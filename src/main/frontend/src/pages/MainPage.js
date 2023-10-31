@@ -9,8 +9,10 @@ import MainCategory from "../components/MainCategory";
 function MainPage() {
 
     return (
-        <Header/>
-    <MainCategory/>
+        <>
+            <Header/>
+            <MainCategory/>
+        </>
     );
 }
 
