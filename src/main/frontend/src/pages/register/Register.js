@@ -3,6 +3,7 @@ import MainCategory from "../../components/MainCategory";
 import Header from "../../components/Header";
 
 import "../../styles/globalStyles.css"
+import Footer from "../../components/Footer";
 
 function register() {
     
@@ -15,6 +16,7 @@ function register() {
             <div className="page">
                 <RegisterForm/>
             </div>
+            <Footer/>
         </>
     );
 }
