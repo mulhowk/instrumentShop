@@ -1,25 +1,19 @@
 import './styles/App.css';
-import MainPage from "./pages/MainPage";
 import './styles/globalStyles.css'
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
-// src/main/frontend/src/App.js
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import Register from "./pages/register/Register";
+import MainPage from "./pages/MainPage";
 
 function App() {
-  let [hello, setHello] = useState('')
-
-  useEffect(() => {
-    axios.get('api/hello')
-        .then(res => setHello(res.data))
-        .catch(error => console.log(error))
-  }, []);
-
   return (
-   <MainPage/>
-
+    <BrowserRouter>
+      <Routes>
+          <Route path="/" element={<MainPage/>}/>
+          <Route path="/register" element={<Register/>}/>
+      </Routes> 
+    </BrowserRouter>
   );
 }
-
 
 export default App;

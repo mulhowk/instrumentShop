@@ -1,0 +1,50 @@
+.select-box {
+    position: relative;
+    width: 420px;
+    padding: 10px;
+    border-radius: 1px;
+    background-color: #ffffff;
+    align-self: center;
+    cursor: pointer;
+  }
+  .select-box::before {
+    content: "⌵";
+    position: absolute;
+    top: 1px;
+    right: 8px;
+    color: #49c181;
+    font-size: 20px;
+  }
+  .s-label {
+    font-size: 14px;
+    margin-left: 4px;
+    text-align: center;
+  }
+  .select-options {
+    position: absolute;
+    list-style: none;
+    top: 18px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    height: 150px;
+    max-height: 0;
+    padding: 0;
+    border-radius: 8px;
+    background-color: #222222;
+    color: #fefefe;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+  .s-option {
+    flex: 0 0 calc(33.3333% - 8px); /* 3열로 나누기 위한 설정 */
+    text-align: center;
+    font-size: 14px;
+    padding: 6px 8px;
+    transition: background-color 0.2s ease-in;
+  }
+  .s-option:hover {
+    background-color: #595959;
+  }
