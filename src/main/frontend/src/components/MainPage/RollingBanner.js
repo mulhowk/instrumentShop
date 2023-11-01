@@ -6,13 +6,28 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 function RollingBanner() {
 
     const images = [
-        'logo.png',
-        'logo192.png',
-        'basket.png',
+        '1.png',
+        '2.png',
+        '3.png',
+        '4.png',
+        '5.png'
     ];
 
     const totalSlides = images.length;
     const [selectedSlide, setSelectedSlide] = React.useState(0);
+    const goToPreviousImage = () => {
+        // 이전 이미지로 이동
+        setSelectedSlide((index) =>
+            index === 0 ? images.length - 1 : index - 1
+        );
+    };
+
+    const goToNextImage = () => {
+        // 다음 이미지로 이동
+        setSelectedSlide((index) =>
+            index === images.length - 1 ? 0 : index + 1
+        );
+    };
 
     const handleOnChange = (index) => {
         setSelectedSlide(index);
@@ -20,6 +35,7 @@ function RollingBanner() {
 
     return (
         <div className="RollingBanner">
+            <button onClick={goToPreviousImage} className="prev-button"></button>
             <div className="custom-carousel">
                 <Carousel
                     showStatus={false} // 슬라이드 인디케이터 숨기기
@@ -30,10 +46,16 @@ function RollingBanner() {
                     autoPlay={true}
                     infiniteLoop={true}
                     centerMode={true}
+                    showArrows={false}
                 >
                     {images.map((image, index) => (
                         <div key={index}>
-                            <a href="/"><img src={image} alt={`Image ${index + 1}`} /></a>
+                            <a href="/">
+                                <img
+                                    src={image}
+                                    alt={`Image ${index + 1}`}
+                                />
+                            </a>
                         </div>
                     ))}
                 </Carousel>
@@ -49,6 +71,7 @@ function RollingBanner() {
                     ))}
                 </div>
             </div>
+            <button onClick={goToNextImage} className="next-button"></button>
         </div>
     );
 }

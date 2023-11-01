@@ -1,0 +1,39 @@
+.quick-links{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.quick-link-title{
+    color: #FFFFFF;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 320px;
+}
+
+.quick-link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #AAAAAA;
+    width: 170px;
+    height: 100px;
+}
+
+.quick-link img{
+    width: 170px;
+    height: 100px;
+}
+
+.quick-link-01{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quick-link-02{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
