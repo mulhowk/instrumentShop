@@ -17,9 +17,69 @@ function RegisterForm() {
   const [name, setName] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [phone, setPhone] = useState('');
-  const [customSelect, setCustomSelect] = useState('');
-
   const [gender, setGender] = useState('');
+
+
+  const [validationErrors, setValidationErrors] = useState({
+    idInformation: {},
+    userInformation: {},
+    phoneInformation: {},
+  });
+
+  const [isValidationPassed, setIsValidationPassed] = useState(false);
+
+  const handleRequestClick = () => {
+    {/** 유효성 검사 */} 
+  
+    const idInformationErrors = {};
+    const userInformationErrors = {};
+    const phoneInformationErrors = {};
+  
+    if (!email) {
+      idInformationErrors.email = '이메일을 입력해주세요.';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      idInformationErrors.email = '이메일 형식이 올바르지 않습니다.';
+    }
+
+    if (!password) {
+      idInformationErrors.password = '비밀번호를 입력해주세요.';
+    } else if (password.length < 6) {
+      idInformationErrors.password = '비밀번호는 6자 이상입니다.';
+    }
+
+    if (!passwordConfirm) {
+      idInformationErrors.password = '비밀번호를 입력해주세요.';
+    } else if (password !== passwordConfirm) {
+      idInformationErrors.password = '비밀번호가 일치하지 않습니다.';
+    }
+
+    if (!name) {
+      userInformationErrors.name = '이름을 입력해주세요.';
+    }
+
+    if (!birthDate) {
+      userInformationErrors.birthDate = '생년월일을 입력해주세요.';
+    } 
+
+    if (!phone) {
+      phoneInformationErrors.phone = '휴대전화를 입력해주세요.';
+    } 
+
+  
+    setValidationErrors({
+      idInformation: idInformationErrors,
+      userInformation: userInformationErrors,
+      phoneInformation: phoneInformationErrors,
+    });
+  
+    if (
+      Object.keys(idInformationErrors).length === 0 &&
+      Object.keys(userInformationErrors).length === 0 &&
+      Object.keys(phoneInformationErrors).length === 0
+    ) {
+      setIsValidationPassed(true);  // 유효성 검사가 통과되었으므로 state를 true로 변경
+    }
+  };
 
   const handleGenderClick = (selectedGender) => {
     setGender(selectedGender);
@@ -51,7 +111,7 @@ function RegisterForm() {
                     style={{backgroundImage: `url(${cPassword})`, 
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: '10px',
-                    backgroundSize: '20px'
+                    backgroundSize: '20px',
                   }}>
                     <input
                   placeholder="비밀번호"
@@ -71,6 +131,13 @@ function RegisterForm() {
                   onChange={(e) => setPasswordConfirm(e.target.value)}
                 />            
                 </div>
+              </div>
+              <div className="c-r-f-validationCheck">
+                {Object.values(validationErrors.idInformation).map((error) => (
+                  <div key={error}>
+                    <label className="c-r-f-error">* {error}</label>
+                  </div>
+                ))}
               </div>
               <div className="c-r-f-user-information">
                 <div className="c-r-f-i-tab-top-round"
@@ -92,12 +159,19 @@ function RegisterForm() {
                     backgroundSize: '20px'
                   }}>                
                 <input
-                  placeholder="생년월일"
+                  placeholder="YYYY/MM/DD"
                   value={birthDate}
                   onChange={(e) => setBirthDate(e.target.value)}
                 />
                 </div>  
               </div>
+              <div className="c-r-f-validationCheck">
+    {Object.values(validationErrors.userInformation).map((error) => (
+      <div key={error}>
+        <label className="c-r-f-error">* {error}</label>
+      </div>
+    ))}
+  </div>
               <div className="c-r-f-phone-information"> 
                 <div className="c-r-f-i-tab-top-round"
                     style={{backgroundImage: `url(${cPhone})`, 
@@ -140,8 +214,32 @@ function RegisterForm() {
                 </div>
               </div>
             </div>
+            <div className="c-r-f-validationCheck">
+              {Object.values(validationErrors.phoneInformation).map((error) => (
+                <div key={error}>
+                  <label className="c-r-f-error">* {error}</label>
+                </div>
+              ))}
+            </div>
 
-            <button className="c-r-f-button">
+            {/* 인증번호 입력 폼 */}
+            {isValidationPassed && (
+              <div className="verification-form">
+                {/* 인증번호 입력을 위한 input, button 등의 컴포넌트 추가 */}
+                <div className="c-r-f-authenticationCode"
+                    style={{backgroundImage: `url(${cPassword})`, 
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: '10px',
+                    backgroundSize: '20px'
+                  }}>
+                <input
+                  placeholder="인증번호"
+                />            
+                </div>
+              </div>
+            )}
+
+            <button className="c-r-f-button"  onClick={handleRequestClick}>
               인증요청
             </button>
           </div>
