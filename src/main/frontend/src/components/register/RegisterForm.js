@@ -8,7 +8,23 @@ import cDate from "../../img/register/c-date.svg"
 import cMore from "../../img/register/c-more.svg"
 import CustomSelect from "./CustomSelect";
 
+import React, { useState } from "react";
+
 function RegisterForm() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [name, setName] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [phone, setPhone] = useState('');
+  const [customSelect, setCustomSelect] = useState('');
+
+  const [gender, setGender] = useState('');
+
+  const handleGenderClick = (selectedGender) => {
+    setGender(selectedGender);
+  };
+
     return (
         <>
           <div className="content-area">
@@ -23,53 +39,83 @@ function RegisterForm() {
                 <div className="c-r-f-i-tab-top-round"
                     style={{backgroundImage: `url(${cUser})`, 
                             backgroundRepeat: 'no-repeat',
-                            backgroundPosition: '10px'
+                            backgroundPosition: '10px',
+                            backgroundSize: '20px'
                     }}>
-                  <input placeholder="이메일"></input>
+                  <input placeholder="이메일"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      ></input>
                 </div>
                 <div className="c-r-f-i-tab"
                     style={{backgroundImage: `url(${cPassword})`, 
                     backgroundRepeat: 'no-repeat',
-                    backgroundPosition: '10px'
+                    backgroundPosition: '10px',
+                    backgroundSize: '20px'
                   }}>
-                  <input placeholder="비밀번호"></input>
+                    <input
+                  placeholder="비밀번호"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
                 </div>
                 <div className="c-r-f-i-tab-bottom-round"
                     style={{backgroundImage: `url(${cPassword})`, 
                     backgroundRepeat: 'no-repeat',
-                    backgroundPosition: '10px'
+                    backgroundPosition: '10px',
+                    backgroundSize: '20px'
                   }}>
-                  <input placeholder="비밀번호 확인"></input>                
+                <input
+                  placeholder="비밀번호 확인"
+                  value={passwordConfirm}
+                  onChange={(e) => setPasswordConfirm(e.target.value)}
+                />            
                 </div>
               </div>
               <div className="c-r-f-user-information">
                 <div className="c-r-f-i-tab-top-round"
                     style={{backgroundImage: `url(${cUser})`, 
                     backgroundRepeat: 'no-repeat',
-                    backgroundPosition: '10px'
+                    backgroundPosition: '10px',
+                    backgroundSize: '20px'
                   }}>
-                  <input placeholder="이름"></input>
+                <input
+                  placeholder="이름"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
                 </div>
                 <div className="c-r-f-i-tab-bottom-round"
                     style={{backgroundImage: `url(${cDate})`, 
                     backgroundRepeat: 'no-repeat',
-                    backgroundPosition: '10px'
+                    backgroundPosition: '10px',
+                    backgroundSize: '20px'
                   }}>                
-                  <input placeholder="생년월일"></input>
+                <input
+                  placeholder="생년월일"
+                  value={birthDate}
+                  onChange={(e) => setBirthDate(e.target.value)}
+                />
                 </div>  
               </div>
               <div className="c-r-f-phone-information"> 
                 <div className="c-r-f-i-tab-top-round"
                     style={{backgroundImage: `url(${cPhone})`, 
                     backgroundRepeat: 'no-repeat',
-                    backgroundPosition: '10px'
+                    backgroundPosition: '10px',
+                    backgroundSize: '20px'
                   }}>                
-                  <input placeholder="휴대전화"></input>
+                <input
+                  placeholder="휴대전화"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
                 </div>
                 <div className="c-r-f-i-tab"
                   style={{backgroundImage: `url(${cMore})`, 
                   backgroundRepeat: 'no-repeat',
-                  backgroundPosition: '10px'
+                  backgroundPosition: '10px',
+                  backgroundSize: '20px'
                   }}>                   
                   {/* dropdown 컴포넌트 추가 */}
                   <div className="t-selectbox">
@@ -78,8 +124,18 @@ function RegisterForm() {
                 </div>
                 <div className="c-r-f-i-tab-bottom-round">
                   <div className="t-button-group">
-                    <button className="t-buttom-m">남자</button>
-                    <button className="t-buttom-f">여자</button>
+                  <button
+                className={`t-buttom-m ${gender === 'male' ? 'active' : ''}`}
+                onClick={() => handleGenderClick('male')}
+              >
+                남자
+              </button>
+              <button
+                className={`t-buttom-f ${gender === 'female' ? 'active' : ''}`}
+                onClick={() => handleGenderClick('female')}
+              >
+                여자
+              </button>
                   </div>
                 </div>
               </div>

@@ -4,8 +4,8 @@
   border-bottom: 1px solid var(--color-silver-200);
   border-left: 1px solid var(--color-silver-200);
   box-sizing: border-box;
-  width: 530px;
-  height: 60px;
+  width: 450px;
+  height: 45px;
 }
 
 .c-r-f-i-tab-top-round {
@@ -13,8 +13,8 @@
   background-color: var(--color-white);
   border: 1px solid var(--color-silver-100);
   box-sizing: border-box;
-  width: 530px;
-  height: 60px;
+  width: 450px;
+  height: 45px;
 }
 
 .c-r-f-i-tab-bottom-round {
@@ -24,8 +24,8 @@
   border-bottom: 1px solid var(--color-silver-200);
   border-left: 1px solid var(--color-silver-200);
   box-sizing: border-box;
-  width: 530px;
-  height: 60px;
+  width: 450px;
+  height: 45px;
 }
 
 .c-r-f-button {
@@ -33,7 +33,7 @@
   background-color: var(--color-white);
   border: 2px solid var(--color-silver-200);
   box-sizing: border-box;
-  width: 530px;
+  width: 450px;
   height: 60px;
 }
 
@@ -53,6 +53,9 @@
   width: 150px;
   height: 40px;
 }
+.t-buttom-m.active, .t-buttom-f.active {
+  background-color: #e0e0e0; /* 회색 배경 */
+}
 
 .c-r-f-i-tab-dropdown {
   -webkit-appearance: none;
@@ -68,14 +71,13 @@
 }
 
 .t-selectbox{
-  margin-left: 50px;
-  padding-top: 8px;
+  margin-left: 35px;
 }
 
 
 input {
-  margin-left: 50px;
-  margin-top: 5px;
+  margin-left: 40px;
+  margin-top: 4px;
   height: 75%;
   width: 75%;
   border: none;

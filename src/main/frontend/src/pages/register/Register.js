@@ -9,7 +9,6 @@ function register() {
     
     
     return (
-
         <>
             <Header/>
             <MainCategory/>

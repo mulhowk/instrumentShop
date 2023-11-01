@@ -1,7 +1,8 @@
 .select-box {
     position: relative;
-    width: 420px;
-    padding: 10px;
+    width: 407px;
+    padding-top: 9px;
+    padding-left: 5px;
     border-radius: 1px;
     background-color: #ffffff;
     align-self: center;
