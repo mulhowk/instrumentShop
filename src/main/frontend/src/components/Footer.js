@@ -45,7 +45,7 @@ function Footer(){
                 <a href="/"><p>ABOUT US</p></a>
                 <a href="/"><p>개인정보처리방침</p></a>
                 <a href="/"><p>이용안내</p></a>
-                <a href="/"><p>이용약관</p></a>
+                <a href="/"><p>이용약치</p></a>
             </div>
         </div>
     );

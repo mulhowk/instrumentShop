@@ -6,11 +6,11 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 function RollingBanner() {
 
     const images = [
-        '1.png',
-        '2.png',
-        '3.png',
-        '4.png',
-        '5.png'
+        '/RollingBanner/1.png',
+        '/RollingBanner/2.png',
+        '/RollingBanner/3.png',
+        '/RollingBanner/4.png',
+        '/RollingBanner/5.png'
     ];
 
     const totalSlides = images.length;
