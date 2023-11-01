@@ -1,0 +1,31 @@
+.goods-list-categories{
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.goods-list-category-title{
+    color: #FFFFFF;
+    font-weight: bold;
+    margin-top: 40px;
+}
+
+.goods-list-category{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: 20px;
+    white-space: nowrap;
+    flex-wrap: wrap;
+
+}
+
+.categories{
+    border: 1px solid #AAAAAA;
+    color: #AAAAAA;
+    padding-top : 20px;
+    padding-bottom: 20px;
+    width : 205px;
+    text-align: center;
+
+}
