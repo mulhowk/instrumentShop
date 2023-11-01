@@ -2,29 +2,54 @@ import React, { useState } from 'react';
 import { Button,Form } from "react-bootstrap";
 import '../../styles/login/loginForm.css'
 
+import Kakao from '../../img/login/kakao.svg';
+import Google from '../../img/login/google.svg'
+import Naver from '../../img/login/naver.svg'
+import cUser from "../../img/register/c-user.svg"
+import cPassword from "../../img/register/c-password.svg"
+
 function LoginForm() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+
+    const handleLogin = () => {
+
+    }
+
     return (
 <>
 <div className="login-main-content">
     <div className="gnb-log-main-img" />
     <div className="custom-form-group">
+        <div className='c-f-g-login-component-top'
+        style={{backgroundImage: `url(${cUser})`, 
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: '10px',
+        backgroundSize: '20px'
+        }}>
       <Form.Control 
         type="text"
         placeholder="아이디"
         value={email}
         onChange={(e) => setEmail(e.target.value)} 
       />
+      </div>
+      <div className='c-f-g-login-component-bottom'
+        style={{backgroundImage: `url(${cPassword})`, 
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: '10px',
+        backgroundSize: '20px'
+        }}>
       <Form.Control 
         type="password"
         placeholder="비밀번호"
         value={password}
         onChange={(e) => setPassword(e.target.value)} 
       />
+      </div>
     </div>
     <div className="content-item-button">
       <Button
@@ -60,7 +85,7 @@ function LoginForm() {
           </a>
         </div>
         <div>
-          <img alt="" src={Apple} />
+          <img alt="" src={Naver} />
         </div>
       </div>
     </div>

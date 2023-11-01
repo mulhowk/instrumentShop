@@ -1,9 +1,15 @@
 import '../styles/Header.css';
 import '../styles/MainCategory.css';
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/globalStyles.css'
 
+import LoginContent from './login/LoginForm';
+import Modal from 'react-modal';
+
 function Header(){
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
     return(
         <div>
             <div className="header">
@@ -20,7 +26,30 @@ function Header(){
                 </div>
                 <div className="header-menu">
                     <ul className="menu">
-                        <li id="login"><a href="/" className="header-menu-text">LOGIN</a></li>
+                        <li id="login"> 
+                        <a href="/" className="header-menu-text" onClick={(e) => {
+                            e.preventDefault();
+                            setModalIsOpen(true);
+                        }}>LOGIN</a></li>
+                        <Modal 
+                            appElement={document.getElementById('root')}
+                            isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}
+                            style={{
+                                overlay: {
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+
+                                  },
+                                content : {
+                                    width: '350px',
+                                    height: '460px',
+                                    position: 'absolute',
+                                    inset: ''
+                                }
+                            }}>
+                            <LoginContent/>
+                        </Modal>
                         <li id="logout" className="hidden">
                             <a href="/" className="header-menu-text">LOGOUT</a>
                         </li>
