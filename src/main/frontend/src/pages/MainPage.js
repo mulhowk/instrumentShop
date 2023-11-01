@@ -7,6 +7,8 @@ import Header from "../components/Header";
 import MainCategory from "../components/MainCategory";
 import Footer from "../components/Footer";
 import RollingBanner from "../components/MainPage/RollingBanner";
+import QuickLink from "../components/MainPage/QuickLink";
+import NewArrival from "../components/MainPage/NewArrival";
 
 
 function MainPage() {
@@ -16,7 +18,8 @@ function MainPage() {
         <Header/>
         <MainCategory/>
         <RollingBanner/>
-
+        <QuickLink/>
+        <NewArrival/>
         <Footer/>
         </div>
     );
