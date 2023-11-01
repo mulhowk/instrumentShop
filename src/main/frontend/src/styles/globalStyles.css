@@ -14,3 +14,35 @@ a {
 ul{
     padding-inline-start: 0px;
 }
+
+.page{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=NanumGothicCoding:wght@400;700&display=swap");
+body {
+  margin: 0;
+  line-height: normal;
+}
+:root {
+  /* fonts */
+  --font-nanumgothiccoding: NanumGothicCoding;
+  --font-inherit: inherit;
+  --font-inter: Inter;
+
+  /* font sizes */
+  --font-size-mini: 15px;
+
+  /* Colors */
+  --color-silver-100: #bbb;
+  --color-silver-200: rgba(187, 187, 187, 0.73);
+  --color-white: #fff;
+  --color-black: #000;
+
+  /* Border radiuses */
+  --br-8xs: 5px;
+}
