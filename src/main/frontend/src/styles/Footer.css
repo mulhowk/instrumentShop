@@ -6,11 +6,12 @@
     justify-content: center;
     aspect-ratio: auto;
     border-top: 1px solid #595959;
-    position : fixed;
+    position : relative;
     bottom : 0;
     text-align: center;
     left: 0;
     width: 100%;
+    margin-top: auto;
 }
 .footer-logo{
     position : absolute;
@@ -56,7 +57,7 @@
     color: #FFFFFF;
     position : absolute;
     top:37%;
-    left:67%;
+    left:69%;
 }
 
 .company{
