@@ -166,12 +166,12 @@ function RegisterForm() {
                 </div>  
               </div>
               <div className="c-r-f-validationCheck">
-    {Object.values(validationErrors.userInformation).map((error) => (
-      <div key={error}>
-        <label className="c-r-f-error">* {error}</label>
-      </div>
-    ))}
-  </div>
+                  {Object.values(validationErrors.userInformation).map((error) => (
+                    <div key={error}>
+                      <label className="c-r-f-error">* {error}</label>
+                    </div>
+                  ))}
+                </div>
               <div className="c-r-f-phone-information"> 
                 <div className="c-r-f-i-tab-top-round"
                     style={{backgroundImage: `url(${cPhone})`, 
