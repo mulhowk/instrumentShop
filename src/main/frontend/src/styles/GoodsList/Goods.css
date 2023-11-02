@@ -1,0 +1,126 @@
+.goods-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.goods-list-header{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    width: 1260px;
+    height: auto;
+    border-bottom: 1px solid #AAAAAA;
+    overflow: visible;
+}
+
+.goods-list-count{
+    color: #AAAAAA;
+    width: 630px;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.goods-list-dropdown{
+    width: 630px;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.dropdown-btn{
+    background: none;
+    border : none;
+    color : #FFFFFF;
+    z-index: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.dropdown-option{
+    margin-top: 20px;
+    border: 1px solid #AAAAAA;
+    z-index: 1;
+    position: absolute;
+    background-color: #272727;
+}
+
+.dropdown-option a{
+    padding: 5px 10px;
+}
+
+.goods{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    white-space: nowrap;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    width: 1200px;
+}
+
+.product{
+    width: 210px;
+    height: 300px;
+    margin: 15px;
+}
+
+.product-img img{
+    width: 210px;
+    height: 210px;
+}
+
+.product-title{
+    margin-top: 10px;
+    white-space: pre-wrap;
+    font-weight: bold;
+}
+
+.product-footer{
+    margin-top: 10px;
+    display: flex;
+}
+
+.product-price{
+    width: 80px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.product-review{
+    width: 130px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.page-nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    flex-wrap: wrap;
+    width: 100vh;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.active{
+    color: white;
+}
+
+.goods-list-prev{
+    font-size: 17px;
+    border: none;
+    background-color: #272727;
+    color: white;
+}
+
+.goods-list-next{
+    font-size: 17px;
+    border: none;
+    background-color: #272727;
+    color: white;
+}

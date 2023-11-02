@@ -51,11 +51,11 @@ function GoodsListCategory(){
             <p className="goods-list-category-title">카테고리이름</p>
             <div className="goods-list-category">
               {categories.map((category) => (
-                    <div
+                  <a href="#"><div
                         key={category.id}
                         className="categories">
                         {category.name}({category.count})
-                    </div>
+                  </div></a>
               ))}
             </div>
         </div>
