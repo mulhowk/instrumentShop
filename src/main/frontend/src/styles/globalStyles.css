@@ -22,6 +22,21 @@ ul{
     margin-bottom: 40px;
 }
 
+.side-page {
+    display: flex;
+    justify-content: center;
+}
+
+.side-page-content {
+    display: flex;
+    width: 1350px;
+    justify-content: center;
+}
+
+.default-space {
+    width: 150px;
+}
+
 /* webkit input 자동완성시 파란색배경 없애기 */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
