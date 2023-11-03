@@ -14,7 +14,6 @@ function MyInfo() {
         <div className="side-page">
             <div className="side-page-content">
                 <MyInfoSide/>
-                <div className="default-space"/>
                 <MyInfoContent/>
             </div>
         </div>

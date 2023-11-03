@@ -9,20 +9,19 @@ function MyInfoSide() {
                     <div className="p-l-info">
                         <img className="image-icon" alt="" src={pImage} />
                         <p className="p-l-i-email">nelap1234@gmail.com</p>  
-                        <b className="b3">닉네임</b>                      
+                        <b className="p-l-i-nickName">닉네임</b>                      
                     </div>
-                    <div>
-                        <br className="p-l-br" />
+                    <div className="p-l-info-content">
                             <div className="p-l-i-button">
-                                <div className="div12">구매 내역</div>
+                                <div className="p-l-i-tab">프로필 설정</div>
                             </div>
                             <div className="p-l-i-button">
-                                <b className="b2">프로필 설정</b>
+                                <div className="p-l-i-tab">구매 내역</div>
                             </div>
                             <div className="p-l-i-button">
-                                <div className="div13">찜한 상품</div>
+                                <div className="p-l-i-tab">찜한 상품</div>
                             </div>
-                        <br className="p-l-br" />
+                        <hr className="p-l-i-hr" />
                     </div>
                 </div>
             </div>
