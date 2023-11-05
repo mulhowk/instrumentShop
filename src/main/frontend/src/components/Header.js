@@ -20,7 +20,7 @@ function Header(){
                     </div>
                 </div>
                 <div className="header-logo">
-                    <a href="/">
+                    <a href="http://localhost:3000/">
                         <img src="/logo0.png" alt='logoImg' width="70" height="70"></img>
                     </a>
                 </div>

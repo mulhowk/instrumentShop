@@ -13,15 +13,17 @@ function Goods(){
             id : 1,
             img : '/Goods/goods1.jpeg',
             title : 'selmer(셀마) Soprano SA80 II JUBILEE1',
-            price : '6,300,000',
+            price : 6300000,
             score : 4.5,
+            amount : 10,
             count : 1
         },
         {
             id : 2,
             img : '/Goods/goods2.jpeg',
             title : 'selmer(셀마) Soprano SA80 II JUBILEE2',
-            price : '전화문의',
+            price : 6300000,
+            amount : 10,
             score : 0,
             count : 0
         },
@@ -29,7 +31,8 @@ function Goods(){
             id : 3,
             img : '/Goods/goods3.jpeg',
             title : 'selmer(셀마) Soprano SA80 II JUBILEE3',
-            price : 'Sold Out',
+            price : 0,
+            amount : 10,
             score : 4.5,
             count : 1
         },
@@ -37,7 +40,8 @@ function Goods(){
             id : 4,
             img : '/Goods/goods4.jpeg',
             title : 'selmer(셀마) Soprano SA80 II JUBILEE4',
-            price : '5,100,000',
+            price : 5100000,
+            amount : 10,
             score : 4.2,
             count : 6
         },
@@ -45,7 +49,8 @@ function Goods(){
             id : 5,
             img : '/Goods/goods5.jpeg',
             title : 'selmer(셀마) Soprano SA80 II JUBILEE5',
-            price : '16,300,000',
+            price : 16300000,
+            amount : 0,
             score : 2.7,
             count : 13
         },
@@ -53,7 +58,8 @@ function Goods(){
             id : 6,
             img : '/Goods/goods6.jpeg',
             title : 'selmer(셀마) Soprano SA80 II JUBILEE6',
-            price : '6,300,000',
+            price : 6300000,
+            amount : 10,
             score : 4.5,
             count : 1
         },
@@ -61,7 +67,8 @@ function Goods(){
             id : 7,
             img : '/Goods/goods7.jpeg',
             title : 'selmer(셀마) Soprano SA80 II JUBILEE7',
-            price : '6,300,000',
+            price : 6300000,
+            amount : 10,
             score : 4.5,
             count : 1
         },
@@ -69,7 +76,7 @@ function Goods(){
             id : 8,
             img : '/Goods/goods7.jpeg',
             title : 'selmer(셀마) Soprano SA80 II JUBILEE7',
-            price : '6,300,000',
+            price : 6300000,
             score : 4.5,
             count : 1
         },
@@ -77,7 +84,8 @@ function Goods(){
             id : 9,
             img : '/Goods/goods7.jpeg',
             title : 'selmer(셀마) Soprano SA80 II JUBILEE7',
-            price : '6,300,000',
+            price : 6300000,
+            amount : 10,
             score : 4.5,
             count : 1
         },
@@ -85,7 +93,8 @@ function Goods(){
             id : 10,
             img : '/Goods/goods7.jpeg',
             title : 'selmer(셀마) Soprano SA80 II JUBILEE7',
-            price : '6,300,000',
+            price : 6300000,
+            amount : 10,
             score : 4.5,
             count : 1
         },
@@ -93,7 +102,8 @@ function Goods(){
             id : 11,
             img : '/Goods/goods7.jpeg',
             title : 'selmer(셀마) Soprano SA80 II JUBILEE7',
-            price : '6,300,000',
+            price : 6300000,
+            amount : 10,
             score : 4.5,
             count : 1
         }
@@ -175,10 +185,13 @@ function Goods(){
                         </div>
                         <div className="product-footer">
                           <div className="product-price">
-                           <a>{goods.price}</a>
+                           <a>{goods.amount === 0 ?
+                               (<span style={{color : "red"}}>Sold Out</span>) : goods.price === 0 ?
+                                   (<span style={{color : "red"}}>전화문의</span>) : goods.price.toLocaleString()}</a>
                           </div>
                           <div className="product-review">
-                            <a>★ {goods.score}({goods.count})</a>
+                            <a>{goods.count === 0 ?
+                            "" : "★" + goods.score + "(" + goods.count + ")"}</a>
                           </div>
                         </div>
 
