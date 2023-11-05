@@ -3,9 +3,22 @@ import cUser from "../../img/register/c-user.svg"
 import cPhone from "../../img/register/c-phone.svg"
 import cEmail from "../../img/register/c-email.svg"
 import MyPageAddress from "./MyPageAddress";
+import ReactDOMServer from 'react-dom/server';
 
+import MyComponent from './AddAddress';
 
 function MyInfoContent() {
+
+    const handleClick = () => {
+        const myComponentHTML = ReactDOMServer.renderToString(<MyComponent />);
+        const myWindow = window.open("", "myWindow", "width=500,height=500");
+
+        myWindow.document.open();
+        myWindow.document.write(myComponentHTML);
+        // document.close()를 호출하여 문서 스트림을 닫습니다.
+        myWindow.document.close();
+      };
+
     return (
         <>
             <div className="myInfo-content-tab">
@@ -59,7 +72,10 @@ function MyInfoContent() {
                                 <button className="delete-button"
                                     style={{ left:'470px',
                                              position: 'relative'
-                                    }}>추가</button>
+                                    }}
+                                    onClick={handleClick}
+                                    >추가</button>
+                                {/* how react-popup page */}
                             </div>
                             <hr className="t-hr" />
                             <div className="m-c-g-t-address">
