@@ -3,6 +3,7 @@ import MainCategory from "../../components/MainCategory";
 import Footer from "../../components/Footer";
 
 import MyInfoContent from "../../components/myPage/MyInfoContent";
+import MyBuyInfo from "../../components/myPage/buylist/MyBuyInfo";
 import "../../styles/myInfo/myInfoSide.css"
 import pImage from "../../img/info/info.svg"
 import React, { useState } from "react";
@@ -12,7 +13,7 @@ function MyInfo() {
     const [selectedTab, setSelectedTab] = useState('profile'); // 기본값 설정
 
     const ProfileSettings = () => <MyInfoContent />;
-    const PurchaseHistory = () => <div>구매 내역입니다.</div>;
+    const PurchaseHistory = () => <MyBuyInfo/>;
     const Wishlist = () => <div>찜한 상품 목록입니다.</div>;
 
     return (

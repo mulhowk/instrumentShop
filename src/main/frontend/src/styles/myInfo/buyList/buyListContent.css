@@ -1,0 +1,25 @@
+.bl-hr {
+    margin: 0 auto;
+}
+
+.m-c-g-tab-small {
+    width: 180px;
+}
+
+.m-c-g-small {
+    display: flex;
+    width: 750px;
+    justify-content: space-between;
+}
+
+.m-c-g-t-content-small {
+    padding: 10px;
+    border: 1px solid var(--color-silver-100);
+    background-color: var(--color-white);
+    height: 100px;
+    text-align: center;
+}
+
+.t-small-span {
+    font-size: 44px;
+}
