@@ -7,6 +7,7 @@ import MainPage from "./pages/MainPage";
 import GoodsList from "./pages/GoodsList";
 import GoodsDetails from "./pages/GoodsDetails";
 import MyInfo from './pages/myinfo/MyInfo';
+import MyAddressPop from './pages/myinfo/MyAddressPop';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/goodsList" element={<GoodsList/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/myinfo" element={<MyInfo/>}/>
+          <Route path="/myinfo/address" element={<MyAddressPop/>}/>
           <Route path="/goodsDetails" element={<GoodsDetails/>}/>
       </Routes> 
     </BrowserRouter>

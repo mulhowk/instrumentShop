@@ -3,23 +3,29 @@ import cUser from "../../img/register/c-user.svg"
 import cPhone from "../../img/register/c-phone.svg"
 import cEmail from "../../img/register/c-email.svg"
 import MyPageAddress from "./MyPageAddress";
-import ReactDOMServer from 'react-dom/server';
+import { useOpenInWindow }  from 'use-open-window';
 
-import MyComponent from './AddAddress';
 
 function MyInfoContent() {
 
-    const handleClick = () => {
-        const myComponentHTML = ReactDOMServer.renderToString(<MyComponent />);
-        const myWindow = window.open("", "myWindow", "width=500,height=500");
 
-        myWindow.document.open();
-        myWindow.document.write(myComponentHTML);
-        // document.close()를 호출하여 문서 스트림을 닫습니다.
-        myWindow.document.close();
-      };
+    const url = '/myinfo/address';
+    const options = {
+      centered: true, /* default */
+      specs: {
+          width: 550, /* window width */
+          height: 400, /* window height */
+      }
+    };
+
+    const handleClick = () => {
+
+    };
+
+    const [handleWindowOpen, newWindowHandle] = useOpenInWindow(url, options);
 
     return (
+        
         <>
             <div className="myInfo-content-tab">
                 <div className="m-c-group">
@@ -73,7 +79,7 @@ function MyInfoContent() {
                                     style={{ left:'470px',
                                              position: 'relative'
                                     }}
-                                    onClick={handleClick}
+                                    onClick={handleWindowOpen}
                                     >추가</button>
                                 {/* how react-popup page */}
                             </div>

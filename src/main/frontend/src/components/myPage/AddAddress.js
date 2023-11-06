@@ -1,47 +1,38 @@
 import React, { useState } from 'react';
-import { DaumPostcodeEmbed } from 'react-daum-postcode';
+import DaumPostcode from 'react-daum-postcode';
 
-function AddAddress() {
-    const [address, setAddress] = useState({
-        zonecode: '',
-        address: '',
-        buildingName: '',
-    });
-
+const PopupPostCode = (props) => {
+ 
     const handleComplete = (data) => {
-        let fullAddress = data.address;
-        let extraAddress = '';
-        let zonecode = data.zonecode;
-        if (data.addressType === 'R') {
-            if (data.bname !== '') {
-                extraAddress += data.bname;
-            }
-            if (data.buildingName !== '') {
-                extraAddress +=
-                    extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
-            }
-            fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
-        }
-        setAddress({
-            zonecode: zonecode,
-            address: fullAddress,
-            buildingName: data.buildingName,
-        });
-        console.log(address);
-    }
+        // 주소 데이터를 처리하는 로직이 여기에 들어갑니다.
+        // 예를 들어, 전체 주소를 구성하거나, 추가 주소 정보를 포함할 수 있습니다.
 
-  return (
-    // JSX 코드...
-            <DaumPostcodeEmbed
-                onComplete={handleComplete}
-                autoClose
-                autoResize
-                width={595}
-                height={450}
-                animation
-                />
-    // 나머지 JSX 코드...
-  );
+        // 완성된 주소 데이터를 부모 컴포넌트로 전달합니다.
+        // 이 함수는 부모 컴포넌트에서 전달 받아야 합니다.
+        if (props.onSelect) {
+            props.onSelect(data);
+
+            console.log(data.address);
+            console.log(data.autoJibunAddress);
+        }
+    };
+
+
+    const postCodeStyle = {
+        display: "block",
+        position: "absolute",
+        top: "10%",
+        width: "500px",
+        height: "400px",
+        padding: "7px",
+      };
+ 
+    return(
+        <div>
+            <DaumPostcode style={postCodeStyle}
+            onComplete={handleComplete}/>
+        </div>
+    )
 }
 
-export default AddAddress;
+export default PopupPostCode;
