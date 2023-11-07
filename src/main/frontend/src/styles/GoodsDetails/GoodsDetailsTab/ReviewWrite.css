@@ -1,0 +1,224 @@
+.review{
+    margin-top: 50px;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+.review-title{
+    color: #FFFFFF;
+    font-size: 25px;
+}
+
+.review-product-contents{
+    width: 1000px;
+    padding: 40px;
+    border: 1px solid #AAAAAA;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.review-product-img img{
+    width: 80px;
+    height: 80px;
+}
+
+.review-product-title{
+    margin-left: 10px;
+}
+
+.review-product-name{
+    color: #FFFFFF;
+}
+
+.review-product-price{
+    color: #FFFFFF;
+}
+
+.review-write-area{
+    width: 1082px;
+    margin-top: 20px;
+    border-top: 1px solid #AAAAAA;
+}
+
+.review-write-area-id{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #AAAAAA;
+
+}
+
+.review-write-area-id-title{
+    color: white;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #AAAAAA;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #3d3d3d;
+}
+
+.review-write-area-id-id{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 882px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px
+}
+
+.review-write-area-id-id input{
+    color: white;
+    background-color: #272727;
+    border: 1px solid #AAAAAA;
+    outline: none;
+    width: 300px;
+    height: 20px;
+}
+
+.review-write-area-subject{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #AAAAAA;
+
+}
+
+.review-write-area-subject-title{
+    color: white;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #AAAAAA;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #3d3d3d;
+}
+
+.review-write-area-subject-subject{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 882px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px
+}
+
+.review-write-area-subject-subject input{
+    color: white;
+    background-color: #272727;
+    border: 1px solid #AAAAAA;
+    outline: none;
+    width: 600px;
+    height: 20px;
+}
+
+.review-write-area-contents{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #AAAAAA;
+
+}
+
+.review-write-area-contents-title{
+    color: white;
+    width: 200px;
+    height: 316px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #AAAAAA;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #3d3d3d;
+}
+
+.review-write-area-contents-contents{
+    display: flex;
+    align-items: center;
+    width: 882px;
+
+    padding-left: 20px
+}
+
+.quill .ql-toolbar{
+    background-color: #AAAAAA;
+}
+
+.review-write-area-file{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #AAAAAA;
+    margin-bottom: 30px;
+
+}
+
+.review-write-area-file-title{
+    color: white;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #AAAAAA;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #3d3d3d;
+}
+
+.review-write-area-file-file{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 882px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px
+}
+
+.review-write-area-file-file-input{
+    color: white;
+    background-color: #272727;
+    border: 1px solid #AAAAAA;
+    outline: none;
+    width: 600px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.review-write-area-file-file button{
+    border: 1px solid #AAAAAA;
+    outline: none;
+    margin-left: 20px;
+    background-color: #272727;
+    color: #FFFFFF;
+    height: 25px;
+}
+
+.review-submit-area{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.review-submit-area button{
+    border: 1px solid #AAAAAA;
+    outline: none;
+    margin-left: 20px;
+    background-color: #272727;
+    color: #FFFFFF;
+    height: 50px;
+    width: 100px;
+}

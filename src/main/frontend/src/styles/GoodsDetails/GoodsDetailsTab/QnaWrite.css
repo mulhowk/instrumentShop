@@ -1,0 +1,224 @@
+.qna{
+    margin-top: 50px;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+.qna-title{
+    color: #FFFFFF;
+    font-size: 25px;
+}
+
+.qna-product-contents{
+    width: 1000px;
+    padding: 40px;
+    border: 1px solid #AAAAAA;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.qna-product-img img{
+    width: 80px;
+    height: 80px;
+}
+
+.qna-product-title{
+    margin-left: 10px;
+}
+
+.qna-product-name{
+    color: #FFFFFF;
+}
+
+.qna-product-price{
+    color: #FFFFFF;
+}
+
+.qna-write-area{
+    width: 1082px;
+    margin-top: 20px;
+    border-top: 1px solid #AAAAAA;
+}
+
+.qna-write-area-id{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #AAAAAA;
+
+}
+
+.qna-write-area-id-title{
+    color: white;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #AAAAAA;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #3d3d3d;
+}
+
+.qna-write-area-id-id{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 882px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px
+}
+
+.qna-write-area-id-id input{
+    color: white;
+    background-color: #272727;
+    border: 1px solid #AAAAAA;
+    outline: none;
+    width: 300px;
+    height: 20px;
+}
+
+.qna-write-area-subject{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #AAAAAA;
+
+}
+
+.qna-write-area-subject-title{
+    color: white;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #AAAAAA;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #3d3d3d;
+}
+
+.qna-write-area-subject-subject{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 882px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px
+}
+
+.qna-write-area-subject-subject input{
+    color: white;
+    background-color: #272727;
+    border: 1px solid #AAAAAA;
+    outline: none;
+    width: 600px;
+    height: 20px;
+}
+
+.qna-write-area-contents{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #AAAAAA;
+
+}
+
+.qna-write-area-contents-title{
+    color: white;
+    width: 200px;
+    height: 316px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #AAAAAA;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #3d3d3d;
+}
+
+.qna-write-area-contents-contents{
+    display: flex;
+    align-items: center;
+    width: 882px;
+
+    padding-left: 20px
+}
+
+.quill .ql-toolbar{
+    background-color: #AAAAAA;
+}
+
+.qna-write-area-file{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #AAAAAA;
+    margin-bottom: 30px;
+
+}
+
+.qna-write-area-file-title{
+    color: white;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #AAAAAA;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #3d3d3d;
+}
+
+.qna-write-area-file-file{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 882px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px
+}
+
+.qna-write-area-file-file-input{
+    color: white;
+    background-color: #272727;
+    border: 1px solid #AAAAAA;
+    outline: none;
+    width: 600px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.qna-write-area-file-file button{
+    border: 1px solid #AAAAAA;
+    outline: none;
+    margin-left: 20px;
+    background-color: #272727;
+    color: #FFFFFF;
+    height: 25px;
+}
+
+.qna-submit-area{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.qna-submit-area button{
+    border: 1px solid #AAAAAA;
+    outline: none;
+    margin-left: 20px;
+    background-color: #272727;
+    color: #FFFFFF;
+    height: 50px;
+    width: 100px;
+}
