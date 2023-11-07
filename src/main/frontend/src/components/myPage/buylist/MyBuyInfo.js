@@ -1,7 +1,8 @@
 import "../../../styles/myInfo/buyList/buyListContent.css"
 import { useState,useEffect  } from "react";
+import MyBuyList from "./MyBuyList";
 
-function MyBuyList() {
+function MyBuyInfo() {
 
       // 상태를 선언합니다.
   const [points, setPoints] = useState(null);
@@ -75,8 +76,9 @@ function MyBuyList() {
                         <div className="m-c-g-t-header">
                             <p>구매 내역</p>
                         </div>
-                        <div className="m-c-g-t-content">
+                        <div className="m-c-g-t-buy-content">
                             {/* 구매내역 */}
+                            <MyBuyList />
                         </div>                        
                     </div>
                     <div className="null-space" />
@@ -86,4 +88,4 @@ function MyBuyList() {
     );
 }
 
-export default MyBuyList;
+export default MyBuyInfo;

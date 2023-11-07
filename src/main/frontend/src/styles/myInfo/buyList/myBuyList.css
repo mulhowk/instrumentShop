@@ -1,0 +1,126 @@
+.box {
+    height: 150px;
+    width: 677px;
+    margin: 10px;
+  }
+  
+  .box .c-box-user {
+    height: 150px;
+    left: 0;
+    top: 0;
+    width: 677px;
+  }
+  
+  .box .name-icon {
+    height: 150px;
+    width: 687px;
+  }
+  
+  .box .overlap-group {
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #bbbbbb;
+    border-radius: 10px;
+    height: 150px;
+    position: relative;
+    width: 700px;
+  }
+  
+  .box .text-wrapper {
+    color: #000000;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    height: 19px;
+    left: 162px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 55px;
+    white-space: nowrap;
+  }
+  
+  .box .div {
+    color: #27272799;
+    font-family: "Roboto-Bold", Helvetica;
+    font-size: 16px;
+    font-weight: 700;
+    height: 19px;
+    left: 162px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 100px;
+    white-space: nowrap;
+  }
+  
+  .box .element {
+    height: 123px;
+    left: 16px;
+    object-fit: cover;
+    position: absolute;
+    top: 12px;
+    width: 127px;
+  }
+  
+  .box .overlap {
+    background-color: #ffffff;
+    border: 2px solid;
+    border-color: #bbbbbbbb;
+    border-radius: 5px;
+    height: 50px;
+    left: 497px;
+    position: absolute;
+    top: 13px;
+    width: 167px;
+  }
+  
+  .box .image {
+    height: 18px;
+    left: 47px;
+    position: absolute;
+    top: 13px;
+    width: 69px;
+  }
+  
+  .box .div-wrapper {
+    background-color: #ffffff;
+    border: 2px solid;
+    border-color: #bbbbbbbb;
+    border-radius: 5px;
+    height: 50px;
+    left: 497px;
+    position: absolute;
+    top: 86px;
+    width: 167px;
+  }
+  
+  .box .text-wrapper-2 {
+    color: #000000;
+    font-size: 20px;
+    font-weight: 400;
+    height: 50px;
+    left: -2px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 11px;
+    width: 167px;
+  }
+  
+  .box .p {
+    color: #000000;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 15px;
+    font-weight: 600;
+    height: 36px;
+    left: 162px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 14px;
+    width: 318px;
+  }

@@ -3,10 +3,11 @@ import MainCategory from "../../components/MainCategory";
 import Footer from "../../components/Footer";
 
 import MyInfoContent from "../../components/myPage/MyInfoContent";
-import MyBuyInfo from "../../components/myPage/buylist/MyBuyInfo";
+import MyBuyInfo from "../../components/myPage/buyList/MyBuyInfo";
 import "../../styles/myInfo/myInfoSide.css"
 import pImage from "../../img/info/info.svg"
 import React, { useState } from "react";
+import MyWishInfo from "../../components/myPage/wishList/MyWishInfo";
 
 function MyInfo() {
 
@@ -14,7 +15,7 @@ function MyInfo() {
 
     const ProfileSettings = () => <MyInfoContent />;
     const PurchaseHistory = () => <MyBuyInfo/>;
-    const Wishlist = () => <div>찜한 상품 목록입니다.</div>;
+    const Wishlist = () => <MyWishInfo/>;
 
     return (
         <>
