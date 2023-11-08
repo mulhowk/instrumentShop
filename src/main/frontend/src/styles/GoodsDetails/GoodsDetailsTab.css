@@ -123,15 +123,16 @@
     margin-right: auto;
 }
 
+.product-tab-review-header-score{
+    margin-right : 54px;
+}
+
 .product-tab-review-header-name{
-    margin-right : 40px;
+    margin-right : 70px;
 }
 
 .product-tab-review-header-date{
-    margin-right : 40px;
-}
-
-.product-tab-review-header-hits{
+    margin-right : 50px;
 }
 
 .product-tab-review-contents{
@@ -154,7 +155,7 @@
 
 .product-tab-review-content-subject{
     margin-right: auto;
-    width: 650px;
+    width: 580px;
     align-items: center;
     display: flex;
     justify-content: flex-start;
@@ -165,7 +166,15 @@
 
 .product-tab-review-content-name{
     margin-right : 32px;
-    width: 60px;
+    width: 100px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.product-tab-review-content-score{
+    margin-right : 32px;
+    width: 20px;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -174,13 +183,6 @@
 .product-tab-review-content-date{
     margin-right : 40px;
     width: 60px;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-}
-
-.product-tab-review-content-hits{
-    width: 30px;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -287,15 +289,13 @@
 }
 
 .product-tab-qna-header-name{
-    margin-right : 40px;
+    margin-right : 100px;
 }
 
 .product-tab-qna-header-date{
-    margin-right : 40px;
+    margin-right : 50px;
 }
 
-.product-tab-qna-header-hits{
-}
 
 .product-tab-qna-contents{
     display: flex;
@@ -317,7 +317,7 @@
 
 .product-tab-qna-content-subject{
     margin-right: auto;
-    width: 650px;
+    width: 580px;
     align-items: center;
     display: flex;
     justify-content: flex-start;
@@ -328,7 +328,7 @@
 
 .product-tab-qna-content-name{
     margin-right : 32px;
-    width: 60px;
+    width: 160px;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -337,13 +337,6 @@
 .product-tab-qna-content-date{
     margin-right : 40px;
     width: 60px;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-}
-
-.product-tab-qna-content-hits{
-    width: 30px;
     align-items: center;
     display: flex;
     justify-content: center;

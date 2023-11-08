@@ -22,6 +22,7 @@ function GoodsDetails(){
                 num : 1,
                 subject : "테스트 리뷰 1",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/24",
                 hits : 120
             },
@@ -29,6 +30,7 @@ function GoodsDetails(){
                 num : 2,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -36,13 +38,15 @@ function GoodsDetails(){
                 num : 3,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
             {
                 num : 4,
-                subject : "테스트 리뷰 2",
+                subject : "테스트 리뷰 2이거?",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -50,6 +54,7 @@ function GoodsDetails(){
                 num : 5,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -57,6 +62,7 @@ function GoodsDetails(){
                 num : 6,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -64,6 +70,7 @@ function GoodsDetails(){
                 num : 7,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -71,6 +78,7 @@ function GoodsDetails(){
                 num : 8,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -78,6 +86,7 @@ function GoodsDetails(){
                 num : 9,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -85,6 +94,7 @@ function GoodsDetails(){
                 num : 10,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -92,6 +102,7 @@ function GoodsDetails(){
                 num : 11,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -99,6 +110,7 @@ function GoodsDetails(){
                 num : 12,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -106,6 +118,7 @@ function GoodsDetails(){
                 num : 13,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             }
@@ -123,28 +136,24 @@ function GoodsDetails(){
                 subject : "테스트 Q&A 2",
                 name : "테스트",
                 date : "2023/10/25",
-                hits : 12
             },
             {
                 num : 3,
                 subject : "테스트 Q&A 1",
                 name : "테스트",
                 date : "2023/10/24",
-                hits : 120
             },
             {
                 num : 4,
                 subject : "테스트 Q&A 2",
                 name : "테스트",
                 date : "2023/10/25",
-                hits : 12
             },
             {
                 num : 5,
                 subject : "테스트 Q&A 1",
                 name : "테스트",
                 date : "2023/10/24",
-                hits : 120
             },
             {
                 num : 6,

@@ -1,10 +1,12 @@
-import AddressTab from "../../components/myPage/AddressTab";
+import DaumPostcode from "react-daum-postcode";
+import React from "react";
 
 function MyAddressPop() {
+
     return (
-        <>
-            <AddressTab />
-        </>
+        <div>
+
+        </div>
     );
 }
 

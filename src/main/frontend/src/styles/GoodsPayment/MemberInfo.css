@@ -1,0 +1,263 @@
+.member-info{
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-top: 50px;
+}
+
+.member-orderInfo{
+
+}
+
+.member-orderInfo-title{
+    color: #FFFFFF;
+    border-bottom: 1px solid #AAAAAA;
+    font-size: 25px;
+}
+
+.member-orderInfo-name{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #3d3d3d;
+
+}
+
+.member-orderInfo-name-title{
+    color: white;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.member-orderInfo-name-name{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 882px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px
+}
+
+.member-orderInfo-name-name input{
+    color: white;
+    background-color: #272727;
+    border: 1px solid #AAAAAA;
+    outline: none;
+    width: 200px;
+    height: 20px;
+}
+
+.member-orderInfo-email{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #3d3d3d;
+
+}
+
+.member-orderInfo-email-title{
+    color: white;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.member-orderInfo-email-email{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 882px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px
+}
+
+.member-orderInfo-email-email input{
+    color: white;
+    background-color: #272727;
+    border: 1px solid #AAAAAA;
+    outline: none;
+    width: 200px;
+    height: 20px;
+}
+
+.member-orderInfo-num{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #3d3d3d;
+
+}
+
+.member-orderInfo-num-title{
+    color: white;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.member-orderInfo-num-num{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 882px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px
+}
+
+.member-orderInfo-num-num input{
+    color: white;
+    background-color: #272727;
+    border: 1px solid #AAAAAA;
+    outline: none;
+    width: 150px;
+    height: 20px;
+}
+
+.member-orderInfo-num-num span{
+    color: white;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.member-orderInfo-address{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #3d3d3d;
+
+}
+
+.member-orderInfo-address-title{
+    color: white;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.member-orderInfo-address-address{
+    width: 882px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px;
+}
+
+.member-orderInfo-address-address input{
+    color: white;
+    background-color: #272727;
+    border: 1px solid #AAAAAA;
+    outline: none;
+    width: 150px;
+    height: 20px;
+}
+
+.member-orderInfo-address-address-num{
+
+}
+
+.member-orderInfo-address-address-num button{
+    margin-left: 5px;
+}
+
+.member-orderInfo-address-address-detail{
+    margin-top: 10px;
+}
+
+.member-orderInfo-address-address-detail input{
+    width: 300px;
+    margin-right: 5px;
+}
+
+.member-orderInfo-ordermsg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #3d3d3d;
+
+}
+
+.member-orderInfo-ordermsg-title{
+    color: white;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.member-orderInfo-ordermsg-ordermsg{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 882px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px
+}
+
+.member-orderInfo-ordermsg-ordermsg input{
+    color: white;
+    background-color: #272727;
+    border: 1px solid #AAAAAA;
+    outline: none;
+    width: 400px;
+    height: 40px;
+}
+
+.member-orderInfo-delivermsg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #3d3d3d;
+
+}
+
+.member-orderInfo-delivermsg-title{
+    color: white;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.member-orderInfo-delivermsg-delivermsg{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 882px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px
+}
+
+.member-orderInfo-delivermsg-delivermsg input{
+    color: white;
+    background-color: #272727;
+    border: 1px solid #AAAAAA;
+    outline: none;
+    width: 400px;
+    height: 40px;
+}
