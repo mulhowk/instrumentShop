@@ -11,6 +11,7 @@ import ReviewWrite from "./components/GoodsDetails/GoodsDetailsTab/ReviewWrite";
 import React from "react";
 import QnaWrite from "./components/GoodsDetails/GoodsDetailsTab/QnaWrite";
 import MyAddressPop from './pages/myinfo/MyAddressPop';
+import GoodsPayment from "./pages/GoodsPayment";
 
 function App() {
     const product = {
@@ -28,6 +29,7 @@ function App() {
                 num : 1,
                 subject : "테스트 리뷰 1",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/24",
                 hits : 120
             },
@@ -35,6 +37,7 @@ function App() {
                 num : 2,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -42,6 +45,7 @@ function App() {
                 num : 3,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -49,6 +53,7 @@ function App() {
                 num : 4,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                score : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -56,6 +61,7 @@ function App() {
                 num : 5,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -63,6 +69,7 @@ function App() {
                 num : 6,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -70,6 +77,7 @@ function App() {
                 num : 7,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -77,6 +85,7 @@ function App() {
                 num : 8,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -84,6 +93,7 @@ function App() {
                 num : 9,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -91,6 +101,7 @@ function App() {
                 num : 10,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -98,6 +109,7 @@ function App() {
                 num : 11,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -105,6 +117,7 @@ function App() {
                 num : 12,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             },
@@ -112,6 +125,7 @@ function App() {
                 num : 13,
                 subject : "테스트 리뷰 2",
                 name : "테스트",
+                point : 4.5,
                 date : "2023/10/25",
                 hits : 12
             }
@@ -226,8 +240,10 @@ function App() {
           <Route path="/myinfo" element={<MyInfo/>}/>
           <Route path="/myinfo/address" element={<MyAddressPop/>}/>
           <Route path="/goodsDetails" element={<GoodsDetails/>}/>
-          <Route path="/reviewWrite" element={<ReviewWrite product = {product}/>}/>
-          <Route path="/qnaWrite" element={<QnaWrite product = {product}/>}/>
+          <Route path="/goodsDetails/reviewWrite" element={<ReviewWrite product = {product}/>}/>
+          <Route path="/goodsDetails//qnaWrite" element={<QnaWrite product = {product}/>}/>
+          <Route path="/goodsPayment" element={<GoodsPayment/>}/>
+
       </Routes>
     </BrowserRouter>
   );

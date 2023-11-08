@@ -39,7 +39,7 @@ function GoodsDetailsTab(props){
     const totalReviewPageCount
         = Math.ceil(props.product.review.length / reviewPerPage);
 
-    const startReviewIndex = (currentReviewPage -1) * reviewPerPage + 1;
+    const startReviewIndex = (currentReviewPage -1) * reviewPerPage;
     const endReviewIndex = startReviewIndex + reviewPerPage;
     const currentReviewData = props.product.review.slice(startReviewIndex, endReviewIndex);
 
@@ -104,6 +104,7 @@ function GoodsDetailsTab(props){
     const showQnaPreviouButton = currentQnaPage > 1 ;
     const showQnaNextButton = currentQnaPage < totalQnaPageCount;
 
+
     return(
         <div className="product-tab">
             <div className="product-tab-detailInfo" ref = {divRefDetailInfo} tabIndex={0}>
@@ -144,16 +145,16 @@ function GoodsDetailsTab(props){
                         <p>NO</p>
                     </div>
                  <div className="product-tab-review-header-subject">
-                     <p>SUBJECT</p>
+                     <p>내용</p>
+                 </div>
+                 <div className="product-tab-review-header-score">
+                     <p>별점</p>
                  </div>
                  <div className="product-tab-review-header-name">
-                     <p>NAME</p>
-                 </div>
+                    <p>이름</p>
+                </div>
                  <div className="product-tab-review-header-date">
-                     <p>DATE</p>
-                 </div>
-                 <div className="product-tab-review-header-hits">
-                     <p>HITS</p>
+                     <p>등록일</p>
                  </div>
                 </div>
                 {currentReviewData.map((res, index) => (
@@ -164,14 +165,15 @@ function GoodsDetailsTab(props){
                     <div className="product-tab-review-content-subject">
                         <p>{res.subject}</p>
                     </div>
+                    <div className="product-tab-review-content-score">
+                        <p>{res.point}</p>
+                        {console.log(res.point)}
+                    </div>
                     <div className="product-tab-review-content-name">
                         <p>{res.name}</p>
                     </div>
                     <div className="product-tab-review-content-date">
                         <p>{res.date}</p>
-                    </div>
-                    <div className="product-tab-review-content-hits">
-                        <p>{res.hits}</p>
                     </div>
                 </div>
                     ))}
@@ -218,16 +220,13 @@ function GoodsDetailsTab(props){
                         <p>NO</p>
                     </div>
                     <div className="product-tab-qna-header-subject">
-                        <p>SUBJECT</p>
+                        <p>내용</p>
                     </div>
                     <div className="product-tab-qna-header-name">
-                        <p>NAME</p>
+                        <p>이름</p>
                     </div>
                     <div className="product-tab-qna-header-date">
-                        <p>DATE</p>
-                    </div>
-                    <div className="product-tab-qna-header-hits">
-                        <p>HITS</p>
+                        <p>등록일</p>
                     </div>
                 </div>
                 {currentQnaData.map((res, index) => (
@@ -243,9 +242,6 @@ function GoodsDetailsTab(props){
                         </div>
                         <div className="product-tab-qna-content-date">
                             <p>{res.date}</p>
-                        </div>
-                        <div className="product-tab-qna-content-hits">
-                            <p>{res.hits}</p>
                         </div>
                     </div>
                 ))}

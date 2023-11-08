@@ -121,6 +121,9 @@ function ReviewWrite(props){
                     <div className="review-submit-area">
                         <button>저장하기</button>
                     </div>
+                    <div className="qna-submit-area" style={{display : "none"}}>
+                        <button>수정하기</button>
+                    </div>
                 </div>
             </div>
 
