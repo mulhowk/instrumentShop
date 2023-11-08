@@ -1,0 +1,19 @@
+.admin-today-component {
+    width: 500px;
+}
+
+.a-t-c-header {
+    background-color: #272727;
+    border-top: 2px solid var(--color-silver-100);
+    border-left: 2px solid var(--color-silver-100);
+    border-right: 2px solid var(--color-silver-100);
+    border-radius: 8px 8px 0 0;
+    height: 35px;
+}
+
+    .a-t-c-header-font {
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 5px;
+    }

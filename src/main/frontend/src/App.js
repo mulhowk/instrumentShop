@@ -11,6 +11,7 @@ import ReviewWrite from "./components/GoodsDetails/GoodsDetailsTab/ReviewWrite";
 import React from "react";
 import QnaWrite from "./components/GoodsDetails/GoodsDetailsTab/QnaWrite";
 import MyAddressPop from './pages/myinfo/MyAddressPop';
+import AdminPage from './pages/admin/AdminPage';
 
 function App() {
     const product = {
@@ -228,6 +229,7 @@ function App() {
           <Route path="/goodsDetails" element={<GoodsDetails/>}/>
           <Route path="/reviewWrite" element={<ReviewWrite product = {product}/>}/>
           <Route path="/qnaWrite" element={<QnaWrite product = {product}/>}/>
+          <Route path="/admin/mypage" element={<AdminPage/>}/>
       </Routes>
     </BrowserRouter>
   );

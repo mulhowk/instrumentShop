@@ -1,0 +1,85 @@
+.admin-side {
+    height: 100%;
+    width: 230px;
+    background-color: #272727;
+}
+
+.a-s-logo {
+    height: 50px;
+    width: 100%;
+    border-bottom: 3px solid var(--color-silver-100);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    .a-s-logo span {
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;   
+    }
+
+.a-s-content {
+    padding: 30px;
+}    
+
+    .a-s-c-site {
+        margin-bottom: 120px;
+    }
+
+    .a-s-c-site span {
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;  
+    }
+
+.a-s-c-tab {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+    .a-s-c-tab-user {
+        cursor: pointer;
+    }
+
+    .a-s-c-tab-user span{
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        padding-left: 20px;
+    }
+
+    .a-s-c-tab-user-menu {
+        margin-left:  20px;
+        color: var(--color-silver-100);
+    }
+
+    .a-s-c-tab-user-menu li {
+        cursor: pointer;
+    }
+
+.a-s-c-tab-shopping {
+    cursor: pointer;
+}
+    
+    .a-s-c-tab-shopping span{
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        padding-left: 20px;
+        margin-bottom: 20px;
+    }
+
+    .a-s-c-tab-shopping-menu {
+        margin-left:  20px;
+        color: var(--color-silver-100);
+    }
+
+.a-s-c-tab span {
+    margin-left: 30px;
+
+}
+
