@@ -1,0 +1,38 @@
+.user-tool-component {
+    width: 200px;
+}
+
+.u-t-header {
+    background-color: #272727;
+    border-top: 2px solid var(--color-silver-100);
+    border-left: 2px solid var(--color-silver-100);
+    border-right: 2px solid var(--color-silver-100);
+    border-radius: 8px 8px 0 0;
+    height: 35px;
+}
+
+    .u-t-h-font {
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 5px;
+    }
+
+.u-t-content {
+    border: 2px solid var(--color-silver-100);
+    height: 120px;
+    padding: 10px;
+}
+
+    .u-t-c-tab {
+        height: 40px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .u-t-c-tab:hover {
+        height: 40px;
+        font-size: 20px;
+        cursor: pointer;
+        background-color: rgba(182, 168, 168, 0.5);
+    }

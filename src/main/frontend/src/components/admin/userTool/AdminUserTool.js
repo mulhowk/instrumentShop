@@ -1,9 +1,11 @@
+import './adminUserTool.css';
+
 const AdminUserTool = () => {
     return (
         <>
             <div className="user-tool-component">
                 <div className="u-t-header">
-                    <span>분류</span>
+                    <div className='u-t-h-font'>분류</div>
                 </div>
                 <div className="u-t-content">
                     <div className="u-t-c-tab"> 전체사용자 </div>

@@ -1,0 +1,50 @@
+.a-u-header {
+    display: flex;
+    width: 800px;
+    height: 50px;
+    align-items: center;
+    border: 1px solid #a39485;
+    box-shadow: 0 2px 5px rgba(0,0,0,.25);
+}
+
+    .a-u-header input {
+        border: 0 none;
+        margin-left: 50px;
+        width: 693px;
+        height: 34px;
+    }
+
+
+.header-title {
+    height: 50px;
+}
+
+.a-u-table {
+    border: 1px #a39485 solid;
+    font-size: .9em;
+    box-shadow: 0 2px 5px rgba(0,0,0,.25);
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+    .a-u-table th {
+        text-align: left;
+    }
+
+    .a-u-table thead {
+        font-weight: bold;
+    }
+
+    .a-u-table td, .a-u-table th {
+        padding: 1em .5em;
+        vertical-align: middle;
+    }
+
+    .a-u-table tbody tr:hover {
+        cursor: pointer;
+        background-color: #cfcfcf;
+    }
+
+
