@@ -141,6 +141,9 @@ function Goods(){
         return pageNumbers;
     };
 
+    const showPreviouButton = currentPage > 1 ;
+    const showNextButton = currentPage < totalPageCount;
+
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
@@ -149,9 +152,6 @@ function Goods(){
         setSelectedOption(option);
         setIsOpen(false);
     };
-
-    const showPreviouButton = currentPage > 1 ;
-    const showNextButton = currentPage < totalPageCount;
 
     return(
         <div className="goods-list">

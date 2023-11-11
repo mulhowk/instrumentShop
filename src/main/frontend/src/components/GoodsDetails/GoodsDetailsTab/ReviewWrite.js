@@ -5,7 +5,7 @@ import MainCategory from "../../MainCategory";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-function ReviewWrite(props){
+function ReviewWrite(){
 
     const modules = {
         toolbar: [
@@ -45,6 +45,29 @@ function ReviewWrite(props){
         }
     };
 
+    const handleStarClick = (clickedValue) => {
+
+       const updateStars = stars.map((star) => ({
+           value : star.value,
+           selected : star.value <= clickedValue,
+       }));
+        setStars(updateStars);
+    };
+
+
+    const [stars, setStars] = useState([
+        {value: 0.5, selected: false},
+        {value : 1, selected: false},
+        {value: 1.5, selected: false},
+        {value: 2, selected: false},
+        {value: 2.5, selected: false},
+        {value: 3, selected: false},
+        {value: 3.5, selected: false},
+        {value: 4, selected: false},
+        {value: 4.5, selected: false},
+        {value: 5, selected: false}
+    ]);
+
     return(
         <div>
             <Header/>
@@ -53,17 +76,33 @@ function ReviewWrite(props){
                 <div className="review-title">
                     <p>후기</p>
                 </div>
+                <div className="review-score">
+                    <div className="review-score-title"><p>별점을 선택해주세요.</p></div>
+                    <div className="review-score-star">
+                    {stars.map((star) => (
+                        <div key={star.value} className="star-wrapper">
+                        <span
+                            className={`star ${star.selected  ? 'selected' : ''}`}
+                            style={{ color: star.selected ? 'red': 'white'}}
+                            onClick={() => handleStarClick(star.value)}
+                        >★</span>
+                            <span className="star-rating-value"
+                            style={{ color: star.selected ? 'red' : 'white'}}>{star.value}</span>
+                        </div>
+                    ))}
+                    </div>
+                </div>
                 <div className="review-product-contents">
                     <div className="review-product-img">
-                        <img src={props.product.img} alt="1" />
+                        <img src="../../logo.png" alt="1" />
                     </div>
                     <div className="review-product-title">
                         <div className="review-product-name">
-                            <p><span style={{fontWeight : "bold"}}>상품명 : </span>{props.product.title}</p>
+                            <p><span style={{fontWeight : "bold"}}>상품명 : </span>머시기저시기</p>
                         </div>
                         <div className="review-product-price">
                             <p><span style={{fontWeight : "bold"}}>상품가 : </span>
-                                {props.product.price.toLocaleString()} 원</p>
+                                7,000,000 원</p>
                         </div>
                     </div>
                 </div>

@@ -9,6 +9,48 @@
     font-size: 25px;
 }
 
+.review-score{
+    display: block;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 30px;
+
+}
+
+.review-score-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.review-score-star{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.star{
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.2s;
+    color: white;
+}
+
+.star.selected{
+    color: red;
+}
+
+.star-rating-value{
+    margin-left: 5px;
+}
+
+.star-wrapper{
+    margin-left: 10px;
+}
+
 .review-product-contents{
     width: 1000px;
     padding: 40px;

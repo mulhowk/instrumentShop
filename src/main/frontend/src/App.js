@@ -12,6 +12,7 @@ import React from "react";
 import QnaWrite from "./components/GoodsDetails/GoodsDetailsTab/QnaWrite";
 import MyAddressPop from './pages/myinfo/MyAddressPop';
 import GoodsPayment from "./pages/GoodsPayment";
+import OpenMarket from "./pages/OpenMarket";
 import AdminPage from "./pages/admin/AdminPage";
 import AdminUser from './pages/admin/AdminUser';
 import AdminMessage from './pages/admin/AdminMessage';
@@ -243,11 +244,13 @@ function App() {
           <Route path="/myinfo" element={<MyInfo/>}/>
           <Route path="/myinfo/address" element={<MyAddressPop/>}/>
           <Route path="/goodsDetails" element={<GoodsDetails/>}/>
-          <Route path="/goodsDetails/reviewWrite" element={<ReviewWrite product = {product}/>}/>
-          <Route path="/goodsDetails//qnaWrite" element={<QnaWrite product = {product}/>}/>
+          <Route path="/goodsDetails/reviewWrite" element={<ReviewWrite/>}/>
+          <Route path="/goodsDetails/qnaWrite" element={<QnaWrite/>}/>
           <Route path="/goodsPayment" element={<GoodsPayment/>}/>
+          <Route path="/openMarket" element={<OpenMarket/>}/>
           <Route path="/admin" element={<AdminPage/>}/>"
-          <Route path="/admin/user" element={<AdminUser/>}/>  
+          <Route path="/admin/user" element={<AdminUser/>}/>
+          <Route path="/admin/user" element={<AdminUser/>}/>
           <Route path="/admin/message" element={<AdminMessage/>}/>
       </Routes>
     </BrowserRouter>

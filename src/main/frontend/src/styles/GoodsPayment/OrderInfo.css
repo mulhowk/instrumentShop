@@ -1,0 +1,338 @@
+.order-info{
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-top: 80px;
+}
+
+.order-info-area{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 2px solid #555555;
+    border-bottom: 2px solid #555555;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #444444;
+}
+
+.order-info-area-goods{
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.order-info-area-count{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.order-info-area-discount{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.order-info-area-price{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.order-info-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #555555;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.order-info-content-img{
+    display: flex;
+    align-items: center;
+    flex: 3;
+}
+
+.order-info-content-img img{
+    width: 90px;
+    height: 90px;
+    margin-left: 20px;
+}
+
+.order-info-content-name-info{
+    color: #FFFFFF;
+    margin-left: 15px;
+
+}
+
+.order-info-content-option{
+    margin-top: 20px;
+
+}
+
+.order-info-content-count{
+    color: #FFFFFF;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-info-content-discount{
+    color: #FFFFFF;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-info-content-price{
+    color: #FFFFFF;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-info-content-total{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-bottom: 2px solid #555555;
+}
+
+.order-info-content-total-title{
+    color: white;
+    font-size: 13px;
+    margin-right: 20px;
+}
+
+.order-info-total{
+    margin-top: 20px;
+}
+
+.order-info-total-title{
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    color: #FFFFFF;
+    padding-bottom: 20px;
+}
+
+.order-info-total-area{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 2px solid #555555;
+    border-bottom: 2px solid #555555;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.order-info-total-area-price{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.order-info-total-area-deliver{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.order-info-total-area-discount{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.order-info-total-area-total{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.order-info-total-pay{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #555555;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    padding-right: 65px;
+    padding-left: 70px;
+}
+
+.order-info-total-pay-price{
+    color: #FFFFFF;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.order-info-total-pay-plus{
+    color: #61dafb;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.order-info-total-pay-deliver{
+    color: #FFFFFF;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.order-info-total-pay-minus{
+    color: red;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.order-info-total-pay-discount{
+    color: #FFFFFF;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.order-info-total-pay-equals{
+    color: rosybrown;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.order-info-total-pay-total{
+    color: #FFFFFF;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.pay-area{
+    margin-top: 20px;
+}
+
+.pay-area-title{
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    color: #FFFFFF;
+    padding-bottom: 20px;
+}
+
+.pay-area-way{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-top: 2px solid #555555;
+    border-bottom: 2px solid #555555;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+}
+
+.pay-area-way p {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.pay-area-way-option{
+    color: white;
+    margin-left: 50px;
+}
+
+.pay-area-way-option input{
+    margin-right: 10px;
+}
+
+.pay-area-way-option label{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.pay-area-button{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pay-area-button button{
+    padding: 10px;
+    color: white;
+    background-color: #272727;
+    border: 1px solid #AAAAAA;
+    width: 100px;
+    height: 50px;
+}
