@@ -12,34 +12,42 @@ const AdminSendMessage = () => {
                 </div>
                 <div className='a-s-m-content'>
                     <div className='a-s-m-c-tab'>
-                        <div className='a-s-m-tab-message'>
-                            <span>메시지 보내기</span>
-                        </div>
-                        <div className='a-s-m-tab-sms'>
-                            <span>SMS 보내기</span>
-                        </div>
+                            <div className='a-s-m-c-tab-tag'>
+                                <div className='a-s-m-tab-message'>
+                                    <span>메시지 보내기</span>
+                                </div>
+                                <div className='a-s-m-tab-sms'>
+                                    <span>SMS 보내기</span>
+                                </div>
+                            </div>    
                         <div className='a-s-m-c-message-board'>
                             <div className='m-b-dropdown'>
-                                <span>메시지를 보낼 대상</span>
+                                <div className='m-b-span'>메시지를 보낼 대상</div>
                                 {/* 드롭다운 */}
                                 <AdminDropDown/>
                             </div>
                             <div className='m-b-title'>
-                                <span>메시지 제목</span>
-                                <input type='text'/>
+                                <div className='m-b-span'>메시지 제목</div>
+                                <div className='m-b-input'>
+                                    <input type='text'/>
+                                </div>
                             </div>
-                            <div className='m-b-content'>
-                                <span>메시지 내용</span>
-                                <textarea/>
+                            <div className='m-b-content-area'>
+                                <div className='m-b-span'>메시지 내용</div>
+                                <div className='m-b-textarea'>
+                                    <textarea/>
+                                </div>
                             </div>
                             <div className='m-b-img'>
-                                <div className='m-b-img-insert'>
+                                <button className='m-b-img-insert'>
                                     사진 첨부하기
-                                </div>
+                                </button>
                             </div>
                         </div>
                         <div className='m-b-btn'>
-                            <button>보내기</button>
+                            <div className='m-b-btn-field'>
+                                <button>보내기</button>
+                            </div>
                         </div>
                     </div>
                 </div>

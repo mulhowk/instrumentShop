@@ -1,0 +1,113 @@
+.admin-send-message {
+    width: 1000px;    
+}
+
+.a-s-m-header-font {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+
+.a-s-m-header {
+    background-color: #272727;
+    border-top: 2px solid var(--color-silver-100);
+    border-left: 2px solid var(--color-silver-100);
+    border-right: 2px solid var(--color-silver-100);
+    border-radius: 8px 8px 0 0;
+    height: 35px;
+}
+.a-s-m-content {
+    border: 2px solid var(--color-silver-100);
+    padding: 10px;
+}
+
+.a-s-m-c-tab-tag {
+    display: flex;
+    border-bottom: 2px solid #2727279c;
+    width: 100%;
+}
+
+    .a-s-m-tab-message {
+        border-bottom: 2px solid #272727;;    
+    }
+
+    .a-s-m-tab-message, .a-s-m-tab-sms {
+        width: 120px;
+        height: 30px;
+
+    }
+
+.a-s-m-c-message-board {
+    padding-top: 30px;
+}
+
+    .m-b-dropdown, .m-b-title, .m-b-content {
+        height: 50px;
+        display: flex;
+        align-items: center;
+    }
+
+    .m-b-span {
+        width: 150px;
+    }
+
+.m-b-input {
+    width: 600px;
+    height: 35px;
+    border: 1px solid #a39485;
+    box-shadow: 0 2px 5px rgba(0,0,0,.25);
+}
+
+    .m-b-input input, .m-b-textarea textarea {
+        width: 90%;
+        height: 90%;
+        border: none;
+        outline: none;
+        padding-left: 10px;
+        resize: none;
+    }
+
+    .m-b-content-area {
+        height: 350px;
+        display: flex;
+        align-items: center;
+    }
+
+
+    .m-b-textarea {
+        width: 600px;
+        height: 300px;
+        border: 1px solid #a39485;
+        box-shadow: 0 2px 5px rgba(0,0,0,.25);
+    }
+
+.m-b-img {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+    .m-b-img-insert {
+        width: 500px;
+        padding: 0 auto;
+        height: 30px;
+        border: none;
+    }
+
+.m-b-btn {
+    height: 40px;
+    width: 100%;
+}
+
+.m-b-btn button {
+    float: right;
+    border: 1px solid #a39485;
+    box-shadow: 0 2px 5px rgba(0,0,0,.25);
+    background-color: transparent;
+    padding: 10px;
+}
+

@@ -14,6 +14,7 @@ import MyAddressPop from './pages/myinfo/MyAddressPop';
 import GoodsPayment from "./pages/GoodsPayment";
 import AdminPage from "./pages/admin/AdminPage";
 import AdminUser from './pages/admin/AdminUser';
+import AdminMessage from './pages/admin/AdminMessage';
 
 function App() {
     const product = {
@@ -247,6 +248,7 @@ function App() {
           <Route path="/goodsPayment" element={<GoodsPayment/>}/>
           <Route path="/admin" element={<AdminPage/>}/>"
           <Route path="/admin/user" element={<AdminUser/>}/>  
+          <Route path="/admin/message" element={<AdminMessage/>}/>
       </Routes>
     </BrowserRouter>
   );

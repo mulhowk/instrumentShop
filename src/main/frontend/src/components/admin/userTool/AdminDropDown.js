@@ -4,9 +4,9 @@ const AdminDropDown = () => {
   const [selectedValue, setSelectedValue] = useState('');
 
   const jsonValues = [
-    { id: 1, name: 'Option 1' },
-    { id: 2, name: 'Option 2' },
-    { id: 3, name: 'Option 3' },
+    { id: 1, name: '전회원' },
+    { id: 2, name: '관계자' },
+    { id: 3, name: '와아악' },
   ];
 
   const handleChange = (event) => {
