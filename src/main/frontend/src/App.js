@@ -16,6 +16,7 @@ import OpenMarket from "./pages/OpenMarket";
 import AdminPage from "./pages/admin/AdminPage";
 import AdminUser from './pages/admin/AdminUser';
 import AdminMessage from './pages/admin/AdminMessage';
+import GoodsControl from "./components/OpenMarket/GoodsControl";
 
 function App() {
     const product = {
@@ -252,6 +253,7 @@ function App() {
           <Route path="/admin/user" element={<AdminUser/>}/>
           <Route path="/admin/user" element={<AdminUser/>}/>
           <Route path="/admin/message" element={<AdminMessage/>}/>
+          <Route path="/openMarket/goodsControll" element={<GoodsControl/>}/>
       </Routes>
     </BrowserRouter>
   );

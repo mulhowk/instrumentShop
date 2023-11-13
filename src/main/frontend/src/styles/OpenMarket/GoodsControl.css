@@ -1,0 +1,278 @@
+.open-market-header{
+    background-color: #000000;
+    min-height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    aspect-ratio: auto;
+}
+
+.open-market-header-title{
+    flex: 1;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.open-market-header-title p{
+    margin-left: 70px;
+}
+
+.open-market-header-logo{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.open-market-header-logo img{
+    width: 40px;
+    height: 40px;
+}
+
+.open-market-header-member{
+    flex : 1;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.open-market-header-member p {
+    margin-right: 30px;
+}
+
+.open-market-header-member span{
+    font-weight: bold;
+}
+
+.goods-control{
+    margin: 20px 200px 30px;
+}
+
+.goods-control-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.goods-control-form{
+    background-color: white;
+}
+
+.goods-control-form-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-bottom: 1px solid #AAAAAA;
+}
+
+.goods-control-form-name-title{
+    flex: 1;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 50px;
+}
+
+.goods-control-form-name-input{
+    flex: 7;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.goods-control-form-name-input input{
+    font-size: 15px;
+    width: 400px;
+    height: 25px;
+    border: #8b8b8b;
+    background-color: #AAAAAA;
+    outline: none;
+}
+
+.goods-control-form-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-bottom: 1px solid #AAAAAA;
+}
+
+.goods-control-form-img-title{
+    flex: 1;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 50px;
+}
+
+.goods-control-form-img-img{
+    flex: 7;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.goods-control-form-img-img img{
+    width: 70px;
+    height: 70px;
+    margin-right: 10px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
+.goods-control-form-img-img button{
+
+}
+
+.goods-control-form-price{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-bottom: 1px solid #AAAAAA;
+}
+
+.goods-control-form-price-title{
+    flex: 1;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 50px;
+}
+
+.goods-control-form-price-input{
+    flex: 7;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.goods-control-form-price-input input{
+    font-size: 15px;
+    width: 150px;
+    height: 25px;
+    border: #8b8b8b;
+    background-color: #AAAAAA;
+    outline: none;
+}
+
+.goods-control-form-count{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-bottom: 1px solid #AAAAAA;
+}
+
+.goods-control-form-count-title{
+    flex: 1;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 50px;
+}
+
+.goods-control-form-count-input{
+    flex: 7;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.goods-control-form-count-input input{
+    font-size: 15px;
+    width: 150px;
+    height: 25px;
+    border: #8b8b8b;
+    background-color: #AAAAAA;
+    outline: none;
+}
+
+.goods-control-form-country{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-bottom: 1px solid #AAAAAA;
+}
+
+.goods-control-form-country-title{
+    flex: 1;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 50px;
+}
+
+.goods-control-form-country-input{
+    flex: 7;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.goods-control-form-country-input select{
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+}
+
+.goods-control-form-detail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-bottom: 1px solid #AAAAAA;
+}
+
+.goods-control-form-detail-title{
+    flex: 1;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 50px;
+}
+
+.goods-control-form-detail-input{
+    flex: 7;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.goods-control-submit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.goods-control-submit button{
+    font-size: 20px;
+    width: 100px;
+    height: 40px;
+}
