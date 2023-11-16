@@ -3,7 +3,7 @@ import MainCategory from "../../components/MainCategory";
 import Footer from "../../components/Footer";
 
 import MyInfoContent from "../../components/myPage/MyInfoContent";
-import MyBuyInfo from "../../components/myPage/buylist/MyBuyInfo";
+import MyBuyInfo from "../../components/myPage/buyList/MyBuyInfo";
 import "../../styles/myInfo/myInfoSide.css"
 import pImage from "../../img/info/info.svg"
 import React, { useState } from "react";

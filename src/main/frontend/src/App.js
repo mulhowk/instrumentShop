@@ -254,6 +254,10 @@ function App() {
           <Route path="/admin/user" element={<AdminUser/>}/>
           <Route path="/admin/message" element={<AdminMessage/>}/>
           <Route path="/openMarket/goodsControll" element={<GoodsControl/>}/>
+
+          {/* 상품관리 (리스트) */}
+          {/* 상품관리 (등록) */}
+          
       </Routes>
     </BrowserRouter>
   );

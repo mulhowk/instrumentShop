@@ -54,8 +54,8 @@ function Header(){
                             <a href="/" className="header-menu-text">LOGOUT</a>
                         </li>
                         <li id="open-market"></li>
-                        <li><a href="/" className="header-menu-text">SIGN UP</a></li>
-                        <li><a href="/" className="header-menu-text">MYPAGE</a></li>
+                        <li><a href="/register" className="header-menu-text">SIGN UP</a></li>
+                        <li><a href="/myinfo" className="header-menu-text">MYPAGE</a></li>
                         <li><a href="/" className="header-menu-text">ORDER</a></li>
                     </ul>
                 </div>

@@ -9,24 +9,24 @@ function AdminSide() {
             </div>
             <div className="a-s-content">
                 <div className="a-s-c-site">
-                    <span>사이트 바로가기</span>
+                    <a href="/"><span>사이트 바로가기</span></a>
                 </div>
                 <div className="a-s-c-tab" 
                 style={{backgroundImage: `url(${aMain})`, 
                                 backgroundRepeat: 'no-repeat',
                                 backgroundPosition: '10px',
                                 backgroundSize: '13px'}}>
-                    <span>메인화면</span>
+                    <a href="/admin"><span>메인화면</span></a>
                 </div>
                 <div className="a-s-c-tab-user" >
-                    <span style={{backgroundImage: `url(${aMain})`, 
+                    <a href="/admin/user"><span style={{backgroundImage: `url(${aMain})`, 
                                 backgroundRepeat: 'no-repeat',
                                 backgroundPosition: '0px',
-                                backgroundSize: '14px'}}>사용자 관리</span>
+                                backgroundSize: '14px'}}>사용자 관리</span></a>
                     <div className="a-s-c-tab-user-menu">
                         <ul>
-                            <li>사용자 목록</li>
-                            <li>메시지 보내기</li>
+                            <a href="/admin/user"><li>사용자 목록</li></a>
+                            <a href="/admin/message"><li>메시지 보내기</li></a>
                             <li>매니저 설정</li>
                         </ul>
                     </div>
