@@ -58,7 +58,9 @@ function MainCategory(){
                     onMouseEnter={() => setActiveCategory(category.id)}
                     onMouseLeave={() => setActiveCategory(null)}
                 >
-                    {category.name}
+                    <a href={`/goodsList/category/${category.id}`}>
+                        {category.name}
+                    </a>
                     {activeCategory === category.id && (
                         <ul className="subcategories">
                             {category.subcategories.map((subcategory, index) =>

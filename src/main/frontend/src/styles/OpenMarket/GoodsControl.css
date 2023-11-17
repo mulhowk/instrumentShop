@@ -84,7 +84,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 50px;
+    padding-left: 40px;
 }
 
 .goods-control-form-name-input{
@@ -118,7 +118,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 50px;
+    padding-left: 40px;
 }
 
 .goods-control-form-img-img{
@@ -155,7 +155,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 50px;
+    padding-left: 40px;
 }
 
 .goods-control-form-price-input{
@@ -189,7 +189,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 50px;
+    padding-left: 40px;
 }
 
 .goods-control-form-count-input{
@@ -223,7 +223,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 50px;
+    padding-left: 40px;
 }
 
 .goods-control-form-country-input{
@@ -254,7 +254,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 50px;
+    padding-left: 40px;
 }
 
 .goods-control-form-detail-input{

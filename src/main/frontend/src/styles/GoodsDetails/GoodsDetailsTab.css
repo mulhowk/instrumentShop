@@ -233,6 +233,15 @@
     padding: 5px;
 }
 
+.not-review{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
 .product-tab-qna{
     display: flex;
     align-items: center;
@@ -381,4 +390,13 @@
 .qna-write button{
     border: 1px solid white;
     padding: 5px;
+}
+
+.not-qna{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-wrap: wrap;
+    margin-top: 20px;
 }

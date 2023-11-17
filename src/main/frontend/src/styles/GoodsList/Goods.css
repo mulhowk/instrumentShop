@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 50px;
 }
 
 .goods-list-header{
@@ -123,4 +124,14 @@
     border: none;
     background-color: #272727;
     color: white;
+}
+
+.not-goods{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    width: 1200px;
 }

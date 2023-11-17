@@ -8,7 +8,7 @@ function QuickLink(){
         <p className="quick-link-title">QUICK CATEGORY</p>
         <div className="quick-link-01">
             <div className="quick-link">
-                <a href="#"><img src="/QuickCategory/cate1.jpg" alt="cate1" /></a>
+                <a href="goodsList/category/1"><img src="/QuickCategory/cate1.jpg" alt="cate1" /></a>
             </div>
             <div className="quick-link">
                 <a href="#"><img src="/QuickCategory/cate2.jpg" alt="cate2" /></a>

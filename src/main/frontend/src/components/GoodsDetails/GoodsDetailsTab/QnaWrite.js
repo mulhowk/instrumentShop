@@ -55,15 +55,15 @@ function QnaWrite(props){
                 </div>
                 <div className="qna-product-contents">
                     <div className="qna-product-img">
-                        <img src={props.product.img} alt="1" />
+                        <img src="../../logo.png" alt="1" />
                     </div>
                     <div className="qna-product-title">
                         <div className="qna-product-name">
-                            <p><span style={{fontWeight : "bold"}}>상품명 : </span>{props.product.title}</p>
+                            <p><span style={{fontWeight : "bold"}}>상품명 : </span>머시기저시기</p>
                         </div>
                         <div className="qna-product-price">
                             <p><span style={{fontWeight : "bold"}}>상품가 : </span>
-                                {props.product.price.toLocaleString()} 원</p>
+                                7,000,000 원</p>
                         </div>
                     </div>
                 </div>

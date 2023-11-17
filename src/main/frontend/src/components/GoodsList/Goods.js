@@ -111,12 +111,13 @@ function Goods(){
 
     const itemPerPage = 5;
     const [currentPage, setCurrentPage] = useState(1);
+    const goodsListLength = (goodsList && goodsList.length) || 0;
 
-    const totalPageCount = Math.ceil(goodsList.length / itemPerPage);
+    const totalPageCount = Math.ceil( goodsListLength / itemPerPage);
 
     const startIndex = (currentPage -1) * itemPerPage;
     const endIndex = startIndex + itemPerPage;
-    const currentData = goodsList.slice(startIndex, endIndex);
+    const currentData = (goodsList && goodsList.slice(startIndex, endIndex)) || null;
 
     const handlePageChange = (newPage) => {
         if(newPage >= 1 && newPage <= totalPageCount){
@@ -172,7 +173,8 @@ function Goods(){
                 )}
             </div>
            </div>
-            <div className="goods">
+            {currentData !== null &&
+                <div className="goods">
                 {currentData.map((goods) => (
                         <div className="product">
                        <div className="product-img">
@@ -196,8 +198,14 @@ function Goods(){
                         </div>
 
                     </div>
-                ))}
+                ))};
             </div>
+            }
+            {currentData === null &&
+                <div className="not-goods">
+                    <p>상품이 존재하지 않습니다.</p>
+                </div>
+            }
             <div className="page-nav">
                 {showPreviouButton && (<button onClick={() => handlePageChange(currentPage - 1)}
                     className="goods-list-prev">

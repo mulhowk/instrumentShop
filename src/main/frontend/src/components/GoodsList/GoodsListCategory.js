@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../styles/GoodsList/GoodsListCategory.css'
+import {useLocation} from "react-router-dom";
 
 function GoodsListCategory(){
 
@@ -46,18 +47,47 @@ function GoodsListCategory(){
 
     ];
 
+    const location = useLocation();
+
+    const [bigCategory, setBigCategory] = useState();
+
+    useEffect(() => {
+        if (location.pathname.includes('1')) {
+            setBigCategory(1);
+        } else if (location.pathname.includes('2')) {
+            setBigCategory(2);
+        } else if (location.pathname.includes('3')) {
+            setBigCategory(3);
+        } else if (location.pathname.includes('4')) {
+            setBigCategory(4);
+        } else if (location.pathname.includes('5')) {
+            setBigCategory(5);
+        } else if (location.pathname.includes('6')) {
+            setBigCategory(6);
+        } else if (location.pathname.includes('7')) {
+            setBigCategory(7);
+        } else if (location.pathname.includes('8')) {
+            setBigCategory(8);
+        } else {
+            setBigCategory(9);
+        }
+    }, [location.pathname]);
+
+
     return(
         <div className="goods-list-categories">
             <p className="goods-list-category-title">카테고리이름</p>
-            <div className="goods-list-category">
-              {categories.map((category) => (
-                  <a href="#"><div
-                        key={category.id}
-                        className="categories">
-                        {category.name}({category.count})
-                  </div></a>
-              ))}
-            </div>
+                <div className="goods-list-category">
+                    {categories.map((category) => (
+                        <a href={`/goodsList/category/${bigCategory}/${category.id}`}>
+                            <div
+                                key={category.id}
+                                className="categories">
+                                {category.name}({category.count})
+                            </div>
+                        </a>
+                    ))}
+                </div>
         </div>
     );
 }

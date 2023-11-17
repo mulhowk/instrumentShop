@@ -34,14 +34,17 @@ function GoodsDetailsTab(props){
         }
     };
 
+    const productReviewLength = (props.product.review && props.product.review.length) || 0;
+
     const reviewPerPage = 10;
     const [currentReviewPage, setCurrentReviewPage] = useState(1);
     const totalReviewPageCount
-        = Math.ceil(props.product.review.length / reviewPerPage);
+        = Math.ceil( productReviewLength / reviewPerPage);
 
     const startReviewIndex = (currentReviewPage -1) * reviewPerPage;
     const endReviewIndex = startReviewIndex + reviewPerPage;
-    const currentReviewData = props.product.review.slice(startReviewIndex, endReviewIndex);
+    const currentReviewData = (props.product.review &&
+        props.product.review.slice(startReviewIndex, endReviewIndex)) || null;
 
     const handleReviewPageChange = (newPage) => {
         if(newPage >= 1 && newPage <= totalReviewPageCount){
@@ -70,13 +73,14 @@ function GoodsDetailsTab(props){
     const showReviewNextButton = currentReviewPage < totalReviewPageCount;
 
     const qnaPerPage = 10;
+    const productQnaLength = (props.product.qna && props.product.qna.length) || 0;
     const [currentQnaPage, setCurrentQnaPage] = useState(1);
     const totalQnaPageCount
-        = Math.ceil(props.product.qna.length / qnaPerPage);
+        = Math.ceil( productQnaLength/ qnaPerPage);
 
     const startQnaIndex = (currentQnaPage -1) * qnaPerPage + 1;
     const endQnaIndex = startQnaIndex + qnaPerPage;
-    const currentQnaData = props.product.qna.slice(startQnaIndex, endQnaIndex);
+    const currentQnaData = (props.product.qna && props.product.qna.slice(startQnaIndex, endQnaIndex)) || null;
 
     const handleQnaPageChange = (newPage) => {
         if(newPage >= 1 && newPage <= totalQnaPageCount){
@@ -157,6 +161,8 @@ function GoodsDetailsTab(props){
                      <p>등록일</p>
                  </div>
                 </div>
+                {currentReviewData !== null &&
+                    <div>
                 {currentReviewData.map((res, index) => (
                 <div className="product-tab-review-contents">
                     <div className="product-tab-review-content-no">
@@ -177,6 +183,13 @@ function GoodsDetailsTab(props){
                     </div>
                 </div>
                     ))}
+                    </div>
+                }
+                {currentReviewData === null &&
+                <div className="not-review">
+                    <p>리뷰가 존재하지 않습니다.</p>
+                </div>
+                }
                 <div className="review-page-nav">
                   <div className="review-page-button">
                     {showReviewPreviouButton && (
@@ -194,7 +207,7 @@ function GoodsDetailsTab(props){
                     )}
                   </div>
                     <div className="review-write">
-                      <Link to="/reviewWrite">
+                      <Link to="/goodsDetails/reviewWrite">
                         <button>WRITE</button>
                       </Link>
                     </div>
@@ -229,6 +242,8 @@ function GoodsDetailsTab(props){
                         <p>등록일</p>
                     </div>
                 </div>
+                {currentQnaData !== null &&
+                    <div>
                 {currentQnaData.map((res, index) => (
                     <div className="product-tab-qna-contents">
                         <div className="product-tab-qna-content-no">
@@ -245,6 +260,13 @@ function GoodsDetailsTab(props){
                         </div>
                     </div>
                 ))}
+                    </div>
+                }
+                {currentQnaData === null &&
+                    <div className="not-qna">
+                        <p>QnA가 없습니다.</p>
+                    </div>
+            }
                 <div className="qna-page-nav">
                     <div className="qna-page-button">
                     {showQnaPreviouButton && (
@@ -261,9 +283,11 @@ function GoodsDetailsTab(props){
                         </button>
                     )}
                     </div>
+                    <Link to="/goodsDetails/qnaWrite">
                     <div className="qna-write">
                         <button>WRITE</button>
                     </div>
+                    </Link>
                 </div>
             </div>
 
