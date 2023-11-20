@@ -2,6 +2,7 @@ import "../../../styles/myInfo/buyList/buyListContent.css"
 import { useState,useEffect  } from "react";
 import MyBuyList from "./MyBuyList";
 
+
 function MyBuyInfo() {
 
       // 상태를 선언합니다.

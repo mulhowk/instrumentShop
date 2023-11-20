@@ -62,6 +62,47 @@ function GoodsControl() {
         setContent(newContent);
     };
 
+    const firstOptions = ['Option A', 'Option B', 'Option C']; // 추가된 첫 번째 옵션들
+    const secondOptionsMap = {
+        'Option A': ['Option A-1', 'Option A-2', 'Option A-3'],
+        'Option B': ['Option B-1', 'Option B-2', 'Option B-3'],
+        'Option C': ['Option C-1', 'Option C-2', 'Option C-3'],
+    }; // 첫 번째 옵션에 따른 두 번째 옵션들의 매핑
+
+    const [firstOption, setFirstOption] = useState('');
+    const [secondOption, setSecondOption] = useState('');
+
+    const handleFirstOptionChange = (event) => {
+        const selectedOption = event.target.value;
+
+        // 선택된 첫 번째 옵션에 따라 두 번째 옵션을 설정
+        setSecondOption('');
+        setFirstOption(selectedOption);
+    };
+
+    const handleSecondOptionChange = (event) => {
+        const selectedOption = event.target.value;
+        setSecondOption(selectedOption);
+    };
+
+    // 선택한 옵션을 저장하는 상태 변수
+    const [selectedOption, setSelectedOption] = useState('');
+    // 각 입력란의 값을 저장하는 상태 변수 배열
+    const [inputValues, setInputValues] = useState(['', '', '', '', '']);
+
+    // 옵션 선택 시 호출되는 함수
+    const handleOptionChange = (event) => {
+        const value = event.target.value;
+        setSelectedOption(value);
+    };
+
+    // 입력란 값 변경 시 호출되는 함수
+    const handleInputChange = (index, event) => {
+        const newInputValues = [...inputValues];
+        newInputValues[index] = event.target.value;
+        setInputValues(newInputValues);
+    };
+
     return (
         <div className="open-market">
             <div className="open-market-header">
@@ -122,6 +163,68 @@ function GoodsControl() {
                         </div>
                         <div className="goods-control-form-count-input">
                             <input type="text"/>&nbsp;개
+                        </div>
+                    </div>
+                    <div className="goods-control-form-category">
+                        <div className="goods-control-form-category-title">
+                            <p>카테고리</p>
+                        </div>
+                        <div className="goods-control-form-category-input">
+                            <label>
+                                <select value={firstOption} onChange={handleFirstOptionChange}>
+                                    <option value="">선택하세요</option>
+                                    {firstOptions.map((option) => (
+                                        <option key={option} value={option}>
+                                            {option}
+                                        </option>
+                                    ))}
+                                </select>
+                            </label>
+                            <label>
+                                <select
+                                    value={secondOption}
+                                    onChange={handleSecondOptionChange}
+                                    hidden={firstOption === ''}
+                                    style={{marginLeft : "10px"}}
+                                >
+                                    <option value="">선택하세요</option>
+                                    {secondOptionsMap[firstOption]?.map((option) => (
+                                        <option key={option} value={option}>
+                                            {option}
+                                        </option>
+                                    ))}
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="goods-control-form-option">
+                        <div className="goods-control-form-option-title">
+                            <p>옵션</p>
+                        </div>
+                        <div className="goods-control-form-option-input">
+                            <select value={selectedOption} onChange={handleOptionChange}>
+                                <option value="">미설정</option>
+                                <option value="option1">옵션 1</option>
+                                <option value="option2">옵션 2</option>
+                                {/* 추가적인 옵션들을 필요에 따라 추가할 수 있습니다 */}
+                            </select>
+
+                            {/* 선택된 옵션에 따라 나타나는 입력란들 */}
+                            {selectedOption && (
+                                <div>
+                                    {/* 5개의 입력란을 나타내는 맵 함수 */}
+                                    {inputValues.map((value, index) => (
+                                        <input
+                                            key={index}
+                                            type="text"
+                                            placeholder={`입력란 ${index + 1}`}
+                                            value={value}
+                                            style={{width  : "100px", marginLeft : "10px"}}
+                                            onChange={(event) => handleInputChange(index, event)}
+                                        />
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className="goods-control-form-country">

@@ -95,12 +95,12 @@ function MemberInfo(){
                     </div>
                     <div className="member-orderInfo-address-address">
                         <div className="member-orderInfo-address-address-num">
-                            <input type="text" id="address-num" value={postcode}></input>
+                            <input type="text" id="address-num" value={postcode} readOnly></input>
                             <button onClick={() => setPopupOpen(true)}>주소검색</button>
                         </div>
                         <div className="member-orderInfo-address-address-detail">
-                            <input type="text" id="address-content" value={address}></input>
-                            <input type="text" id="detail"></input>
+                            <input type="text" id="address-content" value={address} readOnly></input>
+                            <input type="text" id="detail" style={{marginLeft : "10px"}} readOnly></input>
                         </div>
                     </div>
                 </div>

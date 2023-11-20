@@ -9,6 +9,15 @@ import Modal from 'react-modal';
 function Header(){
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
+
+    const handleLogin = () => {
+        setIsLogin(true);
+    }
+
+    const handleLogout = () => {
+        setIsLogin(false);
+    }
 
     return(
         <div>
@@ -26,35 +35,49 @@ function Header(){
                 </div>
                 <div className="header-menu">
                     <ul className="menu">
-                        <li id="login"> 
-                        <a href="/" className="header-menu-text" onClick={(e) => {
+                        {isLogin ?
+                            (
+                                <div>
+                                    <li id="logout">
+                                        <a href="/" className="header-menu-text">LOGOUT</a>
+                                    </li>
+                                </div>
+                            ) : (
+                            <div>
+                            <li id="login">
+                            <a href="/" className="header-menu-text" onClick={(e) => {
                             e.preventDefault();
                             setModalIsOpen(true);
-                        }}>LOGIN</a></li>
-                        <Modal 
-                            appElement={document.getElementById('root')}
-                            isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}
-                            style={{
-                                overlay: {
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center'
+                        }}>LOGIN</a>
+                </li>
+                <Modal
+                    appElement={document.getElementById('root')}
+                    isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}
+                    style={{
+                        overlay: {
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center'
 
-                                  },
-                                content : {
-                                    width: '350px',
-                                    height: '460px',
-                                    position: 'absolute',
-                                    inset: ''
-                                }
-                            }}>
-                            <LoginContent/>
-                        </Modal>
-                        <li id="logout" className="hidden">
-                            <a href="/" className="header-menu-text">LOGOUT</a>
-                        </li>
-                        <li id="open-market"></li>
-                        <li><a href="/register" className="header-menu-text">SIGN UP</a></li>
+                        },
+                        content : {
+                            width: '350px',
+                            height: '460px',
+                            position: 'absolute',
+                            inset: ''
+                        }
+                    }}>
+                    <LoginContent/>
+                </Modal>
+            </div>)}
+                        {isLogin &&
+                            <li id="open-market"></li>
+                        }
+                        {isLogin === false &&
+                            <li>
+                                <a href="/register" className="header-menu-text">SIGN UP</a>
+                            </li>
+                        }
                         <li><a href="/myinfo" className="header-menu-text">MYPAGE</a></li>
                         <li><a href="/" className="header-menu-text">ORDER</a></li>
                     </ul>

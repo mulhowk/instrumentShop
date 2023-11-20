@@ -147,7 +147,8 @@ function ReviewWrite(){
                                 type="text"
                                 id="file"
                                 ref={textInputRef}
-                                placeholder="파일을 선택해주세요"></input>
+                                placeholder="파일을 선택해주세요"
+                            readOnly></input>
                             <input
                                 type="file"
                                 ref={fileInputRef}

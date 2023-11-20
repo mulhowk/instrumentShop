@@ -1,8 +1,19 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import '../../styles/GoodsPayment/OrderInfo.css'
 import {Link} from "react-router-dom";
 
 function OrderInfo() {
+
+    const [deliverPrice, setDeliverPrice] = useState(3000);
+    const productPrice = 40000;
+
+    useEffect(() => {
+        if(productPrice >= 50000){
+            setDeliverPrice(0);
+        } else setDeliverPrice(3000);
+    }, []);
+
+    const totalPrice = productPrice + deliverPrice;
 
     return (
        <div className="order-info">
@@ -34,15 +45,16 @@ function OrderInfo() {
                    <p>1</p>
                </div>
                <div className="order-info-content-discount">
-
                </div>
                <div className="order-info-content-price">
-                   <p>7,000,000 원</p>
+                   <p>{productPrice.toLocaleString()} 원</p>
                </div>
            </div>
            <div className="order-info-content-total">
                <div className="order-info-content-total-title">
-                   <p>주문금액 7,000,000원 + 배송비 0원 = 7,000,000원</p>
+                   <p>주문금액 {productPrice.toLocaleString()}원
+                       + 배송비 {deliverPrice.toLocaleString()}원
+                       = {totalPrice.toLocaleString()}원</p>
                </div>
            </div>
            <div className="order-info-total">
@@ -65,13 +77,13 @@ function OrderInfo() {
                </div>
                <div className="order-info-total-pay">
                    <div className="order-info-total-pay-price">
-                       <p>7,000,000 원</p>
+                       <p>{productPrice.toLocaleString()} 원</p>
                    </div>
                    <div className="order-info-total-pay-plus">
                        <p>+</p>
                    </div>
                    <div className="order-info-total-pay-deliver">
-                       <p>0 원</p>
+                       <p>{deliverPrice.toLocaleString()} 원</p>
                    </div>
                    <div className="order-info-total-pay-minus">
                        <p>-</p>
@@ -83,7 +95,7 @@ function OrderInfo() {
                        <p>=</p>
                    </div>
                    <div className="order-info-total-pay-total">
-                       <p>7,000,000 원</p>
+                       <p>{totalPrice.toLocaleString()} 원</p>
                    </div>
                </div>
            </div>

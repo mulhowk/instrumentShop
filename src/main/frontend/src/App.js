@@ -37,7 +37,6 @@ function App() {
           <Route path="/openMarket" element={<OpenMarket/>}/>
           <Route path="/admin" element={<AdminPage/>}/>"
           <Route path="/admin/user" element={<AdminUser/>}/>
-          <Route path="/admin/user" element={<AdminUser/>}/>
           <Route path="/admin/message" element={<AdminMessage/>}/>
           <Route path="/openMarket/goodsControll" element={<GoodsControl/>}/>
 

@@ -51,6 +51,7 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
     aspect-ratio: auto;
+    width: 1690px;
 }
 
 .header-logo {
