@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from "../components/Header";
-import MainCategory from "../components/MainCategory";
-import Footer from "../components/Footer";
-import GoodsDetailsProduct from "../components/GoodsDetails/GoodsDetailsProduct";
-import GoodsDetailsTab from "../components/GoodsDetails/GoodsDetailsTab";
+import Header from "../../components/Header";
+import MainCategory from "../../components/MainCategory";
+import Footer from "../../components/Footer";
+import GoodsDetailsProduct from "../../components/GoodsDetails/GoodsDetailsProduct";
+import GoodsDetailsTab from "../../components/GoodsDetails/GoodsDetailsTab";
 
 function GoodsDetails(){
 

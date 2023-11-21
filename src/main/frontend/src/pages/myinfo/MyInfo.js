@@ -8,7 +8,7 @@ import "../../styles/myInfo/myInfoSide.css"
 import pImage from "../../img/info/info.svg"
 import React, { useState } from "react";
 import MyWishInfo from "../../components/myPage/wishList/MyWishInfo";
-import MyBuyInfo from "../../components/myPage/buylist/MyBuyInfo";
+import MyBuyInfo from "../../components/myPage/buyList/MyBuyInfo";
 
 function MyInfo() {
 

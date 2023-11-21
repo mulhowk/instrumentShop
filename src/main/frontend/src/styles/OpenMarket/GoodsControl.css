@@ -1,5 +1,5 @@
 .open-market{
-    width: 1690px;
+    width: 100%;
 }
 
 .open-market-header{
@@ -102,7 +102,7 @@
     width: 300px;
     padding: 5px;
     font-size: 16px;
-    border: 2px solid #3498db;
+    border: 2px solid #AAAAAA;
     border-radius: 5px;
     outline: none; /* 기본 포커스 효과 제거 */
     transition: border-color 0.3s; /* 부드러운 효과를 위한 트랜지션 설정 */
@@ -158,7 +158,7 @@
     transition: background-color 0.3s, color 0.3s;
     background-color: #FFFFFF;
     color: #000000;
-    border: 2px solid #3498db;
+    border: 2px solid #AAAAAA;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
     &:hover {
@@ -196,7 +196,7 @@
     width: 150px;
     padding: 5px;
     font-size: 16px;
-    border: 2px solid #3498db;
+    border: 2px solid #AAAAAA;
     border-radius: 5px;
     outline: none; /* 기본 포커스 효과 제거 */
     transition: border-color 0.3s; /* 부드러운 효과를 위한 트랜지션 설정 */
@@ -236,7 +236,7 @@
     width: 150px;
     padding: 5px;
     font-size: 16px;
-    border: 2px solid #3498db;
+    border: 2px solid #AAAAAA;
     border-radius: 5px;
     outline: none; /* 기본 포커스 효과 제거 */
     transition: border-color 0.3s; /* 부드러운 효과를 위한 트랜지션 설정 */
@@ -276,7 +276,7 @@
     width: 150px;
     padding: 5px;
     font-size: 16px;
-    border: 2px solid #3498db;
+    border: 2px solid #AAAAAA;
     border-radius: 5px;
 }
 
@@ -314,7 +314,7 @@
     width: 150px;
     padding: 5px;
     font-size: 16px;
-    border: 2px solid #3498db;
+    border: 2px solid #AAAAAA;
     border-radius: 5px;
 }
 
@@ -327,7 +327,7 @@
     width: 150px;
     padding: 5px;
     font-size: 16px;
-    border: 2px solid #3498db;
+    border: 2px solid #AAAAAA;
     border-radius: 5px;
 }
 
@@ -365,7 +365,7 @@
     width: 150px;
     padding: 5px;
     font-size: 16px;
-    border: 2px solid #3498db;
+    border: 2px solid #AAAAAA;
     border-radius: 5px;
 }
 
