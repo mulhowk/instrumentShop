@@ -1,4 +1,4 @@
-import GoodsAdmin from "../components/OpenMarket/GoodsAdmin";
+import GoodsAdmin from "../../components/OpenMarket/GoodsAdmin";
 
 
 function OpenMarket() {

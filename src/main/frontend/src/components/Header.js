@@ -20,7 +20,6 @@ function Header(){
     }
 
     return(
-        <div>
             <div className="header">
                 <div className="header-search">
                     <input type="text" name="q" placeholder="검색어를 입력하세요" className="custom-input"></input>
@@ -92,7 +91,6 @@ function Header(){
                     </div>
                 </div>
             </div>
-        </div>
     );
 }
 

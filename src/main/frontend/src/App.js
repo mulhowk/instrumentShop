@@ -3,16 +3,16 @@ import './styles/globalStyles.css'
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import Register from "./pages/register/Register";
-import MainPage from "./pages/MainPage";
-import GoodsList from "./pages/GoodsList";
-import GoodsDetails from "./pages/GoodsDetails";
+import MainPage from "./pages/MainPage/MainPage";
+import GoodsList from "./pages/Goods/GoodsList";
+import GoodsDetails from "./pages/Goods/GoodsDetails";
 import MyInfo from './pages/myinfo/MyInfo';
 import ReviewWrite from "./components/GoodsDetails/GoodsDetailsTab/ReviewWrite";
 import React from "react";
 import QnaWrite from "./components/GoodsDetails/GoodsDetailsTab/QnaWrite";
 import MyAddressPop from './pages/myinfo/MyAddressPop';
-import GoodsPayment from "./pages/GoodsPayment";
-import OpenMarket from "./pages/OpenMarket";
+import GoodsPayment from "./pages/Payment/GoodsPayment";
+import OpenMarket from "./pages/OpenMarket/OpenMarket";
 import AdminPage from "./pages/admin/AdminPage";
 import AdminUser from './pages/admin/AdminUser';
 import AdminMessage from './pages/admin/AdminMessage';

@@ -2,7 +2,7 @@
     margin-left: 300px;
     margin-right: 300px;
     margin-top: 50px;
-    width: 1080px;
+    width: 64%;
 }
 
 .member-orderInfo{
@@ -48,7 +48,7 @@
     width: 200px;
     padding: 5px;
     font-size: 16px;
-    border: 2px solid #3498db;
+    border: 2px solid #AAAAAA;
     border-radius: 5px;
     outline: none; /* 기본 포커스 효과 제거 */
     transition: border-color 0.3s; /* 부드러운 효과를 위한 트랜지션 설정 */
@@ -91,7 +91,7 @@
     width: 200px;
     padding: 5px;
     font-size: 16px;
-    border: 2px solid #3498db;
+    border: 2px solid #AAAAAA;
     border-radius: 5px;
     outline: none; /* 기본 포커스 효과 제거 */
     transition: border-color 0.3s; /* 부드러운 효과를 위한 트랜지션 설정 */
@@ -135,7 +135,7 @@
     width: 150px;
     padding: 5px;
     font-size: 16px;
-    border: 2px solid #3498db;
+    border: 2px solid #AAAAAA;
     border-radius: 5px;
     outline: none; /* 기본 포커스 효과 제거 */
     transition: border-color 0.3s; /* 부드러운 효과를 위한 트랜지션 설정 */
@@ -182,7 +182,7 @@
     width: 150px;
     padding: 5px;
     font-size: 16px;
-    border: 2px solid #3498db;
+    border: 2px solid #AAAAAA;
     border-radius: 5px;
     outline: none; /* 기본 포커스 효과 제거 */
     transition: border-color 0.3s; /* 부드러운 효과를 위한 트랜지션 설정 */
@@ -227,7 +227,7 @@
     width: 300px;
     padding: 5px;
     font-size: 16px;
-    border: 2px solid #3498db;
+    border: 2px solid #AAAAAA;
     border-radius: 5px;
     outline: none; /* 기본 포커스 효과 제거 */
     transition: border-color 0.3s; /* 부드러운 효과를 위한 트랜지션 설정 */
@@ -273,7 +273,7 @@
     height: 40px;
     padding: 5px;
     font-size: 16px;
-    border: 2px solid #3498db;
+    border: 2px solid #AAAAAA;
     border-radius: 5px;
     outline: none; /* 기본 포커스 효과 제거 */
     transition: border-color 0.3s; /* 부드러운 효과를 위한 트랜지션 설정 */
@@ -318,7 +318,7 @@
     height: 40px;
     padding: 5px;
     font-size: 16px;
-    border: 2px solid #3498db;
+    border: 2px solid #AAAAAA;
     border-radius: 5px;
     outline: none; /* 기본 포커스 효과 제거 */
     transition: border-color 0.3s; /* 부드러운 효과를 위한 트랜지션 설정 */

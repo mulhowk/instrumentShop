@@ -49,7 +49,7 @@ function RollingBanner() {
                     showArrows={false}
                 >
                     {images.map((image, index) => (
-                        <div key={index}>
+                        <div key={index} className="custom-img">
                             <a href="/">
                                 <img
                                     src={image}
