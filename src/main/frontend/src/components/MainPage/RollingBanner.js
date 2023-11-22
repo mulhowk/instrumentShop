@@ -6,11 +6,26 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 function RollingBanner() {
 
     const images = [
-        '/RollingBanner/1.png',
-        '/RollingBanner/2.png',
-        '/RollingBanner/3.png',
-        '/RollingBanner/4.png',
-        '/RollingBanner/5.png'
+        {
+            img : '/RollingBanner/1.png',
+            href : '/goodsList/category/1/1'
+        },
+        {
+            img : '/RollingBanner/2.png',
+            href: '/goodsDetails/202311211906'
+        },
+        {
+            img : '/RollingBanner/3.png',
+            href: '/goodsList/category/1'
+        },
+        {
+            img : '/RollingBanner/4.png',
+            href: '/goodsDetails/202311211912'
+        },
+        {
+            img : '/RollingBanner/5.png',
+            href: '/goodsDetails/202311211913'
+        }
     ];
 
     const totalSlides = images.length;
@@ -50,9 +65,9 @@ function RollingBanner() {
                 >
                     {images.map((image, index) => (
                         <div key={index} className="custom-img">
-                            <a href="/">
+                            <a href={image.href}>
                                 <img
-                                    src={image}
+                                    src={image.img}
                                     alt={`Image ${index + 1}`}
                                 />
                             </a>

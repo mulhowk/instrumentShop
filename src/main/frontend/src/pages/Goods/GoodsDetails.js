@@ -17,7 +17,62 @@ function GoodsDetails(){
         options : ['빨강색', '초록색', '분홍색'],
         details : '상품 상세 입니다. 이미지 url이 들어올 수도 있어요. 이미지 url이 들어온다면 따로 처리를 해야겠군요.sdfdsfsdf dsf sadhsahuwahdjkshkjdhsajkdhakjshdkjsahdjksahdkjhasjkdhaskjhdjk',
         payInfo : '구매 안내에용오옹ㅇ옹ㅇ',
-        review : "",
+        review : [
+            {
+                writer : 'rkdxogur97',
+                score : 4,
+                date : '2023.11.22',
+                id : '202311220945 상품명이긴한데 이러면 id로 상품명 가져와야 하나',
+                file : '../../logo.png',
+                title : '아주 좋소',
+                content : '아주 좋은 상품이오'
+            },
+            {
+                writer : 'rkdxogur97',
+                score : 4.5,
+                date : '2023.11.22',
+                id : 202311220945,
+                file : '../../logo.png',
+                title : '아주 좋소',
+                content : '아주 좋은 상품이오'
+            },
+            {
+                writer : 'rkdxogur97',
+                score : 4.5,
+                date : '2023-11-22',
+                id : 202311220945,
+                file : '../../logo.png',
+                title : '아주 좋소',
+                content : '아주 좋은 상품이오'
+            },
+            {
+                writer : 'rkdxogur97',
+                score : 4.5,
+                date : '2023-11-22',
+                id : 202311220945,
+                file : '../../logo.png',
+                title : '아주 좋소',
+                content : '아주 좋은 상품이오'
+            },
+            {
+                writer : 'rkdxogur97',
+                score : 4.5,
+                date : '2023-11-22',
+                id : 202311220945,
+                file : '../../logo.png',
+                title : '아주 좋소',
+                content : '아주 좋은 상품이오'
+            },
+            {
+                writer : 'rkdxogur97',
+                score : 4.5,
+                date : '2023-11-22',
+                id : 202311220945,
+                file : '../../logo.png',
+                title : '아주 좋소',
+                content : '아주 좋은 상품이오'
+            }
+        ],
         qna : ""
     };
 

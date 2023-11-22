@@ -110,7 +110,9 @@ function GoodsControl() {
                     <p>오픈마켓</p>
                 </div>
                 <div className="open-market-header-logo">
-                    <img src="../../logo0.png" alt="open-market-logo"/>
+                    <a href="/">
+                        <img src="../../logo0.png" alt="open-market-logo"/>
+                    </a>
                 </div>
                 <div className="open-market-header-member">
                     <p><span>YAMAHA</span> 님 안녕하세요. 좋은 하루 되세요!</p>

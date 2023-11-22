@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "../../styles/OpenMarket/GoodsAdmin.css"
+import {Link} from "react-router-dom";
 
 function GoodsAdmin(){
 
@@ -129,7 +130,9 @@ function GoodsAdmin(){
                 <p>오픈마켓</p>
             </div>
             <div className="open-market-header-logo">
+                <a href="/">
                 <img src="../../logo0.png" alt="open-market-logo"/>
+                </a>
             </div>
             <div className="open-market-header-member">
                 <p><span>YAMAHA</span> 님 안녕하세요. 좋은 하루 되세요!</p>
@@ -138,7 +141,9 @@ function GoodsAdmin(){
 
         <div className="open-market-content">
             <div className="open-market-create">
+                <Link to="/openMarket/goodsControll">
                 <button>상품등록</button>
+                </Link>
             </div>
             <div className="open-market-content-header">
                 <div className="open-market-content-header-no">
@@ -192,7 +197,9 @@ function GoodsAdmin(){
                         <p>{product.country}</p>
                     </div>
                     <div className="open-market-content-list-modify">
-                        <button>✎</button>
+                        <a href="/openMarket/goodsControll">
+                            <button>✎</button>
+                        </a>
                     </div>
                     <div className="open-market-content-list-delete">
                         <button>✖</button>

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import '../../styles/GoodsDetails/GoodsDetailsTab.css'
 import {Link} from "react-router-dom";
 
@@ -36,7 +36,7 @@ function GoodsDetailsTab(props){
 
     const productReviewLength = (props.product.review && props.product.review.length) || 0;
 
-    const reviewPerPage = 10;
+    const reviewPerPage = 5;
     const [currentReviewPage, setCurrentReviewPage] = useState(1);
     const totalReviewPageCount
         = Math.ceil( productReviewLength / reviewPerPage);
@@ -144,42 +144,61 @@ function GoodsDetailsTab(props){
                 <div className="product-tab-review-title">
                     <p style={{color : "white"}}>Review</p>
                 </div>
-                <div className="product-tab-review-header">
-                    <div className="product-tab-review-header-no">
-                        <p>NO</p>
-                    </div>
-                 <div className="product-tab-review-header-subject">
-                     <p>내용</p>
-                 </div>
-                 <div className="product-tab-review-header-score">
-                     <p>별점</p>
-                 </div>
-                 <div className="product-tab-review-header-name">
-                    <p>이름</p>
-                </div>
-                 <div className="product-tab-review-header-date">
-                     <p>등록일</p>
-                 </div>
-                </div>
                 {currentReviewData !== null &&
                     <div>
                 {currentReviewData.map((res, index) => (
                 <div className="product-tab-review-contents">
-                    <div className="product-tab-review-content-no">
-                        <p>{startReviewIndex + index}</p>
+                    <div className="product-tab-review-content-writer">
+                        <p>{res.writer}</p>
                     </div>
-                    <div className="product-tab-review-content-subject">
-                        <p>{res.subject}</p>
+                    <div className="flex-contents">
+                        <div className="product-tab-review-content-score">
+                        {res.score === 5 ?
+                            <img src = '../../GoodsDetails/GoodsDetailsTab/star5.png'
+                            alt = 'star5'/> :
+                            res.score === 4.5 ?
+                                <img src = '../../GoodsDetails/GoodsDetailsTab/star4.5.png'
+                                     alt = 'star4.5'/>:
+                                res.score === 4 ?
+                                    <img src = '../../GoodsDetails/GoodsDetailsTab/star4.png'
+                                         alt = 'star4'/>:
+                                    res.score === 3.5 ?
+                                        <img src = '../../GoodsDetails/GoodsDetailsTab/star3.5.png'
+                                             alt = 'star3.5'/>:
+                                        res.score === 3 ?
+                                            <img src = '../../GoodsDetails/GoodsDetailsTab/star3.png'
+                                                 alt = 'star3'/>:
+                                            res.score === 2.5 ?
+                                                <img src = '../../GoodsDetails/GoodsDetailsTab/star2.5.png'
+                                                     alt = 'star2.5'/>:
+                                                res.score === 2 ?
+                                                    <img src = '../../GoodsDetails/GoodsDetailsTab/star2.png'
+                                                         alt = 'star2'/>:
+                                                    res.score === 1.5 ?
+                                                        <img src = '../../GoodsDetails/GoodsDetailsTab/star1.5.png'
+                                                             alt = 'star1.5'/>:
+                                                        res.score === 1 ?
+                                                            <img src = '../../GoodsDetails/GoodsDetailsTab/star1.png'
+                                                                 alt = 'star1'/>:
+                                                                <img src = '../../GoodsDetails/GoodsDetailsTab/star0.5.png'
+                                                                     alt = 'star0.5'/>
+                        }
+                        </div>
+                        <div className="product-tab-review-content-date">
+                            <p>{res.date}</p>
+                        </div>
                     </div>
-                    <div className="product-tab-review-content-score">
-                        <p>{res.point}</p>
-                        {console.log(res.point)}
+                    <div className="product-tab-review-content-id">
+                        <p>{res.id}</p>
                     </div>
-                    <div className="product-tab-review-content-name">
-                        <p>{res.name}</p>
+                    <div className="product-tab-review-content-img">
+                        <img src={res.file} alt="review-file"/>
                     </div>
-                    <div className="product-tab-review-content-date">
-                        <p>{res.date}</p>
+                    <div className="product-tab-review-content-title">
+                        <p>{res.title}</p>
+                    </div>
+                    <div className="product-tab-review-content-content">
+                        <p>{res.content}</p>
                     </div>
                 </div>
                     ))}

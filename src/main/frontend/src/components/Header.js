@@ -5,6 +5,7 @@ import '../styles/globalStyles.css'
 
 import LoginContent from './login/LoginForm';
 import Modal from 'react-modal';
+import {Link} from "react-router-dom";
 
 function Header(){
 
@@ -24,13 +25,15 @@ function Header(){
                 <div className="header-search">
                     <input type="text" name="q" placeholder="검색어를 입력하세요" className="custom-input"></input>
                     <div className="marginLeft">
-                        <img src="/search3.png" alt='searchImg' width="30" height="30"></img>
+                        <Link to="/goodsList">
+                            <img src="/search3.png" alt='searchImg' width="30" height="30"/>
+                        </Link>
                     </div>
                 </div>
                 <div className="header-logo">
-                    <a href="http://localhost:3000/">
+                    <Link to="/">
                         <img src="/logo0.png" alt='logoImg' width="70" height="70"></img>
-                    </a>
+                    </Link>
                 </div>
                 <div className="header-menu">
                     <ul className="menu">
@@ -38,7 +41,9 @@ function Header(){
                             (
                                 <div>
                                     <li id="logout">
-                                        <a href="/" className="header-menu-text">LOGOUT</a>
+                                        <Link to="/">
+                                        <a className="header-menu-text">LOGOUT</a>
+                                        </Link>
                                     </li>
                                 </div>
                             ) : (

@@ -5,7 +5,7 @@ import {
     ANONYMOUS,
 } from "@tosspayments/payment-widget-sdk"
 
-const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm"
+const clientKey = "test_ck_LkKEypNArWLDZelgyeml8lmeaxYG"
 const customerKey = "3r3xRiVp3pFTT8baWdNIB"
 
 export function CheckoutPage() {

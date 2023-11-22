@@ -17,6 +17,7 @@ import AdminPage from "./pages/admin/AdminPage";
 import AdminUser from './pages/admin/AdminUser';
 import AdminMessage from './pages/admin/AdminMessage';
 import GoodsControl from "./components/OpenMarket/GoodsControl";
+import {CheckoutPage} from "./components/GoodsPayment/CheckoutPage.tsx";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/myinfo" element={<MyInfo/>}/>
           <Route path="/myinfo/address" element={<MyAddressPop/>}/>
           <Route path="/goodsDetails" element={<GoodsDetails/>}/>
+          <Route path="/goodsDetails/:goodsId" element={<GoodsDetails/>}/>
           <Route path="/goodsDetails/reviewWrite" element={<ReviewWrite/>}/>
           <Route path="/goodsDetails/qnaWrite" element={<QnaWrite/>}/>
           <Route path="/goodsPayment" element={<GoodsPayment/>}/>

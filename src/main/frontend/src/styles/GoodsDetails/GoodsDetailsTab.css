@@ -104,59 +104,35 @@
     margin-bottom: 10px;
 }
 
-.product-tab-review-header{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid #AAAAAA;
-    border-top: 1px solid #AAAAAA;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-bottom: 2px;
-}
-
-.product-tab-review-header-no{
-    margin-right: auto;
-    align-items: center;
-}
-
-.product-tab-review-header-subject{
-    margin-right: auto;
-}
-
-.product-tab-review-header-score{
-    margin-right : 54px;
-}
-
-.product-tab-review-header-name{
-    margin-right : 70px;
-}
-
-.product-tab-review-header-date{
-    margin-right : 50px;
-}
-
 .product-tab-review-contents{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-left: 15px;
+    display: block;
+    padding-left: 5px;
     padding-right: 23px;
     margin-bottom: 5px;
     border-bottom: 1px solid #858a8d;
 }
 
-.product-tab-review-content-no{
+.product-tab-review-content-writer{
     margin-right: auto;
-    width: 30px;
     align-items: center;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    font-size: 15px;
+    font-weight: bold;
 }
 
-.product-tab-review-content-subject{
-    margin-right: auto;
-    width: 580px;
+.product-tab-review-content-writer p{
+    color : #FFFFFF;
+}
+
+.flex-contents{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.product-tab-review-content-score{
     align-items: center;
     display: flex;
     justify-content: flex-start;
@@ -165,28 +141,56 @@
     text-overflow: ellipsis;
 }
 
-.product-tab-review-content-name{
-    margin-right : 32px;
-    width: 100px;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-}
-
-.product-tab-review-content-score{
-    margin-right : 32px;
-    width: 20px;
-    align-items: center;
-    display: flex;
-    justify-content: center;
+.product-tab-review-content-score img{
+    width : 150px;
+    height: 30px;
 }
 
 .product-tab-review-content-date{
-    margin-right : 40px;
-    width: 60px;
+
+}
+
+.product-tab-review-content-id{
     align-items: center;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.product-tab-review-content-img{
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+}
+
+.product-tab-review-content-img img{
+    width: 120px;
+    height: 120px;
+}
+
+.product-tab-review-content-title{
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.product-tab-review-content-title p {
+    color: #FFFFFF;
+}
+
+.product-tab-review-content-content{
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.product-tab-review-content-content p {
+    color: #FFFFFF;
 }
 
 .active{

@@ -29,16 +29,16 @@ function Footer(){
             </div>
             <div className="footer-category-01">
                 <p className="color-red">CATEGORY</p>
-                <a href="/"><p>카테고리 1</p></a>
-                <a href="/"><p>카테고리 2</p></a>
-                <a href="/"><p>카테고리 3</p></a>
-                <a href="/"><p>카테고리 4</p></a>
+                <a href="/goodsList/category/1"><p>카테고리 1</p></a>
+                <a href="/goodsList/category/2"><p>카테고리 2</p></a>
+                <a href="/goodsList/category/3"><p>카테고리 3</p></a>
+                <a href="/goodsList/category/4"><p>카테고리 4</p></a>
             </div>
             <div className="footer-category-02">
-                <a href="/"><p>카테고리 5</p></a>
-                <a href="/"><p>카테고리 6</p></a>
-                <a href="/"><p>카테고리 7</p></a>
-                <a href="/"><p>카테고리 8</p></a>
+                <a href="/goodsList/category/5"><p>카테고리 5</p></a>
+                <a href="/goodsList/category/6"><p>카테고리 6</p></a>
+                <a href="/goodsList/category/7"><p>카테고리 7</p></a>
+                <a href="/goodsList/category/8"><p>카테고리 8</p></a>
             </div>
             <div className="company">
                 <p className="color-red">COMPANY</p>

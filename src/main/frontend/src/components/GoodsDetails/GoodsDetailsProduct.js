@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import "../../styles/GoodsDetails/GoodsDetailsProduct.css"
-import {options} from "axios";
+import "../../styles/GoodsDetails/GoodsDetailsProduct.css";
+import {Link} from "react-router-dom";
 
 function GoodsDetailsProduct(props) {
-
 
     const [selectOptions, setSelectOptions] = useState("");
     const handleSelectOptions = (event) => {
@@ -110,7 +109,9 @@ function GoodsDetailsProduct(props) {
 
                             ) :
                             (
-                                <div className="product-area-count" style={{color: "white"}}>옵션을 선택해 주세요</div>
+                                <div className="product-area-count" style={{color: "white"}}>
+                                    옵션을 선택해 주세요
+                                </div>
                             )
                     ) :
                     (
@@ -143,20 +144,25 @@ function GoodsDetailsProduct(props) {
                     )
                 }
                 <div className="product-area-button">
+                    <Link to="/goodsPayment">
                     <button style={
                         {
                             backgroundColor: "white",
-                            color: "black", width: "250px", marginRight: "20px"
+                            color: "black", width: "190px", marginRight: "20px",
+                            cursor : "pointer"
                         }}>구매하기
                     </button>
+                    </Link>
                     <button style={{
                         backgroundColor: "black",
-                        color: "white", width: "250px", marginRight: "20px"
+                        color: "white", width: "200px", marginRight: "20px",
+                        cursor : "pointer"
                     }}>장바구니
                     </button>
                     <button style={{
                         backgroundColor: "white",
-                        color: "black", width: "80px"
+                        color: "black", width: "80px",
+                        cursor : "pointer"
                     }}>♡
                     </button>
                 </div>

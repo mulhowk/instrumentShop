@@ -1,8 +1,32 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/GoodsPayment/OrderInfo.css'
-import {Link} from "react-router-dom";
+import Modal from "react-modal";
+import {CheckoutPage} from "./CheckoutPage.tsx";
 
 function OrderInfo() {
+
+    const [selectedOption, setSelectedOption] = useState('');
+
+    const handleButtonClick = () => {
+        if(selectedOption === 'option0') {
+            console.log('option 1 선택');
+        } else if (selectedOption === 'option1'){
+            openModal();
+            console.log({isModalOpen});
+        } else {
+            console.log('마지막 선택');
+        }
+    }
+
+    const [isModalOpen, setModalOpen] = useState(false);
+
+    const openModal = () => {
+        setModalOpen(true);
+    }
+
+    const closeModal = () => {
+        setModalOpen(false);
+    }
 
     const [deliverPrice, setDeliverPrice] = useState(3000);
     const productPrice = 40000;
@@ -14,6 +38,18 @@ function OrderInfo() {
     }, []);
 
     const totalPrice = productPrice + deliverPrice;
+
+    const customStyles = {
+        overlay : {
+            backgroundColor : 'rgba(0,0,0,0.5)'
+        },
+        content : {
+            width : '50%',
+            margin : 'auto',
+            borderRadius : '8px',
+            boxShadow : '0 0 10px rgba(0,0,0,0.3)'
+        }
+    };
 
     return (
        <div className="order-info">
@@ -45,6 +81,7 @@ function OrderInfo() {
                    <p>1</p>
                </div>
                <div className="order-info-content-discount">
+                   <button>쿠폰 확인</button>
                </div>
                <div className="order-info-content-price">
                    <p>{productPrice.toLocaleString()} 원</p>
@@ -103,37 +140,41 @@ function OrderInfo() {
                <div className="pay-area-title">
                    <p>결제 정보</p>
                </div>
+               <>
+               <Modal
+                   isOpen = {isModalOpen}
+                   onRequestClose = {closeModal}
+                   contentLabel ="Checkout Modal"
+                   style={customStyles}>
+                   <CheckoutPage/>
+                   <button onClick={closeModal}>모달 닫기</button>
+               </Modal>
+               </>
                <div className="pay-area-way">
                    <p>결제방법</p>
                    <div className="pay-area-way-option">
                        <label>
                            <input
                                type="radio"
-                               value="creditCard"
+                               value="option1"
                                name="option"
-                               />
-                           신용카드
-                       </label>
-                       <label>
-                           <input
-                               type="radio"
-                               value="tossPay"
-                               name="option"
+                               onChange={() => setSelectedOption('option1')}
                            />
                            토스 간편결제
                        </label>
                        <label>
                            <input
                                type="radio"
-                               value="mootong"
+                               value="option0"
                                name="option"
+                               onChange={() => setSelectedOption('option0')}
                            />
                            무통장입금
                        </label>
                    </div>
                </div>
                <div className="pay-area-button">
-                   <button>결제하기</button>
+                   <button onClick={handleButtonClick}>결제하기</button>
                </div>
            </div>
        </div>

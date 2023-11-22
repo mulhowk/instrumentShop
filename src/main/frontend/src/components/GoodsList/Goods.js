@@ -142,7 +142,7 @@ function Goods(){
         return pageNumbers;
     };
 
-    const showPreviouButton = currentPage > 1 ;
+    const showPreviousButton = currentPage > 1 ;
     const showNextButton = currentPage < totalPageCount;
 
     const toggleDropdown = () => {
@@ -178,12 +178,12 @@ function Goods(){
                 {currentData.map((goods) => (
                         <div className="product">
                        <div className="product-img">
-                           <a href="#">
+                           <a href={`/goodsDetails/${goods.id}`}>
                                <img src={goods.img} alt={goods.id}/>
                            </a>
                        </div>
                         <div className="product-title">
-                            <a href="#">{goods.title}</a>
+                            <a href={`/goodsDetails/${goods.id}`}>{goods.title}</a>
                         </div>
                         <div className="product-footer">
                           <div className="product-price">
@@ -207,7 +207,7 @@ function Goods(){
                 </div>
             }
             <div className="page-nav">
-                {showPreviouButton && (<button onClick={() => handlePageChange(currentPage - 1)}
+                {showPreviousButton && (<button onClick={() => handlePageChange(currentPage - 1)}
                     className="goods-list-prev">
                         《
                 </button>

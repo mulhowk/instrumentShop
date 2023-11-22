@@ -6,21 +6,22 @@ function GoodsListCategory(){
 
     const categories = [
         {
-            id:1,
+            id:0,
             name : '소프라노 색소폰',
             count : 20
         },
         {
-            id:2,
+            id:1,
             name : '알토 색소폰',
             count: 29
         },
         {
-            id:3,
+            id : 2,
             name : '테너 색소폰',
             count: 41
         },
         {
+            id:3,
             name : '바리톤 색소폰',
             count: 2
         },
