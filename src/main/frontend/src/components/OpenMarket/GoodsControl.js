@@ -1,9 +1,111 @@
 import React, {useState} from "react";
 import "../../styles/OpenMarket/GoodsControl.css"
 import ReactQuill from "react-quill";
+import { useNavigate } from 'react-router-dom';
 
 
 function GoodsControl() {
+
+        const [goodsName, setGoodsName] = useState('');
+        const [goodsPrice, setGoodsPrice] = useState(0);
+        const [goodsImg, setGoodsImg] = useState(null);
+        const [parentCategory, setParentCategory] = useState('');
+        const [childCategory, setChildCategory] = useState('');
+        const [goodsDetail, setGoodsDetail] = useState('');
+        const [goodsOption, setGoodsOption] = useState('');
+        const [goodsBrand, setGoodsBrand] = useState('');
+        const [goodsQuantity, setGoodsQuantity] = useState(0);
+        const [goodsCountry, setGoodsCountry] = useState('');
+        const [options, setOptions] = useState(['','','','','']);
+        const [goodsDate, setGoodsDate] = useState(null);
+
+        const navigate = useNavigate();
+
+        const handlePriceChange = (e) => {
+            const price = parseInt(e.target.value, 10);
+            setGoodsPrice(price);
+        }
+
+        const handleQuantityChange = (e) => {
+            const quantity = parseInt(e.target.value, 10);
+            setGoodsQuantity(quantity);
+        }
+
+        const handleCreate = () => {
+
+            const isConfirmed = window.confirm('상품을 만드시겠습니까?');
+
+            if(isConfirmed) {
+                if(!goodsName) {
+                    alert('상품명을 입력해주세요');
+                    return;
+                }
+                if(!goodsPrice) {
+                    alert('상품 가격을 입력해주세요');
+                    return;
+                }
+                if(!goodsImg) {
+                    alert('상품 이미지를 선택해주세요');
+                    return;
+                }
+                if(!parentCategory) {
+                    alert('상품 카테고리를 선택해주세요');
+                    return;
+                }
+                if(!childCategory) {
+                    alert('상품 소카테고리를 선택해주세요');
+                    return;
+                }
+                if(!goodsDetail) {
+                    alert('상품 설명을 입력해주세요');
+                    return;
+                }
+                if(!goodsBrand) {
+                    alert('상품 브랜드를 입력해주세요');
+                    return;
+                }
+                if(!goodsQuantity) {
+                    alert('상품 재고량을 입력해주세요');
+                    return;
+                }
+                if(!goodsCountry) {
+                    alert('상품 원산지를 입력해주세요');
+                    return;
+                }
+            }
+
+            // 각 상태값을 사용해 서버에 상품 생성 요청을 보냄
+            const formGoodsData = new FormData();
+            formGoodsData.append('goodsImg', goodsImg);
+            formGoodsData.append('parentCategory', parentCategory);
+            formGoodsData.append('childCategory', childCategory);
+            formGoodsData.append('goodsName', goodsName);
+            formGoodsData.append('goodsPrice', goodsPrice);
+            formGoodsData.append('goodsDetail', goodsDetail);
+            formGoodsData.append('goodsQuantity', goodsQuantity);
+            formGoodsData.append('goodsCountry', goodsCountry);
+            formGoodsData.append('goodsBrand', goodsBrand);
+            formGoodsData.append('goodsOption', goodsOption);
+            formGoodsData.append('options', options);
+
+            // 서버에 상품 생성 요청
+            fetch('/openMarket/goodsControl', {
+                method : 'POST',
+                body: formGoodsData,
+            })
+                .then(response => {
+                    if(!response.ok){
+                        throw new Error('상품 등록에 실패했습니다.');
+                }
+                    return response.json();
+                })
+                .then(createdGoods => {
+                    alert('상품이 등록되었습니다!');
+                    navigate('/openMarket');
+                })
+                .then(data => console.log(data))
+                .catch(error => console.error('Error creating goods: ', error));
+        };
 
         const [selectedImage, setSelectedImage] = useState(null);
         const [previewImage, setPreviewImage] = useState(null);
@@ -11,13 +113,9 @@ function GoodsControl() {
         const handleImageChange = (e) => {
             const imageFile = e.target.files[0];
 
-            if(imageFile) {
-                if(!imageFile.type.startsWith('image/')){
-                    alert('이미지 파일이 아닙니다.');
-                    return;
-                }
+            setGoodsImg(imageFile);
 
-                setSelectedImage(imageFile);
+            setSelectedImage(imageFile);
 
                 const reader = new FileReader();
                 reader.onloadend = () => {
@@ -26,7 +124,7 @@ function GoodsControl() {
 
                 reader.readAsDataURL(imageFile);
             }
-        };
+
 
         const handleButtonClick = () => {
             document.getElementById('imageInput').click();
@@ -36,7 +134,9 @@ function GoodsControl() {
         const [selectedCountry, setSelectedCountry] = useState('');
 
         const handleCountryChange = (e) => {
-            setSelectedCountry(e.target.value);
+            const country = e.target.value;
+            setSelectedCountry(country);
+            setGoodsCountry(country);
         };
 
     const modules = {
@@ -59,7 +159,14 @@ function GoodsControl() {
     const [content, setContent] = useState('');
 
     const handleChange = (newContent) => {
+        const noHtmlContent = stripHtmlTags(newContent);
         setContent(newContent);
+        setGoodsDetail(noHtmlContent);
+    };
+
+    const stripHtmlTags = (html) => {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        return doc.body.textContent || "";
     };
 
     const firstOptions = ['Option A', 'Option B', 'Option C']; // 추가된 첫 번째 옵션들
@@ -69,39 +176,43 @@ function GoodsControl() {
         'Option C': ['Option C-1', 'Option C-2', 'Option C-3'],
     }; // 첫 번째 옵션에 따른 두 번째 옵션들의 매핑
 
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedSubCategory, setSelectedSubCategory] = useState('');
+
+    const handleCategoryChange = (e) => {
+        const category = e.target.value;
+        setSelectedCategory(category);
+        setParentCategory(category);
+    };
+
+    const handleSubCategoryChange = (e) => {
+        const subCategory = e.target.value;
+        setSelectedSubCategory(subCategory);
+        setChildCategory(subCategory);
+    }
+
+
     const [firstOption, setFirstOption] = useState('');
-    const [secondOption, setSecondOption] = useState('');
+    const [showBoxes, setShowBoxes] = useState(false);
 
     const handleFirstOptionChange = (event) => {
-        const selectedOption = event.target.value;
+        const text = event.target.value;
+        setFirstOption(text);
+        setGoodsOption(text);
 
-        // 선택된 첫 번째 옵션에 따라 두 번째 옵션을 설정
-        setSecondOption('');
-        setFirstOption(selectedOption);
+        // 문장이 입력되면 인풋 박스를 표시
+        if (text.trim() !== ''){
+            setShowBoxes(true);
+        }else {
+            setShowBoxes(false);
+        }
     };
 
-    const handleSecondOptionChange = (event) => {
-        const selectedOption = event.target.value;
-        setSecondOption(selectedOption);
-    };
-
-    // 선택한 옵션을 저장하는 상태 변수
-    const [selectedOption, setSelectedOption] = useState('');
-    // 각 입력란의 값을 저장하는 상태 변수 배열
-    const [inputValues, setInputValues] = useState(['', '', '', '', '']);
-
-    // 옵션 선택 시 호출되는 함수
-    const handleOptionChange = (event) => {
-        const value = event.target.value;
-        setSelectedOption(value);
-    };
-
-    // 입력란 값 변경 시 호출되는 함수
-    const handleInputChange = (index, event) => {
-        const newInputValues = [...inputValues];
-        newInputValues[index] = event.target.value;
-        setInputValues(newInputValues);
-    };
+    const handleOptionsChange = (index, value) => {
+        const newOptions = [...options];
+        newOptions[index] = value;
+        setOptions(newOptions);
+    }
 
     return (
         <div className="open-market">
@@ -129,7 +240,8 @@ function GoodsControl() {
                             <p>상품명</p>
                         </div>
                         <div className="goods-control-form-name-input">
-                            <input type="text"/>
+                            <input type="text" value={goodsName}
+                                   onChange={e => setGoodsName(e.target.value)}/>
                         </div>
                     </div>
                     <div className="goods-control-form-img">
@@ -144,6 +256,7 @@ function GoodsControl() {
                             )}
                             <input
                                 type="file"
+                                accept="image/*"
                                 onChange={handleImageChange}
                                 id="imageInput"
                                 style={{display : 'none'}}
@@ -156,7 +269,8 @@ function GoodsControl() {
                             <p>상품가격</p>
                         </div>
                         <div className="goods-control-form-price-input">
-                            <input type="text"/>&nbsp;원
+                            <input type="text" value={goodsPrice}
+                                   onChange={handlePriceChange}/>&nbsp;원
                         </div>
                     </div>
                     <div className="goods-control-form-count">
@@ -164,7 +278,8 @@ function GoodsControl() {
                             <p>재고</p>
                         </div>
                         <div className="goods-control-form-count-input">
-                            <input type="text"/>&nbsp;개
+                            <input type="text" value={goodsQuantity}
+                            onChange={handleQuantityChange}/>&nbsp;개
                         </div>
                     </div>
                     <div className="goods-control-form-category">
@@ -173,7 +288,7 @@ function GoodsControl() {
                         </div>
                         <div className="goods-control-form-category-input">
                             <label>
-                                <select value={firstOption} onChange={handleFirstOptionChange}>
+                                <select value={parentCategory} onChange={handleCategoryChange}>
                                     <option value="">선택하세요</option>
                                     {firstOptions.map((option) => (
                                         <option key={option} value={option}>
@@ -184,13 +299,13 @@ function GoodsControl() {
                             </label>
                             <label>
                                 <select
-                                    value={secondOption}
-                                    onChange={handleSecondOptionChange}
-                                    hidden={firstOption === ''}
+                                    value={childCategory}
+                                    onChange={handleSubCategoryChange}
+                                    hidden={parentCategory === ''}
                                     style={{marginLeft : "10px"}}
                                 >
                                     <option value="">선택하세요</option>
-                                    {secondOptionsMap[firstOption]?.map((option) => (
+                                    {secondOptionsMap[parentCategory]?.map((option) => (
                                         <option key={option} value={option}>
                                             {option}
                                         </option>
@@ -199,32 +314,37 @@ function GoodsControl() {
                             </label>
                         </div>
                     </div>
+                    <div className="goods-control-form-brand">
+                        <div className="goods-control-form-brand-title">
+                            <p>브랜드명</p>
+                        </div>
+                        <div className="goods-control-form-brand-input">
+                            <input type="text" value={goodsBrand}
+                                   onChange={e => setGoodsBrand(e.target.value)}/>
+                        </div>
+                    </div>
                     <div className="goods-control-form-option">
                         <div className="goods-control-form-option-title">
                             <p>옵션</p>
                         </div>
                         <div className="goods-control-form-option-input">
-                            <select value={selectedOption} onChange={handleOptionChange}>
-                                <option value="">미설정</option>
-                                <option value="option1">옵션 1</option>
-                                <option value="option2">옵션 2</option>
-                                {/* 추가적인 옵션들을 필요에 따라 추가할 수 있습니다 */}
-                            </select>
-
-                            {/* 선택된 옵션에 따라 나타나는 입력란들 */}
-                            {selectedOption && (
+                            <input type="text"
+                                   placeholder="옵션 사용시 옵션명 입력"
+                                   value={firstOption}
+                                   onChange={handleFirstOptionChange}
+                                   />
+                            {showBoxes && (
                                 <div>
-                                    {/* 5개의 입력란을 나타내는 맵 함수 */}
-                                    {inputValues.map((value, index) => (
-                                        <input
-                                            key={index}
-                                            type="text"
-                                            placeholder={`입력란 ${index + 1}`}
-                                            value={value}
-                                            style={{width  : "100px", marginLeft : "10px"}}
-                                            onChange={(event) => handleInputChange(index, event)}
-                                        />
-                                    ))}
+                                    {options
+                                        .map((option,index) =>
+                                            (<input key={index} type="text"
+                                                   placeholder={option} value={option}
+                                            onChange={
+                                                (e) =>
+                                                    handleOptionsChange(index, e.target.value)}/>
+                                            )
+                                        )
+                                    }
                                 </div>
                             )}
                         </div>
@@ -234,7 +354,7 @@ function GoodsControl() {
                             <p>원산지</p>
                         </div>
                         <div className="goods-control-form-country-input">
-                            <select id="country" value={selectedCountry} onChange={handleCountryChange}>
+                            <select id="country" value={goodsCountry} onChange={handleCountryChange}>
                                 <option value="">-- 선택하세요 --</option>
                                 <option value="Korea">대한민국</option>
                                 <option value="USA">미국</option>
@@ -265,7 +385,7 @@ function GoodsControl() {
                 </div>
             </div>
             <div className="goods-control-submit">
-                <button>저장</button>
+                <button onClick={handleCreate}>저장</button>
                 <button style={{display : "none"}}>수정</button>
             </div>
         </div>

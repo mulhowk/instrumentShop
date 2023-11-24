@@ -54,6 +54,20 @@
     white-space: nowrap;
 }
 
+.product-area-brand{
+    display: flex;
+    margin-top: 13px;
+}
+
+.product-area-brand-title{
+    white-space: nowrap;
+}
+
+.product-area-brand-price{
+    margin-left: auto;
+    white-space: nowrap;
+}
+
 .product-area-options{
     display: flex;
     margin-top: 13px;

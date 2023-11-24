@@ -9,6 +9,7 @@ function GoodsDetails(){
 
     const product = {
         id : 201311030001,
+        brand : 'YAMAHA',
         img : '/Goods/goods1.jpeg',
         title : 'selmer(셀마) Soprano SA80 II JUBILEE1asdasdsdadadsadasdsasadsada',
         price : 700000,

@@ -310,23 +310,10 @@
     align-items: center;
 }
 
-.goods-control-form-option-input select{
-    width: 150px;
-    padding: 5px;
-    font-size: 16px;
-    border: 2px solid #AAAAAA;
-    border-radius: 5px;
-}
-
-.goods-control-form-option-input select:focus {
-    border-color: #2ecc71; /* 포커스 및 호버 시 테두리 색상 변경 */
-    box-shadow: 0 0 5px rgba(46, 204, 113, 0.5); /* 포커스 및 호버 시 약간의 그림자 효과 */
-}
-
 .goods-control-form-option-input input{
     width: 150px;
     padding: 5px;
-    font-size: 16px;
+    font-size: 13px;
     border: 2px solid #AAAAAA;
     border-radius: 5px;
 }
@@ -410,4 +397,44 @@
     font-size: 20px;
     width: 100px;
     height: 40px;
+}
+
+.goods-control-form-brand{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-bottom: 1px solid #AAAAAA;
+}
+
+.goods-control-form-brand-title{
+    flex: 1;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 40px;
+}
+
+.goods-control-form-brand-input{
+    flex: 7;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.goods-control-form-brand-input input{
+    width: 150px;
+    padding: 5px;
+    font-size: 16px;
+    border: 2px solid #AAAAAA;
+    border-radius: 5px;
+    outline: none; /* 기본 포커스 효과 제거 */
+    transition: border-color 0.3s; /* 부드러운 효과를 위한 트랜지션 설정 */
+}
+
+.goods-control-form-brand-input input:focus {
+    border-color: #2ecc71; /* 포커스 시 테두리 색상 변경 */
+    box-shadow: 0 0 5px rgba(46, 204, 113, 0.5); /* 포커스 시 약간의 그림자 효과 */
 }

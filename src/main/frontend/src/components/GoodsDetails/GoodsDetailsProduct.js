@@ -54,6 +54,15 @@ function GoodsDetailsProduct(props) {
                         <p style={{color: "white"}}>{props.product.deliver}</p>
                     </div>
                 </div>
+                {props.product.brand &&
+                <div className="product-area-brand">
+                    <div className="product-area-brand-title">
+                        <p style={{color: "white"}}>브랜드</p>
+                    </div>
+                    <div className="product-area-brand-price">
+                        <p style={{color: "white"}}>{props.product.brand}</p>
+                    </div>
+                </div>}
                 {props.product.options &&
                     <div className="product-area-options">
                         <div className="product-area-options-title">

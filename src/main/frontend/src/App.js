@@ -40,7 +40,7 @@ function App() {
           <Route path="/admin" element={<AdminPage/>}/>"
           <Route path="/admin/user" element={<AdminUser/>}/>
           <Route path="/admin/message" element={<AdminMessage/>}/>
-          <Route path="/openMarket/goodsControll" element={<GoodsControl/>}/>
+          <Route path="/openMarket/goodsControl" element={<GoodsControl/>}/>
 
           {/* 상품관리 (리스트) */}
           {/* 상품관리 (등록) */}

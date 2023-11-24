@@ -141,7 +141,7 @@ function GoodsAdmin(){
 
         <div className="open-market-content">
             <div className="open-market-create">
-                <Link to="/openMarket/goodsControll">
+                <Link to="/openMarket/goodsControl">
                 <button>상품등록</button>
                 </Link>
             </div>
