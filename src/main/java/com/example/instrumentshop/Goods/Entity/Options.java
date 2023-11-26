@@ -1,4 +1,4 @@
-package com.example.instrumentshop.domain.Entity;
+package com.example.instrumentshop.Goods.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;

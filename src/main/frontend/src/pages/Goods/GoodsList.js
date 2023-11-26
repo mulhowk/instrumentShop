@@ -4,22 +4,21 @@ import MainCategory from "../../components/MainCategory";
 import Footer from "../../components/Footer";
 import GoodsListCategory from "../../components/GoodsList/GoodsListCategory";
 import Goods from "../../components/GoodsList/Goods";
-import {useLocation} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 
 function GoodsList(){
 
+    const {categoryId, subCategoryId} = useParams();
     const location = useLocation();
-    const isGoodsListCategory1To9
-        = /^\/goodsList\/category\/[1-9]$/.test(location.pathname);
 
     return(
         <>
         <Header/>
         <MainCategory/>
-        {isGoodsListCategory1To9 && (
-           <GoodsListCategory/>
+        {categoryId && !subCategoryId && (
+           <GoodsListCategory categoryId={categoryId}/>
         )}
-        <Goods/>
+        <Goods categoryId={categoryId} subCategoryId={subCategoryId}/>
         <Footer/>
         </>
     );

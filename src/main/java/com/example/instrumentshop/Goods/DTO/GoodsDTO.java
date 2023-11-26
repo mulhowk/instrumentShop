@@ -1,13 +1,11 @@
-package com.example.instrumentshop.domain.DTO;
+package com.example.instrumentshop.Goods.DTO;
 
 
-import com.example.instrumentshop.domain.Entity.Options;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -28,4 +26,5 @@ public class GoodsDTO {
     private String goodsBrand;
     private String goodsOption;
     private List<String> options;
+    private MultipartFile goodsDetailImg;
 }

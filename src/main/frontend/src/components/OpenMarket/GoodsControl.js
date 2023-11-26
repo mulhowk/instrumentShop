@@ -18,6 +18,7 @@ function GoodsControl() {
         const [goodsCountry, setGoodsCountry] = useState('');
         const [options, setOptions] = useState(['','','','','']);
         const [goodsDate, setGoodsDate] = useState(null);
+        const [goodsDetailImg, setGoodsDetailImg] = useState(null);
 
         const navigate = useNavigate();
 
@@ -72,6 +73,10 @@ function GoodsControl() {
                     alert('상품 원산지를 입력해주세요');
                     return;
                 }
+                if(!goodsDetailImg){
+                    alert('상품 상세설명에 들어갈 이미지를 선택해주세요.');
+                    return;
+                }
             }
 
             // 각 상태값을 사용해 서버에 상품 생성 요청을 보냄
@@ -87,6 +92,7 @@ function GoodsControl() {
             formGoodsData.append('goodsBrand', goodsBrand);
             formGoodsData.append('goodsOption', goodsOption);
             formGoodsData.append('options', options);
+            formGoodsData.append('goodsDetailImg', goodsDetailImg);
 
             // 서버에 상품 생성 요청
             fetch('/openMarket/goodsControl', {
@@ -125,11 +131,31 @@ function GoodsControl() {
                 reader.readAsDataURL(imageFile);
             }
 
+    const [selectedDetailImage, setSelectedDetailImage] = useState(null);
+    const [previewDetailImage, setPreviewDetailImage] = useState(null);
+    const handleDetailImageChange = (e) => {
+        const imageFile = e.target.files[0];
+
+        setGoodsDetailImg(imageFile);
+
+        setSelectedDetailImage(imageFile);
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPreviewDetailImage(reader.result);
+        };
+
+        reader.readAsDataURL(imageFile);
+    }
+
 
         const handleButtonClick = () => {
             document.getElementById('imageInput').click();
         }
 
+    const handleDetailButtonClick = () => {
+        document.getElementById('detailImageInput').click();
+    }
 
         const [selectedCountry, setSelectedCountry] = useState('');
 
@@ -169,11 +195,17 @@ function GoodsControl() {
         return doc.body.textContent || "";
     };
 
-    const firstOptions = ['Option A', 'Option B', 'Option C']; // 추가된 첫 번째 옵션들
-    const secondOptionsMap = {
-        'Option A': ['Option A-1', 'Option A-2', 'Option A-3'],
-        'Option B': ['Option B-1', 'Option B-2', 'Option B-3'],
-        'Option C': ['Option C-1', 'Option C-2', 'Option C-3'],
+    const firstCategorys = ['색소폰', '관악기', '타악기/드럼', '현악기',
+        '기타/베이스', '건반악기', '교제악기', 'etc...']; // 추가된 첫 번째 옵션들
+    const secondCategorys = {
+        '색소폰': ['소프라노 색소폰', '알토 색소폰', '테너 색소폰', '바리톤 색소폰', '악세사리/관리용품'],
+        '관악기': ['플룻/피콜로', '클라리넷/오보에', '트럼펫/코넷/프루겔혼', '트롬본', '관악기 악세사리/관리용품'],
+        '타악기/드럼': ['드럼스틱', '드럼세트', '심벌', '전자드럼', '타악기 악세사리/관리용품'],
+        '현악기': ['바이올린', '사일런트 바이올린', '비올라', '첼로', '콘트라베이스', '현악기 악세사리/유지관리 용품'],
+        '기타/베이스': ['어쿠스틱 기타', '일렉 기타', '클래식 기타', '베이스 기타', '우쿠렐레', '기타 악세사리/유지관리 용품'],
+        '건반악기': ['디지털 피아노', '신디사이저', '스테이지 피아노', '포터블 키보드', '건반악기 악세서리/유지관리 용품'],
+        '교재악기': ['하모니카', '오카리나', '교재용 타악기', '피아니카', '리코더'],
+        'etc': ['엠프', '마이크', '믹서', '반주기/녹음기']
     }; // 첫 번째 옵션에 따른 두 번째 옵션들의 매핑
 
     const [selectedCategory, setSelectedCategory] = useState('');
@@ -269,8 +301,8 @@ function GoodsControl() {
                             <p>상품가격</p>
                         </div>
                         <div className="goods-control-form-price-input">
-                            <input type="text" value={goodsPrice}
-                                   onChange={handlePriceChange}/>&nbsp;원
+                            <input type="number" value={goodsPrice}
+                            onChange={handlePriceChange}/>&nbsp;원
                         </div>
                     </div>
                     <div className="goods-control-form-count">
@@ -278,7 +310,7 @@ function GoodsControl() {
                             <p>재고</p>
                         </div>
                         <div className="goods-control-form-count-input">
-                            <input type="text" value={goodsQuantity}
+                            <input type="number" value={goodsQuantity}
                             onChange={handleQuantityChange}/>&nbsp;개
                         </div>
                     </div>
@@ -290,7 +322,7 @@ function GoodsControl() {
                             <label>
                                 <select value={parentCategory} onChange={handleCategoryChange}>
                                     <option value="">선택하세요</option>
-                                    {firstOptions.map((option) => (
+                                    {firstCategorys.map((option) => (
                                         <option key={option} value={option}>
                                             {option}
                                         </option>
@@ -305,7 +337,7 @@ function GoodsControl() {
                                     style={{marginLeft : "10px"}}
                                 >
                                     <option value="">선택하세요</option>
-                                    {secondOptionsMap[parentCategory]?.map((option) => (
+                                    {secondCategorys[parentCategory]?.map((option) => (
                                         <option key={option} value={option}>
                                             {option}
                                         </option>
@@ -370,6 +402,22 @@ function GoodsControl() {
                         <div className="goods-control-form-detail-title">
                             <p>상품설명</p>
                         </div>
+                        <div className="display-block">
+                        <div className="goods-control-form-img-img">
+                            {previewDetailImage && (
+                                <div>
+                                    <img src={previewDetailImage} alt="PreviewDetail"/>
+                                </div>
+                            )}
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleDetailImageChange}
+                                id="detailImageInput"
+                                style={{display : 'none'}}
+                            />
+                            <button onClick={handleDetailButtonClick}>상세 이미지등록</button>
+                        </div>
                         <div className="goods-control-form-detail-input">
                             <ReactQuill
                                 style={{color : "black", width : "800px"
@@ -380,6 +428,7 @@ function GoodsControl() {
                                 module = {modules}
                                 formats={formats}
                             />
+                        </div>
                         </div>
                     </div>
                 </div>

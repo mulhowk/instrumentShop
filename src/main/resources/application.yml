@@ -4,6 +4,10 @@ spring:
     url: jdbc:mysql://localhost:3306/instrument?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
     username : root
     password : 4492776
+  servlet:
+    multipart:
+      maxFileSize: 10MB # ?? ??? ?? ??
+      maxRequestSize: 30MB  # ? ?? ?? ??? ?? ??
   jpa:
     show-sql: true
     hibernate:

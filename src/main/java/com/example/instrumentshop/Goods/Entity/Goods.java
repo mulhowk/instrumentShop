@@ -1,12 +1,10 @@
-package com.example.instrumentshop.domain.Entity;
+package com.example.instrumentshop.Goods.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @ToString
 @Getter
@@ -32,7 +30,7 @@ public class Goods {
     @Column(name = "child_category", length = 15)
     private String childCategory;
 
-    @Column(name = "goods_name", length = 50)
+    @Column(name = "goods_name", length = 200)
     private String goodsName;
 
     @Column(name = "goods_price")
@@ -71,6 +69,9 @@ public class Goods {
 
     @OneToMany(mappedBy = "goods", cascade = CascadeType.ALL)
     private List<Options> options;
+
+    @Column(name = "goods_detail_img", length = 100)
+    private String goodsDetailImg;
 
     // Builder 클래스
     public static class GoodsBuilder {

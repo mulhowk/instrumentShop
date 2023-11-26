@@ -1,7 +1,6 @@
-package com.example.instrumentshop.domain.repository;
+package com.example.instrumentshop.Goods.repository;
 
-import com.example.instrumentshop.domain.Entity.Goods;
-import com.example.instrumentshop.domain.Entity.Options;
+import com.example.instrumentshop.Goods.Entity.Options;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

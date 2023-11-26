@@ -1,15 +1,14 @@
-package com.example.instrumentshop.service;
+package com.example.instrumentshop.Goods.service;
 
-import com.example.instrumentshop.domain.DTO.GoodsDTO;
-import com.example.instrumentshop.domain.Entity.Goods;
-import com.example.instrumentshop.domain.Entity.Options;
-import com.example.instrumentshop.domain.repository.GoodsRepository;
-import com.example.instrumentshop.domain.repository.OptionRepository;
-import jakarta.servlet.http.HttpServletRequest;
+import com.example.instrumentshop.Goods.DTO.GoodsDTO;
+import com.example.instrumentshop.Goods.Entity.Category;
+import com.example.instrumentshop.Goods.Entity.Goods;
+import com.example.instrumentshop.Goods.Entity.Options;
+import com.example.instrumentshop.Goods.repository.CategoryRepository;
+import com.example.instrumentshop.Goods.repository.GoodsRepository;
+import com.example.instrumentshop.Goods.repository.OptionRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,12 +22,31 @@ import java.util.List;
 public class GoodsService {
     private final GoodsRepository goodsRepository;
     private final OptionRepository optionRepository;
+    private final CategoryRepository categoryRepository;
 
     private static final String payInfo = "구매안내입니다.";
 
     @Transactional
     public List<Goods> getAllGoods(){
+
         return goodsRepository.findAll();
+    }
+    @Transactional
+    public List<Goods> getGoodsByParentCategory(String parentCategory){
+
+        return goodsRepository.findByParentCategory(parentCategory);
+    }
+
+    @Transactional
+    public List<Category> findChildCategoryByParentCategory(String parentCategory){
+
+        return categoryRepository.findByParentCategory(parentCategory);
+    }
+
+    @Transactional
+    public Long getCountOfGoodsByChildCategory(String childCategory){
+
+        return goodsRepository.countByChildCategory(childCategory);
     }
 
     @Transactional
@@ -37,7 +55,11 @@ public class GoodsService {
         // 이미지 파일 받아 서버에 저장하고 그 경로 문자열 뽑기
         MultipartFile goodsImg = goodsDTO.getGoodsImg();
         String filePath = saveFile(goodsImg);
-
+        String detailFilePath = null;
+        if (goodsDTO.getGoodsDetailImg() != null) {
+            MultipartFile goodsDetailImg = goodsDTO.getGoodsDetailImg();
+            detailFilePath = saveFile(goodsDetailImg);
+        }
         // 상품 저장 기본
         Goods newGoods =
                 Goods.builder()
@@ -53,12 +75,13 @@ public class GoodsService {
                         .goodsQuantity(goodsDTO.getGoodsQuantity())
                         .goodsCountry(goodsDTO.getGoodsCountry())
                         .goodsBrand(goodsDTO.getGoodsBrand())
+                        .goodsDetailImg(detailFilePath)
                         .build();
 
         goodsRepository.save(newGoods);
 
         // 옵션 저장해주기 기본
-        if(goodsDTO.getOptions() != null) {
+        if (goodsDTO.getOptions() != null) {
             List<String> optionNames = goodsDTO.getOptions();
 
             Options option =
@@ -80,7 +103,6 @@ public class GoodsService {
     private String saveFile(MultipartFile file) {
         // 파일을 저장하는 로직을 구현
         // 이 부분은 실제 파일 시스템에 저장하거나, AWS S3 등의 외부 저장소에 업로드할 수 있음
-
         try {
             // 파일 저장할 임시 디렉토리 경로
             String uploadDir = "/Users/gangtaehyeog/IdeaProjects/instrumentShop/src/main/resources/tempImg";
@@ -105,6 +127,7 @@ public class GoodsService {
         } catch (IOException e) {
             throw new RuntimeException("Failed to store file", e);
         }
+
     }
 
 }
