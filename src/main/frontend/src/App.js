@@ -26,6 +26,7 @@ function App() {
       <Routes>
           <Route path="/" element={<MainPage/>}/>
           <Route path="/goodsList" element={<GoodsList/>}/>
+          <Route path="/goodsList/query/:query" element={<GoodsList/>}/>
           <Route path="/goodsList/category/:categoryId" element={<GoodsList/>}/>
           <Route path="/goodsList/category/:categoryId/:subCategoryId" element={<GoodsList/>}/>
           <Route path="/register" element={<Register/>}/>

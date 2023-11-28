@@ -8,8 +8,7 @@ import {useLocation, useParams} from "react-router-dom";
 
 function GoodsList(){
 
-    const {categoryId, subCategoryId} = useParams();
-    const location = useLocation();
+    const {query, categoryId, subCategoryId} = useParams();
 
     return(
         <>
@@ -18,7 +17,7 @@ function GoodsList(){
         {categoryId && !subCategoryId && (
            <GoodsListCategory categoryId={categoryId}/>
         )}
-        <Goods categoryId={categoryId} subCategoryId={subCategoryId}/>
+        <Goods categoryId={categoryId} subCategoryId={subCategoryId} query={query}/>
         <Footer/>
         </>
     );

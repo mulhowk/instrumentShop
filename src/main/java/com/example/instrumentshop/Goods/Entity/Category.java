@@ -1,5 +1,6 @@
 package com.example.instrumentshop.Goods.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +19,7 @@ public class Category {
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "goods_id", referencedColumnName = "goods_id")
+    @JsonIgnore
     private Goods goods;
 
     @Column(name = "child_category1", columnDefinition = "NVARCHAR(30)")

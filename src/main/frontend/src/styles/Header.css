@@ -32,6 +32,10 @@
     margin-left: 10px;
     align-items: center;
 }
+
+.marginLeft img{
+    cursor: pointer;
+}
 .custom-input {
     width: 220px;
     background-color : #323030;

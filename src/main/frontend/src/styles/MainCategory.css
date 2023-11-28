@@ -21,10 +21,10 @@
     cursor: pointer;
     position: relative;
     transition: background-color 0.3s;
-    margin: 15px;
     font-size: 20px;
     color: #FFFFFF;
     white-space: nowrap;
+    margin: 15px 25px;
 }
 
 .category:hover {

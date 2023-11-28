@@ -7,6 +7,7 @@ import com.example.instrumentshop.Goods.Entity.Options;
 import com.example.instrumentshop.Goods.repository.CategoryRepository;
 import com.example.instrumentshop.Goods.repository.GoodsRepository;
 import com.example.instrumentshop.Goods.repository.OptionRepository;
+import com.example.instrumentshop.Goods.repository.ReviewRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class GoodsService {
     private final GoodsRepository goodsRepository;
     private final OptionRepository optionRepository;
     private final CategoryRepository categoryRepository;
+    private final ReviewRepository reviewRepository;
 
     private static final String payInfo = "구매안내입니다.";
 
@@ -38,6 +40,18 @@ public class GoodsService {
     }
 
     @Transactional
+    public double getGoodsReviewAvgScoreByGoodsId(Long goodsId){
+
+        return reviewRepository.findAverageReviewScoreByGoodsId(goodsId);
+    }
+
+    @Transactional
+    public Long getGoodsReviewCountByGoodsId(Long goodsId){
+
+        return reviewRepository.countByGoods_GoodsId(goodsId);
+    }
+
+    @Transactional
     public List<Category> findChildCategoryByParentCategory(String parentCategory){
 
         return categoryRepository.findByParentCategory(parentCategory);
@@ -47,6 +61,18 @@ public class GoodsService {
     public Long getCountOfGoodsByChildCategory(String childCategory){
 
         return goodsRepository.countByChildCategory(childCategory);
+    }
+
+    @Transactional
+    public List<Goods> findByQuery(String query){
+
+        return goodsRepository.findByQueryIgnoreCase(query);
+    }
+
+    @Transactional
+    public List<Goods> findByChildCategory(String childCategory){
+
+        return goodsRepository.findByChildCategory(childCategory);
     }
 
     @Transactional
@@ -123,7 +149,8 @@ public class GoodsService {
             // 파일 저장
             file.transferTo(new File(filePath));
 
-            return filePath;
+            return "/tempImg" + File.separator + originalFileName;
+
         } catch (IOException e) {
             throw new RuntimeException("Failed to store file", e);
         }

@@ -2,6 +2,7 @@ import '../styles/Header.css';
 import '../styles/MainCategory.css';
 import React, { useState } from 'react';
 import '../styles/globalStyles.css'
+import { useNavigate } from 'react-router-dom';
 
 import LoginContent from './login/LoginForm';
 import Modal from 'react-modal';
@@ -20,19 +21,45 @@ function Header(){
         setIsLogin(false);
     }
 
+    const [query, setQuery] = useState("");
+    const handleQueryChange = (e) => {
+        setQuery(e.target.value);
+    }
+
+    const navi = useNavigate();
+    const handleSearch = () => {
+        if(query.trim() !== ''){
+            const url = `/goodsList/query/${query}`;
+            navi(url);
+        }
+    };
+
+    const handleKeyPressEnter = (e) => {
+        if(e.key === 'Enter'){
+            handleSearch();
+        }
+    };
+
     return(
             <div className="header">
                 <div className="header-search">
-                    <input type="text" name="q" placeholder="검색어를 입력하세요" className="custom-input"></input>
+                    <input type="text" name="q"
+                           placeholder="검색어를 입력하세요"
+                           className="custom-input"
+                           value={query}
+                           onChange={handleQueryChange}
+                           onKeyPress={handleKeyPressEnter}/>
+
                     <div className="marginLeft">
-                        <Link to="/goodsList">
-                            <img src="/search3.png" alt='searchImg' width="30" height="30"/>
-                        </Link>
+                            <img src="/search3.png"
+                                 alt='searchImg'
+                                 width="30" height="30"
+                                 onClick={handleSearch}/>
                     </div>
                 </div>
                 <div className="header-logo">
                     <Link to="/">
-                        <img src="/logo0.png" alt='logoImg' width="70" height="70"></img>
+                        <img src="/logo0.png" alt='logoImg' width="70" height="70"/>
                     </Link>
                 </div>
                 <div className="header-menu">

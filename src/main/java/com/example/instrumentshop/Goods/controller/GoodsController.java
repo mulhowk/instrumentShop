@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping(consumes = "multipart/form-data")
+@RequestMapping
 public class GoodsController {
 
     private final GoodsService goodsService;
@@ -44,6 +44,35 @@ public class GoodsController {
         childCount.add(goodsService.getCountOfGoodsByChildCategory(child.getChildCategory6()));
 
         return childCount;
+    }
+
+    @GetMapping("/goodsList/{categoryId}")
+    public List<Goods> findByParentCategory(@PathVariable String categoryId){
+
+        return goodsService.getGoodsByParentCategory(categoryId);
+    }
+
+    @GetMapping("/goodsList/sub/{subCategoryId}")
+    public List<Goods> findByChildCategory(@PathVariable String subCategoryId){
+
+        return goodsService.findByChildCategory(subCategoryId);
+    }
+
+    @GetMapping("/goodsList/query/{query}")
+    public List<Goods> findByKeyword(@PathVariable String query){
+
+        return goodsService.findByQuery(query);
+    }
+
+    @GetMapping("/goodsList/review/{goodsId}")
+    public List<Double> findGoodsReviewInfo(@PathVariable Long goodsId){
+        List<Double> reviewInfo = new ArrayList<>();
+        double avgScore = goodsService.getGoodsReviewAvgScoreByGoodsId(goodsId);
+        double reviewCount = goodsService.getGoodsReviewCountByGoodsId(goodsId).doubleValue();
+        reviewInfo.add(avgScore);
+        reviewInfo.add(reviewCount);
+
+        return reviewInfo;
     }
 
 }
