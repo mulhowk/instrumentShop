@@ -7,86 +7,106 @@ function Goods(props){
     const categoryId = props.categoryId;
     const subCategoryId = props.subCategoryId;
     const query = props.query;
+    const [combinedGoodsList, setCombinedGoodsList] = useState([]);
 
-    useEffect(() => {
-        if(!categoryId && !subCategoryId && query){
-            axios.get(`/goodsList/query/${query}`)
-                .then(response => {
-                    setGoodsList(response.data);
-                    const goods = response.data;
-                    const requests = goods.map(goods => {
-                        const goodsId = goods.goodsId;
-                        return axios.get(`/goodsList/review/${goodsId}`);
-                    });
-                   Promise.all(requests)
-                       .then(responses => {
-                       const review = responses.map(response => response.data);
-                       console.log(review)
-                       setReviewInfo(review);
-                   })
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
-                }, [query]);
-        } else if(categoryId && !subCategoryId){
-            axios.get(`/goodsList/${categoryId}`)
-                .then(response => {
-                    setGoodsList(response.data);
-                    const goods = response.data;
-                    const requests = goods.map(goods => {
-                        const goodsId = goods.goodsId;
-                        return axios.get(`/goodsList/review/${goodsId}`);
-                    });
-                    Promise.all(requests)
-                        .then(responses => {
-                            const review = responses.map(response => response.data);
-                            console.log(review)
-                            setReviewInfo(review);
-                        })
-                })
-                .catch(error => {
-                    console.error('Error fetching data', error);
-                }, [categoryId]);
-        }else if(categoryId && subCategoryId){
-            axios.get(`/goodsList/sub/${subCategoryId}`)
-                .then(response => {
-                    setGoodsList(response.data);
-                    const goods = response.data;
-                    const requests = goods.map(goods => {
-                        const goodsId = goods.goodsId;
-                        return axios.get(`/goodsList/review/${goodsId}`);
-                    });
-                    Promise.all(requests)
-                        .then(responses => {
-                            const review = responses.map(response => response.data);
-                            console.log(review)
-                            setReviewInfo(review);
-                        })
-                })
-                .catch(error => {
-                    console.error('Error fetching data', error);
-                }, [subCategoryId]);
-        }
-    }, [query, categoryId, subCategoryId]);
+        useEffect(() => {
+            if(!categoryId && !subCategoryId && query){
+                axios.get(`/goodsList/query/${query}`)
+                    .then(response => {
+                        setGoodsList(response.data);
+                        const goods = response.data;
+                        const requests = goods.map(goods => {
+                            const goodsId = goods.goodsId;
+                            return axios.get(`/goodsList/review/${goodsId}`);
+                        });
+                        Promise.all(requests)
+                            .then(responses => {
+                                const review = responses.map(response => response.data);
+                                setCurrentPage(1);
+                                setSelectedOption('최신순');
+                                const combinedGoods = goods.map(goods => ({
+                                    ...goods,
+                                    review : review.find(r => r[2] === goods.goodsId)
+                                }));
+                                setCombinedGoodsList(combinedGoods);
+                                {console.log(combinedGoodsList)}
+                            })
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
+                    }, [query]);
+            } else if(categoryId && !subCategoryId){
+                axios.get(`/goodsList/${categoryId}`)
+                    .then(response => {
+                        setGoodsList(response.data);
+                        const goods = response.data;
+                        const requests = goods.map(goods => {
+                            const goodsId = goods.goodsId;
+                            return axios.get(`/goodsList/review/${goodsId}`);
+                        });
+                        Promise.all(requests)
+                            .then(responses => {
+                                const review = responses.map(response => response.data);
+                                setCurrentPage(1);
+                                setSelectedOption('최신순');
+                                const combinedGoods = goods.map(goods => ({
+                                    ...goods,
+                                    review : review.find(r => r[2] === goods.goodsId)
+                                }));
+                                setCombinedGoodsList(combinedGoods);
+                                {console.log(combinedGoodsList)}
+                            })
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data', error);
+                    }, [categoryId]);
+            }else if(categoryId && subCategoryId){
+                axios.get(`/goodsList/sub/${subCategoryId}`)
+                    .then(response => {
+                        setGoodsList(response.data);
+                        const goods = response.data;
+                        const requests = goods.map(goods => {
+                            const goodsId = goods.goodsId;
+                            return axios.get(`/goodsList/review/${goodsId}`);
+                        });
+                        Promise.all(requests)
+                            .then(responses => {
+                                const review = responses.map(response => response.data);
+                                setCurrentPage(1);
+                                setSelectedOption('최신순');
+                                const combinedGoods = goods.map(goods => ({
+                                    ...goods,
+                                    review : review.find(r => r[2] === goods.goodsId)
+                                }));
+                                setCombinedGoodsList(combinedGoods);
+                                {console.log(combinedGoodsList)}
+                            })
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data', error);
+                    }, [subCategoryId]);
 
+            }
+        }, [query, categoryId, subCategoryId]);
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState('최신순');
 
     const options = ['최신순', '낮은가격순', '높은가격순', '리뷰많은순', '판매순'];
 
+
     const [goodsList, setGoodsList] = useState(null);
     const [reviewInfo, setReviewInfo] = useState(null);
 
-    const itemPerPage = 10;
+    const itemPerPage = 5;
     const [currentPage, setCurrentPage] = useState(1);
-    const goodsListLength = (goodsList && goodsList.length) || 0;
+    const goodsListLength = (combinedGoodsList && combinedGoodsList.length) || 0;
 
     const totalPageCount = Math.ceil( goodsListLength / itemPerPage);
 
     const startIndex = (currentPage -1) * itemPerPage;
     const endIndex = startIndex + itemPerPage;
-    const currentData = (goodsList && goodsList.slice(startIndex, endIndex)) || null;
+    const currentGoodsData = (combinedGoodsList && combinedGoodsList.slice(startIndex, endIndex)) || null;
 
     const handlePageChange = (newPage) => {
         if(newPage >= 1 && newPage <= totalPageCount){
@@ -120,11 +140,28 @@ function Goods(props){
 
     const handleOptionClick = (option) =>{
         setSelectedOption(option);
+
+        if(option === '최신순'){
+            const sortedGoodsId = combinedGoodsList.sort((a,b) => a.goodsId - b.goodsId);
+            setCombinedGoodsList(sortedGoodsId);
+        } else if(option === '낮은가격순'){
+            const sortedLowPrice = combinedGoodsList.sort((a,b) => a.goodsPrice - b.goodsPrice);
+            setCombinedGoodsList(sortedLowPrice);
+        } else if(option === '높은가격순'){
+            const sortedHighPrice = combinedGoodsList.sort((a,b) => b.goodsPrice - a.goodsPrice);
+            setCombinedGoodsList(sortedHighPrice);
+        } else if(option === '리뷰많은순'){
+            const sortedManyReview = combinedGoodsList.sort((a,b) => b.review[1] - a.review[1]);
+            setCombinedGoodsList(sortedManyReview);
+        } else if(option === '판매순'){
+            const sortedHighSellCount = combinedGoodsList.sort((a,b) => b.goodsSellcount - a.goodsSellcount);
+            setCombinedGoodsList(sortedHighSellCount);
+        }
+
         setIsOpen(false);
     };
 
     return(
-        <div>
         <div className="goods-list">
            <div className="goods-list-header">
             <div className="goods-list-count">
@@ -143,10 +180,10 @@ function Goods(props){
                 )}
             </div>
            </div>
-            {currentData !== null ?
+            {goodsListLength !==0 ?
                 (
                 <div className="goods">
-                {currentData.map((goods, index) => (
+                {currentGoodsData.map((goods) => (
                         <div className="product">
                        <div className="product-img">
                            <a href={`/goodsDetails/${goods.goodsId}`}>
@@ -166,8 +203,9 @@ function Goods(props){
                                 )}</a>
                           </div>
                           <div className="product-review">
-                            <a>{reviewInfo?.[index][1] === 0 ?
-                                "" : "★" + reviewInfo?.[index][0].toFixed(1) + "(" + reviewInfo?.[index][1] + ")"}
+                            <a>{goods.review[1] === 0 ?
+                                "" : "★" + goods.review[0].toFixed(1)
+                                + "(" + goods.review[1] + ")"}
                                 </a>
                           </div>
                         </div>
@@ -195,7 +233,6 @@ function Goods(props){
                 </button>
                     )}
             </div>
-        </div>
         </div>
     );
 }

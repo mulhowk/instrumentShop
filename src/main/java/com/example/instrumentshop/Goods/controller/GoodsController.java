@@ -31,7 +31,7 @@ public class GoodsController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newGoods);
     }
 
-    @GetMapping("/goodsList/category/{category}")
+    @GetMapping("/goodsList/cate/{category}")
     public List<Long> findChildCategory(@PathVariable String category){
         List<Category> childCategory = goodsService.findChildCategoryByParentCategory(category);
         Category child = childCategory.get(0);
@@ -71,6 +71,7 @@ public class GoodsController {
         double reviewCount = goodsService.getGoodsReviewCountByGoodsId(goodsId).doubleValue();
         reviewInfo.add(avgScore);
         reviewInfo.add(reviewCount);
+        reviewInfo.add(goodsId.doubleValue());
 
         return reviewInfo;
     }

@@ -9,14 +9,14 @@ function GoodsListCategory(props){
     const [countCategory, setCountCategory] = useState([]);
 
     useEffect(() => {
-        axios.get(`/goodsList/category/${categoryId}`)
+        axios.get(`/goodsList/cate/${categoryId}`)
             .then(response => {
                 setCountCategory(response.data);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
-    }, [categoryId]);
+    }, []);
 
     const saxophone = ['소프라노색소폰', '알토색소폰', '테너색소폰', '바리톤색소폰', '악세사리'];
     const windInstrument = ['플룻', '클라리넷', '트럼펫', '트롬본', '관악기악세사리'];

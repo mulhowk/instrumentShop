@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from "../../components/Header";
 import MainCategory from "../../components/MainCategory";
 import Footer from "../../components/Footer";
@@ -9,6 +9,7 @@ import {useLocation, useParams} from "react-router-dom";
 function GoodsList(){
 
     const {query, categoryId, subCategoryId} = useParams();
+
 
     return(
         <>

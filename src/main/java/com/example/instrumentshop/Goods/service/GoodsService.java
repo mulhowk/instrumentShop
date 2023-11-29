@@ -36,7 +36,7 @@ public class GoodsService {
     @Transactional
     public List<Goods> getGoodsByParentCategory(String parentCategory){
 
-        return goodsRepository.findByParentCategory(parentCategory);
+        return goodsRepository.findByParentCategoryOrderByGoodsIdDesc(parentCategory);
     }
 
     @Transactional
@@ -66,13 +66,13 @@ public class GoodsService {
     @Transactional
     public List<Goods> findByQuery(String query){
 
-        return goodsRepository.findByQueryIgnoreCase(query);
+        return goodsRepository.queryMethod(query);
     }
 
     @Transactional
     public List<Goods> findByChildCategory(String childCategory){
 
-        return goodsRepository.findByChildCategory(childCategory);
+        return goodsRepository.findByChildCategoryOrderByGoodsIdDesc(childCategory);
     }
 
     @Transactional
