@@ -1,9 +1,11 @@
-package com.example.instrumentshop.Goods.controller;
+package com.example.instrumentshop.Goods.Controller;
 
 import com.example.instrumentshop.Goods.DTO.GoodsDTO;
 import com.example.instrumentshop.Goods.Entity.Category;
 import com.example.instrumentshop.Goods.Entity.Goods;
-import com.example.instrumentshop.Goods.service.GoodsService;
+import com.example.instrumentshop.Goods.Entity.QNA;
+import com.example.instrumentshop.Goods.Entity.Review;
+import com.example.instrumentshop.Goods.Service.GoodsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,16 +23,28 @@ public class GoodsController {
 
     private final GoodsService goodsService;
 
-    @PostMapping("/openMarket/goodsControl")
-    public ResponseEntity<Goods> createGoods(@ModelAttribute GoodsDTO requestDTO){
+    // 상품 상세 정보 컨트롤러
+    @GetMapping("/goodsDetails/goods/{goodsId}")
+    public Goods findByGoodsId(@PathVariable Long goodsId){
 
-        Goods newGoods = goodsService.createGoods(requestDTO);
-
-        System.out.println(ResponseEntity.status(HttpStatus.CREATED).body(newGoods));
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(newGoods);
+        return goodsService.findGoodsByGoodsId(goodsId);
     }
 
+    // 리뷰 정보 컨트롤러
+    @GetMapping("/goodsDetails/review/{goodsId}")
+    public List<Review> findReviewByGoodsId(@PathVariable Long goodsId){
+
+        return goodsService.findReviewByGoodsId(goodsId);
+    }
+
+    // 리뷰 정보 컨트롤러
+    @GetMapping("/goodsDetail/qna/{goodsId}")
+    public List<QNA> findQnaByGoodsId(@PathVariable Long goodsId){
+
+        return goodsService.findQnaByGoodsId(goodsId);
+    }
+
+    // 부모 카테고리 밑 서브 카테고리 상품 개수 카운트 컨트롤러
     @GetMapping("/goodsList/cate/{category}")
     public List<Long> findChildCategory(@PathVariable String category){
         List<Category> childCategory = goodsService.findChildCategoryByParentCategory(category);
@@ -46,24 +60,28 @@ public class GoodsController {
         return childCount;
     }
 
+    // 부모 카테고리 요청 컨트롤러
     @GetMapping("/goodsList/{categoryId}")
     public List<Goods> findByParentCategory(@PathVariable String categoryId){
 
         return goodsService.getGoodsByParentCategory(categoryId);
     }
 
+    // 서브 카테고리 상품 요청 컨트롤러
     @GetMapping("/goodsList/sub/{subCategoryId}")
     public List<Goods> findByChildCategory(@PathVariable String subCategoryId){
 
         return goodsService.findByChildCategory(subCategoryId);
     }
 
+    // 검색 결과 요청 컨트롤러
     @GetMapping("/goodsList/query/{query}")
     public List<Goods> findByKeyword(@PathVariable String query){
 
         return goodsService.findByQuery(query);
     }
 
+    // 리뷰 데이터 요청 컨트롤러
     @GetMapping("/goodsList/review/{goodsId}")
     public List<Double> findGoodsReviewInfo(@PathVariable Long goodsId){
         List<Double> reviewInfo = new ArrayList<>();
@@ -74,6 +92,17 @@ public class GoodsController {
         reviewInfo.add(goodsId.doubleValue());
 
         return reviewInfo;
+    }
+
+    // openMarket 상품 생성 컨트롤러
+    @PostMapping("/openMarket/goodsControl")
+    public ResponseEntity<Goods> createGoods(@ModelAttribute GoodsDTO requestDTO){
+
+        Goods newGoods = goodsService.createGoods(requestDTO);
+
+        System.out.println(ResponseEntity.status(HttpStatus.CREATED).body(newGoods));
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(newGoods);
     }
 
 }

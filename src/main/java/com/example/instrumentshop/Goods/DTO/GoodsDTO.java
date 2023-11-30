@@ -20,7 +20,6 @@ public class GoodsDTO {
     private String goodsName;
     private int goodsPrice;
     private String goodsDetail;
-    private Date goodsDate;
     private int goodsQuantity;
     private String goodsCountry;
     private String goodsBrand;

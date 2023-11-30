@@ -39,8 +39,7 @@ public class Review {
     private String reviewFile;
 
     @Column(name = "review_date")
-    @Temporal(TemporalType.DATE)
-    private Date reviewDate;
+    private String reviewDate;
 
     @Column(name = "review_score")
     private double reviewScore;

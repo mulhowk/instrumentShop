@@ -43,8 +43,7 @@ public class Goods {
     private String goodsPayinfo;
 
     @Column(name = "goods_date")
-    @Temporal(TemporalType.DATE)
-    private Date goodsDate;
+    private String goodsDate;
 
     @Column(name = "open_goods")
     private boolean openGoods;
@@ -80,9 +79,9 @@ public class Goods {
         private boolean openGoods = true;
         private int goodsSellCount = 0;
         private String goodsStatus = "판매";
-        private Date goodsDate;
+        private String goodsDate;
 
-        public GoodsBuilder goodsDate(Date goodsDate) {
+        public GoodsBuilder goodsDate(String goodsDate) {
             this.goodsDate = goodsDate;
             return this;
         }

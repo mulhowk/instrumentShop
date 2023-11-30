@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import "../../styles/OpenMarket/GoodsControl.css"
 import ReactQuill from "react-quill";
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 
 function GoodsControl() {
@@ -95,16 +96,11 @@ function GoodsControl() {
             formGoodsData.append('goodsDetailImg', goodsDetailImg);
 
             // 서버에 상품 생성 요청
-            fetch('/openMarket/goodsControl', {
-                method : 'POST',
-                body: formGoodsData,
-            })
-                .then(response => {
-                    if(!response.ok){
-                        throw new Error('상품 등록에 실패했습니다.');
+            axios.post('/openMarket/goodsControl', formGoodsData, {
+                headers : {
+                    'Content-Type' : 'application/x-www-form-urlencoded'
                 }
-                    return response.json();
-                })
+            })
                 .then(createdGoods => {
                     alert('상품이 등록되었습니다!');
                     navigate('/openMarket');
@@ -198,14 +194,14 @@ function GoodsControl() {
     const firstCategorys = ['색소폰', '관악기', '타악기/드럼', '현악기',
         '기타/베이스', '건반악기', '교제악기', 'etc']; // 추가된 첫 번째 옵션들
     const secondCategorys = {
-        '색소폰': ['소프라노색소폰', '알토색소폰', '테너색소폰', '바리톤색소폰', '악세사리/관리용품'],
-        '관악기': ['플룻/피콜로', '클라리넷/오보에', '트럼펫/코넷/프루겔혼', '트롬본', '관악기악세사리/관리용품'],
-        '타악기/드럼': ['드럼스틱', '드럼세트', '심벌', '전자드럼', '타악기 악세사리/관리용품'],
-        '현악기': ['바이올린', '사일런트바이올린', '비올라', '첼로', '콘트라베이스', '현악기악세사리/유지관리용품'],
-        '기타/베이스': ['어쿠스틱기타', '일렉기타', '클래식기타', '베이스기타', '우쿠렐레', '기타악세사리/유지관리용품'],
-        '건반악기': ['디지털피아노', '신디사이저', '스테이지피아노', '포터블키보드', '건반악기악세서리/유지관리용품'],
-        '교재악기': ['하모니카', '오카리나', '교재용 타악기', '피아니카', '리코더'],
-        'etc': ['엠프', '마이크', '믹서', '반주기/녹음기']
+        '색소폰': ['소프라노색소폰', '알토색소폰', '테너색소폰', '바리톤색소폰', '악세사리관리용품'],
+        '관악기': ['플룻피콜로', '클라리넷오보에', '트럼펫', '트롬본', '관악기악세사리'],
+        '타악기드럼': ['드럼스틱', '드럼세트', '심벌', '전자드럼', '타악기악세사리'],
+        '현악기': ['바이올린', '사일런트바이올린', '비올라', '첼로', '콘트라베이스', '현악기악세사리'],
+        '기타베이스': ['어쿠스틱기타', '일렉기타', '클래식기타', '베이스기타', '우쿠렐레', '기타악세사리'],
+        '건반악기': ['디지털피아노', '신디사이저', '스테이지피아노', '포터블키보드', '건반악기악세서리'],
+        '교재악기': ['하모니카', '오카리나', '교재용타악기', '피아니카', '리코더'],
+        'etc': ['엠프', '마이크', '믹서', '반주기']
     }; // 첫 번째 옵션에 따른 두 번째 옵션들의 매핑
 
     const [selectedCategory, setSelectedCategory] = useState('');
@@ -237,6 +233,7 @@ function GoodsControl() {
             setShowBoxes(true);
         }else {
             setShowBoxes(false);
+            setOptions(['','','','','']);
         }
     };
 

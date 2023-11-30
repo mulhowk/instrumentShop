@@ -4,9 +4,11 @@ import {Link} from "react-router-dom";
 
 function GoodsDetailsProduct(props) {
 
+    const goods = props.goods;
+    const goodsOption = goods.options;
     const [selectOptions, setSelectOptions] = useState("");
     const handleSelectOptions = (event) => {
-        const selectedText = event.target.options[event.target.selectedIndex].text;
+        const selectedText = event.target.value;
         setSelectOptions(selectedText);
     };
 
@@ -32,18 +34,18 @@ function GoodsDetailsProduct(props) {
     return (
         <div className="product-area">
             <div className="product-area-img">
-                <img src={props.product.img} alt="product-img"/>
+                <img src={goods.goodsImg} alt="product-img"/>
             </div>
             <div className="product-area-info">
                 <div className="product-area-title">
-                    <h1 style={{color: "white"}}>{props.product.title}</h1>
+                    <h1 style={{color: "white"}}>{goods.goodsName}</h1>
                 </div>
                 <div className="product-area-price">
                     <div className="product-area-price-title">
                         <p style={{color: "white"}}>판매가격</p>
                     </div>
                     <div className="product-area-price-price">
-                        <p style={{color: "white"}}>{props.product.price.toLocaleString()} 원</p>
+                        <p style={{color: "white"}}>{goods.goodsPrice.toLocaleString()} 원</p>
                     </div>
                 </div>
                 <div className="product-area-deliver">
@@ -51,36 +53,36 @@ function GoodsDetailsProduct(props) {
                         <p style={{color: "white"}}>배송비</p>
                     </div>
                     <div className="product-area-deliver-price">
-                        <p style={{color: "white"}}>{props.product.deliver}</p>
+                        <p style={{color: "white"}}>총 결제금액 5만원 미만시 배송비 3,000원이 추가됩니다.(제주, 산간 제외)</p>
                     </div>
                 </div>
-                {props.product.brand &&
                 <div className="product-area-brand">
                     <div className="product-area-brand-title">
                         <p style={{color: "white"}}>브랜드</p>
                     </div>
                     <div className="product-area-brand-price">
-                        <p style={{color: "white"}}>{props.product.brand}</p>
+                        <p style={{color: "white"}}>{goods.goodsBrand}</p>
                     </div>
-                </div>}
-                {props.product.options &&
+                </div>
+                {goods.goodsOption &&
                     <div className="product-area-options">
                         <div className="product-area-options-title">
-                            <p style={{color: "white"}}>{props.product.optionType}</p>
+                            <p style={{color: "white"}}>{goods.goodsOption}</p>
                         </div>
 
                         <select onChange={handleSelectOptions}>
                             <option value="">옵션을 선택해주세요.</option>
-                            {props.product.options.map((option, index) => (
-                                <option key={index} value={`option${index + 1}`}>
+                            {console.log(Object.values(goodsOption[0]).slice(1,6))}
+                            {Object.values(goodsOption[0]).slice(1,6).map((option, index) =>
+                                <option key={index} value={option}>
                                     {option}
                                 </option>
-                            ))}
+                            )}
                         </select>
                     </div>
                 }
                 <div className="line"></div>
-                {props.product.optionType ?
+                {goods.goodsOption ?
                     (selectOptions ?
                             (selectOptions === '옵션을 선택해주세요.' ?
                                     (
@@ -90,7 +92,8 @@ function GoodsDetailsProduct(props) {
                                             <div className="product-area-count">
                                                 <div className="product-area-count-title">
                                                     <span
-                                                        style={{color: "black"}}>{selectOptions}</span> {props.product.title}
+                                                        style={{color: "black"}}>{selectOptions} </span>
+                                                    {goods.goodsName}
                                                 </div>
                                                 <div className="product-area-count-count">
                                                     <button onClick={decrement}
@@ -100,7 +103,7 @@ function GoodsDetailsProduct(props) {
                                                     <button onClick={increment} style={{marginLeft: "5px"}}>+</button>
                                                 </div>
                                                 <div className="product-area-count-price">
-                                                    <p>{(props.product.price * count).toLocaleString()} 원</p>
+                                                    <p>{(goods.goodsPrice * count).toLocaleString()} 원</p>
                                                 </div>
                                             </div>
                                             <div className="product-area-total">
@@ -109,7 +112,7 @@ function GoodsDetailsProduct(props) {
                                                 </div>
                                                 <div className="product-area-total-price">
                                                     <p style={{color: "white"}}>
-                                                        {(props.product.price * count).toLocaleString()} 원
+                                                        {(goods.goodsPrice * count).toLocaleString()} 원
                                                     </p>
                                                 </div>
                                             </div>
@@ -127,7 +130,7 @@ function GoodsDetailsProduct(props) {
                         <div>
                             <div className="product-area-count">
                                 <div className="product-area-count-title">
-                                    {props.product.title}
+                                    {goods.goodsName}
                                 </div>
                                 <div className="product-area-count-count">
                                     <button onClick={decrement} style={{marginRight: "5px", fontSize: "15px"}}>-
@@ -136,7 +139,7 @@ function GoodsDetailsProduct(props) {
                                     <button onClick={increment} style={{marginLeft: "5px"}}>+</button>
                                 </div>
                                 <div className="product-area-count-price">
-                                    <p>{(props.product.price * count).toLocaleString()} 원</p>
+                                    <p>{(goods.goodsPrice * count).toLocaleString()} 원</p>
                                 </div>
                             </div>
                             <div className="product-area-total">
@@ -145,7 +148,7 @@ function GoodsDetailsProduct(props) {
                                 </div>
                                 <div className="product-area-total-price">
                                     <p style={{color: "white"}}>
-                                        {(props.product.price * count).toLocaleString()} 원
+                                        {(goods.goodsPrice * count).toLocaleString()} 원
                                     </p>
                                 </div>
                             </div>

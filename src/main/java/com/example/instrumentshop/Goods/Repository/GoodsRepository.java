@@ -1,15 +1,16 @@
-package com.example.instrumentshop.Goods.repository;
+package com.example.instrumentshop.Goods.Repository;
 
 import com.example.instrumentshop.Goods.Entity.Goods;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface GoodsRepository extends JpaRepository<Goods, Long> {
+
+    Goods findByGoodsId(Long goodsId);
     List<Goods> findByParentCategoryOrderByGoodsIdDesc(String parentCategory);
     Long countByChildCategory(String childCategory);
 

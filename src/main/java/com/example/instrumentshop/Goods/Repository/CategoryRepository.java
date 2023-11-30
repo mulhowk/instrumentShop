@@ -1,4 +1,4 @@
-package com.example.instrumentshop.Goods.repository;
+package com.example.instrumentshop.Goods.Repository;
 
 import com.example.instrumentshop.Goods.Entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;

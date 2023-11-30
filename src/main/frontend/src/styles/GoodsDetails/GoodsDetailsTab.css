@@ -32,6 +32,8 @@
     white-space: pre-wrap;
     color: white;
     margin-bottom: 20px;
+    display: grid;
+    place-items: center;
 }
 
 .product-tab-detail p{
@@ -63,6 +65,9 @@
     white-space: pre-wrap;
     color: white;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .product-tab-pay p{
@@ -303,11 +308,11 @@
 }
 
 .product-tab-qna-header-name{
-    margin-right : 100px;
+    margin-right : 120px;
 }
 
 .product-tab-qna-header-date{
-    margin-right : 50px;
+    margin-right : 70px;
 }
 
 
@@ -331,7 +336,7 @@
 
 .product-tab-qna-content-subject{
     margin-right: auto;
-    width: 580px;
+    width: 550px;
     align-items: center;
     display: flex;
     justify-content: flex-start;
@@ -350,10 +355,11 @@
 
 .product-tab-qna-content-date{
     margin-right : 40px;
-    width: 60px;
+    width: 100px;
     align-items: center;
     display: flex;
     justify-content: center;
+    font-size: 14px;
 }
 
 .qna-page-button{

@@ -1,13 +1,8 @@
-package com.example.instrumentshop.Goods.service;
+package com.example.instrumentshop.Goods.Service;
 
 import com.example.instrumentshop.Goods.DTO.GoodsDTO;
-import com.example.instrumentshop.Goods.Entity.Category;
-import com.example.instrumentshop.Goods.Entity.Goods;
-import com.example.instrumentshop.Goods.Entity.Options;
-import com.example.instrumentshop.Goods.repository.CategoryRepository;
-import com.example.instrumentshop.Goods.repository.GoodsRepository;
-import com.example.instrumentshop.Goods.repository.OptionRepository;
-import com.example.instrumentshop.Goods.repository.ReviewRepository;
+import com.example.instrumentshop.Goods.Entity.*;
+import com.example.instrumentshop.Goods.Repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -25,14 +22,11 @@ public class GoodsService {
     private final OptionRepository optionRepository;
     private final CategoryRepository categoryRepository;
     private final ReviewRepository reviewRepository;
+    private final QNARepository qnaRepository;
 
-    private static final String payInfo = "구매안내입니다.";
+    private static final String payInfo = "/tempImg/payInfo.png";
 
-    @Transactional
-    public List<Goods> getAllGoods(){
-
-        return goodsRepository.findAll();
-    }
+    // goodsList 서비스
     @Transactional
     public List<Goods> getGoodsByParentCategory(String parentCategory){
 
@@ -58,12 +52,6 @@ public class GoodsService {
     }
 
     @Transactional
-    public Long getCountOfGoodsByChildCategory(String childCategory){
-
-        return goodsRepository.countByChildCategory(childCategory);
-    }
-
-    @Transactional
     public List<Goods> findByQuery(String query){
 
         return goodsRepository.queryMethod(query);
@@ -75,6 +63,33 @@ public class GoodsService {
         return goodsRepository.findByChildCategoryOrderByGoodsIdDesc(childCategory);
     }
 
+    // goodsList 안 goodsListCategory 서비스
+    @Transactional
+    public Long getCountOfGoodsByChildCategory(String childCategory){
+
+        return goodsRepository.countByChildCategory(childCategory);
+    }
+
+    // goodsDetails 서비스
+    @Transactional
+    public Goods findGoodsByGoodsId(Long goodsId){
+
+        return goodsRepository.findByGoodsId(goodsId);
+    }
+
+    @Transactional
+    public List<Review> findReviewByGoodsId(Long goodsId){
+
+        return reviewRepository.findByGoods_GoodsId(goodsId);
+    }
+
+    @Transactional
+    public List<QNA> findQnaByGoodsId(Long goodsId){
+
+        return qnaRepository.findByGoods_GoodsId(goodsId);
+    }
+
+    // openMarket 서비스
     @Transactional
     public Goods createGoods(GoodsDTO goodsDTO) {
 
@@ -96,7 +111,7 @@ public class GoodsService {
                         .parentCategory(goodsDTO.getParentCategory())
                         .childCategory(goodsDTO.getChildCategory())
                         .goodsDetail(goodsDTO.getGoodsDetail())
-                        .goodsDate(goodsDTO.getGoodsDate() != null ? goodsDTO.getGoodsDate() : new Date())
+                        .goodsDate(getCurrentTimeString())
                         .goodsOption(goodsDTO.getGoodsOption())
                         .goodsQuantity(goodsDTO.getGoodsQuantity())
                         .goodsCountry(goodsDTO.getGoodsCountry())
@@ -155,6 +170,13 @@ public class GoodsService {
             throw new RuntimeException("Failed to store file", e);
         }
 
+    }
+
+    private static String getCurrentTimeString(){
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        return now.format(formatter);
     }
 
 }
