@@ -9,7 +9,7 @@ function GoodsDetailsTab(props){
     const review = props.review;
     const qna = props.qna;
     const goods = props.goods;
-
+    const qnaReply = props.qnaReply;
 
     const divRefDetailInfo = useRef(null);
     const divRefPayInfo = useRef(null);
@@ -113,6 +113,14 @@ function GoodsDetailsTab(props){
     const showQnaPreviouButton = currentQnaPage > 1 ;
     const showQnaNextButton = currentQnaPage < totalQnaPageCount;
 
+    const [openStates, setOpenStates] = useState({});
+
+    const handleQnaClick = (key) => {
+        setOpenStates((prevOpenStates) => ({
+            ...prevOpenStates,
+                [key]: !prevOpenStates[key]
+        }));
+    };
 
     return(
         <div className="product-tab">
@@ -267,23 +275,58 @@ function GoodsDetailsTab(props){
                     <div className="product-tab-qna-header-date">
                         <p>등록일</p>
                     </div>
+                    <div className="product-tab-qna-header-status">
+                        <p>답변상태</p>
+                    </div>
                 </div>
-                {currentQnaData.length !==0 ?(
+                {currentQnaData.length !== 0 ?(
                     <div>
                 {currentQnaData.map((qna, index) => (
-                    <div className="product-tab-qna-contents">
-                        <div className="product-tab-qna-content-no">
-                            <p>{startReviewIndex + index}</p>
+                    <div>
+                        <div className="product-tab-qna-contents" key={index}
+                        onClick={() => handleQnaClick(index)}>
+                            <div className="product-tab-qna-content-no">
+                                <p>{startReviewIndex + index}</p>
+                            </div>
+                            <div className="product-tab-qna-content-subject">
+                                <p>{qna.qnaTitle}</p>
+                            </div>
+                            <div className="product-tab-qna-content-name">
+                                <p>{qna.qnaWriter}</p>
+                            </div>
+                            <div className="product-tab-qna-content-date">
+                                <p>{qna.qnaDate}</p>
+                            </div>
+                            <div className="product-tab-qna-content-status">
+                                <p>{qnaReply.length === 0 ? "답변중" : "답변완료"}</p>
+                            </div>
                         </div>
-                        <div className="product-tab-qna-content-subject">
-                            <p>{qna.qnaTitle}</p>
-                        </div>
-                        <div className="product-tab-qna-content-name">
-                            <p>{qna.qnaWriter}</p>
-                        </div>
-                        <div className="product-tab-qna-content-date">
-                            <p>{qna.qnaDate}</p>
-                        </div>
+                        {openStates[index] &&
+                            <div>
+                                <div className="product-tab-qna-contents-detail">
+                                    <div className="product-tab-qna-contents-detail-blank">
+                                    </div>
+                                    <div className="product-tab-qna-contents-detail-content">
+                                        <p>{qna.qnaContent}</p>
+                                    </div>
+                                </div>
+                                {qnaReply.length !==0?
+                                (
+                                <div className="product-tab-qna-contents-detail2">
+                                    <div className="product-tab-qna-contents-detail-blank">
+                                    </div>
+                                    <div className="product-tab-qna-contents-detail-reply">
+                                        <p style={{color : "skyblue"}} className="reply-title">
+                                            (?) 상품 담당자 답변</p>
+                                        <p>{qnaReply[index].replyContent}</p>
+                                    </div>
+                                    <div className="product-tab-qna-contents-detail-date">
+                                        <p>{qnaReply[index].replyDate}</p>
+                                    </div>
+                                </div>) : ("")}
+                            </div>
+
+                        }
                     </div>
                 ))}
                     </div>): (

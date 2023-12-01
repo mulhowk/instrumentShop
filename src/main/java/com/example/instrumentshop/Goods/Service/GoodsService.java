@@ -23,6 +23,7 @@ public class GoodsService {
     private final CategoryRepository categoryRepository;
     private final ReviewRepository reviewRepository;
     private final QNARepository qnaRepository;
+    private final QnaReplyRepository qnaReplyRepository;
 
     private static final String payInfo = "/tempImg/payInfo.png";
 
@@ -87,6 +88,12 @@ public class GoodsService {
     public List<QNA> findQnaByGoodsId(Long goodsId){
 
         return qnaRepository.findByGoods_GoodsId(goodsId);
+    }
+
+    @Transactional
+    public List<QnaReply> findQnaReplyByGoodsId(Long goodsId){
+
+        return qnaReplyRepository.findByGoods_GoodsId(goodsId);
     }
 
     // openMarket 서비스

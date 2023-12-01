@@ -16,7 +16,7 @@ function GoodsDetails(){
 
     const [review, setReview] = useState(null);
     const [qna,setQna] = useState(null);
-
+    const [qnaReply, setQnaReply] = useState(null);
 
     useEffect(() => {
         // 상품 정보 비동기호출
@@ -43,6 +43,12 @@ function GoodsDetails(){
             .catch(error => {
                 console.log('Error fetching data:', error );
             });
+        axios.get(`/goodsDetail/qnaReply/${goodsId}`)
+            .then(response => {
+                setQnaReply(response.data);
+            }).catch(error => {
+            console.log('Error fetching data:', error );
+        });
     }, [goodsId]);
 
     return(
@@ -52,7 +58,10 @@ function GoodsDetails(){
             {goods? <GoodsDetailsProduct goods ={goods}/> : <p>Loading...</p>}
             {goods?
                 (review?
-                    (qna? (<GoodsDetailsTab review ={review} qna ={qna} goods ={goods}/>)
+                    (qna?
+                        (qnaReply? (<GoodsDetailsTab review ={review} qna ={qna}
+                                                     goods ={goods} qnaReply = {qnaReply}/>)
+                            : (<p>Loading...</p>))
                         : (<p>Loading...</p>))
                     : (<p>Loading...</p>))
                 : (<p>Loading...</p>)

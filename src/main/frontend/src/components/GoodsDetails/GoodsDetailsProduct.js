@@ -72,7 +72,6 @@ function GoodsDetailsProduct(props) {
 
                         <select onChange={handleSelectOptions}>
                             <option value="">옵션을 선택해주세요.</option>
-                            {console.log(Object.values(goodsOption[0]).slice(1,6))}
                             {Object.values(goodsOption[0]).slice(1,6).map((option, index) =>
                                 <option key={index} value={option}>
                                     {option}
@@ -128,6 +127,10 @@ function GoodsDetailsProduct(props) {
                     ) :
                     (
                         <div>
+                        {goods.goodsPrice !==0 ?
+                            (goods.goodsQuantity !==0 ?
+                                (
+                        <div>
                             <div className="product-area-count">
                                 <div className="product-area-count-title">
                                     {goods.goodsName}
@@ -152,10 +155,23 @@ function GoodsDetailsProduct(props) {
                                     </p>
                                 </div>
                             </div>
+                        </div>) : (
+                            <div className="quantity-zero">
+                                <p>품절</p>
+                            </div>))
+                        : (
+                            <div className="price-zero">
+                                <p>전화문의</p>
+                                <p>080-335-0020</p>
+                            </div>)
+                            }
                         </div>
                     )
                 }
-                <div className="product-area-button">
+                <div>
+                    {goods.goodsPrice !== 0 ?(
+                        goods.goodsQuantity !== 0 ?
+                            (<div className="product-area-button">
                     <Link to="/goodsPayment">
                     <button style={
                         {
@@ -177,6 +193,7 @@ function GoodsDetailsProduct(props) {
                         cursor : "pointer"
                     }}>♡
                     </button>
+                </div>) : ("")) : ("")}
                 </div>
             </div>
         </div>

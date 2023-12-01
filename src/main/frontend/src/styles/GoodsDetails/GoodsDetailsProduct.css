@@ -168,3 +168,21 @@
     justify-content: center;
 
 }
+
+.price-zero{
+    display: grid;
+    place-items: center;
+    margin-top: 10px;
+    color: red;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.quantity-zero{
+    display: grid;
+    place-items: center;
+    margin-top: 10px;
+    color: red;
+    font-size: 30px;
+    font-weight: bold;
+}

@@ -1,10 +1,7 @@
 package com.example.instrumentshop.Goods.Controller;
 
 import com.example.instrumentshop.Goods.DTO.GoodsDTO;
-import com.example.instrumentshop.Goods.Entity.Category;
-import com.example.instrumentshop.Goods.Entity.Goods;
-import com.example.instrumentshop.Goods.Entity.QNA;
-import com.example.instrumentshop.Goods.Entity.Review;
+import com.example.instrumentshop.Goods.Entity.*;
 import com.example.instrumentshop.Goods.Service.GoodsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,11 +34,18 @@ public class GoodsController {
         return goodsService.findReviewByGoodsId(goodsId);
     }
 
-    // 리뷰 정보 컨트롤러
+    // Qna 정보 컨트롤러
     @GetMapping("/goodsDetail/qna/{goodsId}")
     public List<QNA> findQnaByGoodsId(@PathVariable Long goodsId){
 
         return goodsService.findQnaByGoodsId(goodsId);
+    }
+
+    // Qna 댓글 정보 컨트롤러
+    @GetMapping("/goodsDetail/qnaReply/{goodsId}")
+    public List<QnaReply> findQnaReplyByGoodsId(@PathVariable Long goodsId){
+
+        return goodsService.findQnaReplyByGoodsId(goodsId);
     }
 
     // 부모 카테고리 밑 서브 카테고리 상품 개수 카운트 컨트롤러

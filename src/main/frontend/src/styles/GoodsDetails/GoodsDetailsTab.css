@@ -295,40 +295,55 @@
     border-top: 1px solid #AAAAAA;
     padding-left: 15px;
     padding-right: 15px;
-    margin-bottom: 2px;
 }
 
 .product-tab-qna-header-no{
-    margin-right: auto;
+    flex: 1;
+    display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .product-tab-qna-header-subject{
-    margin-right: auto;
+    flex: 7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .product-tab-qna-header-name{
-    margin-right : 120px;
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .product-tab-qna-header-date{
-    margin-right : 70px;
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.product-tab-qna-header-status{
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .product-tab-qna-contents{
     display: flex;
     align-items: center;
     justify-content: center;
     padding-left: 15px;
-    padding-right: 23px;
-    margin-bottom: 5px;
+    padding-right: 15px;
     border-bottom: 1px solid #858a8d;
 }
 
 .product-tab-qna-content-no{
     margin-right: auto;
-    width: 30px;
+    flex: 1;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -336,7 +351,7 @@
 
 .product-tab-qna-content-subject{
     margin-right: auto;
-    width: 550px;
+    flex: 7;
     align-items: center;
     display: flex;
     justify-content: flex-start;
@@ -346,20 +361,89 @@
 }
 
 .product-tab-qna-content-name{
-    margin-right : 32px;
-    width: 160px;
+    flex: 2;
     align-items: center;
     display: flex;
     justify-content: center;
 }
 
 .product-tab-qna-content-date{
-    margin-right : 40px;
-    width: 100px;
+    flex: 3;
     align-items: center;
     display: flex;
     justify-content: center;
     font-size: 14px;
+}
+
+.product-tab-qna-content-status{
+    flex: 2;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.product-tab-qna-content-status p {
+    color: #FFFFFF;
+}
+
+.product-tab-qna-contents-detail{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 15px;
+    margin-top: 20px;
+}
+
+.product-tab-qna-contents-detail-blank{
+    flex : 1;
+}
+
+.product-tab-qna-contents-detail-content{
+    flex: 12;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #AAAAAA;
+}
+
+.product-tab-qna-contents-detail-content p{
+    color: white;
+}
+
+.product-tab-qna-contents-detail2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 15px;
+    margin-top: 20px;
+    border-bottom: 1px solid #AAAAAA;
+}
+
+.product-tab-qna-contents-detail-reply{
+    flex: 11;
+    display: block;
+    white-space: pre-wrap;
+    padding-bottom: 20px;
+}
+
+.product-tab-qna-contents-detail-reply p{
+    color: white;
+}
+
+.reply-title{
+    margin-bottom : 15px;
+    font-weight : bold;
+    font-size : 17px;
+}
+
+.product-tab-qna-contents-detail-date{
+    flex: 1.5;
+    margin-top: -60px;
+}
+.product-tab-qna-contents-detail-date p{
+    text-align: center;
 }
 
 .qna-page-button{
