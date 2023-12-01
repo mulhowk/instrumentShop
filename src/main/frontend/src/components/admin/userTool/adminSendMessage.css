@@ -21,6 +21,7 @@
 .a-s-m-content {
     border: 2px solid var(--color-silver-100);
     padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.25);
 }
 
 .a-s-m-c-tab-tag {
