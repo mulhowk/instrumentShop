@@ -10,7 +10,7 @@ import {useParams} from "react-router-dom";
 function GoodsDetails(){
 
     const params = useParams();
-    const goodsId = parseInt(params.goodsId, 10);
+    const goodsId = params.goodsId;
 
     const [goods, setGoods] = useState(null);
 
@@ -36,14 +36,14 @@ function GoodsDetails(){
                 console.log('Error fetching data:', error );
             });
         // 상품 문의 비동기호출
-        axios.get(`/goodsDetail/qna/${goodsId}`)
+        axios.get(`/goodsDetails/qna/${goodsId}`)
             .then(response => {
                 setQna(response.data);
             })
             .catch(error => {
                 console.log('Error fetching data:', error );
             });
-        axios.get(`/goodsDetail/qnaReply/${goodsId}`)
+        axios.get(`/goodsDetails/qnaReply/${goodsId}`)
             .then(response => {
                 setQnaReply(response.data);
             }).catch(error => {

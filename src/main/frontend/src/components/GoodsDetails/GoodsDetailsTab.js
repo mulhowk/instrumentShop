@@ -158,7 +158,7 @@ function GoodsDetailsTab(props){
                 <div className="product-tab-review-title">
                     <p style={{color : "white"}}>Review</p>
                 </div>
-                {currentReviewData !== 0 ?(
+                {currentReviewData.length !== 0 ?(
                     <div>
                 {currentReviewData.map((res, index) => (
                 <div className="product-tab-review-contents">
@@ -205,9 +205,11 @@ function GoodsDetailsTab(props){
                     <div className="product-tab-review-content-id">
                         <p>{goods.goodsName}</p>
                     </div>
-                    <div className="product-tab-review-content-img">
+                    {res.reviewFile &&
+                        <div className="product-tab-review-content-img">
                         <img src={res.reviewFile} alt="review-file"/>
                     </div>
+                    }
                     <div className="product-tab-review-content-title">
                         <p>{res.reviewTitle}</p>
                     </div>
@@ -241,7 +243,7 @@ function GoodsDetailsTab(props){
                     )}
                   </div>
                     <div className="review-write">
-                      <Link to="/goodsDetails/reviewWrite">
+                      <Link to={`/goodsDetails/reviewWrite/${goods.goodsId}`}>
                         <button>WRITE</button>
                       </Link>
                     </div>
@@ -350,11 +352,13 @@ function GoodsDetailsTab(props){
                         </button>
                     )}
                     </div>
-                    <Link to="/goodsDetails/qnaWrite">
+
                     <div className="qna-write">
+                        <Link to={`/goodsDetails/qnaWrite/${goods.goodsId}`}>
                         <button>WRITE</button>
+                        </Link>
                     </div>
-                    </Link>
+
                 </div>
             </div>
 

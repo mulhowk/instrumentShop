@@ -1,6 +1,7 @@
 package com.example.instrumentshop.Goods.Controller;
 
 import com.example.instrumentshop.Goods.DTO.GoodsDTO;
+import com.example.instrumentshop.Goods.DTO.ReviewDTO;
 import com.example.instrumentshop.Goods.Entity.*;
 import com.example.instrumentshop.Goods.Service.GoodsService;
 import lombok.RequiredArgsConstructor;
@@ -35,14 +36,14 @@ public class GoodsController {
     }
 
     // Qna 정보 컨트롤러
-    @GetMapping("/goodsDetail/qna/{goodsId}")
+    @GetMapping("/goodsDetails/qna/{goodsId}")
     public List<QNA> findQnaByGoodsId(@PathVariable Long goodsId){
 
         return goodsService.findQnaByGoodsId(goodsId);
     }
 
     // Qna 댓글 정보 컨트롤러
-    @GetMapping("/goodsDetail/qnaReply/{goodsId}")
+    @GetMapping("/goodsDetails/qnaReply/{goodsId}")
     public List<QnaReply> findQnaReplyByGoodsId(@PathVariable Long goodsId){
 
         return goodsService.findQnaReplyByGoodsId(goodsId);
@@ -96,6 +97,17 @@ public class GoodsController {
         reviewInfo.add(goodsId.doubleValue());
 
         return reviewInfo;
+    }
+
+    // review 생성 컨트롤러
+    @PostMapping("/goodsDetails/reviewWrite")
+    public ResponseEntity<Review> createReview(@ModelAttribute ReviewDTO reviewDTO){
+
+        Review newReview = goodsService.createReview(reviewDTO);
+
+        System.out.println(ResponseEntity.status(HttpStatus.CREATED).body(newReview));
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(newReview);
     }
 
     // openMarket 상품 생성 컨트롤러

@@ -1,6 +1,7 @@
 package com.example.instrumentshop.Goods.Service;
 
 import com.example.instrumentshop.Goods.DTO.GoodsDTO;
+import com.example.instrumentshop.Goods.DTO.ReviewDTO;
 import com.example.instrumentshop.Goods.Entity.*;
 import com.example.instrumentshop.Goods.Repository.*;
 import jakarta.transaction.Transactional;
@@ -96,6 +97,44 @@ public class GoodsService {
         return qnaReplyRepository.findByGoods_GoodsId(goodsId);
     }
 
+    @Transactional
+    public Review createReview(ReviewDTO reviewDTO){
+
+        if(reviewDTO.getReviewFile() != null) {
+            MultipartFile ReviewFile = reviewDTO.getReviewFile();
+            String filePath = saveFile(ReviewFile);
+
+
+            Review newReview = Review.builder()
+                    .reviewWriter(reviewDTO.getReviewWriter())
+                    .reviewTitle(reviewDTO.getReviewTitle())
+                    .reviewScore(reviewDTO.getReviewScore())
+                    .reviewContent(reviewDTO.getReviewContent())
+                    .reviewFile(filePath)
+                    .reviewDate(getCurrentTimeString())
+                    .goods(reviewDTO.getGoods())
+                    .build();
+            reviewRepository.save(newReview);
+
+
+            return reviewRepository.save(newReview);
+        } else {
+            Review newReview = Review.builder()
+                    .reviewWriter(reviewDTO.getReviewWriter())
+                    .reviewTitle(reviewDTO.getReviewTitle())
+                    .reviewScore(reviewDTO.getReviewScore())
+                    .reviewContent(reviewDTO.getReviewContent())
+                    .reviewDate(getCurrentTimeString())
+                    .goods(reviewDTO.getGoods())
+                    .build();
+            reviewRepository.save(newReview);
+
+
+            return reviewRepository.save(newReview);
+        }
+
+    }
+
     // openMarket 서비스
     @Transactional
     public Goods createGoods(GoodsDTO goodsDTO) {
@@ -128,8 +167,8 @@ public class GoodsService {
 
         goodsRepository.save(newGoods);
 
-        // 옵션 저장해주기 기본
-        if (goodsDTO.getOptions() != null) {
+        // 옵션 저장해주기
+        if (goodsDTO.getGoodsOption() != null) {
             List<String> optionNames = goodsDTO.getOptions();
 
             Options option =
