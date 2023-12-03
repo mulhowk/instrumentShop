@@ -1,9 +1,18 @@
+jwt:
+  secret: b68l1FyGcgq+wdIVM6UkOgG9CiZrkgwRvpki3frHZwo=
+
+
 spring:
+  profiles:
+    group:
+      "local":
+        - "oauth"
+    active: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/instrument?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/instrument
     username : root
-    password : 4492776
+    password : gudtjr32
   servlet:
     multipart:
       maxFileSize: 10MB # ?? ??? ?? ??
