@@ -1,11 +1,73 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import '../../../styles/GoodsDetails/GoodsDetailsTab/QnaWrite.css'
 import Header from "../../Header";
 import MainCategory from "../../MainCategory";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import {useNavigate, useParams} from "react-router-dom";
+import axios from "axios";
 
-function QnaWrite(props){
+function QnaWrite(){
+
+    const navigate = useNavigate();
+
+    const params = useParams();
+    const goodsId = params.goodsId;
+
+    const [goods, setGoods] = useState([]);
+
+    const [qnaTitle, setQnaTitle] = useState(null);
+    const [qnaContent, setQnaContent] = useState(null);
+    const [qnaFile, setQnaFile] = useState(null);
+    const [qnaWriter, setQnaWriter] = useState(null);
+
+    const handleQnaCreate = () => {
+
+        const isConfirmed = window.confirm('문의를 작성하시겠습니까?');
+
+        if(isConfirmed) {
+            if(!qnaContent) {
+                alert('리뷰 내용을 작성해주세요.');
+                return;
+            }
+            if(!qnaTitle) {
+                alert('리뷰 제목을 작성해주세요.');
+                return;
+            }
+        } else return;
+
+        const formQnaData = new FormData();
+
+        formQnaData.append('qnaWriter', qnaWriter);
+        formQnaData.append('qnaTitle', qnaTitle);
+        formQnaData.append('qnaContent', qnaContent);
+        if(qnaFile){
+            formQnaData.append('qnaFile', qnaFile);
+        }
+        formQnaData.append('goods', goodsId);
+
+        axios.post(`/goodsDetails/qnaWrite`, formQnaData, {
+            headers : {
+                'Content-Type' : 'application/x-www-form-urlencoded'
+            }
+        })
+            .then(createdReviews => {
+                alert('문의가 등록되었습니다!');
+                navigate(-1);
+            })
+            .then(data => console.log(data))
+            .catch(error => console.error('Error creating review: ', error));
+    };
+
+    useEffect(() => {
+        axios.get(`/goodsDetails/goods/${goodsId}`)
+            .then(response => {
+                setGoods(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching data :', error);
+            });
+    }, []);
 
     const modules = {
         toolbar: [
@@ -28,6 +90,12 @@ function QnaWrite(props){
 
     const handleChange = (newContent) => {
         setContent(newContent);
+        setQnaContent(stripHtmlTags(newContent));
+    };
+
+    const stripHtmlTags = (html) => {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        return doc.body.textContent || "";
     };
 
     const fileInputRef = useRef();
@@ -37,6 +105,8 @@ function QnaWrite(props){
         const fileInput = fileInputRef.current;
         const textInput = textInputRef.current;
         const selectedFile = fileInput.files[0];
+
+        setQnaFile(selectedFile);
 
         if(selectedFile) {
             textInput.value = selectedFile.name;
@@ -55,15 +125,15 @@ function QnaWrite(props){
                 </div>
                 <div className="qna-product-contents">
                     <div className="qna-product-img">
-                        <img src="../../logo.png" alt="1" />
+                        <img src={goods.goodsImg} alt={goodsId} />
                     </div>
                     <div className="qna-product-title">
                         <div className="qna-product-name">
-                            <p><span style={{fontWeight : "bold"}}>상품명 : </span>머시기저시기</p>
+                            <p><span style={{fontWeight : "bold"}}>상품명 : </span>{goods.goodsName}</p>
                         </div>
                         <div className="qna-product-price">
                             <p><span style={{fontWeight : "bold"}}>상품가 : </span>
-                                7,000,000 원</p>
+                                {goods.goodsPrice} 원</p>
                         </div>
                     </div>
                 </div>
@@ -73,7 +143,8 @@ function QnaWrite(props){
                             <p>아이디</p>
                         </div>
                         <div className="qna-write-area-id-id">
-                            <input type="text" id="username"></input>
+                            <input type="text" id="username" value={qnaWriter}
+                                   onChange={e => setQnaWriter(e.target.value)}/>
                         </div>
                     </div>
                     <div className="qna-write-area-subject">
@@ -81,7 +152,8 @@ function QnaWrite(props){
                             <p>제목</p>
                         </div>
                         <div className="qna-write-area-subject-subject">
-                            <input type="text" id="subject"></input>
+                            <input type="text" id="subject" value={qnaTitle}
+                            onChange={e => setQnaTitle(e.target.value)}/>
                         </div>
                     </div>
                     <div className="qna-write-area-contents">
@@ -112,6 +184,7 @@ function QnaWrite(props){
                             <input
                                 type="file"
                                 ref={fileInputRef}
+                                accept="image/*"
                                 onChange={handleFileChange}
                                 style={{display : "none"}}/>
                             <button
@@ -119,7 +192,7 @@ function QnaWrite(props){
                         </div>
                     </div>
                     <div className="qna-submit-area">
-                        <button>저장하기</button>
+                        <button onClick={handleQnaCreate}>저장하기</button>
                     </div>
                     <div className="qna-submit-area" style={{display : "none"}}>
                         <button>수정하기</button>

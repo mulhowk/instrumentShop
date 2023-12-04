@@ -2,6 +2,8 @@ import React, {useEffect, useRef, useState} from 'react';
 import '../../styles/GoodsDetails/GoodsDetailsTab.css'
 import {Link} from "react-router-dom";
 import axios from "axios";
+import Modal from "react-modal";
+import QnaReplyWrite from "./GoodsDetailsTab/QnaReplyWrite";
 
 
 function GoodsDetailsTab(props){
@@ -116,10 +118,10 @@ function GoodsDetailsTab(props){
     const [openStates, setOpenStates] = useState({});
 
     const handleQnaClick = (key) => {
-        setOpenStates((prevOpenStates) => ({
-            ...prevOpenStates,
+            setOpenStates((prevOpenStates) => ({
+                ...prevOpenStates,
                 [key]: !prevOpenStates[key]
-        }));
+            }));
     };
 
     return(
@@ -300,19 +302,36 @@ function GoodsDetailsTab(props){
                                 <p>{qna.qnaDate}</p>
                             </div>
                             <div className="product-tab-qna-content-status">
-                                <p>{qnaReply.length === 0 ? "답변중" : "답변완료"}</p>
+                                <p>{!qnaReply[index] ? "답변중" : "답변완료"}</p>
                             </div>
                         </div>
                         {openStates[index] &&
                             <div>
+                                {qna.qnaFile?
+                                <div className="product-tab-qna-contents-img">
+                                    <img src={qna.qnaFile} alt={qna.qnaNo}/>
+                                </div> : ""
+                                }
                                 <div className="product-tab-qna-contents-detail">
                                     <div className="product-tab-qna-contents-detail-blank">
                                     </div>
                                     <div className="product-tab-qna-contents-detail-content">
+                                        <div>
+                                            <p style={{color : "red"}} className="reply-title">
+                                                문의내용
+                                            </p>
+                                        </div>
+                                        <div className="product-tab-qna-contents-detail-content-content">
                                         <p>{qna.qnaContent}</p>
+                                        {!qnaReply[index] ?
+                                            <a href={`/goodsDetails/reply/${goods.goodsId}/${qna.qnaNo}`}>
+                                                <button>댓글등록</button>
+                                            </a>: ""
+                                        }
+                                        </div>
                                     </div>
                                 </div>
-                                {qnaReply.length !==0?
+                                {qnaReply[index] ?
                                 (
                                 <div className="product-tab-qna-contents-detail2">
                                     <div className="product-tab-qna-contents-detail-blank">

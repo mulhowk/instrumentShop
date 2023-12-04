@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface QnaReplyRepository extends JpaRepository<QnaReply, Long> {
-    List<QnaReply> findByGoods_GoodsId(Long goodsId);
+    List<QnaReply> findByGoods_GoodsIdOrderByQnaAsc(Long goodsId);
 }

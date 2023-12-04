@@ -18,6 +18,7 @@ import AdminUser from './pages/admin/AdminUser';
 import AdminMessage from './pages/admin/AdminMessage';
 import GoodsControl from "./components/OpenMarket/GoodsControl";
 import {CheckoutPage} from "./components/GoodsPayment/CheckoutPage.tsx";
+import QnaReplyWrite from "./components/GoodsDetails/GoodsDetailsTab/QnaReplyWrite";
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/goodsDetails/:goodsId" element={<GoodsDetails/>}/>
           <Route path="/goodsDetails/reviewWrite/:goodsId" element={<ReviewWrite/>}/>
           <Route path="/goodsDetails/qnaWrite/:goodsId" element={<QnaWrite/>}/>
+          <Route path="/goodsDetails/reply/:goodsId/:qnaNo" element={<QnaReplyWrite/>}/>
           <Route path="/goodsPayment" element={<GoodsPayment/>}/>
           <Route path="/openMarket" element={<OpenMarket/>}/>
           <Route path="/admin" element={<AdminPage/>}/>"
