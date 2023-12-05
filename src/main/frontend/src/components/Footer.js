@@ -29,16 +29,16 @@ function Footer(){
             </div>
             <div className="footer-category-01">
                 <p className="color-red">CATEGORY</p>
-                <a href="/goodsList/category/1"><p>카테고리 1</p></a>
-                <a href="/goodsList/category/2"><p>카테고리 2</p></a>
-                <a href="/goodsList/category/3"><p>카테고리 3</p></a>
-                <a href="/goodsList/category/4"><p>카테고리 4</p></a>
+                <a href="/goodsList/category/색소폰"><p>색소폰</p></a>
+                <a href="/goodsList/category/관악기"><p>관악기</p></a>
+                <a href="/goodsList/category/타악기"><p>타악기</p></a>
+                <a href="/goodsList/category/현악기"><p>현악기</p></a>
             </div>
             <div className="footer-category-02">
-                <a href="/goodsList/category/5"><p>카테고리 5</p></a>
-                <a href="/goodsList/category/6"><p>카테고리 6</p></a>
-                <a href="/goodsList/category/7"><p>카테고리 7</p></a>
-                <a href="/goodsList/category/8"><p>카테고리 8</p></a>
+                <a href="/goodsList/category/기타베이스"><p>기타베이스</p></a>
+                <a href="/goodsList/category/건반악기"><p>건반악기</p></a>
+                <a href="/goodsList/category/교재악기"><p>교재악기</p></a>
+                <a href="/goodsList/category/etc"><p>etc</p></a>
             </div>
             <div className="company">
                 <p className="color-red">COMPANY</p>

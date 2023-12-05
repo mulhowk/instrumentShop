@@ -1,6 +1,9 @@
 package com.example.instrumentshop.Goods.Controller;
 
 import com.example.instrumentshop.Goods.DTO.GoodsDTO;
+import com.example.instrumentshop.Goods.DTO.QnaDTO;
+import com.example.instrumentshop.Goods.DTO.QnaReplyDTO;
+import com.example.instrumentshop.Goods.DTO.ReviewDTO;
 import com.example.instrumentshop.Goods.Entity.*;
 import com.example.instrumentshop.Goods.Service.GoodsService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +23,34 @@ public class GoodsController {
 
     private final GoodsService goodsService;
 
+    // 상품 전체 조회 컨트롤러
+    @GetMapping("/goods")
+    public List<Goods> findAllGoods(){
+
+        return goodsService.getAllGoods();
+    }
+
+    // 리뷰 전체 조회 컨트롤러
+    @GetMapping("/review")
+    public List<Review> findAllReview(){
+
+        return goodsService.getAllReviews();
+    }
+
+    // 문의 전체 조회 컨트롤러
+    @GetMapping("/qna")
+    public List<QNA> findAllQna(){
+
+        return goodsService.getAllQna();
+    }
+
+    // 문의 댓글 전체 조회 컨트롤러
+    @GetMapping("/qnaReply")
+    public List<QnaReply> findAllQnaReply(){
+
+        return goodsService.getAllQnaReply();
+    }
+
     // 상품 상세 정보 컨트롤러
     @GetMapping("/goodsDetails/goods/{goodsId}")
     public Goods findByGoodsId(@PathVariable Long goodsId){
@@ -35,17 +66,24 @@ public class GoodsController {
     }
 
     // Qna 정보 컨트롤러
-    @GetMapping("/goodsDetail/qna/{goodsId}")
+    @GetMapping("/goodsDetails/qna/{goodsId}")
     public List<QNA> findQnaByGoodsId(@PathVariable Long goodsId){
 
         return goodsService.findQnaByGoodsId(goodsId);
     }
 
     // Qna 댓글 정보 컨트롤러
-    @GetMapping("/goodsDetail/qnaReply/{goodsId}")
+    @GetMapping("/goodsDetails/qnaReply/{goodsId}")
     public List<QnaReply> findQnaReplyByGoodsId(@PathVariable Long goodsId){
 
         return goodsService.findQnaReplyByGoodsId(goodsId);
+    }
+
+    // Qna 찾기 컨트롤러
+    @GetMapping("/qna/{qnaNo}")
+    public QNA findQnaByQnaNo(@PathVariable int qnaNo){
+
+        return goodsService.findQnaByQnaNo(qnaNo);
     }
 
     // 부모 카테고리 밑 서브 카테고리 상품 개수 카운트 컨트롤러
@@ -96,6 +134,39 @@ public class GoodsController {
         reviewInfo.add(goodsId.doubleValue());
 
         return reviewInfo;
+    }
+
+    // 문의 댓글 생성 컨트롤러
+    @PostMapping("/goodsDetails/reply")
+    public ResponseEntity<QnaReply> createQnaReply(@ModelAttribute QnaReplyDTO qnaReplyDTO){
+
+        QnaReply newReply = goodsService.createQnaReply(qnaReplyDTO);
+
+        System.out.println(ResponseEntity.status(HttpStatus.CREATED).body(newReply));
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(newReply);
+    }
+
+    // 문의 생성 컨트롤러
+    @PostMapping("/goodsDetails/qnaWrite")
+    public ResponseEntity<QNA> createQna(@ModelAttribute QnaDTO qnaDTO){
+
+        QNA newQna = goodsService.createQna(qnaDTO);
+
+        System.out.println(ResponseEntity.status(HttpStatus.CREATED).body(newQna));
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(newQna);
+    }
+
+    // review 생성 컨트롤러
+    @PostMapping("/goodsDetails/reviewWrite")
+    public ResponseEntity<Review> createReview(@ModelAttribute ReviewDTO reviewDTO){
+
+        Review newReview = goodsService.createReview(reviewDTO);
+
+        System.out.println(ResponseEntity.status(HttpStatus.CREATED).body(newReview));
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(newReview);
     }
 
     // openMarket 상품 생성 컨트롤러

@@ -1,6 +1,9 @@
 package com.example.instrumentshop.Goods.Service;
 
 import com.example.instrumentshop.Goods.DTO.GoodsDTO;
+import com.example.instrumentshop.Goods.DTO.QnaDTO;
+import com.example.instrumentshop.Goods.DTO.QnaReplyDTO;
+import com.example.instrumentshop.Goods.DTO.ReviewDTO;
 import com.example.instrumentshop.Goods.Entity.*;
 import com.example.instrumentshop.Goods.Repository.*;
 import jakarta.transaction.Transactional;
@@ -26,6 +29,31 @@ public class GoodsService {
     private final QnaReplyRepository qnaReplyRepository;
 
     private static final String payInfo = "/tempImg/payInfo.png";
+
+    // 전체 호출 서비스(QNA, 리뷰, 상품, QNA댓글, 카테고리, 상품옵션)
+    @Transactional
+    public List<Goods> getAllGoods(){
+
+        return goodsRepository.findAll();
+    }
+
+    @Transactional
+    public List<Review> getAllReviews(){
+
+        return reviewRepository.findAll();
+    }
+
+    @Transactional
+    public List<QNA> getAllQna(){
+
+        return qnaRepository.findAll();
+    }
+
+    @Transactional
+    public List<QnaReply> getAllQnaReply(){
+
+        return qnaReplyRepository.findAll();
+    }
 
     // goodsList 서비스
     @Transactional
@@ -93,7 +121,104 @@ public class GoodsService {
     @Transactional
     public List<QnaReply> findQnaReplyByGoodsId(Long goodsId){
 
-        return qnaReplyRepository.findByGoods_GoodsId(goodsId);
+        return qnaReplyRepository.findByGoods_GoodsIdOrderByQnaAsc(goodsId);
+    }
+
+    @Transactional
+    public QNA findQnaByQnaNo(int qnaNo){
+
+        return qnaRepository.findByQnaNo(qnaNo);
+    }
+
+    // Qna 댓글 등록 서비스
+    @Transactional
+    public QnaReply createQnaReply(QnaReplyDTO qnaReplyDTO){
+
+        QnaReply newReply = QnaReply.builder()
+                .goods(qnaReplyDTO.getGoods())
+                .qna(qnaReplyDTO.getQna())
+                .replyContent(qnaReplyDTO.getReplyContent())
+                .replyDate(getCurrentTimeString())
+                .build();
+
+        qnaReplyRepository.save(newReply);
+
+        return qnaReplyRepository.save(newReply);
+    }
+
+    // Qna 등록 서비스
+    @Transactional
+    public QNA createQna(QnaDTO qnaDTO){
+        if(qnaDTO.getQnaFile() != null) {
+            MultipartFile QnaFile = qnaDTO.getQnaFile();
+            String filePath = saveFile(QnaFile);
+
+            QNA newQna = QNA.builder()
+                    .qnaWriter(qnaDTO.getQnaWriter())
+                    .qnaTitle(qnaDTO.getQnaTitle())
+                    .qnaContent(qnaDTO.getQnaContent())
+                    .qnaFile(filePath)
+                    .qnaDate(getCurrentTimeString())
+                    .goods(qnaDTO.getGoods())
+                    .build();
+
+            qnaRepository.save(newQna);
+
+            return qnaRepository.save(newQna);
+
+        } else {
+
+            QNA newQna = QNA.builder()
+                    .qnaWriter(qnaDTO.getQnaWriter())
+                    .qnaTitle(qnaDTO.getQnaTitle())
+                    .qnaContent(qnaDTO.getQnaContent())
+                    .qnaDate(getCurrentTimeString())
+                    .goods(qnaDTO.getGoods())
+                    .build();
+
+            qnaRepository.save(newQna);
+
+            return qnaRepository.save(newQna);
+        }
+    }
+
+    // 리뷰 등록 서비스
+    @Transactional
+    public Review createReview(ReviewDTO reviewDTO){
+
+        if(reviewDTO.getReviewFile() != null) {
+            MultipartFile ReviewFile = reviewDTO.getReviewFile();
+            String filePath = saveFile(ReviewFile);
+
+
+            Review newReview = Review.builder()
+                    .reviewWriter(reviewDTO.getReviewWriter())
+                    .reviewTitle(reviewDTO.getReviewTitle())
+                    .reviewScore(reviewDTO.getReviewScore())
+                    .reviewContent(reviewDTO.getReviewContent())
+                    .reviewFile(filePath)
+                    .reviewDate(getCurrentTimeString())
+                    .goods(reviewDTO.getGoods())
+                    .build();
+            reviewRepository.save(newReview);
+
+
+            return reviewRepository.save(newReview);
+        } else {
+            Review newReview = Review.builder()
+                    .reviewWriter(reviewDTO.getReviewWriter())
+                    .reviewTitle(reviewDTO.getReviewTitle())
+                    .reviewScore(reviewDTO.getReviewScore())
+                    .reviewContent(reviewDTO.getReviewContent())
+                    .reviewDate(getCurrentTimeString())
+                    .goods(reviewDTO.getGoods())
+                    .build();
+            reviewRepository.save(newReview);
+
+
+            return reviewRepository.save(newReview);
+        }
+
     }
 
     // openMarket 서비스
@@ -128,8 +253,8 @@ public class GoodsService {
 
         goodsRepository.save(newGoods);
 
-        // 옵션 저장해주기 기본
-        if (goodsDTO.getOptions() != null) {
+        // 옵션 저장해주기
+        if (goodsDTO.getGoodsOption() != null) {
             List<String> optionNames = goodsDTO.getOptions();
 
             Options option =

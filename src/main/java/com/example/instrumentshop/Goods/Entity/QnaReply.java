@@ -16,7 +16,8 @@ public class QnaReply {
     @Id
     @Column(name = "reply_no")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reply_no_sequence")
-    @SequenceGenerator(name = "reply_no_sequence", sequenceName = "reply_no_sequence", allocationSize = 1, initialValue = 2023112716)
+    @SequenceGenerator(name = "reply_no_sequence", sequenceName = "reply_no_sequence",
+            allocationSize = 1, initialValue = 2023112716)
     private int replyNo;
 
     @ManyToOne(cascade = CascadeType.REMOVE)

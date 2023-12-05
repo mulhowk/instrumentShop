@@ -78,6 +78,7 @@ function GoodsControl() {
                     alert('상품 상세설명에 들어갈 이미지를 선택해주세요.');
                     return;
                 }
+
             }
 
             // 각 상태값을 사용해 서버에 상품 생성 요청을 보냄
@@ -91,8 +92,10 @@ function GoodsControl() {
             formGoodsData.append('goodsQuantity', goodsQuantity);
             formGoodsData.append('goodsCountry', goodsCountry);
             formGoodsData.append('goodsBrand', goodsBrand);
-            formGoodsData.append('goodsOption', goodsOption);
-            formGoodsData.append('options', options);
+            if(goodsOption.length !==0){
+                formGoodsData.append('goodsOption', goodsOption);
+                formGoodsData.append('options', options);
+            }
             formGoodsData.append('goodsDetailImg', goodsDetailImg);
 
             // 서버에 상품 생성 요청
@@ -191,11 +194,11 @@ function GoodsControl() {
         return doc.body.textContent || "";
     };
 
-    const firstCategorys = ['색소폰', '관악기', '타악기/드럼', '현악기',
-        '기타/베이스', '건반악기', '교제악기', 'etc']; // 추가된 첫 번째 옵션들
+    const firstCategorys = ['색소폰', '관악기', '타악기드럼', '현악기',
+        '기타베이스', '건반악기', '교제악기', 'etc']; // 추가된 첫 번째 옵션들
     const secondCategorys = {
         '색소폰': ['소프라노색소폰', '알토색소폰', '테너색소폰', '바리톤색소폰', '악세사리관리용품'],
-        '관악기': ['플룻피콜로', '클라리넷오보에', '트럼펫', '트롬본', '관악기악세사리'],
+        '관악기': ['플룻', '클라리넷', '트럼펫', '트롬본', '관악기악세사리'],
         '타악기드럼': ['드럼스틱', '드럼세트', '심벌', '전자드럼', '타악기악세사리'],
         '현악기': ['바이올린', '사일런트바이올린', '비올라', '첼로', '콘트라베이스', '현악기악세사리'],
         '기타베이스': ['어쿠스틱기타', '일렉기타', '클래식기타', '베이스기타', '우쿠렐레', '기타악세사리'],

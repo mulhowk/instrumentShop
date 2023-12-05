@@ -8,4 +8,5 @@ import java.util.List;
 public interface QNARepository extends JpaRepository<QNA, Long> {
 
     List<QNA> findByGoods_GoodsId(Long goodsId);
+    QNA findByQnaNo(int qnaNo);
 }

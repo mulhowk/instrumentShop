@@ -74,12 +74,13 @@
 }
 
 .qna-write-area-id-id input{
-    color: white;
-    background-color: #272727;
-    border: 1px solid #AAAAAA;
-    outline: none;
     width: 300px;
-    height: 20px;
+    padding: 5px;
+    font-size: 16px;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    outline: none; /* 기본 포커스 효과 제거 */
+    transition: border-color 0.3s; /* 부드러운 효과를 위한 트랜지션 설정 */
 }
 
 .qna-write-area-subject{
@@ -114,12 +115,13 @@
 }
 
 .qna-write-area-subject-subject input{
-    color: white;
-    background-color: #272727;
-    border: 1px solid #AAAAAA;
-    outline: none;
     width: 600px;
-    height: 20px;
+    padding: 5px;
+    font-size: 16px;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    outline: none; /* 기본 포커스 효과 제거 */
+    transition: border-color 0.3s; /* 부드러운 효과를 위한 트랜지션 설정 */
 }
 
 .qna-write-area-contents{
@@ -189,22 +191,35 @@
 }
 
 .qna-write-area-file-file-input{
-    color: white;
-    background-color: #272727;
-    border: 1px solid #AAAAAA;
-    outline: none;
     width: 600px;
-    height: 20px;
-    pointer-events: none;
+    padding: 5px;
+    font-size: 16px;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    outline: none; /* 기본 포커스 효과 제거 */
+    transition: border-color 0.3s; /* 부드러운 효과를 위한 트랜지션 설정 */
 }
 
 .qna-write-area-file-file button{
-    border: 1px solid #AAAAAA;
-    outline: none;
-    margin-left: 20px;
-    background-color: #272727;
-    color: #FFFFFF;
-    height: 25px;
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: #3498db;
+    color: #fff;
+    border: 2px solid #3498db;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-left: 10px;
+
+    &:hover {
+        background-color: #2980b9;
+        border-color: #2980b9;
+    }
 }
 
 .qna-submit-area{
@@ -222,4 +237,5 @@
     color: #FFFFFF;
     height: 50px;
     width: 100px;
+    cursor: pointer;
 }

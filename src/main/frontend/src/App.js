@@ -18,7 +18,7 @@ import AdminUser from './pages/admin/AdminUser';
 import AdminMessage from './pages/admin/AdminMessage';
 import GoodsControl from "./components/OpenMarket/GoodsControl";
 import {CheckoutPage} from "./components/GoodsPayment/CheckoutPage.tsx";
-import Cart from "./pages/cart/Cart";
+import QnaReplyWrite from "./components/GoodsDetails/GoodsDetailsTab/QnaReplyWrite";
 
 function App() {
 
@@ -26,18 +26,16 @@ function App() {
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<MainPage/>}/>
-          <Route path="/goodsList" element={<GoodsList/>}/>
           <Route path="/goodsList/query/:query" element={<GoodsList/>}/>
-          <Route path="/goodsList/cart" element={<Cart/>}/>
           <Route path="/goodsList/category/:categoryId" element={<GoodsList/>}/>
           <Route path="/goodsList/category/:categoryId/:subCategoryId" element={<GoodsList/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/myinfo" element={<MyInfo/>}/>
           <Route path="/myinfo/address" element={<MyAddressPop/>}/>
-          <Route path="/goodsDetails" element={<GoodsDetails/>}/>
           <Route path="/goodsDetails/:goodsId" element={<GoodsDetails/>}/>
-          <Route path="/goodsDetails/reviewWrite" element={<ReviewWrite/>}/>
-          <Route path="/goodsDetails/qnaWrite" element={<QnaWrite/>}/>
+          <Route path="/goodsDetails/reviewWrite/:goodsId" element={<ReviewWrite/>}/>
+          <Route path="/goodsDetails/qnaWrite/:goodsId" element={<QnaWrite/>}/>
+          <Route path="/goodsDetails/reply/:goodsId/:qnaNo" element={<QnaReplyWrite/>}/>
           <Route path="/goodsPayment" element={<GoodsPayment/>}/>
           <Route path="/openMarket" element={<OpenMarket/>}/>
           <Route path="/admin" element={<AdminPage/>}/>"
