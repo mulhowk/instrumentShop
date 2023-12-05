@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 import CartList from "../../components/OrderList/CartList";
 
 
-function Cart() {
+function CartPage() {
     return (
         <>
             <Header/>
@@ -19,4 +19,4 @@ function Cart() {
     );
 }
 
-export default Cart;
+export default CartPage;

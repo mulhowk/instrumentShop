@@ -19,6 +19,7 @@ import AdminMessage from './pages/admin/AdminMessage';
 import GoodsControl from "./components/OpenMarket/GoodsControl";
 import {CheckoutPage} from "./components/GoodsPayment/CheckoutPage.tsx";
 import QnaReplyWrite from "./components/GoodsDetails/GoodsDetailsTab/QnaReplyWrite";
+import CartPage from "./pages/cart/Cart";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/goodsList/query/:query" element={<GoodsList/>}/>
           <Route path="/goodsList/category/:categoryId" element={<GoodsList/>}/>
           <Route path="/goodsList/category/:categoryId/:subCategoryId" element={<GoodsList/>}/>
+          <Route path="/goodsList/cart" element={<CartPage/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/myinfo" element={<MyInfo/>}/>
           <Route path="/myinfo/address" element={<MyAddressPop/>}/>
