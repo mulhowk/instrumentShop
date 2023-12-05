@@ -18,6 +18,7 @@ import AdminUser from './pages/admin/AdminUser';
 import AdminMessage from './pages/admin/AdminMessage';
 import GoodsControl from "./components/OpenMarket/GoodsControl";
 import {CheckoutPage} from "./components/GoodsPayment/CheckoutPage.tsx";
+import Cart from "./pages/cart/Cart";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<MainPage/>}/>
           <Route path="/goodsList" element={<GoodsList/>}/>
           <Route path="/goodsList/query/:query" element={<GoodsList/>}/>
+          <Route path="/goodsList/cart" element={<Cart/>}/>
           <Route path="/goodsList/category/:categoryId" element={<GoodsList/>}/>
           <Route path="/goodsList/category/:categoryId/:subCategoryId" element={<GoodsList/>}/>
           <Route path="/register" element={<Register/>}/>
