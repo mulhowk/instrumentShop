@@ -1,9 +1,6 @@
 package com.example.instrumentshop.Goods.Service;
 
-import com.example.instrumentshop.Goods.DTO.GoodsDTO;
-import com.example.instrumentshop.Goods.DTO.QnaDTO;
-import com.example.instrumentshop.Goods.DTO.QnaReplyDTO;
-import com.example.instrumentshop.Goods.DTO.ReviewDTO;
+import com.example.instrumentshop.Goods.DTO.*;
 import com.example.instrumentshop.Goods.Entity.*;
 import com.example.instrumentshop.Goods.Repository.*;
 import jakarta.transaction.Transactional;
@@ -271,6 +268,75 @@ public class GoodsService {
         }
         return goodsRepository.save(newGoods);
     }
+
+    // openMarket 브랜드 값 받아서 상품 조회
+    @Transactional
+    public List<Goods> findGoodsByGoodsBrand(String brand){
+
+        return goodsRepository.findByGoodsBrandContainingIgnoreCase(brand);
+    }
+
+    // openMarket 상품 업데이트
+    @Transactional
+    public Goods updateGoods(GoodsUpdateDTO goodsUpdateDTO){
+
+        Goods existingGoods = goodsRepository.findByGoodsId(goodsUpdateDTO.getGoodsId());
+
+        Goods updatedGoods =
+                Goods.builder()
+                        .goodsId(existingGoods.getGoodsId())
+                        .goodsImg(existingGoods.getGoodsImg())
+                        .parentCategory(goodsUpdateDTO.getParentCategory())
+                        .childCategory(goodsUpdateDTO.getChildCategory())
+                        .goodsName(goodsUpdateDTO.getGoodsName())
+                        .goodsPrice(goodsUpdateDTO.getGoodsPrice())
+                        .goodsDetail(goodsUpdateDTO.getGoodsDetail())
+                        .goodsPayinfo(existingGoods.getGoodsPayinfo())
+                        .goodsDate(existingGoods.getGoodsDate())
+                        .openGoods(existingGoods.isOpenGoods())
+                        .goodsSellcount(existingGoods.getGoodsSellcount())
+                        .goodsQuantity(goodsUpdateDTO.getGoodsQuantity())
+                        .goodsCountry(goodsUpdateDTO.getGoodsCountry())
+                        .goodsBrand(goodsUpdateDTO.getGoodsBrand())
+                        .goodsStatus(existingGoods.getGoodsStatus())
+                        .goodsOption(goodsUpdateDTO.getGoodsOption())
+                        .goodsDetailImg(existingGoods.getGoodsDetailImg())
+                        .build();
+
+        goodsRepository.save(updatedGoods);
+
+        // 옵션 저장해주기
+        if (goodsUpdateDTO.getGoodsOption() != null) {
+            List<String> optionNames = goodsUpdateDTO.getOptions();
+
+            Options option =
+                    Options.builder()
+                            .goods(updatedGoods)
+                            .goodsOption(goodsUpdateDTO.getGoodsOption())
+                            .option1(optionNames.get(0))
+                            .option2(optionNames.get(1))
+                            .option3(optionNames.get(2))
+                            .option4(optionNames.get(3))
+                            .option5(optionNames.get(4))
+                            .build();
+            optionRepository.save(option);
+        }
+
+        return goodsRepository.save(updatedGoods);
+
+    }
+
+    // 오픈마켓 상품 삭제
+    @Transactional
+    public void deleteGoods(Long goodsId){
+
+        optionRepository.deleteByGoods_GoodsId(goodsId);
+        qnaReplyRepository.deleteByGoods_GoodsId(goodsId);
+        qnaRepository.deleteByGoods_GoodsId(goodsId);
+        reviewRepository.deleteByGoods_GoodsId(goodsId);
+        goodsRepository.deleteByGoodsId(goodsId);
+    }
+
 
     // 파일 저장 로직 구현
     private String saveFile(MultipartFile file) {

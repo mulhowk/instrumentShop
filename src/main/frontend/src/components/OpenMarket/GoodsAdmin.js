@@ -1,92 +1,39 @@
 import React, {useEffect, useState} from "react";
 import "../../styles/OpenMarket/GoodsAdmin.css"
-import {Link} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
+import axios from "axios";
 
 function GoodsAdmin(){
 
-    const openProduct = [
-        {
-            num : 202311111448,
-            img : '../../logo.png',
-            name : '엄청 긴 내용의 상품명입니다. 대충 영역 넘으면 말줄임 처리 할 거에요. 토스 간편결제 API어케 연동하노',
-            price : 7000000,
-            count : 25,
-            country : 'FRANCE'
-        },
-        {
-            num : 202311111449,
-            img : '../../logo0.png',
-            name : '엄청 긴 내용의 상품명입니다. 대충 영역 넘으면 말줄임 처리 할 거에요. 토스 간편결제 API어케 연동하노',
-            price : 87000000,
-            count : 20,
-            country : 'KOREA'
-        },
-        {
-            num : 202311111450,
-            img : '../../logo.png',
-            name : '엄청 긴 내용의 상품명입니다. 대충 영역 넘으면 말줄임 처리 할 거에요. 토스 간편결제 API어케 연동하노',
-            price : 7000000,
-            count : 25,
-            country : 'FRANCE'
-        },
-        {
-            num : 202311111451,
-            img : '../../logo.png',
-            name : '엄청 긴 내용의 상품명입니다. 대충 영역 넘으면 말줄임 처리 할 거에요. 토스 간편결제 API어케 연동하노',
-            price : 7000000,
-            count : 25,
-            country : 'FRANCE'
-        },
-        {
-            num : 202311111452,
-            img : '../../logo.png',
-            name : '엄청 긴 내용의 상품명입니다. 대충 영역 넘으면 말줄임 처리 할 거에요. 토스 간편결제 API어케 연동하노',
-            price : 7000000,
-            count : 25,
-            country : 'FRANCE'
-        },
-        {
-            num : 202311111453,
-            img : '../../logo.png',
-            name : '엄청 긴 내용의 상품명입니다. 대충 영역 넘으면 말줄임 처리 할 거에요. 토스 간편결제 API어케 연동하노',
-            price : 7000000,
-            count : 25,
-            country : 'FRANCE'
-        },
-        {
-            num : 202311111454,
-            img : '../../logo.png',
-            name : '엄청 긴 내용의 상품명입니다. 대충 영역 넘으면 말줄임 처리 할 거에요. 토스 간편결제 API어케 연동하노',
-            price : 7000000,
-            count : 25,
-            country : 'FRANCE'
-        },
-        {
-            num : 202311111455,
-            img : '../../logo.png',
-            name : '엄청 긴 내용의 상품명입니다. 대충 영역 넘으면 말줄임 처리 할 거에요. 토스 간편결제 API어케 연동하노',
-            price : 7000000,
-            count : 25,
-            country : 'FRANCE'
-        },
-        {
-            num : 202311111456,
-            img : '../../logo.png',
-            name : '엄청 긴 내용의 상품명입니다. 대충 영역 넘으면 말줄임 처리 할 거에요. 토스 간편결제 API어케 연동하노',
-            price : 7000000,
-            count : 25,
-            country : 'FRANCE'
-        },
-        {
-            num : 202311111457,
-            img : '../../logo.png',
-            name : '엄청 긴 내용의 상품명입니다. 대충 영역 넘으면 말줄임 처리 할 거에요. 토스 간편결제 API어케 연동하노',
-            price : 7000000,
-            count : 25,
-            country : 'FRANCE'
-        }
-    ];
+    const params = useParams();
+    const brand = params.brand;
 
+    const [openProduct, setOpenProduct] = useState([]);
+
+    useEffect(() => {
+        axios.get(`/goodsList/openMarket/${brand}`)
+            .then(response => {
+                setOpenProduct(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
+
+    const handleDeleteGoods = (key) => {
+
+        const isConfirmed = window.confirm('상품을 삭제하시겠습니까?');
+        {console.log(key)}
+
+        if(isConfirmed){
+        axios.delete(`/openMarket/delete/${key}`)
+            .then(res => {
+                alert("상품이 삭제되었습니다!");
+                window.location.reload();
+            })
+            .catch(error => console.error('Error delete goods: ', error));
+        }
+    }
 
     const productPerPage = 5;
     const [currentPage, setCurrentPage] = useState(1);
@@ -179,30 +126,30 @@ function GoodsAdmin(){
                         <p>{index}</p>
                     </div>
                     <div className="open-market-content-list-num">
-                        <p>{product.num}</p>
+                        <p>{product.goodsId}</p>
                     </div>
                     <div className="open-market-content-list-img">
-                        <img src={product.img} alt = {index} />
+                        <img src={product.goodsImg} alt = {product.goodsId} />
                     </div>
                     <div className="open-market-content-list-name">
-                        <p>{product.name}</p>
+                        <p>{product.goodsName}</p>
                     </div>
                     <div className="open-market-content-list-price">
-                        <p>{product.price.toLocaleString()}</p>
+                        <p>{product.goodsPrice.toLocaleString()}</p>
                     </div>
                     <div className="open-market-content-list-count">
-                        <p>{product.count}</p>
+                        <p>{product.goodsQuantity}</p>
                     </div>
                     <div className="open-market-content-list-country">
-                        <p>{product.country}</p>
+                        <p>{product.goodsCountry}</p>
                     </div>
                     <div className="open-market-content-list-modify">
-                        <a href="/openMarket/goodsControll">
+                        <a href={`/openMarket/goodsControl/${product.goodsId}`}>
                             <button>✎</button>
                         </a>
                     </div>
                     <div className="open-market-content-list-delete">
-                        <button>✖</button>
+                        <button key={product.goodsId} onClick={() => handleDeleteGoods(product.goodsId)}>✖</button>
                     </div>
             </div>
             ))};

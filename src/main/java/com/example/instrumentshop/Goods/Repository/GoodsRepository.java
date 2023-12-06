@@ -22,4 +22,8 @@ public interface GoodsRepository extends JpaRepository<Goods, Long> {
             "order by g.goodsId desc ")
     List<Goods> queryMethod(String query);
     List<Goods> findByChildCategoryOrderByGoodsIdDesc(String childCategory);
+
+    List<Goods> findByGoodsBrandContainingIgnoreCase(String brand);
+
+    void deleteByGoodsId(Long goodsId);
 }

@@ -34,6 +34,7 @@ import java.util.List;
         private SocialType socialType; // KAKAO, NAVER, GOOGLE
         @Enumerated(EnumType.STRING) // JPA로 데이터베이스를 저장할 때 Enum 값을 어떤 형태로 저장할지 결정합니다.
         private Role socialRole;
+        private String openMarketBrand;
         private String loginDate; // 마지막 로그인 일자
         private String memberDate; // 회원가입 일자
         private String socialId; // 로그인한 소셜 타입의 식별자 값 (일반 로그인인 경우 null)

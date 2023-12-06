@@ -1,9 +1,6 @@
 package com.example.instrumentshop.Goods.Controller;
 
-import com.example.instrumentshop.Goods.DTO.GoodsDTO;
-import com.example.instrumentshop.Goods.DTO.QnaDTO;
-import com.example.instrumentshop.Goods.DTO.QnaReplyDTO;
-import com.example.instrumentshop.Goods.DTO.ReviewDTO;
+import com.example.instrumentshop.Goods.DTO.*;
 import com.example.instrumentshop.Goods.Entity.*;
 import com.example.instrumentshop.Goods.Service.GoodsService;
 import lombok.RequiredArgsConstructor;
@@ -178,6 +175,36 @@ public class GoodsController {
         System.out.println(ResponseEntity.status(HttpStatus.CREATED).body(newGoods));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(newGoods);
+    }
+
+    // openMarket 상품 수정 컨트롤러
+    @PostMapping("/openMarket/goodsControl/update")
+    public ResponseEntity<Goods> updateGoods(@ModelAttribute GoodsUpdateDTO goodsUpdateDTO){
+
+        Goods updateGoods = goodsService.updateGoods(goodsUpdateDTO);
+
+        System.out.println(ResponseEntity.status(HttpStatus.OK).body(updateGoods));
+
+        return ResponseEntity.status(HttpStatus.OK).body(updateGoods);
+    }
+
+    // openMarket 상품 요청 컨트롤러
+    @GetMapping("/goodsList/openMarket/{brand}")
+    public List<Goods> findGoodsByGoodsBrand(@PathVariable String brand){
+
+        return goodsService.findGoodsByGoodsBrand(brand);
+    }
+
+    // openMarket 상품 삭제 컨트롤러
+    @DeleteMapping("/openMarket/delete/{goodsId}")
+    public ResponseEntity<String> deleteByGoodsId(@PathVariable Long goodsId){
+
+        try {
+            goodsService.deleteGoods(goodsId);
+            return new ResponseEntity<>("Goods deleted successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to delete goods", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

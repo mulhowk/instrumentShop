@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface QnaReplyRepository extends JpaRepository<QnaReply, Long> {
     List<QnaReply> findByGoods_GoodsIdOrderByQnaAsc(Long goodsId);
+
+    void deleteByGoods_GoodsId(Long goodsId);
 }

@@ -39,11 +39,12 @@ function App() {
           <Route path="/goodsDetails/qnaWrite/:goodsId" element={<QnaWrite/>}/>
           <Route path="/goodsDetails/reply/:goodsId/:qnaNo" element={<QnaReplyWrite/>}/>
           <Route path="/goodsPayment" element={<GoodsPayment/>}/>
-          <Route path="/openMarket" element={<OpenMarket/>}/>
+          <Route path="/openMarket/:brand" element={<OpenMarket/>}/>
           <Route path="/admin" element={<AdminPage/>}/>"
           <Route path="/admin/user" element={<AdminUser/>}/>
           <Route path="/admin/message" element={<AdminMessage/>}/>
           <Route path="/openMarket/goodsControl" element={<GoodsControl/>}/>
+          <Route path="/openMarket/goodsControl/:goodsId" element={<GoodsControl/>}/>
 
           {/* 상품관리 (리스트) */}
           {/* 상품관리 (등록) */}

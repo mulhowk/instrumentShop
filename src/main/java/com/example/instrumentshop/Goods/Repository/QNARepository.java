@@ -9,4 +9,6 @@ public interface QNARepository extends JpaRepository<QNA, Long> {
 
     List<QNA> findByGoods_GoodsId(Long goodsId);
     QNA findByQnaNo(int qnaNo);
+
+    void deleteByGoods_GoodsId(Long goodsId);
 }
