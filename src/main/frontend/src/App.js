@@ -48,6 +48,8 @@ function App() {
           <Route path="/admin/message" element={<AdminMessage/>}/>
           <Route path="/openMarket/goodsControl" element={<GoodsControl/>}/>
           <Route path="/openMarket/goodsControl/:goodsId" element={<GoodsControl/>}/>
+          <Route path="/success/*" element={<SuccessPage/>}/>
+          <Route path="/fail/*" element={<FailPage/>}/>
 
           {/* 상품관리 (리스트) */}
           {/* 상품관리 (등록) */}

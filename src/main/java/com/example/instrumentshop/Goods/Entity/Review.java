@@ -42,5 +42,5 @@ public class Review {
     private String reviewDate;
 
     @Column(name = "review_score")
-    private double reviewScore;
+    private Float reviewScore;
 }

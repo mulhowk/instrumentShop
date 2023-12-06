@@ -124,8 +124,8 @@ public class GoodsController {
     @GetMapping("/goodsList/review/{goodsId}")
     public List<Double> findGoodsReviewInfo(@PathVariable Long goodsId){
         List<Double> reviewInfo = new ArrayList<>();
-        double avgScore = goodsService.getGoodsReviewAvgScoreByGoodsId(goodsId);
-        double reviewCount = goodsService.getGoodsReviewCountByGoodsId(goodsId).doubleValue();
+        Double avgScore = goodsService.getGoodsReviewAvgScoreByGoodsId(goodsId);
+        Double reviewCount = goodsService.getGoodsReviewCountByGoodsId(goodsId).doubleValue();
         reviewInfo.add(avgScore);
         reviewInfo.add(reviewCount);
         reviewInfo.add(goodsId.doubleValue());

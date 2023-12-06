@@ -60,7 +60,7 @@ public class GoodsService {
     }
 
     @Transactional
-    public double getGoodsReviewAvgScoreByGoodsId(Long goodsId){
+    public Double getGoodsReviewAvgScoreByGoodsId(Long goodsId){
 
         return reviewRepository.findAverageReviewScoreByGoodsId(goodsId);
     }

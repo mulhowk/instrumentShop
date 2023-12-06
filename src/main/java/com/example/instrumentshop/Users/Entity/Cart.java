@@ -15,6 +15,8 @@ import lombok.*;
 public class Cart {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cart_no_sequence")
+    @SequenceGenerator(name = "cart_no_sequence", sequenceName = "cart_no_sequence", allocationSize = 1, initialValue = 0)
     @Column(name = "cart_no")
     private Long cartNo;
 
