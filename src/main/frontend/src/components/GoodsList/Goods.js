@@ -203,7 +203,7 @@ function Goods(props){
                                 )}</a>
                           </div>
                           <div className="product-review">
-                            <a>{goods.review[1] === 0 ?
+                            <a>{goods.review && goods.review[1] === 0 ?
                                 "" : "★" + goods.review[0].toFixed(1)
                                 + "(" + goods.review[1] + ")"}
                                 </a>

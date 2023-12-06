@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 public class ReviewDTO {
 
-    private double reviewScore;
+    private Float reviewScore;
     private String reviewTitle;
     private String reviewContent;
     private MultipartFile reviewFile;

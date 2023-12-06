@@ -3,9 +3,11 @@ import '../../styles/GoodsPayment/OrderInfo.css'
 import Modal from "react-modal";
 import {CheckoutPage} from "./CheckoutPage.tsx";
 
-function OrderInfo() {
+function OrderInfo(props) {
 
     const [selectedOption, setSelectedOption] = useState('');
+
+    const goods = props.goods;
 
     const handleButtonClick = () => {
         if(selectedOption === 'option0') {
@@ -29,7 +31,7 @@ function OrderInfo() {
     }
 
     const [deliverPrice, setDeliverPrice] = useState(3000);
-    const productPrice = 40000;
+    const productPrice = goods.goodsPrice;
 
     useEffect(() => {
         if(productPrice >= 50000){
@@ -37,7 +39,7 @@ function OrderInfo() {
         } else setDeliverPrice(3000);
     }, []);
 
-    const totalPrice = productPrice + deliverPrice;
+    const totalPrice = (productPrice*goods.goodsQuantity) + deliverPrice;
 
     const customStyles = {
         overlay : {
@@ -69,27 +71,30 @@ function OrderInfo() {
             </div>
            <div className="order-info-content">
                <div className="order-info-content-img">
-                   <img src="../logo.png" alt="order-img"/>
+                   <img src={goods.goodsImg} alt="order-img"/>
+                   {console.log(goods)}
                    <div className="order-info-content-name-info">
-                       <p>상품명123</p>
-                       <div className="order-info-content-option">
-                           <p>옵션 : 123</p>
-                       </div>
+                       <p>{goods.goodsName}</p>
+                       {goods.goodsOption?
+                           <div className="order-info-content-option">
+                           <p>옵션 : {goods.goodsOption}</p>
+                       </div> : ""
+                       }
                    </div>
                </div>
                <div className="order-info-content-count">
-                   <p>1</p>
+                   <p>{goods.goodsQuantity}</p>
                </div>
                <div className="order-info-content-discount">
                    <button>쿠폰 확인</button>
                </div>
                <div className="order-info-content-price">
-                   <p>{productPrice.toLocaleString()} 원</p>
+                   <p>{totalPrice.toLocaleString()} 원</p>
                </div>
            </div>
            <div className="order-info-content-total">
                <div className="order-info-content-total-title">
-                   <p>주문금액 {productPrice.toLocaleString()}원
+                   <p>주문금액 {(goods.goodsPrice*goods.goodsQuantity).toLocaleString()}원
                        + 배송비 {deliverPrice.toLocaleString()}원
                        = {totalPrice.toLocaleString()}원</p>
                </div>
@@ -114,7 +119,7 @@ function OrderInfo() {
                </div>
                <div className="order-info-total-pay">
                    <div className="order-info-total-pay-price">
-                       <p>{productPrice.toLocaleString()} 원</p>
+                       <p>{(goods.goodsPrice*goods.goodsQuantity).toLocaleString()} 원</p>
                    </div>
                    <div className="order-info-total-pay-plus">
                        <p>+</p>
@@ -140,16 +145,15 @@ function OrderInfo() {
                <div className="pay-area-title">
                    <p>결제 정보</p>
                </div>
-               <>
                <Modal
                    isOpen = {isModalOpen}
                    onRequestClose = {closeModal}
                    contentLabel ="Checkout Modal"
-                   style={customStyles}>
-                   <CheckoutPage/>
-                   <button onClick={closeModal}>모달 닫기</button>
+                   style={customStyles}
+               >
+                   <CheckoutPage pay = {totalPrice}/>
+                   <button className="modal-button" onClick={closeModal}>닫기</button>
                </Modal>
-               </>
                <div className="pay-area-way">
                    <p>결제방법</p>
                    <div className="pay-area-way-option">

@@ -8,12 +8,15 @@ import {
 const clientKey = "test_ck_LkKEypNArWLDZelgyeml8lmeaxYG"
 const customerKey = "3r3xRiVp3pFTT8baWdNIB"
 
-export function CheckoutPage() {
+export function CheckoutPage (props) {
+
+    const pay = props.pay;
+    {console.log(pay)}
     const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null)
     const paymentMethodsWidgetRef = useRef<ReturnType<
         PaymentWidgetInstance["renderPaymentMethods"]
     > | null>(null)
-    const [price, setPrice] = useState(50000)
+    const [price, setPrice] = useState(pay);
 
     useEffect(() => {
         (async () => {
@@ -65,21 +68,12 @@ export function CheckoutPage() {
     return (
         <div>
             <h1>주문서</h1>
-            <span>{`${price.toLocaleString()}원`}</span>
             <div>
-                <label>
-                    <input
-                        type="checkbox"
-                        onChange={(event) => {
-                            setPrice(event.target.checked ? price - 5000 : price + 5000)
-                        }}
-                    />
-                    5,000원 할인 쿠폰 적용
-                </label>
+                <span style={{fontSize : "17px"}}>결제하실 금액 : {`${price.toLocaleString()}원`}</span>
             </div>
             <div id="payment-widget" />
             <div id="agreement" />
-            <button
+            <button className="modal-button" style={{marginLeft : "365px"}}
                 onClick={async () => {
                     const paymentWidget = paymentWidgetRef.current
 
