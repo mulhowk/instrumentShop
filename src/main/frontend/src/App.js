@@ -21,6 +21,7 @@ import {CheckoutPage} from "./components/GoodsPayment/CheckoutPage.tsx";
 import QnaReplyWrite from "./components/GoodsDetails/GoodsDetailsTab/QnaReplyWrite";
 import CartPage from "./pages/cart/Cart";
 import AdminProductMange from './pages/admin/AdminProductMange.js';
+import AdminCouponPages from './pages/admin/AdminCouponPages.js';
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
           <Route path="/openMarket/:brand" element={<OpenMarket/>}/>
           <Route path="/admin" element={<AdminPage/>}/>"
           <Route path="/admin/user" element={<AdminUser/>}/>
+          <Route path="/admin/coupon" element={<AdminCouponPages/>}/>
           <Route path="/admin/message" element={<AdminMessage/>}/>
           <Route path="/admin/goodsAllList"element={<AdminProductMange/>}/>
           <Route path="/openMarket/goodsControl" element={<GoodsControl/>}/>

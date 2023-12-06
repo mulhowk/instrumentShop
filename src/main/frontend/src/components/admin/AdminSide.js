@@ -43,6 +43,15 @@ function AdminSide() {
                         </ul>
                     </div>
                 </div>
+                <div className="a-s-c-tab-coupon">
+                    <a href="/admin/coupon"><span style={{backgroundImage: `url(${aMain})`, 
+                                backgroundRepeat: 'no-repeat',
+                                backgroundPosition: '0px',
+                                backgroundSize: '14px'}}>쿠폰</span></a>
+                    <div className="a-s-c-tab-shopping-menu">
+
+                    </div>
+                </div>
             </div>
         </div>
     </>

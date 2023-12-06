@@ -1,0 +1,100 @@
+
+
+.custom-input-white {
+    width: 400px;
+    border: 1px solid var(--color-silver-200);
+    height: 40px;
+    border-radius: 7px;
+}
+
+.custom-input-white input{
+    width: 396px;
+    height: 38px;
+    border: 0;
+    border-radius: 10px;
+}
+
+
+.coupon-form {
+    display: flex;
+    width: 570px;
+    flex-direction: column;
+    border: 2px solid var(--color-silver-100);
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.25);
+}
+
+.coupon-title {
+    display: flex;
+    height: 40px;
+    align-items: center;
+}
+
+    .coupon-title-input {
+        margin-left: 20px;
+    }
+
+.coupon-table-frist {
+    display: flex;
+    height: 70px;
+    align-items: center;
+}    
+    .coupon-table-frist .coupon-qty {
+        display: flex;
+        align-items: center;
+        
+    }
+
+    .coupon-qty-input, .coupon-sale-input,
+    .coupon-date-start-input, .coupon-date-end-input,
+    .coupon-use-start-input, .coupon-user-end-input {
+        margin-left: 20px;
+    }
+
+    .coupon-sale, .coupon-date-end, .coupon-user-end, .coupon-category{
+        display: flex;
+        margin-left: 20px;
+        align-items: center;
+    }
+
+.coupon-table-date {
+    display: flex;
+    height: 70px;
+    align-items: center;
+}
+
+    .coupon-date-start {
+        display: flex;
+        align-items: center;
+    }  
+
+    .coupon-date-end {
+        display: flex;
+    }
+
+.couppon-table-user {
+    display: flex;
+    height: 70px;
+    align-items: center;
+}    
+
+    .coupon-use-start {
+        display: flex;
+        align-items: center;
+    }
+    
+    .coupon-user-end {
+        display: flex;
+    }
+
+.c-t-btn-save {
+    border: 1px solid var(--color-silver-200);
+    padding: 8px;
+    margin: 2px;
+    background-color: rgb(121, 190, 192);
+}
+
+.c-t-btn-cancel {
+    border: 1px solid var(--color-silver-200);
+    padding: 8px;
+}
