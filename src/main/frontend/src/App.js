@@ -20,6 +20,8 @@ import GoodsControl from "./components/OpenMarket/GoodsControl";
 import {CheckoutPage} from "./components/GoodsPayment/CheckoutPage.tsx";
 import QnaReplyWrite from "./components/GoodsDetails/GoodsDetailsTab/QnaReplyWrite";
 import CartPage from "./pages/cart/Cart";
+import {SuccessPage} from "./components/GoodsPayment/paymentResult/SuccessPage";
+import {FailPage} from "./components/GoodsPayment/paymentResult/FailPage";
 import AdminProductMange from './pages/admin/AdminProductMange.js';
 
 function App() {
@@ -44,7 +46,6 @@ function App() {
           <Route path="/admin" element={<AdminPage/>}/>"
           <Route path="/admin/user" element={<AdminUser/>}/>
           <Route path="/admin/message" element={<AdminMessage/>}/>
-          <Route path="/admin/goodsAllList"element={<AdminProductMange/>}/>
           <Route path="/openMarket/goodsControl" element={<GoodsControl/>}/>
           <Route path="/openMarket/goodsControl/:goodsId" element={<GoodsControl/>}/>
 

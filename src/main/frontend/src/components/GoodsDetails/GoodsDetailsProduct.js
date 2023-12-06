@@ -1,12 +1,33 @@
 import React, {useState} from 'react';
 import "../../styles/GoodsDetails/GoodsDetailsProduct.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function GoodsDetailsProduct(props) {
 
     const goods = props.goods;
     const goodsOption = goods.options;
     const [selectOptions, setSelectOptions] = useState("");
+    const navigate = useNavigate();
+
+    const handlePayment = () =>{
+
+        if(goodsOption.length !==0) {
+            if (!selectOptions) {
+                alert("옵션을 선택해주세요.");
+                return;
+            }
+        }
+
+        const products = {
+            goodsId : goods.goodsId,
+            goodsName : goods.goodsName,
+            goodsOption : selectOptions,
+            goodsQuantity : count,
+            goodsPrice : goods.goodsPrice,
+            goodsImg : goods.goodsImg
+        }
+        navigate(`/goodsPayment`, {state : {products}});
+    }
     const handleSelectOptions = (event) => {
         const selectedText = event.target.value;
         setSelectOptions(selectedText);
@@ -172,15 +193,12 @@ function GoodsDetailsProduct(props) {
                     {goods.goodsPrice !== 0 ?(
                         goods.goodsQuantity !== 0 ?
                             (<div className="product-area-button">
-                    <Link to="/goodsPayment">
                     <button style={
-                        {
-                            backgroundColor: "white",
+                        {   backgroundColor: "white",
                             color: "black", width: "190px", marginRight: "20px",
-                            cursor : "pointer"
-                        }}>구매하기
+                            cursor : "pointer"}}
+                    onClick={handlePayment}>구매하기
                     </button>
-                    </Link>
                     <button style={{
                         backgroundColor: "black",
                         color: "white", width: "200px", marginRight: "20px",
