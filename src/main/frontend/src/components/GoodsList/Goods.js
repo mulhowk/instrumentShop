@@ -98,7 +98,7 @@ function Goods(props){
     const [goodsList, setGoodsList] = useState(null);
     const [reviewInfo, setReviewInfo] = useState(null);
 
-    const itemPerPage = 5;
+    const itemPerPage = 10;
     const [currentPage, setCurrentPage] = useState(1);
     const goodsListLength = (combinedGoodsList && combinedGoodsList.length) || 0;
 
@@ -142,7 +142,7 @@ function Goods(props){
         setSelectedOption(option);
 
         if(option === '최신순'){
-            const sortedGoodsId = combinedGoodsList.sort((a,b) => a.goodsId - b.goodsId);
+            const sortedGoodsId = combinedGoodsList.sort((a,b) => b.goodsId - a.goodsId);
             setCombinedGoodsList(sortedGoodsId);
         } else if(option === '낮은가격순'){
             const sortedLowPrice = combinedGoodsList.sort((a,b) => a.goodsPrice - b.goodsPrice);
