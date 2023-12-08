@@ -10,8 +10,13 @@ import RollingBanner from "../../components/MainPage/RollingBanner";
 import QuickLink from "../../components/MainPage/QuickLink";
 import NewArrival from "../../components/MainPage/NewArrival";
 
+import { getAuthToken,tokenUserInfo,logoutActionHandler } from "../../global/auth";
+
 
 function MainPage() {
+
+    const token =  getAuthToken();
+    const decodedToken = tokenUserInfo(token);
 
     return (
         <div className="main-page">
