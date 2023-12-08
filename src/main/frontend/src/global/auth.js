@@ -27,10 +27,14 @@ import base64 from 'base-64';
   }  
 
   const tokenUserInfo = (token) => {
-    if(token) {
-        let payload = token.substring(token.indexOf('.') + 1,token.lastIndexOf('.')); 
-        let dec = JSON.parse(base64.decode(payload));
-        return dec;
+    if (token) {
+      const base64Url = token.split('.')[1]; // 토큰에서 payload 부분을 추출
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const decodedPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+  
+      return JSON.parse(decodedPayload);
     }
     return null;
   };
