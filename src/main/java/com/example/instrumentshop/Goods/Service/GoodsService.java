@@ -21,9 +21,9 @@ public class GoodsService {
     private final GoodsRepository goodsRepository;
     private final OptionRepository optionRepository;
     private final CategoryRepository categoryRepository;
-    private final ReviewRepository reviewRepository;
     private final QNARepository qnaRepository;
     private final QnaReplyRepository qnaReplyRepository;
+    private final ReviewRepository reviewRepository;
 
     private static final String payInfo = "/tempImg/payInfo.png";
 
@@ -34,41 +34,11 @@ public class GoodsService {
         return goodsRepository.findAll();
     }
 
-    @Transactional
-    public List<Review> getAllReviews(){
-
-        return reviewRepository.findAll();
-    }
-
-    @Transactional
-    public List<QNA> getAllQna(){
-
-        return qnaRepository.findAll();
-    }
-
-    @Transactional
-    public List<QnaReply> getAllQnaReply(){
-
-        return qnaReplyRepository.findAll();
-    }
-
     // goodsList 서비스
     @Transactional
     public List<Goods> getGoodsByParentCategory(String parentCategory){
 
         return goodsRepository.findByParentCategoryOrderByGoodsIdDesc(parentCategory);
-    }
-
-    @Transactional
-    public Double getGoodsReviewAvgScoreByGoodsId(Long goodsId){
-
-        return reviewRepository.findAverageReviewScoreByGoodsId(goodsId);
-    }
-
-    @Transactional
-    public Long getGoodsReviewCountByGoodsId(Long goodsId){
-
-        return reviewRepository.countByGoods_GoodsId(goodsId);
     }
 
     @Transactional
@@ -101,121 +71,6 @@ public class GoodsService {
     public Goods findGoodsByGoodsId(Long goodsId){
 
         return goodsRepository.findByGoodsId(goodsId);
-    }
-
-    @Transactional
-    public List<Review> findReviewByGoodsId(Long goodsId){
-
-        return reviewRepository.findByGoods_GoodsId(goodsId);
-    }
-
-    @Transactional
-    public List<QNA> findQnaByGoodsId(Long goodsId){
-
-        return qnaRepository.findByGoods_GoodsId(goodsId);
-    }
-
-    @Transactional
-    public List<QnaReply> findQnaReplyByGoodsId(Long goodsId){
-
-        return qnaReplyRepository.findByGoods_GoodsIdOrderByQnaAsc(goodsId);
-    }
-
-    @Transactional
-    public QNA findQnaByQnaNo(int qnaNo){
-
-        return qnaRepository.findByQnaNo(qnaNo);
-    }
-
-    // Qna 댓글 등록 서비스
-    @Transactional
-    public QnaReply createQnaReply(QnaReplyDTO qnaReplyDTO){
-
-        QnaReply newReply = QnaReply.builder()
-                .goods(qnaReplyDTO.getGoods())
-                .qna(qnaReplyDTO.getQna())
-                .replyContent(qnaReplyDTO.getReplyContent())
-                .replyDate(getCurrentTimeString())
-                .build();
-
-        qnaReplyRepository.save(newReply);
-
-        return qnaReplyRepository.save(newReply);
-    }
-
-    // Qna 등록 서비스
-    @Transactional
-    public QNA createQna(QnaDTO qnaDTO){
-        if(qnaDTO.getQnaFile() != null) {
-            MultipartFile QnaFile = qnaDTO.getQnaFile();
-            String filePath = saveFile(QnaFile);
-
-            QNA newQna = QNA.builder()
-                    .qnaWriter(qnaDTO.getQnaWriter())
-                    .qnaTitle(qnaDTO.getQnaTitle())
-                    .qnaContent(qnaDTO.getQnaContent())
-                    .qnaFile(filePath)
-                    .qnaDate(getCurrentTimeString())
-                    .goods(qnaDTO.getGoods())
-                    .build();
-
-            qnaRepository.save(newQna);
-
-            return qnaRepository.save(newQna);
-
-        } else {
-
-            QNA newQna = QNA.builder()
-                    .qnaWriter(qnaDTO.getQnaWriter())
-                    .qnaTitle(qnaDTO.getQnaTitle())
-                    .qnaContent(qnaDTO.getQnaContent())
-                    .qnaDate(getCurrentTimeString())
-                    .goods(qnaDTO.getGoods())
-                    .build();
-
-            qnaRepository.save(newQna);
-
-            return qnaRepository.save(newQna);
-        }
-    }
-
-    // 리뷰 등록 서비스
-    @Transactional
-    public Review createReview(ReviewDTO reviewDTO){
-
-        if(reviewDTO.getReviewFile() != null) {
-            MultipartFile ReviewFile = reviewDTO.getReviewFile();
-            String filePath = saveFile(ReviewFile);
-
-
-            Review newReview = Review.builder()
-                    .reviewWriter(reviewDTO.getReviewWriter())
-                    .reviewTitle(reviewDTO.getReviewTitle())
-                    .reviewScore(reviewDTO.getReviewScore())
-                    .reviewContent(reviewDTO.getReviewContent())
-                    .reviewFile(filePath)
-                    .reviewDate(getCurrentTimeString())
-                    .goods(reviewDTO.getGoods())
-                    .build();
-            reviewRepository.save(newReview);
-
-
-            return reviewRepository.save(newReview);
-        } else {
-            Review newReview = Review.builder()
-                    .reviewWriter(reviewDTO.getReviewWriter())
-                    .reviewTitle(reviewDTO.getReviewTitle())
-                    .reviewScore(reviewDTO.getReviewScore())
-                    .reviewContent(reviewDTO.getReviewContent())
-                    .reviewDate(getCurrentTimeString())
-                    .goods(reviewDTO.getGoods())
-                    .build();
-            reviewRepository.save(newReview);
-
-
-            return reviewRepository.save(newReview);
-        }
-
     }
 
     // openMarket 서비스
@@ -370,6 +225,7 @@ public class GoodsService {
 
     }
 
+    // 현재 시간 구하는 서비스
     private static String getCurrentTimeString(){
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
