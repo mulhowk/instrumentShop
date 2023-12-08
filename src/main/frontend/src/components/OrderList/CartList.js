@@ -3,8 +3,9 @@ import './cartList.css';
 
 import { useState } from "react";
 
-const CartList = () => {
+const CartList = (props) => {
     const [totalPrice, setTotalPrice] = useState(0);
+    const carList = props.list;
 
     const handleTotalChange = (price) => {
         setTotalPrice(price);

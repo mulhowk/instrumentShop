@@ -1,25 +1,31 @@
 import '../styles/Header.css';
 import '../styles/MainCategory.css';
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../styles/globalStyles.css'
 import { useNavigate } from 'react-router-dom';
 
 import LoginContent from './login/LoginForm';
 import Modal from 'react-modal';
 import {Link} from "react-router-dom";
+import {logoutActionHandler} from "../global/auth";
 
-function Header(){
+function Header(props){
+
+    const token = props.token || null;
+    {console.log(token?token.UID: null)}
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
 
-    const handleLogin = () => {
-        setIsLogin(true);
-    }
+    useEffect(() => {
+        if(token){
+            setIsLogin(true);
+        } else {
+            setIsLogin(false);
+        }
+    }, []);
 
-    const handleLogout = () => {
-        setIsLogin(false);
-    }
+
 
     const [query, setQuery] = useState("");
     const handleQueryChange = (e) => {
@@ -68,9 +74,7 @@ function Header(){
                             (
                                 <div>
                                     <li id="logout">
-                                        <Link to="/">
-                                        <a className="header-menu-text">LOGOUT</a>
-                                        </Link>
+                                        <a className="header-menu-text" onClick={logoutActionHandler}>LOGOUT</a>
                                     </li>
                                 </div>
                             ) : (
@@ -101,8 +105,10 @@ function Header(){
                     <LoginContent/>
                 </Modal>
             </div>)}
-                        {isLogin &&
-                            <li id="open-market"></li>
+                        {isLogin && token.roles[0].name === 'ROLE_MARKETER' &&
+                            <li id="open-market">
+                                <a href={`/openMarket/${token.brand}`} className="header-menu-text">openMarket</a>
+                            </li>
                         }
                         {isLogin === false &&
                             <li>
@@ -114,9 +120,14 @@ function Header(){
                     </ul>
                 </div>
                 <div className="basket">
-                    <a href="/">
+                    {token?
+                    <a href={`/goodsList/cart/${token.UID}`}>
                         <img src="/basket.png" alt='basketImg' width="60" height="70"></img>
-                    </a>
+                    </a> :
+                        <a href="/">
+                            <img src="/basket.png" alt='basketImg' width="60" height="70"></img>
+                        </a>
+                    }
                     <div className="basket-count">
                         <input name="count" className="count-input" value="10" disabled>
                         </input>

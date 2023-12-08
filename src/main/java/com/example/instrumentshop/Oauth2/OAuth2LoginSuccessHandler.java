@@ -30,7 +30,8 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
             // User의 Role이 GUEST일 경우 처음 요청한 회원이므로 회원가입 페이지로 리다이렉트
             // TODO : createToken 매개인자값 추가
             if(oAuth2User.getSocialRole() == Role.GUEST) {
-                String accessToken = jwtProvider.createToken(oAuth2User.getMember_email(), null, null);
+                String accessToken = jwtProvider.createToken(oAuth2User.getMember_email()
+                        , null, null, null, null);
 
                 // TODO : 토큰값 확인, accessToken, refreshToken 모두 생성해야함
                 response.addHeader("Authorization", "Bearer " + accessToken);
@@ -49,7 +50,8 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     // TODO : 소셜 로그인 시에도 무조건 토큰 생성하지 말고 JWT 인증 필터처럼 RefreshToken 유/무에 따라 다르게 처리해보기
     private void loginSuccess(HttpServletResponse response, CustomOAuth2User oAuth2User) throws IOException {
-        String accessToken = jwtProvider.createToken(oAuth2User.getMember_email(), null, null);
+        String accessToken = jwtProvider.createToken(oAuth2User.getMember_email(), null, null
+                , null, null);
         String refreshToken = jwtProvider.createRefreshToken();
         response.addHeader("Authorization", "Bearer " + accessToken);
         response.addHeader("Authorization-refresh", "Bearer " + refreshToken);

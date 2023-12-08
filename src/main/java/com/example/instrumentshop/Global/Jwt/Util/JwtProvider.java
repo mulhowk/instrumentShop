@@ -61,10 +61,12 @@ public class JwtProvider {
     // eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVjcCIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTYxNjQ0NjQyMCwiZXhwIjo
 
     // 토큰 생성
-    public String createToken(String account, List<Authority> roles, String name) {
+    public String createToken(String account, List<Authority> roles, String name, Long UID, String brand) {
         Claims claims = Jwts.claims().setSubject(account);
         claims.put("roles", roles);
         claims.put("name", name);
+        claims.put("UID", UID);
+        claims.put("brand", brand);
 
         Date now = new Date();
         return Jwts.builder()

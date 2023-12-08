@@ -36,8 +36,13 @@ import base64 from 'base-64';
   };
 
  const logoutActionHandler = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('exp');
+    const isConfirmed = window.confirm('로그아웃 하시겠습니까?');
+
+    if(isConfirmed) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('exp');
+        window.location.href = '/';
+    }
   };
   
   export { setAuthToken, getAuthToken, tokenUserInfo, isAuthTokenValid, logoutActionHandler };

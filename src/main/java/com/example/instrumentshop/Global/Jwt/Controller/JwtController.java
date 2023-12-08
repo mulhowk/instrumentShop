@@ -36,7 +36,8 @@ public class JwtController {
                 new BadCredentialsException("Invalid refresh token"));
 
         // 새로운 액세스 토큰 생성
-        String newAccessToken = jwtProvider.createToken(users.getMemberEmail(), users.getRoles(), users.getMemberName());
+        String newAccessToken = jwtProvider.createToken(users.getMemberEmail()
+                , users.getRoles(), users.getMemberName(), users.getMEMBERUID(), users.getOpenMarketBrand());
         logger.info("newAccessToken: " + newAccessToken);
 
         return ResponseEntity.ok(newAccessToken);

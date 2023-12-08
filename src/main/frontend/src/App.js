@@ -36,7 +36,7 @@ function App() {
           <Route path="/goodsList/query/:query" element={<GoodsList/>}/>
           <Route path="/goodsList/category/:categoryId" element={<GoodsList/>}/>
           <Route path="/goodsList/category/:categoryId/:subCategoryId" element={<GoodsList/>}/>
-          <Route path="/goodsList/cart" element={<CartPage/>}/>
+          <Route path="/goodsList/cart/:MEMBERUID" element={<CartPage/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/myinfo" element={<MyInfo/>}/>
           <Route path="/myinfo/address" element={<MyAddressPop/>}/>

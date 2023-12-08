@@ -43,7 +43,8 @@ public class UserService {
                 .member_name(users.getMemberName())
                 .socialRole(users.getSocialRole())
                 .roles(users.getRoles())
-                .token(jwtProvider.createToken(users.getMemberEmail(), users.getRoles(), users.getMemberName() )) //
+                .token(jwtProvider.createToken(users.getMemberEmail(), users.getRoles()
+                        , users.getMemberName(), users.getMEMBERUID(), users.getOpenMarketBrand() )) //
                 .refreshToken(token) // 리프레시 토큰
                 .build();
     }
