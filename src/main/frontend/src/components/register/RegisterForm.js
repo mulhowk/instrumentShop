@@ -19,6 +19,42 @@ function RegisterForm() {
   const [phone, setPhone] = useState('');
   const [gender, setGender] = useState('');
 
+  const handleLogin = () => {
+    fetch('/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        member_email: email,
+        member_pwd: password,
+        member_name: name,
+        member_gender: name,
+        member_birth: birthDate,
+        member_phone: phone,
+        socialRole: "USER"
+      }),
+    })
+    .then((response) => {
+        if (response.status === 200) {
+
+          return response.text(); // 혹은 response.json()을 사용하여 JSON을 파싱
+        } else if (response.status === 401) {
+          
+          
+        } else {
+        
+        }
+      })
+      .then((data) => {
+          alert("회원가입이 완료되었습니다."); // test
+          // plz move home page
+          window.location.href = "/";
+      })
+      .catch((error) => {
+        // 오류 처리
+      });
+  };
 
   const [validationErrors, setValidationErrors] = useState({
     idInformation: {},
@@ -78,6 +114,8 @@ function RegisterForm() {
       Object.keys(phoneInformationErrors).length === 0
     ) {
       setIsValidationPassed(true);  // 유효성 검사가 통과되었으므로 state를 true로 변경
+    } else {
+      setIsValidationPassed(false); // 유효성 검사 실패 시 회원가입 버튼 숨김
     }
   };
 
@@ -242,6 +280,12 @@ function RegisterForm() {
             <button className="c-r-f-button"  onClick={handleRequestClick}>
               인증요청
             </button>
+            {isValidationPassed && (
+              <button className="c-r-f-button" onClick={handleLogin}>
+                회원가입
+              </button>
+            )}
+            
           </div>
         </>
     );

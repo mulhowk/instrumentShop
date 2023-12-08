@@ -1,6 +1,7 @@
 import './styles/App.css';
 import './styles/globalStyles.css'
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import React, { useEffect } from 'react';
 
 import Register from "./pages/register/Register";
 import MainPage from "./pages/MainPage/MainPage";
@@ -8,7 +9,6 @@ import GoodsList from "./pages/Goods/GoodsList";
 import GoodsDetails from "./pages/Goods/GoodsDetails";
 import MyInfo from './pages/myinfo/MyInfo';
 import ReviewWrite from "./components/GoodsDetails/GoodsDetailsTab/ReviewWrite";
-import React from "react";
 import QnaWrite from "./components/GoodsDetails/GoodsDetailsTab/QnaWrite";
 import MyAddressPop from './pages/myinfo/MyAddressPop';
 import GoodsPayment from "./pages/Payment/GoodsPayment";
@@ -24,9 +24,15 @@ import {SuccessPage} from "./components/GoodsPayment/paymentResult/SuccessPage";
 import {FailPage} from "./components/GoodsPayment/paymentResult/FailPage";
 import AdminProductMange from './pages/admin/AdminProductMange.js';
 import AdminCouponPages from './pages/admin/AdminCouponPages.js';
+import { isAuthTokenValid, logoutActionHandler } from './global/auth.js';
 
 function App() {
-
+  useEffect(() => {
+    if (!isAuthTokenValid()) {
+      logoutActionHandler();
+      // 사용자를 로그인 페이지로 리디렉션하는 로직
+    }
+  }, []);
 
 
   return (

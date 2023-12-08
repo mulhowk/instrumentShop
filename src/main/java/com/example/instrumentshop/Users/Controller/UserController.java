@@ -5,7 +5,11 @@ import com.example.instrumentshop.Users.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/api") //
@@ -17,6 +21,17 @@ public class UserController {
     @PostMapping(value = "/login")
     public ResponseEntity<UsersDTO.SignResponse> signin(@RequestBody UsersDTO.SignRequest request) throws Exception {
         return new ResponseEntity<>(userService.login(request), HttpStatus.OK);
+    }
+
+    @GetMapping("/currentUser")
+    public String currentUser(Principal principal) {
+        if (principal != null) {
+            // 사용자가 로그인 상태임
+            return principal.getName(); // 로그인한 사용자의 이름을 반환
+        } else {
+            // 사용자가 로그인 상태가 아님
+            return "Guest";
+        }
     }
 
     /**
@@ -33,6 +48,16 @@ public class UserController {
     @GetMapping("/user/info")
     public ResponseEntity<UsersDTO.SignResponse> getUser(@RequestParam String email) throws Exception {
         return new ResponseEntity<>( userService.getUser(email), HttpStatus.OK);
+    }
+
+    @GetMapping("/user/login/check")
+    public ResponseEntity<?> getCurrentUserInfo(@AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User is not logged in");
+        } else {
+            // 사용자 정보 반환
+            return ResponseEntity.ok(userDetails);
+        }
     }
 
 }

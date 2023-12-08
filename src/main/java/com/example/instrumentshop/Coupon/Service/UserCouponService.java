@@ -22,15 +22,17 @@ public class UserCouponService {
     private final CouponRepository couponRepository;
 
     @Transactional
-    public void createAndDistributeCoupon(Coupon coupon, List<Long> userIds) {
+    public void createAndDistributeCoupon(Coupon coupon) {
         // 쿠폰 생성
         Coupon savedCoupon = couponRepository.save(coupon);
 
-        // 유저 ID 리스트를 기반으로 유저들을 조회
-        List<Users> selectedUsers = usersRepository.findAllById(userIds);
+        // USER 역할을 가진 모든 사용자 조회
+        List<Users> usersWithRoleUser = usersRepository.findBySocialRole("USER");
 
-        // 각 유저에게 쿠폰을 배포
-        selectedUsers.forEach(user -> distributeCouponToUser(savedCoupon, user));
+        // 모든 유저에게 쿠폰 할당
+        for (Users user : usersWithRoleUser) {
+            distributeCouponToUser(savedCoupon, user);
+        }
     }
 
     // 개별 유저에게 쿠폰 매핑

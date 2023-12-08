@@ -21,7 +21,7 @@ public class UserCouponController {
     @PostMapping("/distribute")
     public ResponseEntity<String> createAndDistributeCoupon(@RequestBody CouponDTO request) {
         try {
-            userCouponService.createAndDistributeCoupon(request.getCoupon(), request.getUserIds());
+            userCouponService.createAndDistributeCoupon(request.getCoupon());
             return ResponseEntity.ok("Coupon successfully distributed to users");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error distributing coupon: " + e.getMessage());
