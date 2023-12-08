@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Button,Form } from "react-bootstrap";
-import '../../styles/login/loginForm.css'
+import '../../styles/login/loginForm.css';
+import { setAuthToken, tokenUserInfo } from "../../global/auth";
 
 import Kakao from '../../img/login/kakao.svg';
-import Google from '../../img/login/google.svg'
-import Naver from '../../img/login/naver.svg'
-import cUser from "../../img/register/c-user.svg"
-import cPassword from "../../img/register/c-password.svg"
+import Google from '../../img/login/google.svg';
+import Naver from '../../img/login/naver.svg';
+import cUser from "../../img/register/c-user.svg";
+import cPassword from "../../img/register/c-password.svg";
 
 function LoginForm() {
 
@@ -16,8 +17,47 @@ function LoginForm() {
 
 
     const handleLogin = () => {
+      fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          member_email: email,
+          member_pwd: password,
+        }),
+      })
+      .then((response) => {
+          if (response.status === 200) {
 
-    }
+            return response.text(); // 혹은 response.json()을 사용하여 JSON을 파싱
+          } else if (response.status === 401) {
+            // 로그인 실패 (UNAUTHORIZED)
+            throw new Error('아이디와 비밀번호을 확인해주세요');
+            
+          } else {
+            // 다른 오류 처리
+            throw new Error('서버 오류');
+          }
+        })
+        .then((data) => {
+          // 서버로부터 받은 데이터(data)를 처리
+          const token = JSON.parse(data).token;
+          const decodedToken = tokenUserInfo(token);
+
+          setAuthToken(token,decodedToken.exp);
+
+          // 로그인 성공
+          window.location.reload();
+          alert(decodedToken);
+        })
+        .catch((error) => {
+          // 오류 처리
+          console.error('로그인 오류:', error.message);
+          setErrorMessage(error.message);
+          // 오류 메시지를 출력하거나 다른 오류 처리 작업을 수행
+        });
+    };
 
     return (
 <>
