@@ -13,6 +13,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Collections;
 
 @Slf4j
@@ -48,12 +49,18 @@ public class UserService {
                 .build();
     }
 
+
+
     public boolean register(UsersDTO.SignRequest request) throws Exception {
         try {
             Users user = Users.builder()
                     .memberEmail(request.getMember_email())
                     .memberPwd(passwordEncoder.encode(request.getMember_pwd()))
                     .memberName(request.getMember_name())
+                    .memberBirth(request.getMember_birth())
+                    .memberGender(request.getMember_gender())
+                    .memberPhone(request.getMember_phone())
+                    .memberDate(LocalDate.now().toString()) // 현재날짜
                     .socialRole(Role.USER) // 일반 회원가입
                     .build();
 

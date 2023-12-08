@@ -38,6 +38,12 @@ public class UsersDTO {
 
         private String member_email;
 
+        private String member_gender;
+
+        private String member_birth;
+
+        private String member_phone;
+
         private List<Authority> roles = new ArrayList<>();
 
         private SocialType socialType;
@@ -52,6 +58,9 @@ public class UsersDTO {
             this.MEMBERUID = users.getMEMBERUID();
             this.member_name = users.getMemberName();
             this.member_email = users.getMemberEmail();
+            this.member_birth = users.getMemberBirth();
+            this.member_gender = users.getMemberGender();
+            this.member_phone = users.getMemberPhone();
             this.roles = users.getRoles();
             this.socialRole = users.getSocialRole();
             this.refreshToken = users.getRefreshToken();
