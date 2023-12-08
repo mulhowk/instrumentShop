@@ -26,6 +26,8 @@ import base64 from 'base-64';
     return token !== null;
   }  
 
+  
+
   const tokenUserInfo = (token) => {
     if (token) {
       const base64Url = token.split('.')[1]; // 토큰에서 payload 부분을 추출
@@ -36,6 +38,11 @@ import base64 from 'base-64';
   
       return JSON.parse(decodedPayload);
     }
+
+    if (!isAuthTokenValid()) {
+        logoutActionHandler();
+      }
+
     return null;
   };
 
