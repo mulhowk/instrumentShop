@@ -28,7 +28,7 @@ public class Cart {
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "MEMBERUID", referencedColumnName = "MEMBERUID")
     @JsonIgnore
-    private Users MEMBERUID;
+    private Users users;
 
     @Column(name = "goodsQuantity")
     private int goodsQuantity;
@@ -38,5 +38,8 @@ public class Cart {
 
     @Column(name = "goodsName")
     private String goodsName;
+
+    @Column(name = "goodsImg")
+    private String goodsImg;
 
 }

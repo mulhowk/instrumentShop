@@ -6,6 +6,7 @@ import com.example.instrumentshop.Users.Entity.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,8 +14,9 @@ import lombok.NoArgsConstructor;
 public class CartDTO {
 
     private Goods goods;
-    private Users MEMBERUID;
+    private Users users;
     private int goodsQuantity;
     private int goodsPrice;
-    private int goodsName;
+    private String goodsName;
+    private String goodsImg;
 }
