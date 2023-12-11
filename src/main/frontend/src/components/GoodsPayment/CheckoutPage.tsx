@@ -10,7 +10,8 @@ const customerKey = "3r3xRiVp3pFTT8baWdNIB"
 
 export function CheckoutPage (props) {
 
-    const pay = props.pay;
+    const orderInfo = props.orderInfo;
+    const pay = orderInfo.pay;
     {console.log(pay)}
     const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null)
     const paymentMethodsWidgetRef = useRef<ReturnType<
@@ -87,8 +88,8 @@ export function CheckoutPage (props) {
                             customerName: "김토스",
                             customerEmail: "customer123@gmail.com",
                             customerMobilePhone: "01012341234",
-                            successUrl: `${window.location.origin}/success`,
-                            failUrl: `${window.location.origin}/fail`,
+                            successUrl: `${window.location.origin}/success?orderInfo=${encodeURIComponent(JSON.stringify(orderInfo))}`,
+                            failUrl: `${window.location.origin}/fail`
                         })
                     } catch (error) {
                         // 에러 처리하기

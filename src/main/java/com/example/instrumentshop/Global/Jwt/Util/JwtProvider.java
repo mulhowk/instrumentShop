@@ -35,7 +35,7 @@ public class JwtProvider {
     private Key secretKey;
 
     // 만료시간 : 1Hour
-    private final long exp = 1000L * 60 * 60;
+    private final long exp = 1000L * 60 * 60 *24;
 
     // 만료시간 : 2Hour
     private final long expRefresh = 1000L * 60 * 60 * 2;
@@ -61,12 +61,14 @@ public class JwtProvider {
     // eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVjcCIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTYxNjQ0NjQyMCwiZXhwIjo
 
     // 토큰 생성
-    public String createToken(String account, List<Authority> roles, String name, Long UID, String brand) {
+    public String createToken(String account, List<Authority> roles, String name, Long UID
+            , String brand, String phoneNum) {
         Claims claims = Jwts.claims().setSubject(account);
         claims.put("roles", roles);
         claims.put("name", name);
         claims.put("UID", UID);
         claims.put("brand", brand);
+        claims.put("phone", phoneNum);
 
         Date now = new Date();
         return Jwts.builder()

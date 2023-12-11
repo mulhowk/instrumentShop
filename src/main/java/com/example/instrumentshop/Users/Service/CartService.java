@@ -44,4 +44,9 @@ public class CartService {
         return cartRepository.save(newCart);
     }
 
+    public Integer getSumByMEMBERUID(Long MEMBERUID){
+
+        return cartRepository.sumByMEMBERUID(MEMBERUID);
+    }
+
 }

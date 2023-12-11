@@ -1,4 +1,5 @@
 import base64 from 'base-64';
+import {useEffect} from "react";
 
   // 토큰을 로컬 스토리지에 저장하는 함수
   const setAuthToken = (token, exp) => {
@@ -47,13 +48,10 @@ import base64 from 'base-64';
   };
 
  const logoutActionHandler = () => {
-    const isConfirmed = window.confirm('로그아웃 하시겠습니까?');
 
-    if(isConfirmed) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('exp');
-        window.location.href = '/';
-    }
+             localStorage.removeItem('token');
+             localStorage.removeItem('exp');
+
   };
   
   export { setAuthToken, getAuthToken, tokenUserInfo, isAuthTokenValid, logoutActionHandler };

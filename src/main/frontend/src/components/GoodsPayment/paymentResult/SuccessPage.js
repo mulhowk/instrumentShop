@@ -1,8 +1,24 @@
 import {Link, useSearchParams} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 
 export function SuccessPage() {
     const [searchParams] = useSearchParams();
+    const [orderInfo, setOrderInfo] = useState([]);
+    {console.log(orderInfo)}
+
+    useEffect(() => {
+        const orderInfoParams = searchParams.get('orderInfo');
+        if(orderInfoParams){
+            try{
+                const parsedOrderInfo = JSON.parse(decodeURIComponent(orderInfoParams));
+                setOrderInfo(parsedOrderInfo);
+            } catch (error){
+                console.error('Error parsing orderInfo : ', error);
+            }
+        }
+    }, []);
+
 
     return(
       <div style={{color : "white", display : "grid", placeContent : "center", marginTop : "200px"}}>

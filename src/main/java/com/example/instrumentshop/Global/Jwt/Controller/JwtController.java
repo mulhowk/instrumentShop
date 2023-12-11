@@ -37,7 +37,8 @@ public class JwtController {
 
         // 새로운 액세스 토큰 생성
         String newAccessToken = jwtProvider.createToken(users.getMemberEmail()
-                , users.getRoles(), users.getMemberName(), users.getMEMBERUID(), users.getOpenMarketBrand());
+                , users.getRoles(), users.getMemberName()
+                , users.getMEMBERUID(), users.getOpenMarketBrand(), users.getMemberPhone());
         logger.info("newAccessToken: " + newAccessToken);
 
         return ResponseEntity.ok(newAccessToken);

@@ -27,12 +27,6 @@ import AdminCouponPages from './pages/admin/AdminCouponPages.js';
 import { isAuthTokenValid, logoutActionHandler } from './global/auth.js';
 
 function App() {
-  useEffect(() => {
-    if (!isAuthTokenValid()) {
-      logoutActionHandler();
-      // 사용자를 로그인 페이지로 리디렉션하는 로직
-    }
-  }, []);
 
 
   return (

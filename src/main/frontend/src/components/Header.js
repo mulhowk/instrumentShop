@@ -8,11 +8,25 @@ import LoginContent from './login/LoginForm';
 import Modal from 'react-modal';
 import {Link} from "react-router-dom";
 import {logoutActionHandler} from "../global/auth";
+import axios from "axios";
 
 function Header(props){
 
     const token = props.token || null;
-    {console.log(token?token.UID: null)}
+    const memberUid = token? token.UID : null;
+    const [sumCart, setSumCart] = useState(0);
+
+
+
+    useEffect(() => {
+        axios.get(`/cart/sum/${memberUid}`)
+            .then(response => {
+                setSumCart(response.data);
+            })
+            .catch(error => {
+                console.log('Error fetching data:', error );
+            });
+    }, []);
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
@@ -74,7 +88,9 @@ function Header(props){
                             (
                                 <div>
                                     <li id="logout">
-                                        <a className="header-menu-text" onClick={logoutActionHandler}>LOGOUT</a>
+                                        <a href="/" className="header-menu-text" onClick={logoutActionHandler}>
+                                            LOGOUT
+                                        </a>
                                     </li>
                                 </div>
                             ) : (
@@ -121,7 +137,7 @@ function Header(props){
                 </div>
                 <div className="basket">
                     {token?
-                    <a href={`/goodsList/cart/${token.UID}`}>
+                    <a href={`/goodsList/cart/${memberUid}`}>
                         <img src="/basket.png" alt='basketImg' width="60" height="70"></img>
                     </a> :
                         <a href="/">
@@ -129,8 +145,11 @@ function Header(props){
                         </a>
                     }
                     <div className="basket-count">
-                        <input name="count" className="count-input" value="10" disabled>
-                        </input>
+                        {token?
+                            <input name="count" className="count-input" value={sumCart} disabled/>
+                            :
+                            <input name="count" className="count-input" value="0" disabled/>
+                        }
                     </div>
                 </div>
             </div>

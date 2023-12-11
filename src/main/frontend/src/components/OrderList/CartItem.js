@@ -1,73 +1,143 @@
 import './cartItem.css';
 import React, { useState, useEffect } from 'react';
+import {useNavigate} from "react-router-dom";
 
-const CartItem = ({ onTotalChange }) => {
+const CartItem = (props) => {
 
-    
+    const navigate = useNavigate();
+    const [selectedCartList, setSelectedCartList] = useState([]);
 
-    const product = [
-        /* item data */
-        {
-          img: "사진링크",
-          title: "SELMER(셀마) Soprano SA80 II JUBILEE AUG Gold Plated",
-          option: "Basic",
-          price: "1,350,000원"
-        },
-        {
-            img: "사진링크",
-            title: "야마하 퍼시파카 트럼펫 YTR-2330S",
-            option: "Puprle",
-            price: "850,000원"
-        },
-        // ... 여기에 추가 상품 데이터를 넣을 수 있습니다.
-    ];
+    const handlePayment = () =>{
 
- // 각 상품의 수량을 관리하는 상태
- const [quantities, setQuantities] = useState(product.map(() => 1));
+        if(selectedCartList.length === 0){
+            alert("상품을 선택해주세요!");
+            return;
+        }
 
- // 수량 변경 핸들러
- const handleQuantityChange = (index, delta) => {
-    const newQuantities = [...quantities];
-    newQuantities[index] = Math.max(1, newQuantities[index] + delta);
-    setQuantities(newQuantities);
+        const products = selectedCartList.length >= 2?
+            selectedCartList.map(list => ({
+            goodsId : list.goods.goodsId,
+            goodsName : list.goodsName,
+            goodsOption : list.goodsOption,
+            goodsQuantity : list.goodsQuantity,
+            goodsPrice : list.goodsPrice,
+            goodsImg : list.goodsImg
+        }))
+        : {
+                goodsId : selectedCartList[0].goods.goodsId,
+                goodsName : selectedCartList[0].goodsName,
+                goodsOption : selectedCartList[0].goodsOption,
+                goodsQuantity : selectedCartList[0].goodsQuantity,
+                goodsPrice : selectedCartList[0].goodsPrice,
+                goodsImg : selectedCartList[0].goodsImg
+            };
+        navigate(`/goodsPayment`, {state : {products}});
+    }
 
-    // 총 금액 계산 후 상위 컴포넌트에 전달
-    const totalPrice = newQuantities.reduce((acc, quantity, idx) => {
-        const price = parseInt(product[idx].price.replace(/원/g, "").replace(/,/g, ""));
-        return acc + (price * quantity);
-    }, 0);
-    onTotalChange(totalPrice);
-};
+    useEffect(() => {
+        const list = props.list;
+        setCarList(list);
+
+    }, [props.list]);
+
+    const [cartList, setCarList] = useState([]);
+
+
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    const increment = (index) => {
+        const updatedCartList = [...cartList];
+        updatedCartList[index].goodsQuantity += 1;
+        setCarList(updatedCartList);
+    };
+
+    const decrement = (index) => {
+        const updatedCartList = [...cartList];
+        if(updatedCartList[index].goodsQuantity > 1){
+            updatedCartList[index].goodsQuantity -= 1;
+            setCarList(updatedCartList);
+        } else {
+            alert("1개 미만은 불가능 합니다.");
+        }
+    };
+
+    const [selectedItems, setSelectedItems] = useState([]);
+    const [selectAll, setSelectAll] = useState(false);
+
+    useEffect(() => {
+        if(selectAll) {
+            setSelectedItems(cartList.map(goods => goods.cartNo));
+        } else {
+            setSelectedItems([]);
+        }
+
+    }, [selectAll, cartList]);
+
+    const handleCheckboxChange = (cartNo) => {
+        if(selectedItems.includes(cartNo)) {
+            setSelectedItems(selectedItems.filter(goods => goods !== cartNo));
+
+        } else {
+            setSelectedItems([...selectedItems, cartNo])
+        }
+
+    }
+
+    useEffect(() => {
+        setSelectedCartList(cartList.filter(item => selectedItems.includes(item.cartNo)));
+        setTotalPrice(cartList.filter(item => selectedItems.includes(item.cartNo))
+            .reduce((all, item) => all + item.goodsQuantity * item.goodsPrice, 0));
+    }, [selectedItems]);
 
     return (
         <>
-            {product.map((item, index) => (
-                <div key={index} className="cart-item">
+            <div className="c-c-header">
+                <div className="c-c-h-check-input">
+                    <input type="checkbox" checked={selectAll} onChange={() => setSelectAll(!selectAll)}/>
+                </div>
+                <div className="c-c-h-span">
+                    <span>전체선택</span>
+                </div>
+            </div>
+            {cartList.map((item, index) => (
+                <div className="cart-item">
                     <div className="cart-item-content">
+                        <div key={item.cartNo} className="cart-item-checkbox">
+                            <input type="checkbox"
+                                   checked={selectedItems.includes(item.cartNo)}
+                                   onChange={() => handleCheckboxChange(item.cartNo)}/>
+                        </div>
                         <div className="cart-itme-img">
-                            <span>{item.img}</span> {/* 이미지 표시 */}
+                            <img src={item.goodsImg} alt={index} /> {/* 이미지 표시 */}
                         </div>
                         <div className="cart-item-description">
-                            <span>{item.title}</span> {/* 상품명 표시 */}
-                            <span>{item.option}</span> {/* 옵션 표시 */}
+                            <span>{item.goodsName}</span> {/* 상품명 표시 */}
+                            {item.goodsOption ?
+                                <span>옵션 : {item.goodsOption}</span>
+                                : ""
+                            }{/* 옵션 표시 */}
+                        </div>
+                        <div className="cart-item-quantity">
+                            <button onClick={() => decrement(index)}>-</button>
+                            <p>{item.goodsQuantity} 개</p>
+                            <button onClick={() => increment(index)}>+</button>
                         </div>
                         <div className="cart-item-price">
-                            <span>{item.price}</span> {/* 가격 표시 */}
-                            {/* 여기에 수량 선택 박스를 추가할 수 있습니다 */}
-                            <div className='c-i-e-intputbox'>
-                                <button className='c-i-e-i-btn' onClick={() => handleQuantityChange(index, 1)}>+</button>
-                                <div className='input-box-ea'>
-                                    <span>{quantities[index]}</span>
-                                </div>
-                                <button className='c-i-e-i-btn' onClick={() => handleQuantityChange(index, -1)}>-</button>
-                            </div>
-                        </div>
-                        <div className="cart-item-coupon">
-                            <span>쿠폰 적용하기</span>
+                            <span>{item.goodsPrice * item.goodsQuantity} 원</span>
                         </div>
                     </div>
                 </div>
             ))}
+            <div className="c-c-total-price">
+                <div className="c-t-p-footer">
+                    <div className="cart-total-all-price">
+                        <span>총 결제 금액</span>
+                        <span>{totalPrice}원</span>
+                    </div>
+                    <button onClick={handlePayment}>구매하기
+                    </button>
+                </div>
+            </div>
         </>
     );
 }

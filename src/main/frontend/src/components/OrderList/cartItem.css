@@ -1,30 +1,49 @@
 .cart-item {
-    width: 1350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cart-item-content {
     width: 1350px;
-    height: 150px;;
+    height: 150px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-bottom: 20px;
 }
 
+    .cart-item-checkbox{
+        flex : 0.3;
+    }
+
     .cart-itme-img {
-        width: 150px;
+        flex : 1;
+    }
+
+    .cart-itme-img img{
+        width : 120px;
+        height : 120px;
+        border: 1px solid #AAAAAA;
     }
 
     .cart-item-description {
         display: flex;
-        width: 500px;
         flex-direction: column;
+        flex : 2;
+    }
+
+    .cart-item-quantity {
+        display: flex;
+        align-items: center;
+        flex : 1;
     }
 
     .cart-item-price {
-        width: 150px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        flex : 1;
     }
 
 .c-i-e-intputbox {
@@ -43,3 +62,58 @@
         justify-content: center;
         align-items: center;
     }
+
+.c-c-header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.c-c-h-span{
+    margin-left: 5px;
+}
+
+.c-c-total-price {
+    border-top: 2px solid var(--color-silver-100);
+}
+
+.c-t-p-footer {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 530px;
+}
+
+.c-t-p-footer button{
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: #3498db;
+    color: #fff;
+    border: 2px solid #3498db;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-left: 10px;
+
+    &:hover {
+        background-color: #2980b9;
+        border-color: #2980b9;
+    }
+}
+
+.cart-total-price {
+    display: flex;
+    width: 200px;
+    flex-direction: column;
+}
+
+.cart-total-all-price {
+    display: flex;
+    width: 200px;
+    flex-direction: column;
+}

@@ -2,21 +2,54 @@ import React, {useEffect, useState} from "react";
 import '../../styles/GoodsPayment/OrderInfo.css'
 import Modal from "react-modal";
 import {CheckoutPage} from "./CheckoutPage.tsx";
+import {getAuthToken, tokenUserInfo} from "../../global/auth";
 
 function OrderInfo(props) {
 
     const [selectedOption, setSelectedOption] = useState('');
 
+    const token =  getAuthToken();
+    const decodedToken = tokenUserInfo(token);
+    const MEMBERUID = decodedToken? decodedToken.UID : null;
     const goods = props.goods;
+    const memberInfo = props.memberData;
 
     const handleButtonClick = () => {
+        {console.log(orderInfo)}
+        if(!memberInfo.orderName){
+            alert("주문자 이름을 입력해주세요");
+            return;
+        } else if(!memberInfo.orderEmail){
+            alert("주문자 이메일을 입력해주세요");
+            return;
+        } else if(!memberInfo.orderPhone){
+            alert("주문자 연락처를 입력해주세요");
+            return;
+        } else if(!memberInfo.deliverName){
+            alert("받는분 성함을 입력해주세요");
+            return;
+        } else if(!memberInfo.deliverPhone){
+            alert("받는분 연락처를 입력해주세요");
+            return;
+        } else if(!memberInfo.deliverAddress){
+            alert("받는분 주소를 입력해주세요");
+            return;
+        } else if(!memberInfo.orderMsg){
+            alert("주문 메세지를 입력해주세요");
+            return;
+        } else if(!memberInfo.deliverMsg){
+            alert("배달 메세지를 입력해주세요");
+            return;
+        }
+
         if(selectedOption === 'option0') {
             console.log('option 1 선택');
+            /* 무통장 입금 이동 url */
         } else if (selectedOption === 'option1'){
             openModal();
             console.log({isModalOpen});
         } else {
-            console.log('마지막 선택');
+            alert("결제방식을 선택해주세요!");
         }
     }
 
@@ -31,15 +64,23 @@ function OrderInfo(props) {
     }
 
     const [deliverPrice, setDeliverPrice] = useState(3000);
-    const productPrice = goods.goodsPrice;
+    const productPrice = goods.length >= 2 ? goods.map(goods => goods.goodsPrice) : goods.goodsPrice;
+    const productQuantity = goods.length >= 2 ? goods.map(goods => goods.goodsQuantity) : goods.goodsQuantity;
+    const totalPrice = goods.length >=2 ?
+        productPrice.map((value, index) => value * productQuantity[index])
+    : productPrice * productQuantity;
+    const finalPrice = goods.length >= 2 ?
+        totalPrice.reduce((sum, value) => sum + value, 0)
+    : totalPrice;
+    const pay = finalPrice + deliverPrice;
 
     useEffect(() => {
-        if(productPrice >= 50000){
+        {console.log(totalPrice)}
+        if( finalPrice >= 50000){
             setDeliverPrice(0);
         } else setDeliverPrice(3000);
-    }, []);
 
-    const totalPrice = (productPrice*goods.goodsQuantity) + deliverPrice;
+    }, []);
 
     const customStyles = {
         overlay : {
@@ -52,6 +93,33 @@ function OrderInfo(props) {
             boxShadow : '0 0 10px rgba(0,0,0,0.3)'
         }
     };
+
+    const goodsId = goods.length >=2 ?
+        goods.map(goods => goods.goodsId)
+    : goods.goodsId;
+    const goodsQuantity = goods.length >=2 ?
+        goods.map(goods => goods.goodsQuantity)
+    : goods.goodsQuantity;
+    const goodsOption = goods.length >=2 ?
+        goods.map(goods => goods.goodsOption)
+    : goods.goodsOption;
+
+    const orderInfo = {
+
+        goodsId : goodsId,
+        MEMBERUID : MEMBERUID,
+        goodsQuantity : goodsQuantity,
+        goodsOption : goodsOption,
+        pay : pay,
+        orderMsg : memberInfo.orderMsg,
+        deliverMsg : memberInfo.deliverMsg,
+        orderName : memberInfo.orderName,
+        orderEmail : memberInfo.orderEmail,
+        orderPhone : memberInfo.orderPhone,
+        deliverName : memberInfo.deliverName,
+        deliverPhone : memberInfo.deliverPhone
+
+    }
 
     return (
        <div className="order-info">
@@ -69,10 +137,11 @@ function OrderInfo(props) {
                     <p>주문금액</p>
                 </div>
             </div>
+           {goods.length >= 2 ?
+               goods.map((goods, index) => (
            <div className="order-info-content">
-               <div className="order-info-content-img">
+                   <div className="order-info-content-img">
                    <img src={goods.goodsImg} alt="order-img"/>
-                   {console.log(goods)}
                    <div className="order-info-content-name-info">
                        <p>{goods.goodsName}</p>
                        {goods.goodsOption?
@@ -89,14 +158,36 @@ function OrderInfo(props) {
                    <button>쿠폰 확인</button>
                </div>
                <div className="order-info-content-price">
-                   <p>{totalPrice.toLocaleString()} 원</p>
+                   <p>{totalPrice[index].toLocaleString()} 원</p>
                </div>
            </div>
+           )) : <div className="order-info-content">
+                   <div className="order-info-content-img">
+                       <img src={goods.goodsImg} alt="order-img"/>
+                       <div className="order-info-content-name-info">
+                           <p>{goods.goodsName}</p>
+                           {goods.goodsOption?
+                               <div className="order-info-content-option">
+                                   <p>옵션 : {goods.goodsOption}</p>
+                               </div> : ""
+                           }
+                       </div>
+                   </div>
+                   <div className="order-info-content-count">
+                       <p>{goods.goodsQuantity}</p>
+                   </div>
+                   <div className="order-info-content-discount">
+                       <button>쿠폰 확인</button>
+                   </div>
+                   <div className="order-info-content-price">
+                       <p>{totalPrice.toLocaleString()} 원</p>
+                   </div>
+               </div>}
            <div className="order-info-content-total">
                <div className="order-info-content-total-title">
-                   <p>주문금액 {(goods.goodsPrice*goods.goodsQuantity).toLocaleString()}원
+                   <p>주문금액 {finalPrice.toLocaleString()}원
                        + 배송비 {deliverPrice.toLocaleString()}원
-                       = {totalPrice.toLocaleString()}원</p>
+                       = {pay.toLocaleString()}원</p>
                </div>
            </div>
            <div className="order-info-total">
@@ -119,7 +210,7 @@ function OrderInfo(props) {
                </div>
                <div className="order-info-total-pay">
                    <div className="order-info-total-pay-price">
-                       <p>{(goods.goodsPrice*goods.goodsQuantity).toLocaleString()} 원</p>
+                       <p>{finalPrice.toLocaleString()} 원</p>
                    </div>
                    <div className="order-info-total-pay-plus">
                        <p>+</p>
@@ -137,7 +228,7 @@ function OrderInfo(props) {
                        <p>=</p>
                    </div>
                    <div className="order-info-total-pay-total">
-                       <p>{totalPrice.toLocaleString()} 원</p>
+                       <p>{pay.toLocaleString()} 원</p>
                    </div>
                </div>
            </div>
@@ -151,7 +242,7 @@ function OrderInfo(props) {
                    contentLabel ="Checkout Modal"
                    style={customStyles}
                >
-                   <CheckoutPage pay = {totalPrice}/>
+                   <CheckoutPage orderInfo = {orderInfo}/>
                    <button className="modal-button" onClick={closeModal}>닫기</button>
                </Modal>
                <div className="pay-area-way">

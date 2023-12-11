@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import MemberInfo from "../../components/GoodsPayment/MemberInfo";
@@ -12,12 +12,19 @@ function GoodsPayment(){
     const location = useLocation();
     const goods = location.state.products;
 
+    const [memberData, setMemberData] = useState([]);
+
+    const handelMemberDataChange = (data) => {
+        setMemberData(data);
+
+    }
+
     return(
         <>
             <Header/>
             <MainCategory/>
-            <MemberInfo/>
-            <OrderInfo goods = {goods}/>
+            <MemberInfo onMemberInfoChange = {handelMemberDataChange}/>
+            <OrderInfo goods = {goods} memberData = {memberData}/>
             <Footer/>
         </>
     );

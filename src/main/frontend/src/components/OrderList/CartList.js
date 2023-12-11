@@ -4,12 +4,9 @@ import './cartList.css';
 import { useState } from "react";
 
 const CartList = (props) => {
-    const [totalPrice, setTotalPrice] = useState(0);
-    const carList = props.list;
 
-    const handleTotalChange = (price) => {
-        setTotalPrice(price);
-    };
+    const cartList = props.list;
+
 
     return (
         <>
@@ -20,32 +17,8 @@ const CartList = (props) => {
                     </div>
                 </div>
                 <div className="cart-component-conent">
-                    <div className="c-c-header">
-                        <div className="c-c-h-check-input">
-                            <input type="checkbox"></input>
-                        </div>
-                        <div className="c-c-h-span">
-                            <span>전체선택</span>
-                        </div>
-                    </div>
                     <div className="c-c-list">
-                        <CartItem onTotalChange={handleTotalChange} />
-                    </div>
-                    <div className="c-c-total-price">
-                        <div className="c-t-p-footer">
-                            <div className="cart-total-price">
-                                <span className="c-t-title">총 상품 금액</span>
-                                <span>{totalPrice}원</span>
-                            </div>
-                            <div className="cart-total-sale">
-                                <span>총 할인 금액</span>
-                                <span>0원</span>
-                            </div>
-                            <div className="cart-total-all-price">
-                                <span>총 결제 금액</span>
-                                <span>{totalPrice}원</span>
-                            </div>
-                        </div>
+                        <CartItem list = {cartList}/>
                     </div>
                 </div>
             </div>
