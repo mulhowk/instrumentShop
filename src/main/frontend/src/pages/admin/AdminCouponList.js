@@ -1,22 +1,19 @@
 import AdminSide from "../../components/admin/AdminSide";
-import AdminProductAll from "../../components/admin/productAll/AdminProductAll";
-import AdminProductFilter from "../../components/admin/productAll/AdminProductFilter";
+import CouponAll from "../../components/admin/couponTool/CouponAll";
 
-const AdminProductMange = () => {
+function AdminCouponList() {
     return (
-        <>
-        <div style={{display:"flex", backgroundColor:"white"}}>
+    <div style={{display:"flex", backgroundColor:"white"}}>
         <div style={{backgroundColor:"white",height:"1080px"}}>
             <AdminSide/>
         </div>
         <div style={{width:"100%"}}>
             <div style={{width:"100%", display:"flex", justifyContent:"center",paddingTop:"30px"}}>
-                <AdminProductAll/>
+                <CouponAll/>
             </div>
         </div>
     </div>
-    </>
     );
 }
 
-export default AdminProductMange;
+export default AdminCouponList;

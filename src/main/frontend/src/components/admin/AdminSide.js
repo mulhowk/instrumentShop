@@ -32,10 +32,10 @@ function AdminSide() {
                     </div>
                 </div>
                 <div className="a-s-c-tab-shopping">
-                    <span style={{backgroundImage: `url(${aMain})`, 
+                    <a href="/admin/goodsAllList"><span style={{backgroundImage: `url(${aMain})`, 
                                 backgroundRepeat: 'no-repeat',
                                 backgroundPosition: '0px',
-                                backgroundSize: '14px'}}>쇼핑</span>
+                                backgroundSize: '14px'}}>쇼핑</span></a>
                     <div className="a-s-c-tab-shopping-menu">
                         <ul>
                             <li>상품 관리</li>
@@ -49,7 +49,9 @@ function AdminSide() {
                                 backgroundPosition: '0px',
                                 backgroundSize: '14px'}}>쿠폰</span></a>
                     <div className="a-s-c-tab-shopping-menu">
-
+                        <ul>
+                            <a href="/admin/couponAllList"><li>쿠폰 목록</li></a>
+                        </ul>
                     </div>
                 </div>
             </div>

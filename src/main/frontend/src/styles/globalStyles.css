@@ -7,7 +7,6 @@ li {
 
 a {
     text-decoration: none; /* 밑줄 없애기 */
-    display: flex;
     align-items: center;
 }
 
