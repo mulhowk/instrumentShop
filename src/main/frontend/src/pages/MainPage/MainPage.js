@@ -15,12 +15,11 @@ import { getAuthToken,tokenUserInfo,logoutActionHandler } from "../../global/aut
 
 function MainPage() {
 
-    const token =  getAuthToken();
-    const decodedToken = tokenUserInfo(token);
+
 
     return (
         <div className="main-page">
-        <Header token = {decodedToken}/>
+        <Header/>
         <MainCategory/>
         <RollingBanner/>
         <QuickLink/>

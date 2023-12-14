@@ -20,7 +20,7 @@ public class Cart {
     private Long cartNo;
 
     @ManyToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "goods_id", referencedColumnName = "goods_id", nullable = true)
+    @JoinColumn(name = "goods_id", referencedColumnName = "goods_id")
     private Goods goods;
 
     @ManyToOne(cascade = CascadeType.DETACH)

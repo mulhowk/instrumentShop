@@ -3,8 +3,9 @@ import { useState,useEffect  } from "react";
 import MyBuyList from "./MyBuyList";
 
 
-function MyBuyInfo() {
+function MyBuyInfo(props) {
 
+    const memberUid = props.MEMBERUID;
       // 상태를 선언합니다.
   const [points, setPoints] = useState(null);
   const [coupons, setCoupons] = useState(null);
@@ -79,7 +80,7 @@ function MyBuyInfo() {
                         </div>
                         <div className="m-c-g-t-buy-content">
                             {/* 구매내역 */}
-                            <MyBuyList />
+                            <MyBuyList MEMBERUID = {memberUid}/>
                         </div>                        
                     </div>
                     <div className="null-space" />

@@ -17,7 +17,7 @@ public class Options {
     @Column(name = "goods_option", columnDefinition = "NVARCHAR(20)")
     private String goodsOption;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "goods_id", referencedColumnName = "goods_id")
     @JsonIgnore
     private Goods goods;

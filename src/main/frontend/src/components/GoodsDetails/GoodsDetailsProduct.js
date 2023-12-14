@@ -14,6 +14,65 @@ function GoodsDetailsProduct(props) {
     const decodedToken = tokenUserInfo(token);
     const MEMBERUID = decodedToken? decodedToken.UID : null;
 
+    const [wishList, setWishList] = useState([]);
+    const [wishNo, setWishNo] = useState(0);
+    const [wishCheck, setWishCheck] = useState(false);
+    {console.log(wishNo)}
+
+    useEffect(() => {
+        if(MEMBERUID !== null){
+            axios.get(`/wishList/${MEMBERUID}`)
+                .then(res => {
+                    const filterWish = res.data.filter(wish => wish.goods.goodsId === goods.goodsId);
+                    if(filterWish.length !==0){
+                    setWishNo(filterWish[0].wishNo);
+                    setWishList(res.data.map(wishList => wishList.goods.goodsId));
+                    } else {console.log("좋아요 없음")}
+                })
+        } else {console.log("비로그인")}
+    }, []);
+
+    useEffect(() => {
+        if(MEMBERUID !== null){
+            setWishCheck(wishList.includes(goods.goodsId));
+        } else {console.log("비로그인")}
+    }, [wishList]);
+
+    const handelAddWishList = () => {
+
+        const formWishData = new FormData;
+
+        formWishData.append('goods', goods.goodsId);
+        formWishData.append('users', MEMBERUID);
+
+        axios.post(`/wishList/add`, formWishData, {
+            headers : {
+                'Content-type' : 'application/x-www-form-urlencoded'
+            }
+        }).then(createdWishList => {
+            alert('위시리스트에 등록되었습니다!');
+            window.location.reload();
+        })
+            .then(data => console.log(data))
+            .catch(error => console.error('Error creating review: ', error));
+
+    };
+
+    const handelDeleteWishList = () => {
+
+        const isConfirmed = window.confirm('위시리스트에서 삭제하시겠습니까?');
+
+        if(isConfirmed){
+            axios.delete(`/wishList/delete/${wishNo}`)
+                .then(res => {
+                    alert("위시리스트에서 삭제되었습니다!");
+                    window.location.reload();
+                })
+                .catch(error => console.error('Error delete goods: ', error));
+        }
+
+    }
+
     const handlePayment = () =>{
 
         if(goodsOption.length !==0) {
@@ -243,12 +302,35 @@ function GoodsDetailsProduct(props) {
                     }}
                     onClick={handleCart}>장바구니
                     </button>
+                    {MEMBERUID !== null ?
+                        (
+                    wishCheck ?(
+                    <button style={{
+                        backgroundColor: "white",
+                        color: "red", width: "80px",
+                        cursor : "pointer"
+                    }}
+                    onClick={handelDeleteWishList}
+                    >♥
+                    </button>)
+                        : (
+                    <button style={{
+                    backgroundColor: "white",
+                    color: "black", width: "80px",
+                    cursor : "pointer"
+                    }}
+                    onClick={handelAddWishList}
+                    >♡
+                    </button>
+                    )
+                        ) :
                     <button style={{
                         backgroundColor: "white",
                         color: "black", width: "80px",
                         cursor : "pointer"
-                    }}>♡
-                    </button>
+                    }}
+                    >♡
+                    </button> }
                 </div>) : ("")) : ("")}
                 </div>
             </div>

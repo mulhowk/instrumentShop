@@ -6,7 +6,7 @@ import axios from "axios";
 export function SuccessPage() {
     const [searchParams] = useSearchParams();
     const [orderInfo, setOrderInfo] = useState([]);
-
+    {console.log(orderInfo)}
     useEffect(() => {
         const orderInfoParams = searchParams.get('orderInfo');
         if(orderInfoParams){
@@ -20,7 +20,7 @@ export function SuccessPage() {
     }, []);
 
     useEffect(() => {
-        if(orderInfo.goodsId){
+        if(orderInfo.length !==0){
             {console.log(orderInfo.goodsId)}
         const formOrdersData = new FormData();
 
@@ -47,7 +47,7 @@ export function SuccessPage() {
         })
             .catch(error => console.log('Error creating order: ', error));
         }
-    }, []);
+    }, [orderInfo]);
 
 
 

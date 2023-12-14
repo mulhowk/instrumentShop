@@ -7,13 +7,15 @@ import { useNavigate } from 'react-router-dom';
 import LoginContent from './login/LoginForm';
 import Modal from 'react-modal';
 import {Link} from "react-router-dom";
-import {logoutActionHandler} from "../global/auth";
+import {getAuthToken, logoutActionHandler, tokenUserInfo} from "../global/auth";
 import axios from "axios";
 
 function Header(props){
 
-    const token = props.token || null;
-    const memberUid = token? token.UID : null;
+    const token =  getAuthToken();
+    const decodedToken = tokenUserInfo(token);
+
+    const memberUid = decodedToken? decodedToken.UID : null;
     const [sumCart, setSumCart] = useState(0);
 
 
@@ -32,7 +34,7 @@ function Header(props){
     const [isLogin, setIsLogin] = useState(false);
 
     useEffect(() => {
-        if(token){
+        if(decodedToken){
             setIsLogin(true);
         } else {
             setIsLogin(false);
@@ -121,9 +123,9 @@ function Header(props){
                     <LoginContent/>
                 </Modal>
             </div>)}
-                        {isLogin && token.roles[0].name === 'ROLE_MARKETER' &&
+                        {isLogin && decodedToken.roles[0].name === 'ROLE_MARKETER' &&
                             <li id="open-market">
-                                <a href={`/openMarket/${token.brand}`} className="header-menu-text">openMarket</a>
+                                <a href={`/openMarket/${decodedToken.brand}`} className="header-menu-text">openMarket</a>
                             </li>
                         }
                         {isLogin === false &&
@@ -131,12 +133,22 @@ function Header(props){
                                 <a href="/register" className="header-menu-text">SIGN UP</a>
                             </li>
                         }
-                        <li><a href="/myinfo" className="header-menu-text">MYPAGE</a></li>
+                        {isLogin ?
+                        <li>
+                            <a href="/myinfo" className="header-menu-text">MYPAGE</a>
+                        </li> :
+                        <li>
+                            <a onClick={(e) => {
+                                e.preventDefault();
+                                setModalIsOpen(true);
+                            }} className="header-menu-text">MYPAGE</a>
+                        </li>
+                        }
                         <li><a href="/" className="header-menu-text">ORDER</a></li>
                     </ul>
                 </div>
                 <div className="basket">
-                    {token?
+                    {decodedToken?
                     <a href={`/goodsList/cart/${memberUid}`}>
                         <img src="/basket.png" alt='basketImg' width="60" height="70"></img>
                     </a> :
@@ -145,7 +157,7 @@ function Header(props){
                         </a>
                     }
                     <div className="basket-count">
-                        {token?
+                        {decodedToken?
                             <input name="count" className="count-input" value={sumCart} disabled/>
                             :
                             <input name="count" className="count-input" value="0" disabled/>

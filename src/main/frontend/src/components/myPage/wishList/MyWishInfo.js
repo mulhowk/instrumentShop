@@ -3,7 +3,9 @@ import { useState,useEffect  } from "react";
 import MyWishList from "./MyWishList";
 
 
-function MyWishInfo() {
+function MyWishInfo(props) {
+
+    const memberUid = props.MEMBERUID
 
     return (
         
@@ -12,11 +14,11 @@ function MyWishInfo() {
                 <div className="m-c-group">
                     <div className="m-c-g-tab">
                         <div className="m-c-g-t-header">
-                            <p>구매 내역</p>
+                            <p>좋아요 목록</p>
                         </div>
                         <div className="m-c-g-t-wish-content">
-                            {/* 구매내역 */}
-                            <MyWishList/>
+                            {/* 좋아요 */}
+                            <MyWishList MEMBERUID = {memberUid}/>
                         </div>                        
                     </div>
                     <div className="null-space" />

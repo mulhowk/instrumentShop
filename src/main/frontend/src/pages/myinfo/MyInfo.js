@@ -9,14 +9,19 @@ import pImage from "../../img/info/info.svg"
 import React, { useState } from "react";
 import MyWishInfo from "../../components/myPage/wishList/MyWishInfo";
 import MyBuyInfo from "../../components/myPage/buyList/MyBuyInfo";
+import {getAuthToken, tokenUserInfo} from "../../global/auth";
 
 function MyInfo() {
+
+    const token =  getAuthToken();
+    const decodedToken = tokenUserInfo(token);
+    const memberUid = decodedToken.UID;
 
     const [selectedTab, setSelectedTab] = useState('profile'); // 기본값 설정
 
     const ProfileSettings = () => <MyInfoContent />;
-    const PurchaseHistory = () => <MyBuyInfo/>;
-    const Wishlist = () => <MyWishInfo/>;
+    const PurchaseHistory = () => <MyBuyInfo MEMBERUID = {memberUid}/>;
+    const Wishlist = () => <MyWishInfo MEMBERUID = {memberUid}/>;
 
     return (
         <>
@@ -46,8 +51,8 @@ function MyInfo() {
                         </div>
                     </div>
                 {selectedTab === 'profile' && <ProfileSettings />}
-                {selectedTab === 'buyList' && <PurchaseHistory />}
-                {selectedTab === 'wishList' && <Wishlist />}
+                {selectedTab === 'buyList' && <PurchaseHistory/>}
+                {selectedTab === 'wishList' && <Wishlist/>}
                 </div>
             </div>
             <Footer/>

@@ -109,6 +109,7 @@
     text-align: center;
     top: 11px;
     width: 167px;
+    cursor : pointer;
   }
   
   .box .p {

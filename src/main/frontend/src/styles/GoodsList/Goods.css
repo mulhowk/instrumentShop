@@ -52,6 +52,7 @@
 
 .dropdown-option a{
     padding: 5px 10px;
+    display: block;
 }
 
 .goods{
