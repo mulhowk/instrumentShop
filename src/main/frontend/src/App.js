@@ -29,6 +29,7 @@ import AdminCouponList from './pages/admin/AdminCouponList.js';
 import AdminProductAdd from './pages/admin/AdminProductAdd.js';
 import MyPageReview from './components/myPage/inMyReview/MyPageReview.js';
 import InMyReview from './pages/myinfo/InMyReview.js';
+import InMyQnA from './pages/myinfo/InMyQnA.js';
 
 function App() {
 
@@ -62,6 +63,7 @@ function App() {
           <Route path="/admin/couponAllList" element={<AdminCouponList/>}/>
           <Route path="/admin/productAdd" element={<AdminProductAdd/>}/>
           <Route path="/pop/reviewAdd" element={<InMyReview/>}/>
+          <Route path="/pop/qnaAdd" element={<InMyQnA/>}/>
           
       </Routes>
     </BrowserRouter>
