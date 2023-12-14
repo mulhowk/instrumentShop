@@ -1,0 +1,246 @@
+.mypage-review{
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .mypage-review-content {
+    background-color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692nero);
+    border-color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692concrete);
+    border-top-style: solid;
+    border-top-width: 0.8px;
+    height: 458px;
+    position: relative;
+    width: 470.4px;
+  }
+  
+  .mypage-review .strong {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    padding: 29px 148.04px 0px 148.36px;
+    position: absolute;
+    top: 1px;
+    width: 470px;
+  }
+  
+  .mypage-review .text-wrapper {
+    color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692black);
+    font-family: "Malgun Gothic-Bold", Helvetica;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 23px;
+    margin-top: -1px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  .mypage-reivew-point {
+    position: relative;
+    width: 100%;
+    height: 200px;
+  }
+  
+  .mypage-review .div-s {
+    align-items: flex-start;
+    background-color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692wild-sand);
+    border: 1px solid;
+    border-color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692silver);
+    display: flex;
+    flex-direction: column;
+    padding: 150.8px 15.8px 11.8px 16.8px;
+    position: absolute;
+    top: 63px;
+    width: 434px;
+  }
+  
+  .mypage-review .label {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    left: 17px;
+    padding: 0px 19.8px 0px 0px;
+    position: absolute;
+    top: 14px;
+    width: 401px;
+  }
+  
+  .mypage-review .element {
+    color: #999999;
+    position: relative;
+    width: 423px;
+    height: 145px;
+    border: 0px;
+  }
+  
+  .mypage-review .div-dhgs {
+    align-self: stretch;
+    height: 17px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .mypage-review .emphasis {
+    color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692dusty-gray);
+    font-family: "Malgun Gothic-Regular", Helvetica; 
+    font-size: 15px;
+    font-weight: 400;
+    height: 17px;
+    left: 347px;
+    letter-spacing: 0;
+    line-height: 17px;
+    position: absolute;
+    text-align: right;
+    top: -1px;
+    white-space: nowrap;
+  }
+  
+  .mypage-review .span {
+    height: 12px;
+    left: 356px;
+    position: absolute;
+    top: 2px;
+    width: 7px;
+  }
+  
+  .mypage-review .text-wrapper-2 {
+    color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692dusty-gray);
+    font-family: "Malgun Gothic-Regular", Helvetica;
+    font-size: 15px;
+    font-weight: 400;
+    height: 17px;
+    left: 365px;
+    letter-spacing: 0;
+    line-height: 17px;
+    position: absolute;
+    text-align: right;
+    top: -1px;
+    white-space: nowrap;
+  }
+  
+  .mypage-review .div-hptjmmcb {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    left: 0;
+    padding: 28px 0px 26px;
+    position: absolute;
+    top: 242px;
+    width: 470px;
+  }
+  
+  .mypage-review .link {
+    align-items: center;
+    align-self: stretch;
+    background-color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692nero);
+    border: 1px dashed;
+    border-color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692dove-gray);
+    display: flex;
+    gap: 7.68px;
+    height: 64.6px;
+    padding: 0.2px 109.53px 1.4px 110.19px;
+    position: relative;
+  }
+  
+  .mypage-review .before {
+    flex: 0 0 auto;
+    position: relative;
+  }
+  
+  .mypage-review .text-wrapper-3 {
+    color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692mine-shaft);
+    font-family: "Malgun Gothic-Bold", Helvetica;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 63px;
+    margin-top: -1px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .mypage-review .p {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    padding: 0px 11.4px 0px 0px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .mypage-review .text-wrapper-4 {
+    color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692pomegranate);
+    font-family: "Malgun Gothic-Regular", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 19px;
+    margin-top: -1px;
+    position: relative;
+    width: fit-content;
+  }
+  
+  .mypage-review .div-cbggbxc {
+    background-color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692alabaster);
+    box-shadow: inset 0px -1px 0px #e3e3e3, inset 0px 1px 0px #0000000d;
+    height: 47px;
+    left: 0;
+    opacity: 0.9;
+    position: absolute;
+    top: 411px;
+    width: 470px;
+  }
+  
+  .mypage-review .img {
+    height: 17px;
+    left: 18px;
+    position: absolute;
+    top: 15px;
+    width: 17px;
+  }
+  
+  .mypage-review .text-wrapper-5 {
+    color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692mine-shaft);
+    font-family: "Malgun Gothic-Regular", Helvetica;
+    font-size: 15px;
+    font-weight: 400;
+    height: 20px;
+    left: 41px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 13px;
+    white-space: nowrap;
+  }
+  
+  .mypage-review .div-wrapper {
+    align-items: flex-start;
+    display: inline-flex;
+    left: 212px;
+    position: absolute;
+    top: 14px;
+  }
+  
+  .mypage-review .text-wrapper-6 {
+    color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692malachite);
+    font-family: "Malgun Gothic-Bold", Helvetica;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 20px;
+    margin-top: -1px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  

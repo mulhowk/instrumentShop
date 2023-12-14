@@ -1,4 +1,6 @@
 import "../../../styles/myInfo/buyList/myBuyList.css"
+import { createRoot } from 'react-dom/client';
+import InMyReview from "../../../pages/myinfo/InMyReview";
 
 const MyBuyList = () => {
 
@@ -19,6 +21,11 @@ const MyBuyList = () => {
         // ... 여기에 추가 상품 데이터를 넣을 수 있습니다.
     ];
 
+
+    const openPopup = () => {
+      const popupWindow = window.open('/pop/reviewAdd', '_blank', 'width=500,height=700');
+    };
+
     const itemList = items.map((item) => (
         <div className="box" key={item.id}>
           <div className="c-box-user">
@@ -32,10 +39,10 @@ const MyBuyList = () => {
                 </div>
                 <img className="element" alt="Element" src={item.imageSrc} />
                 <div className="overlap">
-                  <div className="text-wrapper-2">리뷰쓰기</div>
+                  <div className="text-wrapper-2" onClick={openPopup}>리뷰쓰기</div>
                 </div>
                 <div className="div-wrapper">
-                  <div className="text-wrapper-2">문의하기</div>
+                  <div className="text-wrapper-2" >문의하기</div>
                 </div>
                 <span className="p">{item.description}</span>
               </div>

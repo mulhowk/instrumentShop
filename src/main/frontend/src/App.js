@@ -27,6 +27,8 @@ import AdminCouponPages from './pages/admin/AdminCouponPages.js';
 import { isAuthTokenValid, logoutActionHandler } from './global/auth.js';
 import AdminCouponList from './pages/admin/AdminCouponList.js';
 import AdminProductAdd from './pages/admin/AdminProductAdd.js';
+import MyPageReview from './components/myPage/inMyReview/MyPageReview.js';
+import InMyReview from './pages/myinfo/InMyReview.js';
 
 function App() {
 
@@ -59,8 +61,7 @@ function App() {
           <Route path="/admin/goodsAllList" element={<AdminProductMange/>}/>
           <Route path="/admin/couponAllList" element={<AdminCouponList/>}/>
           <Route path="/admin/productAdd" element={<AdminProductAdd/>}/>
-          {/* 상품관리 (리스트) */}
-          {/* 상품관리 (등록) */}
+          <Route path="/pop/reviewAdd" element={<InMyReview/>}/>
           
       </Routes>
     </BrowserRouter>
