@@ -17,7 +17,7 @@ public class Category {
     @Column(name = "parent_category", columnDefinition = "NVARCHAR(30)")
     private String parentCategory;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "goods_id", referencedColumnName = "goods_id")
     @JsonIgnore
     private Goods goods;

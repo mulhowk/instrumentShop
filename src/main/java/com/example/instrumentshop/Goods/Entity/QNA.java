@@ -20,7 +20,7 @@ public class QNA {
     @SequenceGenerator(name = "qna_no_sequence", sequenceName = "qna_no_sequence", allocationSize = 1, initialValue = 2023112716)
     private int qnaNo;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "goods_id", referencedColumnName = "goods_id")
     @JsonIgnore
     private Goods goods;

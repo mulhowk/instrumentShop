@@ -46,6 +46,24 @@
         flex : 1;
     }
 
+    .cart-item-delete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    color: white;
+    }
+
+    .cart-item-delete button{
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            color: red;
+            border: none;
+            background-color: white;
+            cursor: pointer;
+    }
+
 .c-i-e-intputbox {
     display: flex;
     background-color: white;
@@ -77,7 +95,7 @@
 }
 
 .c-t-p-footer {
-    height: 200px;
+    height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;

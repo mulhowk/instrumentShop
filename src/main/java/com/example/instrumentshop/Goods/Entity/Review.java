@@ -21,7 +21,7 @@ public class Review {
     @SequenceGenerator(name = "review_no_sequence", sequenceName = "review_no_sequence", allocationSize = 1, initialValue = 2023112716)
     private int reviewNo;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "goods_id", referencedColumnName = "goods_id")
     @JsonIgnore
     private Goods goods;

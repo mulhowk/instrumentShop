@@ -20,12 +20,12 @@ public class QnaReply {
             allocationSize = 1, initialValue = 2023112716)
     private int replyNo;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "goods_id", referencedColumnName = "goods_id")
     @JsonIgnore
     private Goods goods;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "qna_no", referencedColumnName = "qna_no")
     @JsonIgnore
     private QNA qna;

@@ -2,6 +2,7 @@ package com.example.instrumentshop.Order.Entity;
 
 import com.example.instrumentshop.Goods.Entity.Goods;
 import com.example.instrumentshop.Users.Entity.Users;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,7 +28,8 @@ public class Orders {
     private List<Goods> goods;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn
+    @JoinColumn(name = "MEMBERUID", referencedColumnName = "MEMBERUID")
+    @JsonIgnore
     private Users users;
 
     @ElementCollection

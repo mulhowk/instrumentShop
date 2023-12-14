@@ -1,11 +1,28 @@
 import './cartItem.css';
 import React, { useState, useEffect } from 'react';
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 const CartItem = (props) => {
 
     const navigate = useNavigate();
     const [selectedCartList, setSelectedCartList] = useState([]);
+
+    const handleDeleteCarts = (key) => {
+
+        {console.log(key)}
+        const isConfirmed = window.confirm('해당 장바구니를 삭제하시겠습니까?');
+
+
+        if(isConfirmed){
+            axios.delete(`/cart/delete/${key}`)
+                .then(res => {
+                    alert("상품이 삭제되었습니다!");
+                    window.location.reload();
+                })
+                .catch(error => console.error('Error delete goods: ', error));
+        }
+    }
 
     const handlePayment = () =>{
 
@@ -123,7 +140,13 @@ const CartItem = (props) => {
                             <button onClick={() => increment(index)}>+</button>
                         </div>
                         <div className="cart-item-price">
-                            <span>{item.goodsPrice * item.goodsQuantity} 원</span>
+                            <span>{(item.goodsPrice * item.goodsQuantity).toLocaleString()} 원</span>
+                        </div>
+                        <div className="cart-item-delete">
+                            <button key={item.cartNo}
+                                    onClick={() => handleDeleteCarts(item.cartNo)}>
+                                ✖
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -132,7 +155,7 @@ const CartItem = (props) => {
                 <div className="c-t-p-footer">
                     <div className="cart-total-all-price">
                         <span>총 결제 금액</span>
-                        <span>{totalPrice}원</span>
+                        <span>{totalPrice.toLocaleString()}원</span>
                     </div>
                     <button onClick={handlePayment}>구매하기
                     </button>

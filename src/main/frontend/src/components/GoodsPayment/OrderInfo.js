@@ -42,10 +42,10 @@ function OrderInfo(props) {
             return;
         }
 
-        if(selectedOption === 'option0') {
-            console.log('option 1 선택');
-            /* 무통장 입금 이동 url */
-        } else if (selectedOption === 'option1'){
+        if(selectedOption === '무통장입금') {
+            window.location.href =
+                `${window.location.origin}/success?orderInfo=${encodeURIComponent(JSON.stringify(orderInfo))}`;
+        } else if (selectedOption === '토스 간편결제'){
             openModal();
             console.log({isModalOpen});
         } else {
@@ -117,7 +117,8 @@ function OrderInfo(props) {
         orderEmail : memberInfo.orderEmail,
         orderPhone : memberInfo.orderPhone,
         deliverName : memberInfo.deliverName,
-        deliverPhone : memberInfo.deliverPhone
+        deliverPhone : memberInfo.deliverPhone,
+        payInformation : selectedOption
 
     }
 
@@ -251,18 +252,18 @@ function OrderInfo(props) {
                        <label>
                            <input
                                type="radio"
-                               value="option1"
+                               value="tossPay"
                                name="option"
-                               onChange={() => setSelectedOption('option1')}
+                               onChange={() => setSelectedOption('토스 간편결제')}
                            />
                            토스 간편결제
                        </label>
                        <label>
                            <input
                                type="radio"
-                               value="option0"
+                               value="noAccount"
                                name="option"
-                               onChange={() => setSelectedOption('option0')}
+                               onChange={() => setSelectedOption('무통장입금')}
                            />
                            무통장입금
                        </label>

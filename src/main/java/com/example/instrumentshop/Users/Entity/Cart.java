@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-@ToString
 @Getter
 @Builder
 @AllArgsConstructor
@@ -20,11 +19,11 @@ public class Cart {
     @Column(name = "cart_no")
     private Long cartNo;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "goods_id", referencedColumnName = "goods_id")
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "goods_id", referencedColumnName = "goods_id", nullable = true)
     private Goods goods;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "MEMBERUID", referencedColumnName = "MEMBERUID")
     @JsonIgnore
     private Users users;

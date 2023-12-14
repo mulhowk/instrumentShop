@@ -19,4 +19,5 @@ public class CartDTO {
     private int goodsPrice;
     private String goodsName;
     private String goodsImg;
+    private String goodsOption;
 }

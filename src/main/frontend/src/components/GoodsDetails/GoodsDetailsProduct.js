@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "../../styles/GoodsDetails/GoodsDetailsProduct.css";
 import {Link, useNavigate} from "react-router-dom";
+import {getAuthToken, tokenUserInfo} from "../../global/auth";
+import axios from "axios";
 
 function GoodsDetailsProduct(props) {
 
@@ -8,6 +10,9 @@ function GoodsDetailsProduct(props) {
     const goodsOption = goods.options;
     const [selectOptions, setSelectOptions] = useState("");
     const navigate = useNavigate();
+    const token =  getAuthToken();
+    const decodedToken = tokenUserInfo(token);
+    const MEMBERUID = decodedToken? decodedToken.UID : null;
 
     const handlePayment = () =>{
 
@@ -51,6 +56,38 @@ function GoodsDetailsProduct(props) {
             setCount(count - 1);
         }
     };
+
+    const handleCart = () => {
+
+        if(goodsOption.length !==0) {
+            if (!selectOptions) {
+                alert("옵션을 선택해주세요.");
+                return;
+            }
+        }
+
+        const formCartData = new FormData();
+
+        formCartData.append('goods', goods.goodsId);
+        formCartData.append('users', MEMBERUID);
+        formCartData.append('goodsQuantity', count);
+        formCartData.append('goodsPrice', goods.goodsPrice);
+        formCartData.append('goodsName', goods.goodsName);
+        formCartData.append('goodsImg', goods.goodsImg);
+        if(goodsOption.length !==0) {
+            formCartData.append('goodsOption', selectOptions);
+        }
+
+        axios.post(`/cart/cartIn`, formCartData, {
+            headers : {
+                'Content-Type' : 'application/x-www-form-urlencoded'
+            }
+        }).then(createdCart => {
+                alert("장바구니에 담겼습니다!");
+                window.location.reload();
+        }).catch(error => console.log('Error creating order: ', error))
+
+    }
 
     return (
         <div className="product-area">
@@ -203,7 +240,8 @@ function GoodsDetailsProduct(props) {
                         backgroundColor: "black",
                         color: "white", width: "200px", marginRight: "20px",
                         cursor : "pointer"
-                    }}>장바구니
+                    }}
+                    onClick={handleCart}>장바구니
                     </button>
                     <button style={{
                         backgroundColor: "white",

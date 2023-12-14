@@ -14,4 +14,6 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
     @Query("SELECT COALESCE(sum(c.goodsQuantity), 0) from Cart c where c.users.MEMBERUID = :MEMBERUID")
     Integer sumByMEMBERUID(Long MEMBERUID);
 
+    void deleteByCartNo(Long cartNo);
+
 }

@@ -45,4 +45,17 @@ public class CartController {
 
         return cartService.getSumByMEMBERUID(MEMBERUID);
     }
+
+    @DeleteMapping("/cart/delete/{cartNo}")
+    public ResponseEntity<String> deleteCart(@PathVariable Long cartNo){
+
+        try {
+            cartService.deleteCartByCartNo(cartNo);
+            return new ResponseEntity<>("Cart deleted successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to delete cart", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
 }

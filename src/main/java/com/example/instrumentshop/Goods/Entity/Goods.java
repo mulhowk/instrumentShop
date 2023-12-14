@@ -66,7 +66,7 @@ public class Goods {
     @Column(name = "goods_option", length = 20)
     private String goodsOption;
 
-    @OneToMany(mappedBy = "goods", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "goods", cascade = CascadeType.REMOVE)
     private List<Options> options;
 
     @Column(name = "goods_detail_img", length = 100)

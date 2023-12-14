@@ -37,6 +37,7 @@ public class CartService {
                 .goodsName(cartDTO.getGoodsName())
                 .users(cartDTO.getUsers())
                 .goodsImg(cartDTO.getGoodsImg())
+                .goodsOption(cartDTO.getGoodsOption())
                 .build();
 
         cartRepository.save(newCart);
@@ -47,6 +48,11 @@ public class CartService {
     public Integer getSumByMEMBERUID(Long MEMBERUID){
 
         return cartRepository.sumByMEMBERUID(MEMBERUID);
+    }
+
+    public void deleteCartByCartNo(Long cartNo){
+
+        cartRepository.deleteByCartNo(cartNo);
     }
 
 }
