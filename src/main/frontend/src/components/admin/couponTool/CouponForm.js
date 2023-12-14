@@ -6,9 +6,11 @@ const CouponForm = () => {
   return (
     <>
     <div className='tab-header-coupon'>
-        <div className='t-h-c-title'>
-            <span>쿠폰배포</span>
-        </div>
+    <div className="a-n-c-header">
+                    <div className='a-n-c-header-font'>
+                    <span>쿠폰배포</span>
+                    </div>
+                </div>  
         <div className='coupon-form'>
             <div className='coupon-title'>
                 <span>쿠폰이름</span>

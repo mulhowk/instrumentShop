@@ -1,8 +1,7 @@
 import AdminSide from "../../components/admin/AdminSide";
-import AdminProductAll from "../../components/admin/productAll/AdminProductAll";
-import AdminProductFilter from "../../components/admin/productAll/AdminProductFilter";
+import AdminProductCreate from "../../components/admin/productAll/AdminProductCreate";
 
-const AdminProductMange = () => {
+const AdminProductAdd = () => {
     return (
         <>
         <div style={{display:"flex", backgroundColor:"white"}}>
@@ -11,7 +10,7 @@ const AdminProductMange = () => {
         </div>
         <div style={{width:"100%"}}>
             <div style={{width:"100%", display:"flex", justifyContent:"center",paddingTop:"30px"}}>
-                <AdminProductAll/>
+                <AdminProductCreate/>
             </div>
         </div>
     </div>
@@ -19,4 +18,4 @@ const AdminProductMange = () => {
     );
 }
 
-export default AdminProductMange;
+export default AdminProductAdd;
