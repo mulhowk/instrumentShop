@@ -26,6 +26,10 @@ const MyBuyList = () => {
       const popupWindow = window.open('/pop/reviewAdd', '_blank', 'width=500,height=700');
     };
 
+    const qnaPopup = () => {
+      const popupWindow = window.open('/pop/qnaAdd', '_blank', 'width=500,height=700');
+    };
+
     const itemList = items.map((item) => (
         <div className="box" key={item.id}>
           <div className="c-box-user">
@@ -42,7 +46,7 @@ const MyBuyList = () => {
                   <div className="text-wrapper-2" onClick={openPopup}>리뷰쓰기</div>
                 </div>
                 <div className="div-wrapper">
-                  <div className="text-wrapper-2" >문의하기</div>
+                  <div className="text-wrapper-2" onClick={qnaPopup}>문의하기</div>
                 </div>
                 <span className="p">{item.description}</span>
               </div>
