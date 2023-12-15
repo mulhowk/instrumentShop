@@ -2,6 +2,8 @@ import "../../../styles/myInfo/buyList/myBuyList.css"
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import { createRoot } from 'react-dom/client';
+import InMyReview from "../../../pages/myinfo/InMyReview";
 
 const MyBuyList = (props) => {
 
@@ -17,10 +19,9 @@ const MyBuyList = (props) => {
             })
     }, []);
 
-    const handelReview = (goodsId) => {
-        const url = `/goodsDetails/reviewWrite/${goodsId}`;
-        navi(url);
-    }
+    const openPopup = () => {
+        const popupWindow = window.open('/pop/reviewAdd', '_blank', 'width=500,height=700');
+    };
 
     const handelQna = (goodsId) => {
         const url = `/goodsDetails/qnaWrite/${goodsId}`;
@@ -49,7 +50,7 @@ const MyBuyList = (props) => {
                         <img className="element" alt="Element" src={goods.goodsImg} />
                         <div className="overlap">
                             <div className="text-wrapper-2"
-                                 onClick={() => handelReview(goods.goodsId)}>
+                                 onClick={openPopup}>
                                 리뷰쓰기
                             </div>
                         </div>
