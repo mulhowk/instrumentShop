@@ -31,6 +31,7 @@ import MyPageReview from './components/myPage/inMyReview/MyPageReview.js';
 import InMyReview from './pages/myinfo/InMyReview.js';
 import InMyQnA from './pages/myinfo/InMyQnA.js';
 import InMyCoupon from './pages/myinfo/InMyCoupon.js';
+import AdminUserInfo from './pages/admin/AdminUserInfo.js';
 
 function App() {
 
@@ -52,8 +53,9 @@ function App() {
           <Route path="/goodsDetails/reply/:goodsId/:qnaNo" element={<QnaReplyWrite/>}/>
           <Route path="/goodsPayment" element={<GoodsPayment/>}/>
           <Route path="/openMarket/:brand" element={<OpenMarket/>}/>
-          <Route path="/admin" element={<AdminPage/>}/>"
+          <Route path="/admin" element={<AdminPage/>}/>
           <Route path="/admin/user" element={<AdminUser/>}/>
+          <Route path="/admin/user/info" element={<AdminUserInfo/>}/>
           <Route path="/admin/coupon" element={<AdminCouponPages/>}/>
           <Route path="/admin/message" element={<AdminMessage/>}/>
           <Route path="/openMarket/goodsControl" element={<GoodsControl/>}/>

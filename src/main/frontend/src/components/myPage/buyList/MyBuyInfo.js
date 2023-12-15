@@ -67,7 +67,7 @@ function MyBuyInfo() {
                         </div>
                         <div className="m-c-g-tab-small">
                             <div className="m-c-g-t-header">
-                                <p>내 리뷰보기</p>
+                                <p>주문배송</p>
                             </div>
                             <div className="m-c-g-t-content-small">
                                 <div className="m-c-g-t-c-tab first">
