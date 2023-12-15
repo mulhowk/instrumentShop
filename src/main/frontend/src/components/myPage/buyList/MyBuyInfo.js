@@ -5,6 +5,10 @@ import MyBuyList from "./MyBuyList";
 
 function MyBuyInfo() {
 
+    const couponPopup = () => {
+        const popupWindow = window.open('/pop/couponAdd', '_blank', 'width=500,height=700');
+      };
+
       // 상태를 선언합니다.
   const [points, setPoints] = useState(null);
   const [coupons, setCoupons] = useState(null);
@@ -55,7 +59,7 @@ function MyBuyInfo() {
                             <div className="m-c-g-t-header">
                                 <p>내 쿠폰</p>
                             </div>
-                            <div className="m-c-g-t-content-small">
+                            <div className="m-c-g-t-content-small" onClick={couponPopup}>
                                 <div className="m-c-g-t-c-tab first">
                                     <div className="t-small-span">{dummyData.coupons.length} 장</div>
                                 </div>

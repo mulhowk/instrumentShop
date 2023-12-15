@@ -30,6 +30,7 @@ import AdminProductAdd from './pages/admin/AdminProductAdd.js';
 import MyPageReview from './components/myPage/inMyReview/MyPageReview.js';
 import InMyReview from './pages/myinfo/InMyReview.js';
 import InMyQnA from './pages/myinfo/InMyQnA.js';
+import InMyCoupon from './pages/myinfo/InMyCoupon.js';
 
 function App() {
 
@@ -62,8 +63,13 @@ function App() {
           <Route path="/admin/goodsAllList" element={<AdminProductMange/>}/>
           <Route path="/admin/couponAllList" element={<AdminCouponList/>}/>
           <Route path="/admin/productAdd" element={<AdminProductAdd/>}/>
+
+
+
+          
           <Route path="/pop/reviewAdd" element={<InMyReview/>}/>
           <Route path="/pop/qnaAdd" element={<InMyQnA/>}/>
+          <Route path="/pop/couponAdd" element={<InMyCoupon/>}/>
           
       </Routes>
     </BrowserRouter>
