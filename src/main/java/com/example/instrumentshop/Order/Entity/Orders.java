@@ -23,11 +23,11 @@ public class Orders {
     @Column(name = "order_id")
     private Long orderId;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
+    @OneToMany(cascade = CascadeType.DETACH)
     @JoinColumn
     private List<Goods> goods;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "MEMBERUID", referencedColumnName = "MEMBERUID")
     @JsonIgnore
     private Users users;

@@ -88,17 +88,15 @@ function Header(props){
                     <ul className="menu">
                         {isLogin ?
                             (
-                                <div>
                                     <li id="logout">
-                                        <a href="/" className="header-menu-text" onClick={logoutActionHandler}>
+                                        <a href="/" onClick={logoutActionHandler}>
                                             LOGOUT
                                         </a>
                                     </li>
-                                </div>
                             ) : (
                             <div>
                             <li id="login">
-                            <a href="/" className="header-menu-text" onClick={(e) => {
+                            <a href="/" onClick={(e) => {
                             e.preventDefault();
                             setModalIsOpen(true);
                         }}>LOGIN</a>
@@ -125,17 +123,17 @@ function Header(props){
             </div>)}
                         {isLogin && decodedToken.roles[0].name === 'ROLE_MARKETER' &&
                             <li id="open-market">
-                                <a href={`/openMarket/${decodedToken.brand}`} className="header-menu-text">openMarket</a>
+                                <a href={`/openMarket/${decodedToken.brand}`}>openMarket</a>
                             </li>
                         }
                         {isLogin === false &&
                             <li>
-                                <a href="/register" className="header-menu-text">SIGN UP</a>
+                                <a href="/register">SIGN UP</a>
                             </li>
                         }
                         {isLogin ?
                         <li>
-                            <a href="/myinfo" className="header-menu-text">MYPAGE</a>
+                            <a href="/myinfo">MYPAGE</a>
                         </li> :
                         <li>
                             <a onClick={(e) => {
@@ -144,7 +142,7 @@ function Header(props){
                             }} className="header-menu-text">MYPAGE</a>
                         </li>
                         }
-                        <li><a href="/" className="header-menu-text">ORDER</a></li>
+                        <li><a href="/">ORDER</a></li>
                     </ul>
                 </div>
                 <div className="basket">

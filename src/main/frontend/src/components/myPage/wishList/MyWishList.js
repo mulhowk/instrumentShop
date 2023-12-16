@@ -1,45 +1,39 @@
 import "../../../styles/myInfo/myWishList.css"
+import {useEffect, useState} from "react";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
-const MyWishList = () => {
+const MyWishList = (props) => {
 
-    const wishItems = [
-        {
-            id: 1,
-            price: "700,000 원",
-            imageSrc: "7.png",
-            description: "SELMER(셀마) Soprano SA80 II JUBILEE AUG Gold Plated"
-        },
-        {
-            id: 2,
-            price: "380,000 원",
-            imageSrc: "7.png",
-            description: "YAMAHA(야마하) YAS-62 Alto Saxophone"
-        },
-        {
-            id: 3,
-            price: "320,000 원",
-            imageSrc: "7.png",
-            description: "YAMAHA(야마하) PAC-112 퍼시피카 블루"
-        },
-        {
-            id: 4,
-            price: "520,000 원",
-            imageSrc: "7.png",
-            description: "YAMAHA(야마하) YBL-421G Bass Trombone"
-        }
-    ];
+    const navi = useNavigate();
+    const MEMBERUID = props.MEMBERUID;
+    const [wishList, setWishList] = useState([]);
+    {console.log(wishList)}
+    useEffect(() => {
+        axios.get(`/wishList/${MEMBERUID}`)
+            .then(res => {
+                setWishList(res.data);
+            }).catch(error => {
+            console.error('Error fetching data:', error);
+        });
+    }, []);
 
-    const itemWishList = wishItems.map((item) => (
-        <div className="wish-item">
+    const handelGoGoodsDetails = (id) => {
+
+        return navi(`/goodsDetails/${id}`);
+    }
+
+    const itemWishList = wishList.map((item, index) => (
+        <div className="wish-item" onClick={() => handelGoGoodsDetails(item.goods.goodsId)}>
             <div className="wish-item-box">
-                <div className="">
-                    이미지
+                <div className="w-i-img">
+                    <img src={item.goods.goodsImg} alt={item.goods.goodsId}/>
                 </div>
                 <div className="w-i-title">
-                    {item.description} 
+                    {item.goods.goodsName}
                 </div>
-                <div className="w-i-proice">
-                    {item.price}
+                <div className="w-i-price">
+                    {item.goods.goodsPrice.toLocaleString()} 원
                 </div>
             </div>
         </div>

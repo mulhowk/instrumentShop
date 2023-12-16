@@ -1,10 +1,14 @@
 .RollingBanner{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
     border: 1px solid #AAAAAA;
-    width: 90%;
-    margin-left: 85px;
+    width: 1500px;
+    margin-left: 75px;
+}
+
+.custom-carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .custom-indicators {

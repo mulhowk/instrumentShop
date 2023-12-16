@@ -50,8 +50,8 @@ function RollingBanner() {
 
     return (
         <div className="RollingBanner">
-            <button onClick={goToPreviousImage} className="prev-button"></button>
             <div className="custom-carousel">
+                <button onClick={goToPreviousImage} className="prev-button"></button>
                 <Carousel
                     showStatus={false} // 슬라이드 인디케이터 숨기기
                     selectedItem={selectedSlide}
@@ -74,19 +74,19 @@ function RollingBanner() {
                         </div>
                     ))}
                 </Carousel>
-                <div className="custom-indicators">
-                    {Array.from({ length: totalSlides }).map((_, index) => (
-                        <div
-                            key={index}
-                            className={index === selectedSlide ? 'active' : ''}
-                            onClick={() => handleOnChange(index)}
-                        >
-                            {index + 1}
-                        </div>
-                    ))}
-                </div>
+                <button onClick={goToNextImage} className="next-button"></button>
             </div>
-            <button onClick={goToNextImage} className="next-button"></button>
+            <div className="custom-indicators">
+                {Array.from({ length: totalSlides }).map((_, index) => (
+                    <div
+                        key={index}
+                        className={index === selectedSlide ? 'active' : ''}
+                        onClick={() => handleOnChange(index)}
+                    >
+                        {index + 1}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

@@ -51,7 +51,7 @@ function App() {
           <Route path="/goodsDetails/reply/:goodsId/:qnaNo" element={<QnaReplyWrite/>}/>
           <Route path="/goodsPayment" element={<GoodsPayment/>}/>
           <Route path="/openMarket/:brand" element={<OpenMarket/>}/>
-          <Route path="/admin" element={<AdminPage/>}/>"
+          <Route path="/admin" element={<AdminPage/>}/>
           <Route path="/admin/user" element={<AdminUser/>}/>
           <Route path="/admin/coupon" element={<AdminCouponPages/>}/>
           <Route path="/admin/message" element={<AdminMessage/>}/>

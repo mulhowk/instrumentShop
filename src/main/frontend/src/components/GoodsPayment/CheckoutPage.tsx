@@ -85,9 +85,6 @@ export function CheckoutPage (props) {
                         await paymentWidget?.requestPayment({
                             orderId: "3r3xRiVp3pFTT8baWdNIB",
                             orderName: "토스 티셔츠 외 2건",
-                            customerName: "김토스",
-                            customerEmail: "customer123@gmail.com",
-                            customerMobilePhone: "01012341234",
                             successUrl: `${window.location.origin}/success?orderInfo=${encodeURIComponent(JSON.stringify(orderInfo))}`,
                             failUrl: `${window.location.origin}/fail`
                         })

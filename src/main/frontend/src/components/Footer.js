@@ -6,6 +6,7 @@ import '../styles/Footer.css'
 function Footer(){
     return(
         <div className="footer">
+            <div className="account-info">
             <div className="footer-logo">
                 <img src="/logo2.png" alt='logoImg' width="60" height="60"></img>
             </div>
@@ -18,6 +19,7 @@ function Footer(){
                 <p className="color-red">BANK INFO</p>
                 <p>기업은행 01077534135</p>
                 <p>예금주 : 강태혁</p>
+            </div>
             </div>
             <div className="company-info">
                 <p className="color-red">COMPANY INFO</p>

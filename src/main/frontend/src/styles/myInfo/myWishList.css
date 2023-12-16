@@ -3,16 +3,31 @@
     height: 300px;
     border: 1px solid var(--color-silver-100);
     margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
 .wish-item-box {
     text-align: center;
 }
 
+.w-i-img img{
+    width : 200px;
+    height: 200px;
+}
+
+.w-i-price {
+    margin-top : 20px;
+}
+
 .m-c-g-t-wish-content {
-    padding: 10px;
+    padding: 30px;
     border: 1px solid var(--color-silver-100);
     background-color: var(--color-white);
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+
 }
