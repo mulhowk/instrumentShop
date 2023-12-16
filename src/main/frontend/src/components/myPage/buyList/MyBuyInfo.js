@@ -5,6 +5,10 @@ import MyBuyList from "./MyBuyList";
 
 function MyBuyInfo(props) {
 
+    const couponPopup = () => {
+        const popupWindow = window.open('/pop/couponAdd', '_blank', 'width=500,height=700');
+      };
+
     const memberUid = props.MEMBERUID;
       // 상태를 선언합니다.
   const [points, setPoints] = useState(null);
@@ -56,7 +60,7 @@ function MyBuyInfo(props) {
                             <div className="m-c-g-t-header">
                                 <p>내 쿠폰</p>
                             </div>
-                            <div className="m-c-g-t-content-small">
+                            <div className="m-c-g-t-content-small" onClick={couponPopup}>
                                 <div className="m-c-g-t-c-tab first">
                                     <div className="t-small-span">{dummyData.coupons.length} 장</div>
                                 </div>
@@ -64,7 +68,7 @@ function MyBuyInfo(props) {
                         </div>
                         <div className="m-c-g-tab-small">
                             <div className="m-c-g-t-header">
-                                <p>내 리뷰보기</p>
+                                <p>주문배송</p>
                             </div>
                             <div className="m-c-g-t-content-small">
                                 <div className="m-c-g-t-c-tab first">

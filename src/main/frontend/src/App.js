@@ -30,6 +30,8 @@ import AdminProductAdd from './pages/admin/AdminProductAdd.js';
 import MyPageReview from './components/myPage/inMyReview/MyPageReview.js';
 import InMyReview from './pages/myinfo/InMyReview.js';
 import InMyQnA from './pages/myinfo/InMyQnA.js';
+import InMyCoupon from './pages/myinfo/InMyCoupon.js';
+import AdminUserInfo from './pages/admin/AdminUserInfo.js';
 
 function App() {
 
@@ -53,6 +55,7 @@ function App() {
           <Route path="/openMarket/:brand" element={<OpenMarket/>}/>
           <Route path="/admin" element={<AdminPage/>}/>
           <Route path="/admin/user" element={<AdminUser/>}/>
+          <Route path="/admin/user/info" element={<AdminUserInfo/>}/>
           <Route path="/admin/coupon" element={<AdminCouponPages/>}/>
           <Route path="/admin/message" element={<AdminMessage/>}/>
           <Route path="/openMarket/goodsControl" element={<GoodsControl/>}/>
@@ -62,8 +65,13 @@ function App() {
           <Route path="/admin/goodsAllList" element={<AdminProductMange/>}/>
           <Route path="/admin/couponAllList" element={<AdminCouponList/>}/>
           <Route path="/admin/productAdd" element={<AdminProductAdd/>}/>
+
+
+
+          
           <Route path="/pop/reviewAdd" element={<InMyReview/>}/>
           <Route path="/pop/qnaAdd" element={<InMyQnA/>}/>
+          <Route path="/pop/couponAdd" element={<InMyCoupon/>}/>
           
       </Routes>
     </BrowserRouter>

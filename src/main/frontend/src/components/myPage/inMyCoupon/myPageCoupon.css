@@ -1,0 +1,24 @@
+.mypage-coupon {
+    background-color: white;
+    width: 500px;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mypage-coupon-header {
+    width: 100%;
+}
+
+.mypage-coupon-header div{
+    display: flex;
+    height: 40px;
+    border-bottom: 1px solid gray;
+    justify-content: center;
+    align-items: center;
+}
+
+.mypage-coupon-header div span {
+    font-size: 20px;
+    font-weight: bold;
+}

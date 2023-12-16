@@ -23,6 +23,11 @@ const MyBuyList = (props) => {
         const popupWindow = window.open('/pop/reviewAdd', '_blank', 'width=500,height=700');
     };
 
+    const qnaPopup = () => {
+      const popupWindow = window.open('/pop/qnaAdd', '_blank', 'width=500,height=700');
+    };
+
+
     const handelQna = (goodsId) => {
         const url = `/goodsDetails/qnaWrite/${goodsId}`;
         navi(url);
