@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+    @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @Entity
     @Builder

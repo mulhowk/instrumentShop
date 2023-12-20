@@ -36,7 +36,7 @@ function AddressTab() {
 
     return (    
         <>
-          <div className="member-ssg-com-by" style={{backgroundColor:"white", height:"500px", overflow:"hidden"}} >
+          <div className="member-ssg-com-by" style={{backgroundColor:"white", height:"100%", overflow:"hidden", paddingBottom:"20px"}} >
       <div className="div-pop-content">
         <div className="div-delivery-reg">
           <div className="form-fieldset">
