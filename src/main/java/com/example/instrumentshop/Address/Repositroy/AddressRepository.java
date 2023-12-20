@@ -1,6 +1,7 @@
 package com.example.instrumentshop.Address.Repositroy;
 
 import com.example.instrumentshop.Address.Entity.Address;
+import com.example.instrumentshop.Users.Entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +10,9 @@ import java.util.List;
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {
 
-    // 특정 memberUid에 해당하는 모든 주소를 조회하는 메서드
-    List<Address> findByMEMBERUID(Long MEMBERUID);
+    // User 엔티티를 이용한 조회 메서드
+    List<Address> findByUsers(Users user);
+
+    boolean existsByUsersAndIsUse(Users user, boolean isUse);
 
 }

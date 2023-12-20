@@ -10,6 +10,40 @@ function AddressTab() {
     const [address, setAddress] = useState();
     const [jibunAddress, setJibunAddress] = useState();
 
+    const [formData, setFormData] = useState({
+        addressNickname: '',
+        addressReceiver: '',
+        memberPhone: '',
+        // 다른 필드들...
+    });
+
+    // 폼 필드 변경 핸들러
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    // '등록' 버튼 클릭 이벤트 핸들러
+    const handleSubmit = async () => {
+        try {
+            const response = await fetch('/api/address', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Something went wrong');
+            }
+
+            // 성공 처리
+            console.log('Address saved successfully');
+        } catch (error) {
+            console.error('Error saving address:', error);
+        }
+    };
+
     // PopupPostCode 컴포넌트로부터 주소 데이터를 받아 상태를 업데이트하는 함수입니다.
     const handleAddressSelect = (data) => {
         setAddress(data);
@@ -98,9 +132,9 @@ function AddressTab() {
         </div>
         <div className="div-pop-btn-area">
           <div className="link-2">
-            <div className="text-wrapper-9">확인</div>
+              <button onClick={handleSubmit}>등록</button>
           </div>
-          <div className="link-3" onClick={() => window.close()}>
+            <div className="link-3" onClick={() => window.close()}>
             <div className="text-wrapper-10" >취소</div>
           </div>
         </div>

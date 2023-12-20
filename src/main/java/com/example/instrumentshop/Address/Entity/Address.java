@@ -1,5 +1,6 @@
 package com.example.instrumentshop.Address.Entity;
 
+import com.example.instrumentshop.Users.Entity.Users;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,8 +17,9 @@ public class Address {
     @Column(name = "ADDRESSID", nullable = false)
     private Long ADDRESSID;
 
-    @Column(name = "MEMBERUID", nullable = false)
-    private Long MEMBERUID;
+    @ManyToOne
+    @JoinColumn(name = "MEMBERUID")
+    private Users users;
 
     @Column(nullable = false, length = 10)
     private String addressReceiver;
@@ -28,5 +30,6 @@ public class Address {
     @Column(nullable = false)
     private String addressValue; // 주소
     private String addressPostnumber; // 우편번호
-
+    @Column(nullable = false)
+    private boolean isUse; // 기본 주소 여부
 }
