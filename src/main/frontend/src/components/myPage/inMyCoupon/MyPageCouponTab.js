@@ -1,32 +1,50 @@
 import './myPageCouponTab.css';
+import {getAuthToken, tokenUserInfo} from "../../../global/auth";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 const MyPageCouponTab = () => {
 
-    const couponList = [
-        {
-            id: 1,
-            name: '전 제품 20% 할인(최대 5만원)',
-            discount: '20%',
-            description: '최대 5만원 할인, 패키지 제품 제외',
-            date: '2024년 01월 03일 24시까지'
-        }
-    ]
+    const token =  getAuthToken();
+    const decodedToken = tokenUserInfo(token);
+    const memberUid = decodedToken? decodedToken.UID : null;
+    const [memberCoupon, setMemberCoupon] = useState([]);
+
+
+    useEffect(() => {
+        axios.get(`/api/coupons/users/coupons/${memberUid}`)
+            .then(res => {
+                setMemberCoupon(res.data);
+            }).catch(error => {
+            console.log('Error fetching data:', error );
+        });
+    }, []);
 
     return(
     <>
-        {couponList.map((coupon) => (
-            <div key={coupon.id} className="coupon-content-tab">
+        {memberCoupon.map((coupon) => (
+            <div key={coupon.coupon.couponId} className="coupon-content-tab">
                 <div className="coupon-discount">
-                    <span>{coupon.discount} 할인</span>
+                    {coupon.coupon.couponDiscount >= 1 ?
+                        <span>{coupon.coupon.couponDiscount}% 할인</span>
+                        :
+                        <span>{coupon.coupon.couponValue}원 할인</span>
+                    }
                 </div>
                 <div className="coupon-title">
-                    <span>{coupon.name}</span>
+                    <span>{coupon.coupon.couponName}</span>
                 </div>
                 <div className="coupon-description">
-                    <span>{coupon.description}</span>
+                    {coupon.coupon.couponDiscount >= 1 ?
+                        <span>최대 5만원 할인</span>
+                        :
+                        ""
+                    }
                 </div>
                 <div className="coupon-date">
-                    <span>{coupon.date}</span>
+                    <span>{coupon.coupon.couponEndAt[0]}년&nbsp;
+                         {coupon.coupon.couponEndAt[1]}월&nbsp;
+                         {coupon.coupon.couponEndAt[2]}일 까지 사용 가능</span>
                 </div>
             </div>
         ))}

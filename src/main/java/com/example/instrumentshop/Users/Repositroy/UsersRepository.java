@@ -29,4 +29,6 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 
     // USER 역할을 가진 사용자 조회
     List<Users> findBySocialRole(String socialRole);
+
+    Users findByMEMBERUID(Long MEMBERUID);
 }

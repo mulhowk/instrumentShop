@@ -20,7 +20,7 @@ public class UserCouponMap {
 
     @ManyToOne
     @JoinColumn(name = "MEMBERUID")
-    private Users user;
+    private Users users;
 
     @ManyToOne
     @JoinColumn(name = "couponId")

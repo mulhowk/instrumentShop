@@ -6,7 +6,7 @@ import Header from "../../Header";
 import Footer from "../../Footer";
 
 
-function QnaReplyWrite() {
+function    QnaReplyWrite() {
 
     const params = useParams();
     const qnaNo = params.qnaNo;

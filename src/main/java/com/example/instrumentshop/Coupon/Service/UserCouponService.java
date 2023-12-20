@@ -38,12 +38,19 @@ public class UserCouponService {
     // 개별 유저에게 쿠폰 매핑
     private void distributeCouponToUser(Coupon coupon, Users user) {
         UserCouponMap userCouponMap = new UserCouponMap();
-        userCouponMap.setUser(user);
+        userCouponMap.setUsers(user);
         userCouponMap.setCoupon(coupon);
         userCouponMap.setUsed(false);
         userCouponMap.setAssignedDate(LocalDate.now());
 
         userCouponRepository.save(userCouponMap);
+    }
+
+    @Transactional
+    public List<UserCouponMap> getUserCouponByUser(Long MEMBERUID){
+
+
+        return userCouponRepository.findByUsers_MEMBERUID(MEMBERUID);
     }
 
 }

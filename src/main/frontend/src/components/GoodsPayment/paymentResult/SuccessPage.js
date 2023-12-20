@@ -63,6 +63,17 @@ export function SuccessPage() {
                       searchParams.get("amount")
                   ).toLocaleString()}`} 원</p>
               </div>
+              <br/>
+              <div>
+                  <p>(무통장 입금으로 결제하신 고객님께서는 계좌 이체를 하셔야 배송이 가능합니다!)</p>
+              </div>
+              <br/>
+              <div>
+                  <p>계좌 번호 : 기업은행 01077534135</p>
+              </div>
+              <div>
+                  <p>예금주 : 강태혁</p>
+              </div>
               <div>
                   <Link to="/">
                   <button className="modal-button">

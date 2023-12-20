@@ -142,7 +142,14 @@ function Header(props){
                             }} className="header-menu-text">MYPAGE</a>
                         </li>
                         }
-                        <li><a href="/">ORDER</a></li>
+                        {isLogin ?
+                        <li><a href="/myinfo">ORDER</a></li>
+                            :
+                            <a onClick={(e) => {
+                                e.preventDefault();
+                                setModalIsOpen(true);
+                            }} className="header-menu-text">ORDER</a>
+                        }
                     </ul>
                 </div>
                 <div className="basket">

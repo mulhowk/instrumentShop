@@ -1,13 +1,17 @@
 package com.example.instrumentshop.Coupon.Controller;
 
 import com.example.instrumentshop.Coupon.DTO.CouponDTO;
+import com.example.instrumentshop.Coupon.Entity.Coupon;
+import com.example.instrumentshop.Coupon.Entity.UserCouponMap;
+import com.example.instrumentshop.Coupon.Service.CouponService;
 import com.example.instrumentshop.Coupon.Service.UserCouponService;
+import com.example.instrumentshop.Users.Entity.Users;
+import com.example.instrumentshop.Users.Repositroy.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserCouponController {
 
     private final UserCouponService userCouponService;
+    private final CouponService couponService;
 
     // 쿠폰 생성 및 사용자에게 배포
     @PostMapping("/distribute")
@@ -26,6 +31,18 @@ public class UserCouponController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error distributing coupon: " + e.getMessage());
         }
+    }
+
+    @GetMapping("/users/coupons/{MEMBERUID}")
+    public List<UserCouponMap> getUsersCoupon(@PathVariable Long MEMBERUID){
+
+        return userCouponService.getUserCouponByUser(MEMBERUID);
+    }
+
+    @GetMapping("/coupons/{couponId}")
+    public Coupon getCouponByCouponId(@PathVariable Long couponId){
+
+        return couponService.getCouponByCouponId(couponId);
     }
 
 }

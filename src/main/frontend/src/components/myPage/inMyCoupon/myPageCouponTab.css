@@ -6,6 +6,7 @@
     padding: 8px;
     border-radius: 10px;
     box-shadow: 0px 0px 2px gray;
+    cursor: pointer;
 }
 
 .coupon-discount {

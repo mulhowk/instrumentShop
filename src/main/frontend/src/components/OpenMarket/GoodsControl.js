@@ -378,7 +378,7 @@ function GoodsControl() {
 
     return (
         <div>
-        {goods ? (
+        {goods.length !==0 ? (
             <div className="open-market">
             <div className="open-market-header">
                 <div className="open-market-header-title">

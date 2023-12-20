@@ -1,13 +1,16 @@
 .goods-list-categories{
-    margin-left: 215px;
+    margin-left: 200px;
     margin-right: 200px;
-    width: 80%;
+    width: 1690px;
 }
 
 .goods-list-category-title{
     color: #FFFFFF;
     font-weight: bold;
     margin-top: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .goods-list-category{

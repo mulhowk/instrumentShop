@@ -28,7 +28,7 @@
 .header-menu{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     width: 600px;
     flex : 3.2;
 }

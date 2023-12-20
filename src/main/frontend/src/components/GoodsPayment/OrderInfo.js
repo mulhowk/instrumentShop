@@ -3,6 +3,9 @@ import '../../styles/GoodsPayment/OrderInfo.css'
 import Modal from "react-modal";
 import {CheckoutPage} from "./CheckoutPage.tsx";
 import {getAuthToken, tokenUserInfo} from "../../global/auth";
+import axios from "axios";
+import InMyCoupon from "../../pages/myinfo/InMyCoupon";
+import CouponList from "./CouponList";
 
 function OrderInfo(props) {
 
@@ -13,6 +16,101 @@ function OrderInfo(props) {
     const MEMBERUID = decodedToken? decodedToken.UID : null;
     const goods = props.goods;
     const memberInfo = props.memberData;
+
+    const [couponModal, setCouponModal] = useState(false);
+    const [selectedCoupon, setSelectedCoupon] = useState([]);
+    const [modify, setModify] = useState(new Array(goods.length).fill(false));
+    const [payIndex, setPayIndex] = useState();
+    {console.log(modify)}
+
+
+    const openCouponModal = (index) => {
+        {console.log(modify[index])}
+        if(!modify[index]) {
+            setCouponModal(true);
+            setPayIndex(index);
+        } else {
+            alert("이미 쿠폰을 적용했습니다!")
+        }
+    }
+
+    const openCouponModalNoIndex = () => {
+        if(!modify[0]){
+            setCouponModal(true);
+        } else {
+            alert("이미 쿠폰을 적용했습니다!");
+        }
+    }
+
+    const closeCouponModal = () => {
+        setCouponModal(false);
+    }
+
+    useEffect(() => {
+        if(selectedCoupon.length !== 0){
+            if(!Array.isArray(goods)){
+                if(selectedCoupon.couponDiscount > 0){
+                    const newTotalPrice = totalPrice * (1-(selectedCoupon.couponDiscount/100));
+                    if(totalPrice - newTotalPrice >= selectedCoupon.couponLimit) {
+                        const limitTotalPrice = totalPrice - selectedCoupon.couponLimit;
+                        const newModify = [...modify];
+                        setTotalPrice(limitTotalPrice);
+                        alert("쿠폰이 적용되었습니다!");
+                        newModify[0] = true;
+                        setModify(newModify);
+                    } else {
+                        const newModify = [...modify];
+                        setTotalPrice(newTotalPrice);
+                        alert("쿠폰이 적용되었습니다!");
+                        newModify[0] = true;
+                        setModify(newModify);
+                    }
+                } else {
+                    const newTotalPrice = totalPrice - selectedCoupon.couponValue;
+                    const newModify = [...modify];
+                    setTotalPrice(newTotalPrice);
+                    alert("쿠폰이 적용되었습니다!");
+                    newModify[0] = true;
+                    setModify(newModify);
+                }
+            }
+            else {
+                console.log(selectedCoupon);
+                const coupon = selectedCoupon.coupon;
+                const index = selectedCoupon.productNum;
+                if(coupon.couponDiscount > 0){
+                    const newTotalPrice = [...totalPrice];
+
+                    newTotalPrice[index] = totalPrice[index] * (1-(coupon.couponDiscount/100));
+
+                    if(totalPrice[index] - newTotalPrice[index] >= coupon.couponLimit){
+                        const newModify = [...modify];
+                        newTotalPrice[index] = totalPrice[index] - coupon.couponLimit;
+                        setTotalPrice(newTotalPrice);
+                        alert("쿠폰이 적용되었습니다!");
+                        newModify[index] = true;
+                        setModify(newModify);
+                    } else {
+                        const newModify = [...modify];
+                        setTotalPrice(newTotalPrice);
+                        alert("쿠폰이 적용되었습니다!");
+                        newModify[index] = true;
+                        setModify(newModify);
+                    }
+
+                } else {
+                    const newTotalPrice = [...totalPrice];
+                    const newModify = [...modify];
+                    newTotalPrice[index] = totalPrice[index] - coupon.couponValue;
+                    setTotalPrice(newTotalPrice);
+                    alert("쿠폰이 적용되었습니다!");
+                    newModify[index] = true;
+                    setModify(newModify);
+                }
+            }
+        }
+    }, [selectedCoupon]);
+
 
     const handleButtonClick = () => {
         {console.log(orderInfo)}
@@ -64,15 +162,20 @@ function OrderInfo(props) {
     }
 
     const [deliverPrice, setDeliverPrice] = useState(3000);
+
     const productPrice = goods.length >= 2 ? goods.map(goods => goods.goodsPrice) : goods.goodsPrice;
+
     const productQuantity = goods.length >= 2 ? goods.map(goods => goods.goodsQuantity) : goods.goodsQuantity;
-    const totalPrice = goods.length >=2 ?
+
+    const [totalPrice, setTotalPrice] = useState(goods.length >=2 ?
         productPrice.map((value, index) => value * productQuantity[index])
-    : productPrice * productQuantity;
+    : productPrice * productQuantity);
+
     const finalPrice = goods.length >= 2 ?
-        totalPrice.reduce((sum, value) => sum + value, 0)
-    : totalPrice;
-    const pay = finalPrice + deliverPrice;
+        Math.round(totalPrice.reduce((sum, value) => sum + value, 0))
+    : Math.round(totalPrice);
+
+    const pay = Math.round(finalPrice + deliverPrice);
 
     useEffect(() => {
         {console.log(totalPrice)}
@@ -152,11 +255,34 @@ function OrderInfo(props) {
                        }
                    </div>
                </div>
+               <Modal
+                   appElement={document.getElementById('root')}
+                   isOpen = {couponModal}
+                   style={{
+                       overlay: {
+                           display: 'flex',
+                           justifyContent: 'center',
+                           alignItems: 'center'
+
+                       },
+                       content : {
+                           width: '350px',
+                           height: '460px',
+                           position: 'absolute',
+                           inset: ''
+                       }
+                   }}>
+               <CouponList
+                   onClose = {closeCouponModal}
+                   onSelectCoupon = {setSelectedCoupon}
+                   index = {payIndex}
+                   />
+               </Modal>
                <div className="order-info-content-count">
                    <p>{goods.goodsQuantity}</p>
                </div>
                <div className="order-info-content-discount">
-                   <button>쿠폰 확인</button>
+                   <button onClick={() => openCouponModal(index)}>쿠폰 확인</button>
                </div>
                <div className="order-info-content-price">
                    <p>{totalPrice[index].toLocaleString()} 원</p>
@@ -177,8 +303,30 @@ function OrderInfo(props) {
                    <div className="order-info-content-count">
                        <p>{goods.goodsQuantity}</p>
                    </div>
+                   <Modal
+                       appElement={document.getElementById('root')}
+                       isOpen = {couponModal}
+                       style={{
+                           overlay: {
+                               display: 'flex',
+                               justifyContent: 'center',
+                               alignItems: 'center'
+
+                           },
+                           content : {
+                               width: '350px',
+                               height: '460px',
+                               position: 'absolute',
+                               inset: ''
+                           }
+                       }}>
+                       <CouponList
+                           onClose = {closeCouponModal}
+                           onSelectCoupon = {setSelectedCoupon}
+                       />
+                   </Modal>
                    <div className="order-info-content-discount">
-                       <button>쿠폰 확인</button>
+                       <button onClick={openCouponModalNoIndex}>쿠폰 확인</button>
                    </div>
                    <div className="order-info-content-price">
                        <p>{totalPrice.toLocaleString()} 원</p>
