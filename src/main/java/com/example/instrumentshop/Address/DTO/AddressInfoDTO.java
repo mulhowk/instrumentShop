@@ -1,2 +1,16 @@
-package com.example.instrumentshop.Address.DTO;public class AddressInfoDTO {
+package com.example.instrumentshop.Address.DTO;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class AddressInfoDTO {
+
+    private Long memberUid;
+
 }

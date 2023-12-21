@@ -3,13 +3,14 @@ import MainCategory from "../../components/MainCategory";
 import Footer from "../../components/Footer";
 
 import MyInfoContent from "../../components/myPage/MyInfoContent";
-
+import axios from 'axios';
 import "../../styles/myInfo/myInfoSide.css"
 import pImage from "../../img/info/info.svg"
-import React, { useState } from "react";
+import React, { useEffect , useState} from "react";
 import MyWishInfo from "../../components/myPage/wishList/MyWishInfo";
 import MyBuyInfo from "../../components/myPage/buyList/MyBuyInfo";
 import {getAuthToken, tokenUserInfo} from "../../global/auth";
+
 
 function MyInfo() {
 
@@ -18,8 +19,24 @@ function MyInfo() {
     const memberUid = decodedToken.UID;
 
     const [selectedTab, setSelectedTab] = useState('profile'); // 기본값 설정
+    const [userData, setUserData] = useState();
 
-    const ProfileSettings = () => <MyInfoContent />;
+    useEffect(() => {
+        const fetchUserData = () => {
+            axios.post('/api/user/info', { memberUid: memberUid })
+                .then(response => {
+                    setUserData(response.data);
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error("Error fetching user data: ", error);
+                });
+        };
+
+        fetchUserData();
+    }, []);
+
+    const ProfileSettings = () => <MyInfoContent userData = {userData} />;
     const PurchaseHistory = () => <MyBuyInfo MEMBERUID = {memberUid}/>;
     const Wishlist = () => <MyWishInfo MEMBERUID = {memberUid}/>;
 
@@ -33,8 +50,8 @@ function MyInfo() {
                             <div className="profile-left">
                                 <div className="p-l-info">
                                     <img className="image-icon" alt="" src={pImage} />
-                                    <p className="p-l-i-email">nelap1234@gmail.com</p>  
-                                    <b className="p-l-i-nickName">닉네임</b>                      
+                                    <p className="p-l-i-email">{userData && userData.member_email}</p>
+                                    <b className="p-l-i-nickName">{userData && userData.member_name}</b>
                                 </div>
                             <div className="p-l-info-content">
                                 <div className="p-l-i-button">

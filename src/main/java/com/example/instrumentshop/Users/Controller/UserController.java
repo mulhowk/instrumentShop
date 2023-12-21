@@ -45,9 +45,9 @@ public class UserController {
         return new ResponseEntity<>(userService.register(request), HttpStatus.OK);
     }
 
-    @GetMapping("/user/info")
-    public ResponseEntity<UsersDTO.SignResponse> getUser(@RequestParam String email) throws Exception {
-        return new ResponseEntity<>( userService.getUser(email), HttpStatus.OK);
+    @PostMapping("/user/info")
+    public ResponseEntity<UsersDTO.SignResponse> getUser(@RequestBody UsersDTO.UserInfoDTO request) throws Exception {
+        return new ResponseEntity<>(userService.getUser(request.getMemberUid()), HttpStatus.OK);
     }
 
     @GetMapping("/user/login/check")

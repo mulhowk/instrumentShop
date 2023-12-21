@@ -6,9 +6,10 @@ import MyPageAddress from "./MyPageAddress";
 import { useOpenInWindow }  from 'use-open-window';
 
 
-function MyInfoContent() {
+function MyInfoContent(prop) {
+    const userData = prop.userData;
 
-
+    console.log(userData);
     const url = '/myinfo/address';
     const options = {
       centered: true, /* default */
@@ -40,7 +41,7 @@ function MyInfoContent() {
                                 backgroundPosition: '20px',
                                 backgroundSize: '20px'
                             }}>
-                                <span className="t-span">함형우</span>
+                                {userData && <span className="t-span">{userData.member_name}</span>}
                             </div>
                             <hr className="t-hr" />
                             <div className="m-c-g-t-c-tab"
@@ -49,7 +50,7 @@ function MyInfoContent() {
                                 backgroundPosition: '20px',
                                 backgroundSize: '20px'
                             }}>
-                                <span className="t-span">01023447239</span>
+                                {userData && <span className="t-span">{userData.member_phone}</span>}
                             </div>
                             <hr className="t-hr" />
                             <div className="m-c-g-t-c-tab"
@@ -58,7 +59,7 @@ function MyInfoContent() {
                                 backgroundPosition: '20px',
                                 backgroundSize: '20px'
                             }}>
-                                <span className="t-span">nelap1234@gmaiki.com</span>
+                                {userData && <span className="t-span">{userData.member_email}</span>}
                             </div>
                         </div>
                     </div>
@@ -85,7 +86,7 @@ function MyInfoContent() {
                             </div>
                             <hr className="t-hr" />
                             <div className="m-c-g-t-address">
-                                <MyPageAddress/>
+                                <MyPageAddress userData = {userData} />
                             </div>
                         </div>                        
                     </div>

@@ -1,6 +1,7 @@
 package com.example.instrumentshop.Address.Service;
 
 import com.example.instrumentshop.Address.DTO.AddressDTO;
+import com.example.instrumentshop.Address.DTO.AddressResponseDTO;
 import com.example.instrumentshop.Address.Entity.Address;
 import com.example.instrumentshop.Address.Repositroy.AddressRepository;
 import com.example.instrumentshop.Users.Entity.Users;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,10 +21,20 @@ public class AddressService {
     private final AddressRepository addressRepository;
     private final UsersRepository usersRepository;
 
-    public List<Address> getAddressesByUser(Long memberId) {
+    public List<AddressResponseDTO> getAddressesByUser(Long memberId) {
         Users users = usersRepository.findById(memberId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
-        return addressRepository.findByUsers(users);
+
+        return addressRepository.findByUsers(users).stream()
+                .map(address -> AddressResponseDTO.builder()
+                        .addressId(address.getADDRESSID())
+                        .addressReceiver(address.getAddressReceiver())
+                        .addressNickname(address.getAddressNickname())
+                        .memberPhone(address.getUsers().getMemberPhone()) // 이 부분은 address 객체 구조에 따라 다를 수 있습니다.
+                        .addressValue(address.getAddressValue())
+                        .addressPostnumber(address.getAddressPostnumber())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     @Transactional

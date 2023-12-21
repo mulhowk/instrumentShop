@@ -87,5 +87,10 @@ public class UsersDTO {
         private String password;
 
     }
+    @NoArgsConstructor
+    @Data
+    public static class UserInfoDTO {
+        private Long memberUid;
+    }
 
 }

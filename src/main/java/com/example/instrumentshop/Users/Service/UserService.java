@@ -76,9 +76,8 @@ public class UserService {
         return true;
     }
 
-    public UsersDTO.SignResponse getUser(String email) throws Exception {
-        Users users = usersRepository.findByMemberEmail(email).orElseThrow(() ->
-                new BadCredentialsException("잘못된 계정정보입니다."));
+    public UsersDTO.SignResponse getUser(Long memberUid) throws Exception {
+        Users users = usersRepository.findByMEMBERUID(memberUid);
 
         return new UsersDTO.SignResponse(users);
     }

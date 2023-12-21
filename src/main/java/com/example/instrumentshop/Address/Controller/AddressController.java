@@ -1,6 +1,8 @@
 package com.example.instrumentshop.Address.Controller;
 
 import com.example.instrumentshop.Address.DTO.AddressDTO;
+import com.example.instrumentshop.Address.DTO.AddressInfoDTO;
+import com.example.instrumentshop.Address.DTO.AddressResponseDTO;
 import com.example.instrumentshop.Address.Entity.Address;
 import com.example.instrumentshop.Address.Service.AddressService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/addresses")
+@RequestMapping("/api/address")
 @RequiredArgsConstructor
 public class AddressController {
 
@@ -20,9 +22,9 @@ public class AddressController {
 
 
     // 특정 MEMBERUID에 해당하는 모든 주소를 조회하는 엔드포인트
-    @GetMapping("/{MEMBERUID}")
-    public ResponseEntity<List<Address>> getAddressesByMemberUid(@PathVariable Long MEMBERUID) {
-        List<Address> addresses = addressService.getAddressesByUser(MEMBERUID);
+    @PostMapping("/info")
+    public ResponseEntity<List<AddressResponseDTO>> getAddressesByMemberUid(@RequestBody AddressInfoDTO request) {
+        List<AddressResponseDTO> addresses = addressService.getAddressesByUser(request.getMemberUid());
         return ResponseEntity.ok(addresses);
     }
 
