@@ -16,35 +16,50 @@ function OrderInfo(props) {
     const MEMBERUID = decodedToken? decodedToken.UID : null;
     const goods = props.goods;
     const memberInfo = props.memberData;
-
-    const [couponModal, setCouponModal] = useState(false);
+    const [memberCoupon, setMemberCoupon] = useState([]);
+    const [productIndex, setProductIndex] = useState();
     const [selectedCoupon, setSelectedCoupon] = useState([]);
-    const [modify, setModify] = useState(new Array(goods.length).fill(false));
-    const [payIndex, setPayIndex] = useState();
-    {console.log(modify)}
+    const [useCoupon, setUseCoupon] = useState([]);
+    const [useCouponState, setUseCouponState] = useState([]);
+    // {console.log(memberCoupon)}
+    {console.log(useCoupon)}
+    // {console.log(useCouponState)}
 
+    useEffect(() => {
+        if(MEMBERUID.length !==0 ){
+            axios.get(`/api/coupons/users/coupons/${MEMBERUID}`)
+                .then(res => {
+                    setMemberCoupon(res.data);
+                    setUseCouponState(new Array(res.data.length).fill(false));
+                }).catch(error => {
+                console.log('Error fetching data:', error );
+            });
+        }
+    }, []);
 
-    const openCouponModal = (index) => {
-        {console.log(modify[index])}
-        if(!modify[index]) {
-            setCouponModal(true);
-            setPayIndex(index);
+    // 여기서 사용한 쿠폰 저장
+    const handleCouponSelect = (couponInfo) => {
+        if(!Array.isArray(goods)){
+            const usingCoupon = {...couponInfo[0]};
+            usingCoupon.used = true;
+            setUseCoupon((prevArray) => prevArray.concat(usingCoupon));
+            const newUseState = [...useCouponState];
+            const index = couponInfo[1];
+            newUseState[index] = true;
+            setUseCouponState(newUseState);
+            setSelectedCoupon(couponInfo[0].coupon);
         } else {
-            alert("이미 쿠폰을 적용했습니다!")
+            const usingCoupon = {...couponInfo[0].coupon};
+            usingCoupon.used = true;
+            setUseCoupon((prevArray) => prevArray.concat(usingCoupon));
+            const newUseState = [...useCouponState];
+            const index = couponInfo[1];
+            newUseState[index] = true;
+            setUseCouponState(newUseState);
+            setSelectedCoupon(couponInfo[0]);
         }
     }
 
-    const openCouponModalNoIndex = () => {
-        if(!modify[0]){
-            setCouponModal(true);
-        } else {
-            alert("이미 쿠폰을 적용했습니다!");
-        }
-    }
-
-    const closeCouponModal = () => {
-        setCouponModal(false);
-    }
 
     useEffect(() => {
         if(selectedCoupon.length !== 0){
@@ -53,30 +68,20 @@ function OrderInfo(props) {
                     const newTotalPrice = totalPrice * (1-(selectedCoupon.couponDiscount/100));
                     if(totalPrice - newTotalPrice >= selectedCoupon.couponLimit) {
                         const limitTotalPrice = totalPrice - selectedCoupon.couponLimit;
-                        const newModify = [...modify];
                         setTotalPrice(limitTotalPrice);
                         alert("쿠폰이 적용되었습니다!");
-                        newModify[0] = true;
-                        setModify(newModify);
                     } else {
-                        const newModify = [...modify];
                         setTotalPrice(newTotalPrice);
                         alert("쿠폰이 적용되었습니다!");
-                        newModify[0] = true;
-                        setModify(newModify);
                     }
                 } else {
                     const newTotalPrice = totalPrice - selectedCoupon.couponValue;
-                    const newModify = [...modify];
                     setTotalPrice(newTotalPrice);
                     alert("쿠폰이 적용되었습니다!");
-                    newModify[0] = true;
-                    setModify(newModify);
                 }
             }
             else {
-                console.log(selectedCoupon);
-                const coupon = selectedCoupon.coupon;
+                const coupon = selectedCoupon.coupon.coupon;
                 const index = selectedCoupon.productNum;
                 if(coupon.couponDiscount > 0){
                     const newTotalPrice = [...totalPrice];
@@ -84,28 +89,19 @@ function OrderInfo(props) {
                     newTotalPrice[index] = totalPrice[index] * (1-(coupon.couponDiscount/100));
 
                     if(totalPrice[index] - newTotalPrice[index] >= coupon.couponLimit){
-                        const newModify = [...modify];
                         newTotalPrice[index] = totalPrice[index] - coupon.couponLimit;
                         setTotalPrice(newTotalPrice);
                         alert("쿠폰이 적용되었습니다!");
-                        newModify[index] = true;
-                        setModify(newModify);
                     } else {
-                        const newModify = [...modify];
                         setTotalPrice(newTotalPrice);
                         alert("쿠폰이 적용되었습니다!");
-                        newModify[index] = true;
-                        setModify(newModify);
                     }
 
                 } else {
                     const newTotalPrice = [...totalPrice];
-                    const newModify = [...modify];
                     newTotalPrice[index] = totalPrice[index] - coupon.couponValue;
                     setTotalPrice(newTotalPrice);
                     alert("쿠폰이 적용되었습니다!");
-                    newModify[index] = true;
-                    setModify(newModify);
                 }
             }
         }
@@ -145,13 +141,13 @@ function OrderInfo(props) {
                 `${window.location.origin}/success?orderInfo=${encodeURIComponent(JSON.stringify(orderInfo))}`;
         } else if (selectedOption === '토스 간편결제'){
             openModal();
-            console.log({isModalOpen});
         } else {
             alert("결제방식을 선택해주세요!");
         }
     }
 
     const [isModalOpen, setModalOpen] = useState(false);
+    const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
 
     const openModal = () => {
         setModalOpen(true);
@@ -159,6 +155,18 @@ function OrderInfo(props) {
 
     const closeModal = () => {
         setModalOpen(false);
+    }
+
+    const openCouponModal = (index) => {
+        setIsCouponModalOpen(true);
+        setProductIndex(index);
+    }
+
+    const openCouponModalNoIndex = () => {
+        setIsCouponModalOpen(true);
+    }
+    const closeCouponModal = () => {
+        setIsCouponModalOpen(false);
     }
 
     const [deliverPrice, setDeliverPrice] = useState(3000);
@@ -221,7 +229,8 @@ function OrderInfo(props) {
         orderPhone : memberInfo.orderPhone,
         deliverName : memberInfo.deliverName,
         deliverPhone : memberInfo.deliverPhone,
-        payInformation : selectedOption
+        payInformation : selectedOption,
+        useCoupon : useCoupon
 
     }
 
@@ -255,34 +264,27 @@ function OrderInfo(props) {
                        }
                    </div>
                </div>
-               <Modal
-                   appElement={document.getElementById('root')}
-                   isOpen = {couponModal}
-                   style={{
-                       overlay: {
-                           display: 'flex',
-                           justifyContent: 'center',
-                           alignItems: 'center'
-
-                       },
-                       content : {
-                           width: '350px',
-                           height: '460px',
-                           position: 'absolute',
-                           inset: ''
-                       }
-                   }}>
-               <CouponList
-                   onClose = {closeCouponModal}
-                   onSelectCoupon = {setSelectedCoupon}
-                   index = {payIndex}
-                   />
-               </Modal>
                <div className="order-info-content-count">
                    <p>{goods.goodsQuantity}</p>
                </div>
+               <Modal
+                   isOpen = {isCouponModalOpen}
+                   onRequestClose = {closeCouponModal}
+                   style={customStyles}
+               >
+                   <CouponList
+                       coupon = {memberCoupon}
+                       useCoupon = {useCouponState}
+                       onSelectCoupon = {handleCouponSelect}
+                       index = {productIndex}
+                       onClose = {closeCouponModal}
+                       />
+                   <button className="modal-button" onClick={closeCouponModal}>닫기</button>
+               </Modal>
                <div className="order-info-content-discount">
-                   <button onClick={() => openCouponModal(index)}>쿠폰 확인</button>
+                   {MEMBERUID.length !==0 &&
+                       <button onClick={() => openCouponModal(index)}>쿠폰 확인</button>
+                   }
                </div>
                <div className="order-info-content-price">
                    <p>{totalPrice[index].toLocaleString()} 원</p>
@@ -304,29 +306,22 @@ function OrderInfo(props) {
                        <p>{goods.goodsQuantity}</p>
                    </div>
                    <Modal
-                       appElement={document.getElementById('root')}
-                       isOpen = {couponModal}
-                       style={{
-                           overlay: {
-                               display: 'flex',
-                               justifyContent: 'center',
-                               alignItems: 'center'
-
-                           },
-                           content : {
-                               width: '350px',
-                               height: '460px',
-                               position: 'absolute',
-                               inset: ''
-                           }
-                       }}>
+                       isOpen = {isCouponModalOpen}
+                       onRequestClose = {closeCouponModal}
+                       style={customStyles}
+                   >
                        <CouponList
+                           coupon = {memberCoupon}
+                           useCoupon = {useCouponState}
+                           onSelectCoupon = {handleCouponSelect}
                            onClose = {closeCouponModal}
-                           onSelectCoupon = {setSelectedCoupon}
                        />
+                       <button className="modal-button" onClick={closeCouponModal}>닫기</button>
                    </Modal>
                    <div className="order-info-content-discount">
-                       <button onClick={openCouponModalNoIndex}>쿠폰 확인</button>
+                       {MEMBERUID.length !==0 &&
+                           <button onClick={openCouponModalNoIndex}>쿠폰 확인</button>
+                       }
                    </div>
                    <div className="order-info-content-price">
                        <p>{totalPrice.toLocaleString()} 원</p>

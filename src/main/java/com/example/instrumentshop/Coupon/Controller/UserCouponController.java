@@ -1,6 +1,7 @@
 package com.example.instrumentshop.Coupon.Controller;
 
 import com.example.instrumentshop.Coupon.DTO.CouponDTO;
+import com.example.instrumentshop.Coupon.DTO.UserCouponDTO;
 import com.example.instrumentshop.Coupon.Entity.Coupon;
 import com.example.instrumentshop.Coupon.Entity.UserCouponMap;
 import com.example.instrumentshop.Coupon.Service.CouponService;
@@ -8,6 +9,7 @@ import com.example.instrumentshop.Coupon.Service.UserCouponService;
 import com.example.instrumentshop.Users.Entity.Users;
 import com.example.instrumentshop.Users.Repositroy.UsersRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +45,17 @@ public class UserCouponController {
     public Coupon getCouponByCouponId(@PathVariable Long couponId){
 
         return couponService.getCouponByCouponId(couponId);
+    }
+
+    @PostMapping("/users/coupons/update")
+    public ResponseEntity<UserCouponMap> updateUsersCoupon(@ModelAttribute UserCouponDTO userCouponDTO){
+
+        UserCouponMap newUserCouponMap = userCouponService.updateUserCoupon(userCouponDTO);
+
+        System.out.println(ResponseEntity.status(HttpStatus.OK).body(newUserCouponMap));
+
+        return ResponseEntity.status(HttpStatus.OK).body(newUserCouponMap);
+
     }
 
 }

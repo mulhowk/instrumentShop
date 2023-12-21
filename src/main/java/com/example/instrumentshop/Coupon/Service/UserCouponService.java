@@ -1,5 +1,6 @@
 package com.example.instrumentshop.Coupon.Service;
 
+import com.example.instrumentshop.Coupon.DTO.UserCouponDTO;
 import com.example.instrumentshop.Coupon.Entity.Coupon;
 import com.example.instrumentshop.Coupon.Entity.UserCouponMap;
 import com.example.instrumentshop.Coupon.Repository.CouponRepository;
@@ -11,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -35,6 +38,27 @@ public class UserCouponService {
         }
     }
 
+    @Transactional
+    public UserCouponMap updateUserCoupon(UserCouponDTO userCouponDTO){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(getCurrentTimeString(), formatter);
+
+        UserCouponMap newUserCouponMap = UserCouponMap.builder()
+                .Id(userCouponDTO.getId())
+                .users(userCouponDTO.getUsers())
+                .used(userCouponDTO.isUsed())
+                .coupon(userCouponDTO.getCoupon())
+                .assignedDate(userCouponDTO.getAssignedDate())
+                .usedDate(localDate)
+                .build();
+
+        userCouponRepository.save(newUserCouponMap);
+
+        return userCouponRepository.save(newUserCouponMap);
+
+    }
+
     // 개별 유저에게 쿠폰 매핑
     private void distributeCouponToUser(Coupon coupon, Users user) {
         UserCouponMap userCouponMap = new UserCouponMap();
@@ -51,6 +75,14 @@ public class UserCouponService {
 
 
         return userCouponRepository.findByUsers_MEMBERUID(MEMBERUID);
+    }
+
+    // 현재 시간 구하는 서비스
+    private static String getCurrentTimeString(){
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        return now.format(formatter);
     }
 
 }

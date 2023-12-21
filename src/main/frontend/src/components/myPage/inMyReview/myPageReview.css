@@ -9,7 +9,6 @@
   .mypage-review-content {
     background-color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692nero);
     border-color: var(--shoppingnavercompopupreviewsmonthly-form4703999938964844x692concrete);
-    border-top-style: solid;
     border-top-width: 0.8px;
     height: 458px;
     position: relative;
@@ -69,12 +68,20 @@
     top: 14px;
     width: 401px;
   }
+
+    .mypage-review .label textarea{
+      color : black;
+    }
+
+    .mypage-review .label textarea:focus{
+      outline: none;
+    }
   
   .mypage-review .element {
     color: #999999;
     position: relative;
     width: 423px;
-    height: 145px;
+    height: 130px;
     border: 0px;
   }
   
@@ -144,7 +151,6 @@
     display: flex;
     gap: 7.68px;
     height: 64.6px;
-    padding: 0.2px 109.53px 1.4px 110.19px;
     position: relative;
   }
   
@@ -243,4 +249,13 @@
     white-space: nowrap;
     width: fit-content;
   }
-  
+.review-file-input{
+  width: 200px;
+  padding: 5px;
+  font-size: 16px;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  outline: none; /* 기본 포커스 효과 제거 */
+  transition: border-color 0.3s; /* 부드러운 효과를 위한 트랜지션 설정 */
+  margin-right: 20px;
+}

@@ -56,7 +56,7 @@ function AddressTab() {
                   </div>
                   <div className="data-2">
                     <input className="input input-address-name" />
-                    <div className="element"> 10자 이내</div>
+                    <div className="element"> &nbsp; 10자 이내</div>
                   </div>
                 </div>
                 <div className="row">

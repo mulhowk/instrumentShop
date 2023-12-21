@@ -2,8 +2,7 @@ package com.example.instrumentshop.Coupon.Entity;
 
 import com.example.instrumentshop.Users.Entity.Users;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -12,6 +11,9 @@ import java.time.LocalDate;
 @Table(name = "UserCouponMap")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserCouponMap {
 
     @Id

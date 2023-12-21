@@ -5,3 +5,26 @@
     flex-direction: column;
     align-items: center;
 }
+
+.mypage-review-top-title{
+    display: grid;
+    place-items: center;
+}
+
+.review-title-area{
+    display: grid;
+    place-items: flex-end;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.review-title-area p{
+    font-weight: bold;
+}
+
+.review-title-area textarea{
+    width: 460px;
+    height: 20px;
+    outline: none;
+    border : 1px solid black;
+}

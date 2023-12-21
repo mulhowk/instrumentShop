@@ -1,6 +1,7 @@
 import {Link, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import { format, parseISO} from 'date-fns';
 
 
 export function SuccessPage() {
@@ -22,6 +23,7 @@ export function SuccessPage() {
     useEffect(() => {
         if(orderInfo.length !==0){
             {console.log(orderInfo.goodsId)}
+
         const formOrdersData = new FormData();
 
         formOrdersData.append('goods', orderInfo.goodsId);
@@ -46,6 +48,49 @@ export function SuccessPage() {
             console.log("주문 정보 등록 완료");
         })
             .catch(error => console.log('Error creating order: ', error));
+
+        if(orderInfo.useCoupon.length === 1){
+            const formUserCouponData = new FormData();
+            const dateArray = orderInfo.useCoupon[0].assignedDate;
+            const localDate = format(new Date(dateArray[0], dateArray[1] - 1, dateArray[2])
+                , 'yyyy-MM-dd')
+
+            formUserCouponData.append('Id', orderInfo.useCoupon[0].id);
+            formUserCouponData.append('users', orderInfo.useCoupon[0].users.memberuid);
+            formUserCouponData.append('used', orderInfo.useCoupon[0].used);
+            formUserCouponData.append('coupon', orderInfo.useCoupon[0].coupon.couponId);
+            formUserCouponData.append('assignedDate', localDate);
+
+            axios.post(`/api/coupons/users/coupons/update`, formUserCouponData,{
+                headers : {
+                    'Content-Type' : 'application/x-www-form-urlencoded'
+                }
+            }).then(createdOrders => {
+                console.log("쿠폰 정보 등록 완료");
+            })
+                .catch(error => console.log('Error creating order: ', error));
+
+        } else if(orderInfo.useCoupon.length >= 2){
+            orderInfo.useCoupon.forEach((obj) => {
+                const formUserCouponData = new FormData();
+
+                formUserCouponData.append('Id', obj.id);
+                formUserCouponData.append('users', obj.users);
+                formUserCouponData.append('used', obj.used);
+                formUserCouponData.append('coupon', obj.coupon);
+                formUserCouponData.append('assignedDate', obj.assignedDate);
+
+                axios.post(`/api/coupons/users/coupons/update`, formUserCouponData,{
+                    headers : {
+                        'Content-Type' : 'application/x-www-form-urlencoded'
+                    }
+                }).then(createdOrders => {
+                    console.log("쿠폰 정보 등록 완료");
+                })
+                    .catch(error => console.log('Error creating order: ', error));
+
+            })
+        }
         }
     }, [orderInfo]);
 
