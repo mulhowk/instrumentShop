@@ -18,10 +18,11 @@ public class AddressController {
 
     private final AddressService addressService;
 
-    // 특정 memberUid에 해당하는 모든 주소를 조회하는 엔드포인트
+
+    // 특정 MEMBERUID에 해당하는 모든 주소를 조회하는 엔드포인트
     @GetMapping("/{MEMBERUID}")
     public ResponseEntity<List<Address>> getAddressesByMemberUid(@PathVariable Long MEMBERUID) {
-        List<Address> addresses = addressService.getAddressesByMEMBERUID(MEMBERUID);
+        List<Address> addresses = addressService.getAddressesByUser(MEMBERUID);
         return ResponseEntity.ok(addresses);
     }
 
