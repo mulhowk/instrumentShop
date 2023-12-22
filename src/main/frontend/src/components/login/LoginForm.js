@@ -43,13 +43,15 @@ function LoginForm() {
         .then((data) => {
           // 서버로부터 받은 데이터(data)를 처리
           const token = JSON.parse(data).token;
+          console.log(token);
+          const refreshToken = JSON.parse(data).refreshToken;
           const decodedToken = tokenUserInfo(token);
 
-          setAuthToken(token,decodedToken.exp);
+          setAuthToken(token,decodedToken.exp, refreshToken);
 
           // 로그인 성공
           window.location.reload();
-          alert(decodedToken);
+
         })
         .catch((error) => {
           // 오류 처리

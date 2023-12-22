@@ -17,3 +17,4 @@ public class AddressResponseDTO {
     private String addressValue;
     private String addressPostnumber;
 }
+

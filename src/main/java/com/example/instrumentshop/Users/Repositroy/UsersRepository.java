@@ -27,6 +27,8 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
      */
     Optional<Users> findBySocialTypeAndSocialId(SocialType socialType, String socialId);
 
+    Optional<Users> findByMemberName(String memberName);
+
     // USER 역할을 가진 사용자 조회
     List<Users> findBySocialRole(String socialRole);
 

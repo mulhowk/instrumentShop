@@ -21,6 +21,25 @@ public class AddressService {
     private final AddressRepository addressRepository;
     private final UsersRepository usersRepository;
 
+    // 특정 주소를 기본 주소로 설정하는 메서드
+    @Transactional
+    public void setPrimaryAddress(Long memberId, Long addressId) {
+        Users user = usersRepository.findById(memberId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        List<Address> addresses = addressRepository.findByUsers(user);
+
+        for (Address address : addresses) {
+            if (address.getADDRESSID().equals(addressId)) {
+                address.setUse(true);
+            } else {
+                address.setUse(false);
+            }
+        }
+
+        addressRepository.saveAll(addresses);
+    }
+    @Transactional
     public List<AddressResponseDTO> getAddressesByUser(Long memberId) {
         Users users = usersRepository.findById(memberId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
