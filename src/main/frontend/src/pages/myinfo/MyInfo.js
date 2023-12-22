@@ -15,7 +15,9 @@ import {getAuthToken, tokenUserInfo} from "../../global/auth";
 function MyInfo() {
 
     const token =  getAuthToken();
+
     const decodedToken = tokenUserInfo(token);
+
     const memberUid = decodedToken.UID;
 
     const [selectedTab, setSelectedTab] = useState('profile'); // 기본값 설정
@@ -23,7 +25,13 @@ function MyInfo() {
 
     useEffect(() => {
         const fetchUserData = () => {
-            axios.post('/api/user/info', { memberUid: memberUid })
+            const token = localStorage.getItem('token');
+            console.log(token);
+            axios.post('/api/user/info', { memberUid: memberUid }, {
+                headers: {
+                    'Authorization': `Bearer ${token}` // JWT 토큰을 헤더에 포함
+                }
+            })
                 .then(response => {
                     setUserData(response.data);
                     console.log(response.data);

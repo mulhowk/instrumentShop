@@ -1,8 +1,10 @@
 package com.example.instrumentshop.Users.Controller;
 
+import com.example.instrumentshop.Global.Jwt.Controller.JwtController;
 import com.example.instrumentshop.Users.DTO.UsersDTO;
 import com.example.instrumentshop.Users.Service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,18 +14,19 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/api") //
+@RequestMapping("") //
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
+    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(UserController.class);
 
-    @PostMapping(value = "/login")
+    @PostMapping(value = "/api/login")
     public ResponseEntity<UsersDTO.SignResponse> signin(@RequestBody UsersDTO.SignRequest request) throws Exception {
         return new ResponseEntity<>(userService.login(request), HttpStatus.OK);
     }
 
-    @GetMapping("/currentUser")
+    @GetMapping("/api/currentUser")
     public String currentUser(Principal principal) {
         if (principal != null) {
             // 사용자가 로그인 상태임
@@ -40,17 +43,18 @@ public class UserController {
      * @return
      * @throws Exception
      */
-    @PostMapping(value = "/register")
+    @PostMapping(value = "/api/register")
     public ResponseEntity<Boolean> signup(@RequestBody UsersDTO.SignRequest request) throws Exception {
         return new ResponseEntity<>(userService.register(request), HttpStatus.OK);
     }
 
-    @PostMapping("/user/info")
-    public ResponseEntity<UsersDTO.SignResponse> getUser(@RequestBody UsersDTO.UserInfoDTO request) throws Exception {
+    @PostMapping("/api/user/info")
+    public ResponseEntity<UsersDTO.SignResponse> getUser(@RequestBody UsersDTO.UserInfoDTO request, Principal principal) throws Exception {
+        logger.info("USER INFO - principal : " + principal.getName());
         return new ResponseEntity<>(userService.getUser(request.getMemberUid()), HttpStatus.OK);
     }
 
-    @GetMapping("/user/login/check")
+    @GetMapping("/api/user/login/check")
     public ResponseEntity<?> getCurrentUserInfo(@AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User is not logged in");

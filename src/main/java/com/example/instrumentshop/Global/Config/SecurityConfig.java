@@ -73,7 +73,7 @@ public class SecurityConfig {
                 .dispatcherTypeMatchers(HttpMethod.valueOf("/api/login")).permitAll()
                 .dispatcherTypeMatchers(HttpMethod.valueOf( "/oauth2/authorization/**")).permitAll()
                 // /admin으로 시작하는 요청은 ADMIN 권한이 있는 유저에게만 허용
-                .dispatcherTypeMatchers(HttpMethod.valueOf("/api/admin/**")).hasRole("ADMIN")
+                    .dispatcherTypeMatchers(HttpMethod.valueOf("/api/admin/**")).hasRole("ADMIN")
                 // /user 로 시작하는 요청은 USER 권한이 있는 유저에게만 허용
                 .dispatcherTypeMatchers(HttpMethod.valueOf("/api/user/**")).hasRole("USER")
                 .anyRequest().denyAll()*/

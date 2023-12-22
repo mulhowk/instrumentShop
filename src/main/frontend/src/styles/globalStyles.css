@@ -10,6 +10,10 @@ a {
     align-items: center;
 }
 
+.btnClickStyle {
+    cursor: pointer;
+}
+
 ul{
     padding-inline-start: 0px;
 }

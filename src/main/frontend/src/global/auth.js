@@ -2,9 +2,10 @@ import base64 from 'base-64';
 import {useEffect} from "react";
 
   // 토큰을 로컬 스토리지에 저장하는 함수
-  const setAuthToken = (token, exp) => {
+  const setAuthToken = (token, exp, refreshToken) => {
     localStorage.setItem('token', token);
     localStorage.setItem('exp', exp);
+    localStorage.setItem('refreshToken', refreshToken);
   };
   
   // 로컬 스토리지에서 토큰을 가져오는 함수
@@ -51,7 +52,7 @@ import {useEffect} from "react";
 
              localStorage.removeItem('token');
              localStorage.removeItem('exp');
-
+              localStorage.removeItem('refreshToken');
   };
   
   export { setAuthToken, getAuthToken, tokenUserInfo, isAuthTokenValid, logoutActionHandler };

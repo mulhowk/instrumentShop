@@ -19,3 +19,4 @@ public class AddressResponseDTO {
     private String addressPostnumber;
 
 }
+
