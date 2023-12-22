@@ -12,7 +12,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/instrument
     username : root
-    password : gudtjr32
+    password : 4492776
   servlet:
     multipart:
       maxFileSize: 10MB # ?? ??? ?? ??

@@ -21,6 +21,7 @@ function Header(props){
 
 
     useEffect(() => {
+        if(memberUid){
         axios.get(`/cart/sum/${memberUid}`)
             .then(response => {
                 setSumCart(response.data);
@@ -28,6 +29,7 @@ function Header(props){
             .catch(error => {
                 console.log('Error fetching data:', error );
             });
+        }
     }, []);
 
     const [modalIsOpen, setModalIsOpen] = useState(false);

@@ -26,7 +26,7 @@ function OrderInfo(props) {
     // {console.log(useCouponState)}
 
     useEffect(() => {
-        if(MEMBERUID.length !==0 ){
+        if(MEMBERUID){
             axios.get(`/api/coupons/users/coupons/${MEMBERUID}`)
                 .then(res => {
                     setMemberCoupon(res.data);
@@ -282,8 +282,9 @@ function OrderInfo(props) {
                    <button className="modal-button" onClick={closeCouponModal}>닫기</button>
                </Modal>
                <div className="order-info-content-discount">
-                   {MEMBERUID.length !==0 &&
+                   {MEMBERUID ?
                        <button onClick={() => openCouponModal(index)}>쿠폰 확인</button>
+                       : ""
                    }
                </div>
                <div className="order-info-content-price">
@@ -319,8 +320,9 @@ function OrderInfo(props) {
                        <button className="modal-button" onClick={closeCouponModal}>닫기</button>
                    </Modal>
                    <div className="order-info-content-discount">
-                       {MEMBERUID.length !==0 &&
-                           <button onClick={openCouponModalNoIndex}>쿠폰 확인</button>
+                       {MEMBERUID ?
+                           <button onClick={openCouponModalNoIndex}>쿠폰 확인</button>:
+                           ""
                        }
                    </div>
                    <div className="order-info-content-price">

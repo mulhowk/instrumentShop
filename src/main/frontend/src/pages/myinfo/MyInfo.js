@@ -55,13 +55,19 @@ function MyInfo() {
                                 </div>
                             <div className="p-l-info-content">
                                 <div className="p-l-i-button">
-                                    <div className="p-l-i-tab" onClick={() => setSelectedTab('profile')}>프로필 설정</div>
+                                    <div className="p-l-i-tab" onClick={() => setSelectedTab('profile')}>
+                                        <p>프로필 설정</p>
+                                    </div>
                                 </div>
                                 <div className="p-l-i-button">
-                                    <div className="p-l-i-tab" onClick={() => setSelectedTab('buyList')}>구매 내역</div>
+                                    <div className="p-l-i-tab" onClick={() => setSelectedTab('buyList')}>
+                                        <p>구매 내역</p>
+                                    </div>
                                 </div>
                                 <div className="p-l-i-button">
-                                    <div className="p-l-i-tab" onClick={() => setSelectedTab('wishList')}>찜한 상품</div>
+                                    <div className="p-l-i-tab" onClick={() => setSelectedTab('wishList')}>
+                                        <p>찜한 상품</p>
+                                    </div>
                                 </div>
                                 <hr className="p-l-i-hr" />
                             </div>

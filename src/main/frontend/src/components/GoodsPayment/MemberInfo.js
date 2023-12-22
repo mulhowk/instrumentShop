@@ -2,11 +2,52 @@ import React, {useEffect, useState} from 'react';
 import "../../styles/GoodsPayment/MemberInfo.css"
 import DaumPostcode from "react-daum-postcode"
 import {getAuthToken, tokenUserInfo} from "../../global/auth";
+import CouponList from "./CouponList";
+import Modal from "react-modal";
+import axios from "axios";
+import MemberAddressList from "./MemberAddressList";
 
 function MemberInfo({ onMemberInfoChange }){
 
     const token =  getAuthToken();
-    const decodedToken = tokenUserInfo(token);
+    const decodedToken = token? tokenUserInfo(token) : null;
+    const memberUid = decodedToken.UID;
+    const [userData, setUserData] = useState();
+
+    const [deliverAddress, setDeliverAddress] = useState('');
+    const [address, setAddress] = useState('');
+    const [postcode, setPostcode] = useState('');
+    const [detailAddress, setDetailAddress] = useState('');
+
+    const [isMemberAddress, setIsMemberAddress] = useState(false);
+
+    useEffect(() => {
+        setDeliverAddress(postcode + " " + address + " " + detailAddress);
+    }, [address, postcode, detailAddress]);
+
+    const handleAddressData = (addressData) => {
+        setIsMemberAddress(true);
+        setAddress(addressData.addressValue);
+        setPostcode(addressData.addressPostnumber);
+        setDeliverAddress("");
+        setDeliverName(addressData.addressReceiver);
+        setDeliverPhone(addressData.memberPhone);
+    }
+
+    useEffect(() => {
+        const fetchUserData = () => {
+            axios.post('/api/user/info', { memberUid: memberUid })
+                .then(response => {
+                    setUserData(response.data);
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error("Error fetching user data: ", error);
+                });
+        };
+
+        fetchUserData();
+    }, []);
 
     const [orderName, setOrderName] = useState(decodedToken? decodedToken.name : '');
 
@@ -39,14 +80,6 @@ function MemberInfo({ onMemberInfoChange }){
         setDeliverPhone(e.target.value);
     }
 
-    const [deliverAddress, setDeliverAddress] = useState('');
-    const [address, setAddress] = useState('');
-    const [postcode, setPostcode] = useState('');
-    const [detailAddress, setDetailAddress] = useState('');
-    useEffect(() => {
-        setDeliverAddress(postcode + " " + address + " " + detailAddress);
-    }, [address, postcode, detailAddress]);
-
     const [orderMsg, setOrderMsg] = useState('');
 
     const handelOrderMsg = (e) => {
@@ -61,6 +94,28 @@ function MemberInfo({ onMemberInfoChange }){
 
     const handelDetailAddress = (e) => {
         setDetailAddress(e.target.value);
+    }
+
+    const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+
+    const customStyles = {
+        overlay : {
+            backgroundColor : 'rgba(0,0,0,0.5)'
+        },
+        content : {
+            width : '50%',
+            margin : 'auto',
+            borderRadius : '8px',
+            boxShadow : '0 0 10px rgba(0,0,0,0.3)'
+        }
+    };
+
+    const openAddressModal = () => {
+        setIsAddressModalOpen(true);
+    }
+
+    const closeAddressModal = () => {
+        setIsAddressModalOpen(false);
     }
 
     const [isPopupOpen, setPopupOpen] = useState(false);
@@ -78,6 +133,7 @@ function MemberInfo({ onMemberInfoChange }){
         const selectedAddress = data.addressType === 'R' ? data.address : data.jibunAddress;
         const selectedPostcode = data.zonecode;
 
+        setIsMemberAddress(false);
         setAddress(selectedAddress);
         setPostcode(selectedPostcode);
         setPopupOpen(false);
@@ -172,16 +228,42 @@ function MemberInfo({ onMemberInfoChange }){
                     <div className="member-orderInfo-address-title">
                         <p>주소</p>
                     </div>
+                    <Modal
+                        isOpen = {isAddressModalOpen}
+                        onRequestClose = {closeAddressModal}
+                        style={customStyles}
+                    >
+                        <MemberAddressList
+                            onClose = {closeAddressModal}
+                            userData = {userData}
+                            onSelectAddress = {handleAddressData}
+                        />
+                        <button className="modal-button" onClick={closeAddressModal}>닫기</button>
+                    </Modal>
                     <div className="member-orderInfo-address-address">
                         <div className="member-orderInfo-address-address-num">
                             <input type="text" id="address-num" value={postcode} readOnly></input>
                             <button onClick={() => setPopupOpen(true)}>주소검색</button>
+                            {decodedToken?
+                                <button style={{backgroundColor : "red", borderColor : "red"}}
+                                onClick={openAddressModal}>
+                                    저장된 주소
+                                </button>
+                                :
+                                ""
+                            }
                         </div>
+                        {!isMemberAddress ?
                         <div className="member-orderInfo-address-address-detail">
-                            <input type="text" id="address-content" value={address} readOnly/>
-                            <input type="text" id="detail" style={{marginLeft : "10px"}} value={detailAddress}
-                            onChange={handelDetailAddress}/>
+                                <input type="text" id="address-content" value={address} readOnly/>
+                                <input type="text" id="detail" style={{marginTop : "10px"}} value={detailAddress}
+                                       onChange={handelDetailAddress}/>
                         </div>
+                            :
+                            <div className="member-orderInfo-address-address-detail">
+                                <input type="text" id="address-content" value={address} readOnly/>
+                            </div>
+                        }
                     </div>
                 </div>
                 <div className="member-orderInfo-ordermsg">

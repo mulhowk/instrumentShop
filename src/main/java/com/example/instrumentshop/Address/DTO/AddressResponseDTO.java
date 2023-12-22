@@ -10,10 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddressResponseDTO {
+
     private Long addressId;
     private String addressReceiver;
     private String addressNickname;
     private String memberPhone;
     private String addressValue;
     private String addressPostnumber;
+
 }

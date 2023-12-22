@@ -24,3 +24,7 @@
     height: 50px;
     font-size: 18px;
   }
+
+.p-l-i-tab p {
+    cursor: pointer;
+}
