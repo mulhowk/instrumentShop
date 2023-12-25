@@ -17,6 +17,7 @@ public class AddressResponseDTO {
     private String memberPhone;
     private String addressValue;
     private String addressPostnumber;
+    private boolean isUse;
 
 }
 

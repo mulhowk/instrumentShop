@@ -52,6 +52,7 @@ public class AddressService {
                         .memberPhone(address.getUsers().getMemberPhone()) // 이 부분은 address 객체 구조에 따라 다를 수 있습니다.
                         .addressValue(address.getAddressValue())
                         .addressPostnumber(address.getAddressPostnumber())
+                        .isUse(address.isUse())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -59,7 +60,7 @@ public class AddressService {
     @Transactional
     public void saveAddress(AddressDTO addressDTO) {
         // 먼저, User 엔티티를 찾는다
-        Users users = usersRepository.findById(addressDTO.getMemberUid())
+        Users users = usersRepository.findByMemberEmail(addressDTO.getMemberEmail())
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
         // 동일한 User에 대한 'Y'로 설정된 주소가 있는지 확인한다
@@ -77,6 +78,25 @@ public class AddressService {
                 .build();
 
         addressRepository.save(address);
+    }
+
+    @Transactional
+    public void updateAddressUse(String userEmail, Long newAddressId) {
+        // 기존에 isUse가 true인 주소 찾기
+        Users user = usersRepository.findByMemberEmail(userEmail)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        List<Address> existingAddresses = addressRepository.findByUsersAndIsUse(user, true);
+        for (Address address : existingAddresses) {
+            address.setUse(false); // 기존 주소의 isUse를 false로 변경
+            addressRepository.save(address); // 변경 사항 저장
+        }
+
+        // 새 주소의 isUse를 true로 설정
+        Address newAddress = addressRepository.findById(newAddressId)
+                .orElseThrow(() -> new EntityNotFoundException("Address not found"));
+        newAddress.setUse(true);
+        addressRepository.save(newAddress); // 변경 사항 저장
     }
 
 }

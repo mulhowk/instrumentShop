@@ -31,17 +31,20 @@ function AddressTab() {
         // 전화번호 결합
         const fullPhoneNumber = `${addressData.addressPhone1}${addressData.addressPhone2}${addressData.addressPhone3}`;
         // 상세주소 결합
-        const fullAddressValue = `${addressData.deliveryAddress} ${addressData.addressDetail}`;
+        const fullAddressValue = `${jibunAddress} ${addressData.addressDetail}`;
+        const token = localStorage.getItem('token');
 
         try {
             fetch('/api/address/add', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`, // JWT 토큰을 헤더에 포함
+                    'Content-Type': 'application/json'
                 },
+
                 body: JSON.stringify({
-                    memberUid: 2,
                     addressNickname: addressData.addressNickname,
+                    addressReceiver : addressData.addressReceiver,
                     addressName: addressData.addressName,
                     memberPhone: fullPhoneNumber,
                     addressPostnumber: postNumber,
@@ -50,7 +53,11 @@ function AddressTab() {
 
             })
                 .then(response => response.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    console.log(data)
+                    alert('등록되었습니다'); // 성공 알림
+                    window.close(); // 팝업 윈도우 닫기
+                })
                 .catch(error => console.error('Error:', error));
 
         } catch (error) {
@@ -104,7 +111,7 @@ function AddressTab() {
                       <div className="data-2">
                           <input
                               className="input input-address-name"
-                              name="addressName"
+                              name="addressReceiver"
                               value={addressData.addressName}
                               onChange={handleChange}
                           />
@@ -168,7 +175,7 @@ function AddressTab() {
                 <p>{jibunAddress}</p>
                 <input
                     className="input input-address-detail"
-                    name="addressName"
+                    name="addressDetail"
                     value={addressData.addressDetail}
                     onChange={handleChange}
                 />

@@ -5,6 +5,7 @@ import com.example.instrumentshop.Address.DTO.AddressInfoDTO;
 import com.example.instrumentshop.Address.DTO.AddressResponseDTO;
 import com.example.instrumentshop.Address.DTO.AddressSetRequestDTO;
 import com.example.instrumentshop.Address.Service.AddressService;
+import com.example.instrumentshop.Users.Entity.Users;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -49,7 +50,8 @@ public class AddressController {
     public ResponseEntity<Boolean> addAddress(@RequestBody AddressDTO addressDTO, Principal principal) {
         logger.info("Adding address for user: {}", principal);
         try {
-
+            String userEmail = principal.getName(); // 현재 인증된 사용자의 이메일을 가져옵니다.
+            addressDTO.setMemberEmail(userEmail); // AddressDTO에 이메일을 설정합니다.
             addressService.saveAddress(addressDTO);
             return new ResponseEntity<>(true, HttpStatus.OK);
         } catch (Exception e) {
@@ -58,4 +60,16 @@ public class AddressController {
         }
     }
 
+    @PutMapping("/updateUse/{newAddressId}")
+    public ResponseEntity<String> updateAddressUse(Principal principal, @PathVariable Long newAddressId) {
+        try {
+            String userEmail = principal.getName();
+            addressService.updateAddressUse(userEmail, newAddressId);
+            return ResponseEntity.ok("Address use status updated successfully.");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
+        }
+    }
 }

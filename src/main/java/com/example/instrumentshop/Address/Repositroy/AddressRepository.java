@@ -15,4 +15,5 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
 
     boolean existsByUsersAndIsUse(Users user, boolean isUse);
 
+    List<Address> findByUsersAndIsUse(Users user, boolean isUse);
 }
