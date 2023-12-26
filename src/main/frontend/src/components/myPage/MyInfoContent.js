@@ -77,7 +77,7 @@ function MyInfoContent(prop) {
                                 }}>
                                 <span className="t-span">기본 배송지 설정</span>
                                 <button className="delete-button"
-                                    style={{ left:'470px',
+                                    style={{ left:'520px',
                                              position: 'relative'
                                     }}
                                     onClick={handleWindowOpen}

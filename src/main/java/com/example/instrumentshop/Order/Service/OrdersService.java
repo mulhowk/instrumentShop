@@ -3,6 +3,7 @@ package com.example.instrumentshop.Order.Service;
 import com.example.instrumentshop.Order.DTO.OrdersDTO;
 import com.example.instrumentshop.Order.Entity.Orders;
 import com.example.instrumentshop.Order.Repository.OrdersRepository;
+import com.example.instrumentshop.Users.Entity.Users;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -62,5 +63,10 @@ public class OrdersService {
 
         return now.format(formatter);
     }
+
+    public int getUserOrderCount(Users users) {
+        return ordersRepository.countByUsers(users);
+    }
+
 
 }
