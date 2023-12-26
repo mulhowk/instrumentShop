@@ -64,4 +64,11 @@ public class UserController {
         }
     }
 
+    @GetMapping("/api/user/history")
+    public ResponseEntity<UsersDTO.UserMyInfoDTO> getMyInfo(Principal principal) {
+        String username = principal.getName(); // 현재 로그인한 사용자의 이름(이메일)을 가져옵니다.
+        UsersDTO.UserMyInfoDTO myInfo = userService.getMyInfo(username);
+        return ResponseEntity.ok(myInfo);
+    }
+
 }

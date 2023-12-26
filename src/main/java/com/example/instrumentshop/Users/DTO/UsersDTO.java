@@ -93,4 +93,12 @@ public class UsersDTO {
         private Long memberUid;
     }
 
+    @Data
+    @NoArgsConstructor
+    public static class UserMyInfoDTO {
+        private int reserves;
+        private int couponCount;
+        private int orderCount;
+    }
+
 }

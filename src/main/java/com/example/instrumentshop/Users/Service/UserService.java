@@ -1,11 +1,14 @@
 package com.example.instrumentshop.Users.Service;
 
+import com.example.instrumentshop.Coupon.Repository.UserCouponRepository;
 import com.example.instrumentshop.Global.Jwt.Util.JwtProvider;
+import com.example.instrumentshop.Order.Repository.OrdersRepository;
 import com.example.instrumentshop.Users.DTO.UsersDTO;
 import com.example.instrumentshop.Users.Entity.Authority;
 import com.example.instrumentshop.Users.Entity.Role;
 import com.example.instrumentshop.Users.Entity.Users;
 import com.example.instrumentshop.Users.Repositroy.UsersRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Optional;
 
 @Slf4j
 @Transactional
@@ -23,6 +27,8 @@ import java.util.Collections;
 public class UserService {
 
     private final UsersRepository usersRepository;
+    private final UserCouponRepository userCouponRepository;
+    private final OrdersRepository ordersRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
 
@@ -80,6 +86,23 @@ public class UserService {
         Users users = usersRepository.findByMEMBERUID(memberUid);
 
         return new UsersDTO.SignResponse(users);
+    }
+
+    public UsersDTO.UserMyInfoDTO getMyInfo(String username) {
+
+        // 현재 로그인한 사용자 정보 조회
+        Users user = usersRepository.findByMemberEmail(username)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        int unusedCouponCount = userCouponRepository.countByUsersAndUsed(user, false);
+        int orderCount = ordersRepository.countByUsers(user);
+
+        UsersDTO.UserMyInfoDTO userMyInfoDTO = new UsersDTO.UserMyInfoDTO();
+        userMyInfoDTO.setReserves(user.getMemberReserves());
+        userMyInfoDTO.setCouponCount(unusedCouponCount);
+        userMyInfoDTO.setOrderCount(orderCount);
+
+        return userMyInfoDTO;
     }
 }
 
