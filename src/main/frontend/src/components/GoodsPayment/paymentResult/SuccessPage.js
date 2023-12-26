@@ -91,6 +91,21 @@ export function SuccessPage() {
 
             })
         }
+
+        const formUserReservesData = new FormData();
+
+        formUserReservesData.append('MEMBERUID', orderInfo.MEMBERUID);
+        formUserReservesData.append('memberReserves', orderInfo.reserves);
+
+        axios.post(`/api/user/reserves`, formUserReservesData, {
+            headers : {
+                'Content-Type' : 'application/x-www-form-urlencoded'
+            }
+        }).then(createdOrders => {
+            console.log("유저 정보 업데이트 완료");
+        })
+            .catch(error => console.log('Error creating order: ', error));
+
         }
     }, [orderInfo]);
 

@@ -13,6 +13,8 @@ function MemberInfo({ onMemberInfoChange }){
     const decodedToken = token? tokenUserInfo(token) : null;
     const memberUid = decodedToken.UID;
     const [userData, setUserData] = useState();
+    const [defaultAddresses, setDefaultAddresses] = useState([]);
+    {console.log(defaultAddresses)}
 
     const [deliverAddress, setDeliverAddress] = useState('');
     const [address, setAddress] = useState('');
@@ -36,10 +38,14 @@ function MemberInfo({ onMemberInfoChange }){
 
     useEffect(() => {
         const fetchUserData = () => {
-            axios.post('/api/user/info', { memberUid: memberUid })
+            const token = localStorage.getItem('token');
+            axios.post('/api/user/info', { memberUid: memberUid }, {
+                headers: {
+                    'Authorization': `Bearer ${token}` // JWT 토큰을 헤더에 포함
+                }
+            })
                 .then(response => {
                     setUserData(response.data);
-                    console.log(response.data);
                 })
                 .catch(error => {
                     console.error("Error fetching user data: ", error);
@@ -48,6 +54,30 @@ function MemberInfo({ onMemberInfoChange }){
 
         fetchUserData();
     }, []);
+
+    useEffect(() => {
+        const fetchAddresses = async () => {
+            try {
+                const response = await axios.post('/api/address/info', { memberUid: memberUid });
+                setDefaultAddresses(response.data.filter(address => address.use));
+            } catch (error) {
+                console.error("Error fetching addresses: ", error);
+            }
+        };
+
+        fetchAddresses();
+    }, []);
+
+    useEffect(() => {
+        if(defaultAddresses.length !== 0) {
+            setAddress(defaultAddresses[0].addressValue);
+            setPostcode(defaultAddresses[0].addressPostnumber);
+            setDeliverAddress("");
+            setDeliverName(defaultAddresses[0].addressReceiver);
+            setDeliverPhone(defaultAddresses[0].memberPhone);
+            setIsMemberAddress(true);
+        }
+    }, [defaultAddresses]);
 
     const [orderName, setOrderName] = useState(decodedToken? decodedToken.name : '');
 
@@ -254,11 +284,11 @@ function MemberInfo({ onMemberInfoChange }){
                             }
                         </div>
                         {!isMemberAddress ?
-                        <div className="member-orderInfo-address-address-detail">
+                                <div className="member-orderInfo-address-address-detail">
                                 <input type="text" id="address-content" value={address} readOnly/>
                                 <input type="text" id="detail" style={{marginTop : "10px"}} value={detailAddress}
                                        onChange={handelDetailAddress}/>
-                        </div>
+                                </div>
                             :
                             <div className="member-orderInfo-address-address-detail">
                                 <input type="text" id="address-content" value={address} readOnly/>

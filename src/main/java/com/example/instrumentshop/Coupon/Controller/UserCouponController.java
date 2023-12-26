@@ -58,4 +58,10 @@ public class UserCouponController {
 
     }
 
+    @GetMapping("/users/coupons/noUse/{MEMBERUID}")
+    public Long getCountCouponNoUse(@PathVariable Long MEMBERUID){
+
+        return userCouponService.getCountUserCouponNoUse(MEMBERUID);
+    }
+
 }

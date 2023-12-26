@@ -1,6 +1,7 @@
 import "../../../styles/myInfo/buyList/buyListContent.css"
 import { useState,useEffect  } from "react";
 import MyBuyList from "./MyBuyList";
+import axios from "axios";
 
 
 function MyBuyInfo(props) {
@@ -9,36 +10,28 @@ function MyBuyInfo(props) {
         const popupWindow = window.open('/pop/couponAdd', '_blank', 'width=500,height=700');
       };
 
-    const memberUid = props.MEMBERUID;
+    const userData = props.userData;
+    {console.log(userData)}
+
+    const memberUid = userData.memberuid;
+
       // 상태를 선언합니다.
   const [points, setPoints] = useState(null);
-  const [coupons, setCoupons] = useState(null);
+  const [couponsLength, setCouponsLength] = useState(null);
   const [reviews, setReviews] = useState(null);
 
-  // 더미 데이터
-  const dummyData = {
-    points: [
-        {amount: "1000" },
-    ],
-    coupons: [
-        { name: '10% 할인 쿠폰' }, 
-        { name: '무료 배송 쿠폰' }
-    ],
-    reviews: [
-        { title: '좋은 제품이에요' }, 
-        { title: '만족합니다' }
-    ]
-  };
 
-    // 컴포넌트가 마운트될 때 더미 데이터를 상태로 설정합니다.
     useEffect(() => {
-        // 포인트 정보를 설정합니다.
-        setPoints(dummyData.points);
-        // 쿠폰 정보를 설정합니다.
-        setCoupons(dummyData.coupons);
-        // 리뷰 정보를 설정합니다.
-        setReviews(dummyData.reviews);
-      }, []);
+        setPoints(userData.memberReserves);
+
+        axios.get(`/api/coupons/users/coupons/noUse/${memberUid}`)
+            .then(res => {
+                setCouponsLength(res.data)
+                {console.log(res.data)}
+            }).catch(error => {
+            console.log('Error fetching data:', error);
+        });
+    }, []);
 
     return (
         
@@ -52,7 +45,7 @@ function MyBuyInfo(props) {
                             </div>
                             <div className="m-c-g-t-content-small">
                                 <div className="m-c-g-t-c-tab first">
-                                    <div className="t-small-span">{dummyData.points[0].amount} 원</div>
+                                    <div className="t-small-span">{points} 원</div>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +55,7 @@ function MyBuyInfo(props) {
                             </div>
                             <div className="m-c-g-t-content-small" onClick={couponPopup}>
                                 <div className="m-c-g-t-c-tab first">
-                                    <div className="t-small-span">{dummyData.coupons.length} 장</div>
+                                    <div className="t-small-span"> {couponsLength} 장</div>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +65,7 @@ function MyBuyInfo(props) {
                             </div>
                             <div className="m-c-g-t-content-small">
                                 <div className="m-c-g-t-c-tab first">
-                                    <div className="t-small-span">{dummyData.reviews.length} 건</div>
+                                    <div className="t-small-span"> 건</div>
                                 </div>
                             </div>
                         </div>

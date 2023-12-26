@@ -29,4 +29,7 @@ public interface UserCouponRepository extends JpaRepository<UserCouponMap, Long>
 
     // 특정 날짜에 사용된 모든 쿠폰 조회
     List<UserCouponMap> findByUsedDate(LocalDate usedDate);
+
+    // 사용자가 사용하지 않은 쿠폰 조회
+    Long countByUsers_MEMBERUIDAndUsed(Long MEMBERUID, boolean used);
 }

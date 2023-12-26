@@ -1,6 +1,7 @@
 package com.example.instrumentshop.Users.Service;
 
 import com.example.instrumentshop.Global.Jwt.Util.JwtProvider;
+import com.example.instrumentshop.Users.DTO.ReservesDTO;
 import com.example.instrumentshop.Users.DTO.UsersDTO;
 import com.example.instrumentshop.Users.Entity.Authority;
 import com.example.instrumentshop.Users.Entity.Role;
@@ -81,5 +82,18 @@ public class UserService {
 
         return new UsersDTO.SignResponse(users);
     }
+
+    public Users addReserves(ReservesDTO reservesDTO){
+
+        Users prevUser = usersRepository.findByMEMBERUID(reservesDTO.getMEMBERUID());
+
+        int addReserves = reservesDTO.getMemberReserves();
+
+        prevUser.setMemberReserves(prevUser.getMemberReserves() + addReserves);
+
+        return usersRepository.save(prevUser);
+
+    }
+
 }
 

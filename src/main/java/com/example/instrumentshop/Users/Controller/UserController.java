@@ -1,7 +1,9 @@
 package com.example.instrumentshop.Users.Controller;
 
 import com.example.instrumentshop.Global.Jwt.Controller.JwtController;
+import com.example.instrumentshop.Users.DTO.ReservesDTO;
 import com.example.instrumentshop.Users.DTO.UsersDTO;
+import com.example.instrumentshop.Users.Entity.Users;
 import com.example.instrumentshop.Users.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -62,6 +64,13 @@ public class UserController {
             // 사용자 정보 반환
             return ResponseEntity.ok(userDetails);
         }
+    }
+
+    @PostMapping("/api/user/reserves")
+    public ResponseEntity<Users> addReserves(@ModelAttribute ReservesDTO reservesDTO){
+        Users updatedUser = userService.addReserves(reservesDTO);
+
+        return ResponseEntity.ok(updatedUser);
     }
 
 }

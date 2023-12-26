@@ -21,8 +21,11 @@ function OrderInfo(props) {
     const [selectedCoupon, setSelectedCoupon] = useState([]);
     const [useCoupon, setUseCoupon] = useState([]);
     const [useCouponState, setUseCouponState] = useState([]);
+    const [discountPrice, setDistCountPrice] = useState(0);
+    const [reserves, setReserves] = useState(0);
+
     // {console.log(memberCoupon)}
-    {console.log(useCoupon)}
+    // {console.log(useCoupon)}
     // {console.log(useCouponState)}
 
     useEffect(() => {
@@ -68,14 +71,17 @@ function OrderInfo(props) {
                     const newTotalPrice = totalPrice * (1-(selectedCoupon.couponDiscount/100));
                     if(totalPrice - newTotalPrice >= selectedCoupon.couponLimit) {
                         const limitTotalPrice = totalPrice - selectedCoupon.couponLimit;
+                        setDistCountPrice(prevState => prevState + selectedCoupon.couponLimit)
                         setTotalPrice(limitTotalPrice);
                         alert("쿠폰이 적용되었습니다!");
                     } else {
                         setTotalPrice(newTotalPrice);
+                        setDistCountPrice(prevState => prevState + (totalPrice - newTotalPrice))
                         alert("쿠폰이 적용되었습니다!");
                     }
                 } else {
                     const newTotalPrice = totalPrice - selectedCoupon.couponValue;
+                    setDistCountPrice(prevState => prevState + selectedCoupon.couponValue)
                     setTotalPrice(newTotalPrice);
                     alert("쿠폰이 적용되었습니다!");
                 }
@@ -90,16 +96,20 @@ function OrderInfo(props) {
 
                     if(totalPrice[index] - newTotalPrice[index] >= coupon.couponLimit){
                         newTotalPrice[index] = totalPrice[index] - coupon.couponLimit;
+                        setDistCountPrice(prevState => prevState + coupon.couponLimit)
                         setTotalPrice(newTotalPrice);
                         alert("쿠폰이 적용되었습니다!");
                     } else {
                         setTotalPrice(newTotalPrice);
+                        setDistCountPrice(prevState => prevState +
+                            (totalPrice[index] - newTotalPrice[index]));
                         alert("쿠폰이 적용되었습니다!");
                     }
 
                 } else {
                     const newTotalPrice = [...totalPrice];
                     newTotalPrice[index] = totalPrice[index] - coupon.couponValue;
+                    setDistCountPrice(prevState => prevState + coupon.couponValue)
                     setTotalPrice(newTotalPrice);
                     alert("쿠폰이 적용되었습니다!");
                 }
@@ -186,6 +196,10 @@ function OrderInfo(props) {
     const pay = Math.round(finalPrice + deliverPrice);
 
     useEffect(() => {
+        setReserves(Math.round(pay * 0.05));
+    }, [pay]);
+
+    useEffect(() => {
         {console.log(totalPrice)}
         if( finalPrice >= 50000){
             setDeliverPrice(0);
@@ -230,7 +244,8 @@ function OrderInfo(props) {
         deliverName : memberInfo.deliverName,
         deliverPhone : memberInfo.deliverPhone,
         payInformation : selectedOption,
-        useCoupon : useCoupon
+        useCoupon : useCoupon,
+        reserves : reserves
 
     }
 
@@ -356,7 +371,7 @@ function OrderInfo(props) {
                </div>
                <div className="order-info-total-pay">
                    <div className="order-info-total-pay-price">
-                       <p>{finalPrice.toLocaleString()} 원</p>
+                       <p>{(productPrice * productQuantity).toLocaleString()} 원</p>
                    </div>
                    <div className="order-info-total-pay-plus">
                        <p>+</p>
@@ -368,13 +383,18 @@ function OrderInfo(props) {
                        <p>-</p>
                    </div>
                    <div className="order-info-total-pay-discount">
-                       <p>0 원</p>
+                       <p>{discountPrice} 원</p>
                    </div>
                    <div className="order-info-total-pay-equals">
                        <p>=</p>
                    </div>
                    <div className="order-info-total-pay-total">
                        <p>{pay.toLocaleString()} 원</p>
+                   </div>
+               </div>
+               <div className="order-info-content-total">
+                   <div className="order-info-content-total-title">
+                       <p>예상 적립금 : {reserves} 원</p>
                    </div>
                </div>
            </div>

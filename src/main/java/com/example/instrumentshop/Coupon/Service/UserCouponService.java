@@ -77,6 +77,12 @@ public class UserCouponService {
         return userCouponRepository.findByUsers_MEMBERUID(MEMBERUID);
     }
 
+    @Transactional
+    public Long getCountUserCouponNoUse(Long MEMBERUID){
+
+        return userCouponRepository.countByUsers_MEMBERUIDAndUsed(MEMBERUID, false);
+    }
+
     // 현재 시간 구하는 서비스
     private static String getCurrentTimeString(){
         LocalDateTime now = LocalDateTime.now();

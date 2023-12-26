@@ -14,7 +14,7 @@ const MyPageCouponTab = () => {
     useEffect(() => {
         axios.get(`/api/coupons/users/coupons/${memberUid}`)
             .then(res => {
-                setMemberCoupon(res.data);
+                setMemberCoupon(res.data.filter(coupon => !coupon.used));
             }).catch(error => {
             console.log('Error fetching data:', error );
         });

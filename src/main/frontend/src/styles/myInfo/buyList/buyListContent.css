@@ -13,15 +13,20 @@
 }
 
 .m-c-g-t-content-small {
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
     border: 1px solid var(--color-silver-100);
     background-color: var(--color-white);
     height: 100px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .t-small-span {
-    font-size: 44px;
+    font-size: 28px;
 }
 
 .m-c-g-t-buy-content {

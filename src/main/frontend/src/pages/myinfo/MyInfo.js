@@ -45,7 +45,7 @@ function MyInfo() {
     }, []);
 
     const ProfileSettings = () => <MyInfoContent userData = {userData} />;
-    const PurchaseHistory = () => <MyBuyInfo MEMBERUID = {memberUid}/>;
+    const PurchaseHistory = () => <MyBuyInfo userData = {userData}/>;
     const Wishlist = () => <MyWishInfo MEMBERUID = {memberUid}/>;
 
     return (
