@@ -73,7 +73,6 @@ public class UserCouponService {
     @Transactional
     public List<UserCouponMap> getUserCouponByUser(Long MEMBERUID){
 
-
         return userCouponRepository.findByUsers_MEMBERUID(MEMBERUID);
     }
 

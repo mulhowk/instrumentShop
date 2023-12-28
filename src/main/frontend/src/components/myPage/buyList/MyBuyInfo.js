@@ -16,22 +16,30 @@ function MyBuyInfo(props) {
     const memberUid = userData.memberuid;
 
       // 상태를 선언합니다.
-  const [points, setPoints] = useState(null);
-  const [couponsLength, setCouponsLength] = useState(null);
-  const [reviews, setReviews] = useState(null);
-
+    const [myInfo, setMyInfo] = useState({
+        reserves: 0,
+        couponCount: 0,
+        orderCount: 0
+    });
 
     useEffect(() => {
-        setPoints(userData.memberReserves);
+        async function fetchMyInfo() {
+            try {
+                const accessToken = localStorage.getItem('token');
+                const response = await axios.get('/api/user/history', {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    }
+                });
+                setMyInfo(response.data);
+            } catch (error) {
+                console.error('데이터를 가져오는 데 실패했습니다:', error);
+            }
+        }
 
-        axios.get(`/api/coupons/users/coupons/noUse/${memberUid}`)
-            .then(res => {
-                setCouponsLength(res.data)
-                {console.log(res.data)}
-            }).catch(error => {
-            console.log('Error fetching data:', error);
-        });
+        fetchMyInfo();
     }, []);
+
 
     return (
         
@@ -45,7 +53,7 @@ function MyBuyInfo(props) {
                             </div>
                             <div className="m-c-g-t-content-small">
                                 <div className="m-c-g-t-c-tab first">
-                                    <div className="t-small-span">{points} 원</div>
+                                    <div className="t-small-span">{myInfo.reserves}원</div>
                                 </div>
                             </div>
                         </div>
@@ -55,7 +63,7 @@ function MyBuyInfo(props) {
                             </div>
                             <div className="m-c-g-t-content-small" onClick={couponPopup}>
                                 <div className="m-c-g-t-c-tab first">
-                                    <div className="t-small-span"> {couponsLength} 장</div>
+                                    <div className="t-small-span">{myInfo.couponCount}장</div>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +73,7 @@ function MyBuyInfo(props) {
                             </div>
                             <div className="m-c-g-t-content-small">
                                 <div className="m-c-g-t-c-tab first">
-                                    <div className="t-small-span"> 건</div>
+                                    <div className="t-small-span">{myInfo.orderCount}건</div>
                                 </div>
                             </div>
                         </div>

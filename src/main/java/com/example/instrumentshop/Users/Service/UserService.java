@@ -84,16 +84,13 @@ public class UserService {
     }
 
     public Users addReserves(ReservesDTO reservesDTO){
-
-        Users prevUser = usersRepository.findByMEMBERUID(reservesDTO.getMEMBERUID());
+        Users users = usersRepository.findByMEMBERUID(reservesDTO.getMEMBERUID());
 
         int addReserves = reservesDTO.getMemberReserves();
+        users.setMemberReserves(users.getMemberReserves() + addReserves);
 
-        prevUser.setMemberReserves(prevUser.getMemberReserves() + addReserves);
-
-        return usersRepository.save(prevUser);
+        return usersRepository.save(users);
 
     }
-
 }
 
