@@ -34,7 +34,7 @@ public class OrdersService {
 
         Orders newOrders =
                 Orders.builder()
-                        .goods(ordersDTO.getGoods())
+                        .goodsId(ordersDTO.getGoodsId())
                         .users(ordersDTO.getUsers())
                         .goodsQuantity(ordersDTO.getGoodsQuantity())
                         .options(ordersDTO.getOptions())

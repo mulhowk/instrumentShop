@@ -26,7 +26,7 @@ export function SuccessPage() {
 
         const formOrdersData = new FormData();
 
-        formOrdersData.append('goods', orderInfo.goodsId);
+        formOrdersData.append('goodsId', orderInfo.goodsId);
         formOrdersData.append('users', orderInfo.MEMBERUID);
         formOrdersData.append('goodsQuantity', orderInfo.goodsQuantity);
         formOrdersData.append('options', orderInfo.goodsOption);

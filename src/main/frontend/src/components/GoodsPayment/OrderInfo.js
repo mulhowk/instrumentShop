@@ -185,6 +185,9 @@ function OrderInfo(props) {
 
     const productQuantity = goods.length >= 2 ? goods.map(goods => goods.goodsQuantity) : goods.goodsQuantity;
 
+    const originPrice = goods.length >= 2 ? Math.round(productPrice.map((value, index) => value * productQuantity[index])
+        .reduce((sum, value) => sum + value, 0)) : productPrice * productQuantity;
+
     const [totalPrice, setTotalPrice] = useState(goods.length >=2 ?
         productPrice.map((value, index) => value * productQuantity[index])
     : productPrice * productQuantity);
@@ -371,7 +374,7 @@ function OrderInfo(props) {
                </div>
                <div className="order-info-total-pay">
                    <div className="order-info-total-pay-price">
-                       <p>{(productPrice * productQuantity).toLocaleString()} 원</p>
+                       <p>{originPrice.toLocaleString()} 원</p>
                    </div>
                    <div className="order-info-total-pay-plus">
                        <p>+</p>

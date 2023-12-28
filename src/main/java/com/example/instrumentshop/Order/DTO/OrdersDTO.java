@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 public class OrdersDTO {
 
-    private List<Goods> goods;
+    private List<Integer> goodsId;
     private Users users;
     private List<Integer> goodsQuantity;
     private List<String> options;

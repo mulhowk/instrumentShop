@@ -22,9 +22,8 @@ public class Orders {
     @Column(name = "order_id")
     private Long orderId;
 
-    @OneToMany(cascade = CascadeType.DETACH)
-    @JoinColumn
-    private List<Goods> goods;
+    @ElementCollection
+    private List<Integer> goodsId;
 
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "MEMBERUID", referencedColumnName = "MEMBERUID")

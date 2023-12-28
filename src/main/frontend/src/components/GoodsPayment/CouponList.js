@@ -34,7 +34,8 @@ const CouponList = ({coupon, useCoupon, onSelectCoupon, index = -1, onClose}) =>
 
     return(
         <>
-        <div style={{display : "block", placeContent : "center", margin : "10px"}}>
+        <div style={{display : "block", placeContent : "center", margin : "10px", border : "1px solid #AAAAAA",
+        padding : "8px", borderRadius : "10px"}}>
             {memberCoupon.map((coupon, index) => (
                 <div>
                 {useCouponList[index] === false ?
