@@ -2,11 +2,13 @@ import {Link, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import { format, parseISO} from 'date-fns';
+import {getAuthToken} from "../../../global/auth";
 
 
 export function SuccessPage() {
     const [searchParams] = useSearchParams();
     const [orderInfo, setOrderInfo] = useState([]);
+    const [orderId, setOrderId] = useState();
     {console.log(orderInfo)}
     useEffect(() => {
         const orderInfoParams = searchParams.get('orderInfo');
@@ -21,6 +23,9 @@ export function SuccessPage() {
     }, []);
 
     useEffect(() => {
+        const token =  getAuthToken() || null;
+
+        if(token !== null){
         if(orderInfo.length !==0){
             {console.log(orderInfo.goodsId)}
 
@@ -45,6 +50,7 @@ export function SuccessPage() {
                 'Content-Type' : 'application/x-www-form-urlencoded'
             }
         }).then(createdOrders => {
+            setOrderId(createdOrders.data.orderId);
             console.log("주문 정보 등록 완료");
         })
             .catch(error => console.log('Error creating order: ', error));
@@ -107,6 +113,38 @@ export function SuccessPage() {
             .catch(error => console.log('Error creating order: ', error));
 
         }
+        }
+        else {
+            if(orderInfo.length !==0){
+                {console.log(orderInfo.goodsId)}
+
+                const formOrdersData = new FormData();
+
+                formOrdersData.append('goodsId', orderInfo.goodsId);
+                formOrdersData.append('goodsQuantity', orderInfo.goodsQuantity);
+                formOrdersData.append('options', orderInfo.goodsOption);
+                formOrdersData.append('totalPrice', orderInfo.pay);
+                formOrdersData.append('orderMsg', orderInfo.orderMsg);
+                formOrdersData.append('deliverMsg', orderInfo.deliverMsg);
+                formOrdersData.append('orderName', orderInfo.orderName);
+                formOrdersData.append('orderEmail', orderInfo.orderEmail);
+                formOrdersData.append('orderPhone', orderInfo.orderPhone);
+                formOrdersData.append('deliverName', orderInfo.deliverName);
+                formOrdersData.append('deliverPhone', orderInfo.deliverPhone);
+                formOrdersData.append('payInformation', orderInfo.payInformation);
+
+                axios.post(`/orders/post`, formOrdersData, {
+                    headers : {
+                        'Content-Type' : 'application/x-www-form-urlencoded'
+                    }
+                }).then(createdOrders => {
+                    setOrderId(createdOrders.data.orderId);
+                    console.log("주문 정보 등록 완료");
+                })
+                    .catch(error => console.log('Error creating order: ', error));
+
+                }
+        }
     }, [orderInfo]);
 
 
@@ -122,6 +160,9 @@ export function SuccessPage() {
                   <p>결제 금액 : {`${Number(
                       searchParams.get("amount")
                   ).toLocaleString()}`} 원</p>
+              </div>
+              <div>
+                  <p>주문 번호 : {orderId}</p>
               </div>
               <br/>
               <div>

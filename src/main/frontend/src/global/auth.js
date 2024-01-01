@@ -16,6 +16,7 @@ import {useEffect} from "react";
     const now = parseInt(new Date().getTime() / 1000, 10);
     // 만료 시간이 있고, 현재 시간보다 미래라면 토큰 반환
     if (parseInt(tokenExpiration, 10) > now) {
+      localStorage.removeItem('cart');
       return token;
     }
     // 만료된 토큰이나 토큰이 없는 경우 null 반환

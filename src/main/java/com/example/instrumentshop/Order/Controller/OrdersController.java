@@ -43,7 +43,11 @@ public class OrdersController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newOrders);
     }
 
+    @GetMapping("/orders/one/{orderId}")
+    public Orders getOrdersByOrderId(@PathVariable Long orderId){
 
+        return ordersService.findOrdersByOrderId(orderId);
+    }
 
 
 }

@@ -47,52 +47,6 @@ const MyBuyList = (props) => {
     const [goodsId, setGoodsId] = useState([]);
     const [goods, setGoods] = useState([]);
 
-    // useEffect(() => {
-    //     const newGoodsArray = [];
-    //
-    //     axios.get(`/orders/${MEMBERUID}`)
-    //         .then(res => {
-    //             setOrderItem(res.data);
-    //             setGoodsId(res.data.map(order => order.goodsId));
-    //
-    //             const goodsId = res.data.map(order => order.goodsId);
-    //             function createArrayOfObjects(...objects) {
-    //                 return objects;
-    //             }
-    //
-    //             goodsId.map((goodsIdArray, index) => {
-    //
-    //                 if (goodsIdArray.length > 1) {
-    //                     const fetchData = async () => {
-    //                         try {
-    //                             const responses = await Promise.all(
-    //                                 goodsIdArray.map(id => axios.get(`/goodsDetails/goods/${id}`))
-    //                             );
-    //                             newGoodsArray[index] = responses.map(response => response.data);
-    //
-    //                         } catch (error) {
-    //                             console.error('Error fetching data:', error);
-    //                         }
-    //                     };
-    //                     fetchData();
-    //                 } else if (goodsIdArray.length === 1) {
-    //                     axios.get(`/goodsDetails/goods/${goodsIdArray[0]}`)
-    //                         .then(res => {
-    //                             newGoodsArray[index]= createArrayOfObjects(res.data);
-    //
-    //                         }).catch(error => {
-    //                         console.log('Error fetching data:', error);
-    //                     });
-    //                 }
-    //
-    //             })
-    //
-    //         }).catch(error => {
-    //         console.log('Error fetching data:', error );
-    //     });
-    //
-    //
-    // }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -155,7 +109,6 @@ const MyBuyList = (props) => {
             {orderItem.length !==0 ?
                 orderItem.map((orders, index) =>
                     <div>
-                        {console.log(goods)}
                         {goods[index].length > 1 ?
                             (goods[index].map((goods, index) => (
         <div className="box" key={goods.goodsId}>

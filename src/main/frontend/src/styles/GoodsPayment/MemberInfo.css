@@ -328,3 +328,25 @@
     border-color: #2ecc71; /* 포커스 시 테두리 색상 변경 */
     box-shadow: 0 0 5px rgba(46, 204, 113, 0.5); /* 포커스 시 약간의 그림자 효과 */
 }
+
+.modal-close-button{
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: #FFFFFF;
+    color: #000000;
+    border: 2px solid #AAAAAA;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-left: 500px;
+
+    &:hover {
+        background-color: #2980b9;
+        border-color: #2980b9;
+    }
+}

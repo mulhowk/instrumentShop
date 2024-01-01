@@ -18,6 +18,7 @@ function GoodsDetailsProduct(props) {
     const [wishNo, setWishNo] = useState(0);
     const [wishCheck, setWishCheck] = useState(false);
     {console.log(wishNo)}
+    {console.log(JSON.parse(localStorage.getItem('cart')) || [])}
 
     useEffect(() => {
         if(MEMBERUID !== null){
@@ -40,6 +41,7 @@ function GoodsDetailsProduct(props) {
 
     const handelAddWishList = () => {
 
+        if(MEMBERUID !== null){
         const formWishData = new FormData;
 
         formWishData.append('goods', goods.goodsId);
@@ -55,6 +57,10 @@ function GoodsDetailsProduct(props) {
         })
             .then(data => console.log(data))
             .catch(error => console.error('Error creating review: ', error));
+
+        } else {
+            alert('로그인시 가능합니다!');
+        }
 
     };
 
@@ -76,7 +82,7 @@ function GoodsDetailsProduct(props) {
     const handlePayment = () =>{
 
         if(goodsOption.length !==0) {
-            if (!selectOptions) {
+            if (selectOptions.length !==0) {
                 alert("옵션을 선택해주세요.");
                 return;
             }
@@ -108,6 +114,34 @@ function GoodsDetailsProduct(props) {
 
     };
 
+    function addToCart(goods, goodsQuantity, goodsPrice, goodsName, goodsImg, goodsOption){
+
+            if (goods.goodsOption && selectOptions === "") {
+                alert("옵션을 선택해주세요.");
+                return;
+            }
+
+
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        const newProduct = {
+            cartNo : cart.length + 1,
+            goods,
+            goodsQuantity,
+            goodsPrice,
+            goodsName,
+            goodsImg,
+            ...(goodsOption && { goodsOption })
+        };
+
+        cart.push(newProduct);
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert("장바구니에 추가 되었습니다!");
+
+        window.location.reload();
+    }
+
     const decrement = () => {
         if (count === 1) {
             alert("개수 1 미만으로는 설정할 수 없습니다.")
@@ -118,33 +152,42 @@ function GoodsDetailsProduct(props) {
 
     const handleCart = () => {
 
-        if(goodsOption.length !==0) {
-            if (!selectOptions) {
-                alert("옵션을 선택해주세요.");
-                return;
+        if(MEMBERUID !== null){
+            if(goodsOption.length !==0) {
+                if (!selectOptions) {
+                    alert("옵션을 선택해주세요.");
+                    return;
+                }
+            }
+
+            const formCartData = new FormData();
+
+            formCartData.append('goods', goods.goodsId);
+            formCartData.append('users', MEMBERUID);
+            formCartData.append('goodsQuantity', count);
+            formCartData.append('goodsPrice', goods.goodsPrice);
+            formCartData.append('goodsName', goods.goodsName);
+            formCartData.append('goodsImg', goods.goodsImg);
+            if(goodsOption.length !==0) {
+                formCartData.append('goodsOption', selectOptions);
+            }
+
+            axios.post(`/cart/cartIn`, formCartData, {
+                headers : {
+                    'Content-Type' : 'application/x-www-form-urlencoded'
+                }
+            }).then(createdCart => {
+                    alert("장바구니에 담겼습니다!");
+                    window.location.reload();
+            }).catch(error => console.log('Error creating order: ', error))
+
+        } else {
+            if(goodsOption.length !==0) {
+                addToCart(goods, count, goods.goodsPrice, goods.goodsName, goods.goodsImg, selectOptions);
+            } else {
+                addToCart(goods, count, goods.goodsPrice, goods.goodsName, goods.goodsImg);
             }
         }
-
-        const formCartData = new FormData();
-
-        formCartData.append('goods', goods.goodsId);
-        formCartData.append('users', MEMBERUID);
-        formCartData.append('goodsQuantity', count);
-        formCartData.append('goodsPrice', goods.goodsPrice);
-        formCartData.append('goodsName', goods.goodsName);
-        formCartData.append('goodsImg', goods.goodsImg);
-        if(goodsOption.length !==0) {
-            formCartData.append('goodsOption', selectOptions);
-        }
-
-        axios.post(`/cart/cartIn`, formCartData, {
-            headers : {
-                'Content-Type' : 'application/x-www-form-urlencoded'
-            }
-        }).then(createdCart => {
-                alert("장바구니에 담겼습니다!");
-                window.location.reload();
-        }).catch(error => console.log('Error creating order: ', error))
 
     }
 

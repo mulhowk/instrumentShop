@@ -56,6 +56,12 @@ public class OrdersService {
         return ordersRepository.save(newOrders);
     }
 
+    @Transactional
+    public Orders findOrdersByOrderId(Long orderId){
+
+        return ordersRepository.findByOrderId(orderId);
+    }
+
     // 현재 시간 구하는 서비스
     private static String getCurrentTimeString(){
         LocalDateTime now = LocalDateTime.now();
