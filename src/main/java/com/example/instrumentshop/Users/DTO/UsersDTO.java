@@ -103,5 +103,18 @@ public class UsersDTO {
         private int couponCount;
         private int orderCount;
     }
-
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class UserAllInfoDTO {
+        private Long memberUid;
+        private String memberName;
+        private String memberGender;
+        private String memberEmail;
+        private Role memberRole;
+        private String memberDate;
+        private int memberReserves;
+        private String loginDate;
+    }
 }

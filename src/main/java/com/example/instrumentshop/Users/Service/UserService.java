@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Transactional
@@ -91,6 +93,28 @@ public class UserService {
 
         return usersRepository.save(users);
 
+    }
+
+    public List<UsersDTO.UserAllInfoDTO> getAllUserAllInfo() {
+        List<Users> usersList = usersRepository.findAll();
+
+        return usersList.stream()
+                .map(user -> UsersDTO.UserAllInfoDTO.builder()
+                        .memberUid(user.getMEMBERUID())
+                        .memberName(user.getMemberName())
+                        .memberGender(user.getMemberGender())
+                        .memberEmail(user.getMemberEmail())
+                        .memberRole(user.getSocialRole())
+                        .memberDate(user.getMemberDate())
+                        .memberReserves(user.getMemberReserves())
+                        .loginDate(user.getLoginDate())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void addReserves(Long MEMBERUID, int reserves) {
+        usersRepository.updateMemberReserves(MEMBERUID, reserves);
     }
 }
 

@@ -28,7 +28,7 @@ import java.util.List;
         private String memberPhone; // 전화번호
         private String imageUrl; // 프로필 이미지
         private String city; // 사는 도시
-        @OneToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+        @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
         @Builder.Default
         private List<Authority> roles = new ArrayList<>();
         @Enumerated(EnumType.STRING)

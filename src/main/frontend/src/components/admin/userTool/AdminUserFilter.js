@@ -1,32 +1,32 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './adminUserFilter.css';
 import aMain from '../../../img/info/search_img.png';
+import AdminUserModal from './AdminUserModal';
+import axios from "axios";
 
 const AdminUserFilter = () => {
     // 데이터를 상태로 설정
-    const [users, setUsers] = useState([]);
+    const [userinfo, setUserInfo] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
 
-    const userItems = [
-        {
-            nickname: "홍길동",
-            email: "nelp1234@gmail.com",
-            userType: "일반사용자",
-            registrationDate: "2023-10-30",
-            point: 3000,
-            amount: 1700000,
-            date: "2023/10/25"
-        },
-        {
-            nickname: "한팀장",
-            email: "oasdj124@gmail.com",
-            userType: "일반사용자",
-            registrationDate: "2023-10-30",
-            point: 5000,
-            amount: 0,
-            date: "2023/10/28"
-        }
-    ]
+    useEffect(() => {
 
+        const fetchAllUserInfo = async () => {
+            try {
+                const response = await axios.get('/api/all/users');
+                setUserInfo(response.data);
+            } catch (error) {
+                console.error("Error fetching addresses: ", error);
+            }
+        };
+
+        fetchAllUserInfo();
+    }, []);
+    const handleRowClick = (user) => {
+        setSelectedUser(user);
+        setShowModal(true);
+    };
 
     return (
         <>
@@ -48,32 +48,36 @@ const AdminUserFilter = () => {
                                 <th>
                                     <input type='checkbox'/>
                                 </th>
-                                <th>닉네임</th>
+                                <th>이름</th>
+                                <th>성별</th>
                                 <th>이메일</th>
                                 <th>회원유형</th>
-                                <th>가입일</th>
+                                <th>가입날자</th>
                                 <th>적립금</th>
-                                <th>누적금액</th>
                                 <th>최종 로그인 일자</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {userItems.map((user, index) => (
-                            <tr key={index}>
+                        {userinfo.map(user => (
+                            <tr key={user.memberUid} onClick={() => handleRowClick(user)} >
                                 <td><input type='checkbox'/></td>
-                                <td>{user.nickname}</td>
-                                <td>{user.email}</td>
-                                <td>{user.userType}</td>
-                                <td>{user.registrationDate}</td>
-                                <td>{user.point}</td>
-                                <td>{user.amount}</td>
-                                <td>{user.date}</td>
+                                <td>{user.memberName}</td>
+                                <td>{user.memberGender}</td>
+                                <td>{user.memberEmail}</td>
+                                <td>{user.memberRole}</td>
+                                <td>{user.memberDate}</td>
+                                <td>{user.memberReserves}</td>
+                                <td>{user.loginDate}</td>
                             </tr>
-                            ))}
+                        ))}
                         </tbody>
                     </table>
                 </div>
             </div>
+
+            {showModal && selectedUser && (
+                <AdminUserModal user={selectedUser} onClose={() => setShowModal(false)} />
+            )}
         </>
     );
 }

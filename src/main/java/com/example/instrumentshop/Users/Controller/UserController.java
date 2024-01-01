@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("") //
@@ -26,6 +27,12 @@ public class UserController {
     @PostMapping(value = "/api/login")
     public ResponseEntity<UsersDTO.SignResponse> signin(@RequestBody UsersDTO.SignRequest request) throws Exception {
         return new ResponseEntity<>(userService.login(request), HttpStatus.OK);
+    }
+
+    @GetMapping("/api/all/users")
+    public ResponseEntity<List<UsersDTO.UserAllInfoDTO>> getAllUserInformation() {
+        List<UsersDTO.UserAllInfoDTO> allUserInfo = userService.getAllUserAllInfo();
+        return ResponseEntity.ok(allUserInfo);
     }
 
     @GetMapping("/api/currentUser")
@@ -73,4 +80,13 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
+    @PutMapping("/api/user/reservesAdd/{memberUID}")
+    public ResponseEntity<?> addReserves(@PathVariable Long memberUID, @RequestBody ReservesDTO reserveDTO) {
+        try {
+            userService.addReserves(memberUID, reserveDTO.getMemberReserves());
+            return ResponseEntity.ok().body("Reserves updated successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error updating reserves: " + e.getMessage());
+        }
+    }
 }
