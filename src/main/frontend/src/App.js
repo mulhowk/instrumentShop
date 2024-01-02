@@ -32,6 +32,7 @@ import InMyReview from './pages/myinfo/InMyReview.js';
 import InMyQnA from './pages/myinfo/InMyQnA.js';
 import InMyCoupon from './pages/myinfo/InMyCoupon.js';
 import AdminUserInfo from './pages/admin/AdminUserInfo.js';
+import OrderSearch from "./components/OrderList/OrderSearch";
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="/goodsList/category/:categoryId" element={<GoodsList/>}/>
           <Route path="/goodsList/category/:categoryId/:subCategoryId" element={<GoodsList/>}/>
           <Route path="/goodsList/cart/:MEMBERUID" element={<CartPage/>}/>
+          <Route path="/goodsList/cart/guest" element={<CartPage/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/myinfo" element={<MyInfo/>}/>
           <Route path="/myinfo/address" element={<MyAddressPop/>}/>
@@ -65,7 +67,7 @@ function App() {
           <Route path="/admin/goodsAllList" element={<AdminProductMange/>}/>
           <Route path="/admin/couponAllList" element={<AdminCouponList/>}/>
           <Route path="/admin/productAdd" element={<AdminProductAdd/>}/>
-
+          <Route path="/orderSearch" element={<OrderSearch/>}/>
 
 
           

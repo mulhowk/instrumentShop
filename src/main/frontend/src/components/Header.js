@@ -17,6 +17,7 @@ function Header(props){
 
     const memberUid = decodedToken? decodedToken.UID : null;
     const [sumCart, setSumCart] = useState(0);
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 
 
@@ -144,14 +145,11 @@ function Header(props){
                             }} className="header-menu-text">MYPAGE</a>
                         </li>
                         }
-                        {isLogin ?
-                        <li><a href="/myinfo">ORDER</a></li>
-                            :
-                            <a onClick={(e) => {
-                                e.preventDefault();
-                                setModalIsOpen(true);
-                            }} className="header-menu-text">ORDER</a>
-                        }
+                        <li>
+                            <a href="/orderSearch">
+                                ORDER
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div className="basket">
@@ -159,7 +157,7 @@ function Header(props){
                     <a href={`/goodsList/cart/${memberUid}`}>
                         <img src="/basket.png" alt='basketImg' width="60" height="70"></img>
                     </a> :
-                        <a href="/">
+                        <a href="/goodsList/cart/guest">
                             <img src="/basket.png" alt='basketImg' width="60" height="70"></img>
                         </a>
                     }
@@ -167,7 +165,7 @@ function Header(props){
                         {decodedToken?
                             <input name="count" className="count-input" value={sumCart} disabled/>
                             :
-                            <input name="count" className="count-input" value="0" disabled/>
+                            <input name="count" className="count-input" value={cart.length} disabled/>
                         }
                     </div>
                 </div>

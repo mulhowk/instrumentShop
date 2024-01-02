@@ -12,4 +12,6 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
 
     // 특정 사용자의 주문 개수 조회
     int countByUsers(Users user);
+
+    Orders findByOrderId(Long orderId);
 }

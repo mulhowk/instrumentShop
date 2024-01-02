@@ -147,8 +147,12 @@ function OrderInfo(props) {
         }
 
         if(selectedOption === '무통장입금') {
-            window.location.href =
-                `${window.location.origin}/success?orderInfo=${encodeURIComponent(JSON.stringify(orderInfo))}`;
+            {MEMBERUID ?
+                window.location.href =
+                `${window.location.origin}/success?orderInfo=${encodeURIComponent(JSON.stringify(orderInfo))}`
+             : window.location.href =
+                    `${window.location.origin}/success?orderInfo=${encodeURIComponent(JSON.stringify(orderInfoNotLogin))}`
+            }
         } else if (selectedOption === '토스 간편결제'){
             openModal();
         } else {
@@ -249,6 +253,23 @@ function OrderInfo(props) {
         payInformation : selectedOption,
         useCoupon : useCoupon,
         reserves : reserves
+
+    }
+
+    const orderInfoNotLogin = {
+
+        goodsId : goodsId,
+        goodsQuantity : goodsQuantity,
+        goodsOption : goodsOption,
+        pay : pay,
+        orderMsg : memberInfo.orderMsg,
+        deliverMsg : memberInfo.deliverMsg,
+        orderName : memberInfo.orderName,
+        orderEmail : memberInfo.orderEmail,
+        orderPhone : memberInfo.orderPhone,
+        deliverName : memberInfo.deliverName,
+        deliverPhone : memberInfo.deliverPhone,
+        payInformation : selectedOption
 
     }
 
@@ -395,11 +416,13 @@ function OrderInfo(props) {
                        <p>{pay.toLocaleString()} 원</p>
                    </div>
                </div>
-               <div className="order-info-content-total">
+               {MEMBERUID &&
+                   <div className="order-info-content-total">
                    <div className="order-info-content-total-title">
                        <p>예상 적립금 : {reserves} 원</p>
                    </div>
                </div>
+               }
            </div>
            <div className="pay-area">
                <div className="pay-area-title">
@@ -411,7 +434,7 @@ function OrderInfo(props) {
                    contentLabel ="Checkout Modal"
                    style={customStyles}
                >
-                   <CheckoutPage orderInfo = {orderInfo}/>
+                   <CheckoutPage orderInfo = {MEMBERUID ? orderInfo : orderInfoNotLogin}/>
                    <button className="modal-button" onClick={closeModal}>닫기</button>
                </Modal>
                <div className="pay-area-way">

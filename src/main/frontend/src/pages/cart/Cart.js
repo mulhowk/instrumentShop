@@ -14,17 +14,23 @@ import axios from "axios";
 
 function CartPage() {
 
-    const params = useParams();
-    const MEMBERUID = params.MEMBERUID;
+    const params = useParams() || null;
+    const MEMBERUID = params.MEMBERUID || null;
     const [cartList, setCartList] = useState([]);
 
     useEffect(() => {
-        axios.get(`/cart/${MEMBERUID}`)
-            .then(response => {
-                setCartList(response.data);
-            }).catch(error => {
-            console.log('Error fetching data:', error );
-        });
+        if(MEMBERUID !== null){
+            axios.get(`/cart/${MEMBERUID}`)
+                .then(response => {
+                    setCartList(response.data);
+                }).catch(error => {
+                console.log('Error fetching data:', error );
+            });
+        } else {
+            const cart = JSON.parse(localStorage.getItem('cart')) || null;
+            {console.log(cart)}
+            setCartList(cart);
+        }
     }, []);
 
     return (

@@ -2,6 +2,7 @@ import './cartItem.css';
 import React, { useState, useEffect } from 'react';
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {getAuthToken} from "../../global/auth";
 
 const CartItem = (props) => {
 
@@ -12,15 +13,33 @@ const CartItem = (props) => {
 
         {console.log(key)}
         const isConfirmed = window.confirm('해당 장바구니를 삭제하시겠습니까?');
-
+        const token =  getAuthToken() || null;
 
         if(isConfirmed){
+            if(token !== null){
             axios.delete(`/cart/delete/${key}`)
                 .then(res => {
                     alert("상품이 삭제되었습니다!");
                     window.location.reload();
                 })
                 .catch(error => console.error('Error delete goods: ', error));
+            } else{
+                const cart = JSON.parse(localStorage.getItem('cart')) || null;
+
+                const indexToRemove = cart.findIndex(cartList => cartList.cartNo === key);
+
+                if(indexToRemove !== -1){
+                    cart.splice(indexToRemove, 1);
+
+                    localStorage.setItem('cart', JSON.stringify(cart));
+
+                    console.log('상품 정상 삭제');
+                    alert("상품이 삭제되었습니다!");
+                    window.location.reload();
+                } else {
+                    console.log('번호에 맞는 상품 없음');
+                }
+            }
         }
     }
 

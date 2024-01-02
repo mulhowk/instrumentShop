@@ -11,7 +11,7 @@ function MemberInfo({ onMemberInfoChange }){
 
     const token =  getAuthToken();
     const decodedToken = token? tokenUserInfo(token) : null;
-    const memberUid = decodedToken.UID;
+    const memberUid = decodedToken ? decodedToken.UID : null;
     const [userData, setUserData] = useState();
     const [defaultAddresses, setDefaultAddresses] = useState([]);
     {console.log(defaultAddresses)}
@@ -29,14 +29,16 @@ function MemberInfo({ onMemberInfoChange }){
 
     const handleAddressData = (addressData) => {
         setIsMemberAddress(true);
-        setAddress(addressData.addressValue);
         setPostcode(addressData.addressPostnumber);
         setDeliverAddress("");
+        setAddress(addressData.addressValue);
         setDeliverName(addressData.addressReceiver);
         setDeliverPhone(addressData.memberPhone);
     }
 
     useEffect(() => {
+
+        if(decodedToken !==null){
         const fetchUserData = () => {
             const token = localStorage.getItem('token');
             axios.post('/api/user/info', { memberUid: memberUid }, {
@@ -51,11 +53,13 @@ function MemberInfo({ onMemberInfoChange }){
                     console.error("Error fetching user data: ", error);
                 });
         };
+            fetchUserData();
+        }
 
-        fetchUserData();
     }, []);
 
     useEffect(() => {
+        if(memberUid){
         const fetchAddresses = async () => {
             try {
                 const response = await axios.post('/api/address/info', { memberUid: memberUid });
@@ -66,13 +70,14 @@ function MemberInfo({ onMemberInfoChange }){
         };
 
         fetchAddresses();
+        } else {console.log('비로그인')}
     }, []);
 
     useEffect(() => {
         if(defaultAddresses.length !== 0) {
-            setAddress(defaultAddresses[0].addressValue);
             setPostcode(defaultAddresses[0].addressPostnumber);
             setDeliverAddress("");
+            setAddress(defaultAddresses[0].addressValue);
             setDeliverName(defaultAddresses[0].addressReceiver);
             setDeliverPhone(defaultAddresses[0].memberPhone);
             setIsMemberAddress(true);
@@ -184,7 +189,6 @@ function MemberInfo({ onMemberInfoChange }){
             orderMsg : orderMsg,
             deliverMsg : deliverMsg
         }
-
         onMemberInfoChange(memberInfo);
 
     }, [orderName, orderEmail, orderPhone, deliverName, deliverPhone, deliverAddress, orderMsg, deliverMsg]);
@@ -204,6 +208,7 @@ function MemberInfo({ onMemberInfoChange }){
                             onAutoClose={handleClosePopup}
                             style={daumStyle}
                         />
+                        <button className="modal-close-button" onClick={handleClosePopup}>닫기</button>
                     </div>
                 )}
                 <div className="member-orderInfo-name">
