@@ -23,6 +23,7 @@ const AdminUserFilter = () => {
 
         fetchAllUserInfo();
     }, []);
+
     const handleRowClick = (user) => {
         setSelectedUser(user);
         setShowModal(true);
