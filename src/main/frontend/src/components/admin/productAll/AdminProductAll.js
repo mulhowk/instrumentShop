@@ -1,10 +1,28 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../userTool/adminUserFilter.css';
 import AdminProductFilter from './AdminProductFilter';
+import axios from "axios";
 
 const AdminProductAll = () => {
-    // 데이터를 상태로 설정
-    const [users, setUsers] = useState([]);
+    const [goods, setGoods] = useState();
+
+    useEffect(() => {
+
+        const fetchGoods = async () => {
+            try {
+                axios.get('/goods')
+                    .then(response => {
+                        setGoods(response.data);
+                    })
+            } catch (error) {
+                console.error('Failed to fetch goods:', error);
+
+            }
+        };
+
+        fetchGoods();
+    }, []);
+
 
     const productItem = [
         {

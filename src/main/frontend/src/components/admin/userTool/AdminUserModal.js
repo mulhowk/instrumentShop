@@ -1,17 +1,29 @@
 import './adminUserModal.css';
 import axios from "axios";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const AdminUserModal = ({ user, onClose }) => {
-    const [reservesToAdd, setReservesToAdd] = useState('');
+    const [reservesToAdd, setReservesToAdd] = useState(0);
+    const [orders, setOrders] = useState(null);
+    const [loading, setLoading] = useState(true); // 로딩 상태
 
+    useEffect(() => {
+        axios.get(`/orders/${user.memberUid}`)
+            .then(response => {
+                setOrders(response.data); // 받아온 데이터로 상태 업데이트
+                setLoading(false); // 로딩 상태 업데이트
+            })
+            .catch(error => {
+                setLoading(false); // 에러 발생 시에도 로딩 상태 업데이트
+                alert(error.message);
+            });
+    }, [user.memberUid]); // user.memberUid가 변경될 때마다 효과 실행
 
     const handleAddReserves = () => {
         const reserves = parseInt(reservesToAdd, 10);
 
-
         if (!isNaN(reserves) && reserves > 0) {
-            axios.put(`/api/user/reservesAdd/${user.MEMBERUID}`, { memberReserves : reserves })
+            axios.put(`/api/user/reservesAdd/${user.memberUid}`, { memberReserves : reserves })
                 .then(response => {
                     alert('적립금이 성공적으로 추가되었습니다.');
                     onClose(); // 모달을 닫거나 상태를 업데이트 할 수 있습니다.
@@ -54,14 +66,54 @@ const AdminUserModal = ({ user, onClose }) => {
                                 ></input>
                             &nbsp;
                             <button className="edit-button" onClick={handleAddReserves}>적립금 추가</button>
+                            </div>
+                        </div>
+                        <div className="modal-body-right">
+                            <h2>주문내역</h2>
+                            <div>
+                                {loading ? (
+                                    <div>Loading...</div>
+                                ) : !orders || orders.length === 0 ? (
+                                    <div>주문내역이 없습니다.</div>
+                                ) : (
+                                    <div className="modal-order-info">
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th>주문 ID</th>
+                                                <th>주문 날짜</th>
+                                                <th>주문 가격</th>
+                                                <th>결제 방식</th>
+                                                <th>상품 ID</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {orders.map((order) => (
+                                                <tr key={order.orderId}>
+                                                    <td>{order.orderId}</td>
+                                                    <td>{order.orderDate}</td>
+                                                    <td>{order.totalPrice}</td>
+                                                    <td>{order.paymentInformation}</td>
+                                                    <td>
+                                                        {order.goodsId.map((id, index) => (
+                                                            <span
+                                                                key={id}>{id}{index < order.goodsId.length - 1 ? ', ' : ''}</span>
+                                                        ))}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-</>
-)
-    ;
+        </>
+    )
+        ;
 }
 
 export default AdminUserModal;
