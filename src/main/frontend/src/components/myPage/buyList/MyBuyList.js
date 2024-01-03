@@ -5,12 +5,14 @@ import {useNavigate} from "react-router-dom";
 import InMyReview from "../../../pages/myinfo/InMyReview";
 import Modal from "react-modal";
 import InMyQnA from "../../../pages/myinfo/InMyQnA";
+import OrderDetails from "./OrderDetails";
 
 const MyBuyList = (props) => {
 
     const MEMBERUID = props.MEMBERUID;
     const navi = useNavigate();
     const [goodsNum, setGoodsNum] = useState();
+    const [orderNum, setOrderNum] = useState();
 
     const customStyles = {
         overlay : {
@@ -26,6 +28,7 @@ const MyBuyList = (props) => {
 
     const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
     const [isQnaModalOpen, setIsQnaModalOpen] = useState(false);
+    const [isOrderDetailsModalOpen, setIsOrderDetailsModalOpen] = useState(false);
 
     const openReviewModal = () => {
         setIsReviewModalOpen(true);
@@ -41,6 +44,14 @@ const MyBuyList = (props) => {
 
     const closeQnaModal = () => {
         setIsQnaModalOpen(false);
+    }
+
+    const openOrderDetailsModal = () => {
+        setIsOrderDetailsModalOpen(true);
+    }
+
+    const closeOrderDetailsModal = () => {
+        setIsOrderDetailsModalOpen(false);
     }
 
     const [orderItem, setOrderItem] = useState([]);
@@ -98,6 +109,10 @@ const MyBuyList = (props) => {
         openQnaModal();
     };
 
+    const orderDetailsPopup = (orderId) => {
+        setOrderNum(orderId)
+        openOrderDetailsModal();
+    }
 
     const handelQna = (goodsId) => {
         const url = `/goodsDetails/qnaWrite/${goodsId}`;
@@ -120,7 +135,19 @@ const MyBuyList = (props) => {
                             / {orders.goodsQuantity[index]}개
                             / {orders.orderDate} 주문
                         </div>
-                        <div className="div">
+                        <Modal
+                            isOpen = {isOrderDetailsModalOpen}
+                            onRequestClose = {closeOrderDetailsModal}
+                            style={customStyles}
+                        >
+                            <OrderDetails
+                                orderNum = {orderNum}
+                            />
+                            <button className="modal-button" onClick={closeOrderDetailsModal}>닫기</button>
+                        </Modal>
+                        <div className="div"
+                             onClick={() => orderDetailsPopup(orders.orderId)}
+                             style={{cursor : "pointer"}}>
                             주문상세 보러가기
                         </div>
                         <a href={`/goodsDetails/${goods.goodsId}`}>
@@ -176,7 +203,19 @@ const MyBuyList = (props) => {
                                                 / {orders.goodsQuantity[index]}개
                                                 / {orders.orderDate} 주문
                                             </div>
-                                            <div className="div">
+                                            <Modal
+                                                isOpen = {isOrderDetailsModalOpen}
+                                                onRequestClose = {closeOrderDetailsModal}
+                                                style={customStyles}
+                                            >
+                                                <OrderDetails
+                                                    orderNum = {orderNum}
+                                                />
+                                                <button className="modal-button" onClick={closeOrderDetailsModal}>닫기</button>
+                                            </Modal>
+                                            <div className="div"
+                                                 onClick={() => orderDetailsPopup(orders.orderId)}
+                                                 style={{cursor : "pointer"}}>
                                                 주문상세 보러가기
                                             </div>
                                             <a href={`/goodsDetails/${goods[index][0].goodsId}`}>

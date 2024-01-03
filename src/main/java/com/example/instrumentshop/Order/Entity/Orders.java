@@ -27,7 +27,6 @@ public class Orders {
 
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "MEMBERUID", referencedColumnName = "MEMBERUID")
-    @JsonIgnore
     private Users users;
 
     @ElementCollection

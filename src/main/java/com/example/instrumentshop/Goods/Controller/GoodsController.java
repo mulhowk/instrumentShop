@@ -5,6 +5,7 @@ import com.example.instrumentshop.Goods.Entity.*;
 import com.example.instrumentshop.Goods.Service.GoodsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +19,11 @@ import java.util.List;
 @RequestMapping
 public class GoodsController {
 
+
     private final GoodsService goodsService;
 
     // 상품 전체 조회 컨트롤러
-    @GetMapping("/goods")
+    @GetMapping("/goodsList/all")
     public List<Goods> findAllGoods(){
 
         return goodsService.getAllGoods();
