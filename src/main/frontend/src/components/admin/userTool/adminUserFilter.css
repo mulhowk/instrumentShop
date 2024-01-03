@@ -14,6 +14,13 @@
         height: 34px;
     }
 
+.a-u-header-product {
+    width: 915px;
+}
+
+.a-u-header-product input {
+    width: 800px;
+}
 
 .header-title {
     height: 50px;

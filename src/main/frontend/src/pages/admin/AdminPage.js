@@ -11,7 +11,7 @@ function AdminPage() {
             </div>
             <div style={{width:"100%"}}>
                 <AdminNewNotice/>
-                <div style={{width:"100%", display:"flex", justifyContent:"center",paddingTop:"30px"}}>
+                <div style={{width:"100%", display:"flex", justifyContent:"center",paddingTop:"30px",paddingBottom:"30px"}}>
                     <AdminReview/>
                     <div style={{width:"150px"}} />
                     <AdminTodayCheck/>

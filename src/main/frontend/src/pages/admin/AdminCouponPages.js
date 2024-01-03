@@ -9,7 +9,7 @@ function AdminCouponPages() {
             <AdminSide/>
         </div>
         <div style={{width:"100%"}}>
-            <div style={{width:"100%", display:"flex", justifyContent:"center",paddingTop:"30px"}}>
+            <div style={{width:"100%", display:"flex", justifyContent:"center",paddingTop:"30px",paddingBottom:"30px"}}>
                 <CouponForm/>
             </div>
         </div>
