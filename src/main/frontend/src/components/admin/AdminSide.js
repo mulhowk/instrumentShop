@@ -1,5 +1,6 @@
 import "../../styles/adminPage/adminMain.css"
 import aMain from "../../img/info/main_admin.svg"
+import {Link} from "react-router-dom";
 function AdminSide() {
   return (
     <>
@@ -38,8 +39,8 @@ function AdminSide() {
                                 backgroundSize: '14px'}}>쇼핑</span></a>
                     <div className="a-s-c-tab-shopping-menu">
                         <ul>
-                            <li>상품 관리</li>
-                            <li>상품 등록</li>
+                            <Link to="/admin/goodsAllList"><li>상품 관리</li></Link>
+                            <Link to="/admin/productAdd"><li>상품 등록</li></Link>
                         </ul>
                     </div>
                 </div>
