@@ -136,18 +136,17 @@ function OrderSearch(){
                             }
                         </div>
                     )
-                } else {
-                    setOrderResult(
-                        <div>
-                            <p>입력하신 정보와 일치하는 주문이 없습니다.</p>
-                        </div>
-                    )
                 }
 
 
 
             } catch (error) {
                 console.error('Error fetching data:', error);
+                setOrderResult(
+                    <div>
+                        <p>입력하신 정보와 일치하는 주문이 없습니다.</p>
+                    </div>
+                )
             }
         };
 

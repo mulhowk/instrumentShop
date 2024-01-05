@@ -70,8 +70,8 @@ public class OrdersService {
         return now.format(formatter);
     }
 
-    public int getUserOrderCount(Users users) {
-        return ordersRepository.countByUsers(users);
+    public int getUserOrderCount(Long MEMBERUID) {
+        return ordersRepository.countByUsers_MEMBERUID(MEMBERUID);
     }
 
 

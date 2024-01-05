@@ -55,6 +55,93 @@ export function SuccessPage() {
         })
             .catch(error => console.log('Error creating order: ', error));
 
+            function updateGoodsData(goodsId, goodsSellcount) {
+                {console.log(goodsId)}
+                {console.log(goodsSellcount)}
+                const formGoodsData = new FormData();
+                formGoodsData.append('goodsId', goodsId);
+                formGoodsData.append('goodsSellcount', goodsSellcount);
+
+                return axios.post(`/goodsPayment/update`, formGoodsData, {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                });
+            }
+
+            async function sendPostRequests() {
+                if (Array.isArray(orderInfo.goodsId)) {
+                    const goodsId = orderInfo.goodsId;
+                    const goodsQuantity = orderInfo.goodsQuantity;
+                    {
+                        console.log(goodsId)
+                    }
+                    {
+                        console.log(goodsQuantity)
+                    }
+
+                    // Promise 배열 생성
+                    const promises = [];
+
+                    for (let i = 0; i < goodsId.length; i++) {
+                        const currentGoodsId = goodsId[i];
+                        const currentGoodsQuantity = goodsQuantity[i];
+                        const promise = await updateGoodsData(currentGoodsId, currentGoodsQuantity);
+                        {
+                            console.log(promise)
+                        }
+                        promises.push(promise);
+                    }
+
+                    try {
+                        // 모든 Promise가 완료될 때까지 기다림
+                        const updatedGoodsArray = await Promise.all(promises);
+                        {
+                            console.log(promises)
+                        }
+                        console.log("모든 상품 판매수, 재고 업데이트 완료");
+                        // 여기에서 updatedGoodsArray를 사용하여 추가적인 처리 가능
+                    } catch (error) {
+                        console.error('Error updating sellCount: ', error);
+                    }
+
+                } else if(!Array.isArray(orderInfo.goodsId)){
+                    const goodsId = orderInfo.goodsId;
+                    const goodsQuantity = orderInfo.goodsQuantity;
+
+                    const goodsIdArray = [goodsId];
+                    const goodsQuantityArray = [goodsQuantity];
+
+                    // Promise 배열 생성
+                    const promises = [];
+
+                    for (let i = 0; i < goodsIdArray.length; i++) {
+                        const currentGoodsId = goodsIdArray[i];
+                        const currentGoodsQuantity = goodsQuantityArray[i];
+                        const promise = await updateGoodsData(currentGoodsId, currentGoodsQuantity);
+                        {
+                            console.log(promise)
+                        }
+                        promises.push(promise);
+                    }
+
+                    try {
+                        // 모든 Promise가 완료될 때까지 기다림
+                        const updatedGoodsArray = await Promise.all(promises);
+                        {
+                            console.log(promises)
+                        }
+                        console.log("모든 상품 판매수, 재고 업데이트 완료");
+                        // 여기에서 updatedGoodsArray를 사용하여 추가적인 처리 가능
+                    } catch (error) {
+                        console.error('Error updating sellCount: ', error);
+                    }
+
+                }
+            }
+
+            sendPostRequests();
+
         if(orderInfo.useCoupon.length === 1){
             const formUserCouponData = new FormData();
             const dateArray = orderInfo.useCoupon[0].assignedDate;
@@ -142,6 +229,47 @@ export function SuccessPage() {
                     console.log("주문 정보 등록 완료");
                 })
                     .catch(error => console.log('Error creating order: ', error));
+
+                function updateGoodsDatas(goodsId, goodsSellcount) {
+                    const formGoodsData = new FormData();
+                    formGoodsData.append('goodsId', goodsId);
+                    formGoodsData.append('goodsSellcount', goodsSellcount);
+
+                    return axios.post(`/goodsPayment/update`, formGoodsData, {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                    });
+                }
+
+                async function sendPostRequest() {
+                    {console.log("여기 거치긴 함?")}
+                    const goodsId = orderInfo.goodsId;
+                    const goodsQuantity = orderInfo.goodsQuantity;
+
+                    // Promise 배열 생성
+                    const promises = [];
+
+                    for (let i = 0; i < goodsId.length; i++) {
+                        const currentGoodsId = goodsId[i];
+                        const currentGoodsQuantity = goodsQuantity[i];
+                        const promise = await updateGoodsDatas(currentGoodsId, currentGoodsQuantity);
+                        {console.log(promise)}
+                        promises.push(promise);
+                    }
+
+                    try {
+                        // 모든 Promise가 완료될 때까지 기다림
+                        const updatedGoodsArray = await Promise.all(promises);
+                        {console.log(promises)}
+                        console.log("모든 상품 판매수, 재고 업데이트 완료");
+                        // 여기에서 updatedGoodsArray를 사용하여 추가적인 처리 가능
+                    } catch (error) {
+                        console.error('Error updating sellCount: ', error);
+                    }
+                }
+
+                sendPostRequest();
 
                 }
         }

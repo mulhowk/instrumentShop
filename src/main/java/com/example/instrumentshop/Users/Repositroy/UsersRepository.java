@@ -38,4 +38,7 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
     @Modifying
     @Query("UPDATE Users u SET u.memberReserves = u.memberReserves + :reserves WHERE u.MEMBERUID = :MEMBERUID")
     int updateMemberReserves(@Param("MEMBERUID") Long MEMBERUID, @Param("reserves") int reserves);
+
+    @Query("select u.memberReserves from Users u where u.MEMBERUID = :MEMBERUID")
+    int findMemberReserves(Long MEMBERUID);
 }

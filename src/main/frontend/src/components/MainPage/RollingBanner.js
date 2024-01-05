@@ -8,23 +8,23 @@ function RollingBanner() {
     const images = [
         {
             img : '/RollingBanner/1.png',
-            href : '/goodsList/category/1/1'
+            href : '/goodsList/category/색소폰'
         },
         {
             img : '/RollingBanner/2.png',
-            href: '/goodsDetails/202311211906'
+            href: '/goodsDetails/2023112225'
         },
         {
             img : '/RollingBanner/3.png',
-            href: '/goodsList/category/1'
+            href: '/goodsList/category/색소폰/소프라노색소폰'
         },
         {
             img : '/RollingBanner/4.png',
-            href: '/goodsDetails/202311211912'
+            href: '/goodsDetails/2023112225'
         },
         {
             img : '/RollingBanner/5.png',
-            href: '/goodsDetails/202311211913'
+            href: '/goodsDetails/2023112225'
         }
     ];
 
@@ -64,14 +64,14 @@ function RollingBanner() {
                     showArrows={false}
                 >
                     {images.map((image, index) => (
+                        <a href={image.href}>
                         <div key={index} className="custom-img">
-                            <a href={image.href}>
                                 <img
                                     src={image.img}
                                     alt={`Image ${index + 1}`}
                                 />
-                            </a>
                         </div>
+                        </a>
                     ))}
                 </Carousel>
                 <button onClick={goToNextImage} className="next-button"></button>

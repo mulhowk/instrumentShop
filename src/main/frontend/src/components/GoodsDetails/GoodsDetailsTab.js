@@ -4,9 +4,13 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import Modal from "react-modal";
 import QnaReplyWrite from "./GoodsDetailsTab/QnaReplyWrite";
+import {getAuthToken, tokenUserInfo} from "../../global/auth";
 
 
 function GoodsDetailsTab(props){
+
+    const token =  getAuthToken();
+    const decodedToken = token ? tokenUserInfo(token) : null;
 
     const review = props.review;
     const qna = props.qna;
@@ -323,10 +327,12 @@ function GoodsDetailsTab(props){
                                         </div>
                                         <div className="product-tab-qna-contents-detail-content-content">
                                         <p>{qna.qnaContent}</p>
-                                        {!qnaReply[index] ?
+                                        {(decodedToken.roles[0].name === 'ROLE_MARKETER'
+                                            || decodedToken.roles[0].name === 'ROLE_ADMIN')
+                                            && !qnaReply[index] ?
                                             <a href={`/goodsDetails/reply/${goods.goodsId}/${qna.qnaNo}`}>
                                                 <button>댓글등록</button>
-                                            </a>: ""
+                                            </a> : ""
                                         }
                                         </div>
                                     </div>

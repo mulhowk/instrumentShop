@@ -4,6 +4,7 @@ import com.example.instrumentshop.Coupon.Entity.Coupon;
 import com.example.instrumentshop.Coupon.Entity.UserCouponMap;
 import com.example.instrumentshop.Users.Entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -32,4 +33,5 @@ public interface UserCouponRepository extends JpaRepository<UserCouponMap, Long>
 
     // 사용자가 사용하지 않은 쿠폰 조회
     Long countByUsers_MEMBERUIDAndUsed(Long MEMBERUID, boolean used);
+
 }

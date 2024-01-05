@@ -49,5 +49,11 @@ public class OrdersController {
         return ordersService.findOrdersByOrderId(orderId);
     }
 
+    @GetMapping("/orders/count/{MEMBERUID}")
+    public int countOrderByMemberUid(@PathVariable Long MEMBERUID){
+
+        return ordersService.getUserOrderCount(MEMBERUID);
+    }
+
 
 }

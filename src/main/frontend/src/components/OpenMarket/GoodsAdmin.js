@@ -78,7 +78,7 @@ function GoodsAdmin(){
             </div>
             <div className="open-market-header-logo">
                 <a href="/">
-                <img src="../../logo0.png" alt="open-market-logo"/>
+                <img src="../../violin.png" alt="open-market-logo"/>
                 </a>
             </div>
             <div className="open-market-header-member">
@@ -94,7 +94,8 @@ function GoodsAdmin(){
             </div>
             <div className="open-market-content-header">
                 <div className="open-market-content-header-no">
-                    <p>NO</p></div>
+                    <p>NO</p>
+                </div>
                 <div className="open-market-content-header-num">
                     <p>상품번호</p>
                 </div>

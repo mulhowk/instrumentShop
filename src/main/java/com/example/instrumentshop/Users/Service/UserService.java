@@ -116,5 +116,11 @@ public class UserService {
     public void addReserves(Long MEMBERUID, int reserves) {
         usersRepository.updateMemberReserves(MEMBERUID, reserves);
     }
+
+    @Transactional
+    public int findReserves(Long MEMBERUID){
+
+        return usersRepository.findMemberReserves(MEMBERUID);
+    }
 }
 

@@ -37,6 +37,10 @@
     width : 200px;
 }
 
+.basket a{
+    cursor: pointer;
+}
+
 .header-menu a{
     text-align: center;
     font-size: 20px;

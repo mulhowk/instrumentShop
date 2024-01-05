@@ -181,6 +181,39 @@ public class GoodsService {
 
     }
 
+    // 상품 구매시 구매 수 업데이트
+    @Transactional
+    public Goods updateGoodsSellCount(GoodsSellDTO goodsSellDTO){
+
+        Goods existingGoods = goodsRepository.findByGoodsId(goodsSellDTO.getGoodsId());
+
+        Goods updatedGoods =
+                Goods.builder()
+                        .goodsId(existingGoods.getGoodsId())
+                        .goodsImg(existingGoods.getGoodsImg())
+                        .parentCategory(existingGoods.getParentCategory())
+                        .childCategory(existingGoods.getChildCategory())
+                        .goodsName(existingGoods.getGoodsName())
+                        .goodsPrice(existingGoods.getGoodsPrice())
+                        .goodsDetail(existingGoods.getGoodsDetail())
+                        .goodsPayinfo(existingGoods.getGoodsPayinfo())
+                        .goodsDate(existingGoods.getGoodsDate())
+                        .openGoods(existingGoods.isOpenGoods())
+                        .goodsSellcount(existingGoods.getGoodsSellcount() + goodsSellDTO.getGoodsSellcount())
+                        .goodsQuantity(existingGoods.getGoodsQuantity() - goodsSellDTO.getGoodsSellcount())
+                        .goodsCountry(existingGoods.getGoodsCountry())
+                        .goodsBrand(existingGoods.getGoodsBrand())
+                        .goodsStatus(existingGoods.getGoodsStatus())
+                        .goodsOption(existingGoods.getGoodsOption())
+                        .goodsDetailImg(existingGoods.getGoodsDetailImg())
+                        .build();
+
+        goodsRepository.save(updatedGoods);
+
+        return goodsRepository.save(updatedGoods);
+
+    }
+
     // 오픈마켓 상품 삭제
     @Transactional
     public void deleteGoods(Long goodsId){

@@ -208,7 +208,7 @@ function MemberInfo({ onMemberInfoChange }){
                             onAutoClose={handleClosePopup}
                             style={daumStyle}
                         />
-                        <button className="modal-close-button" onClick={handleClosePopup}>닫기</button>
+                        <button className="modal-close-button" onClick={handleClosePopup}>X</button>
                     </div>
                 )}
                 <div className="member-orderInfo-name">

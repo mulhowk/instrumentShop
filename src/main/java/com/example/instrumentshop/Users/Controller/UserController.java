@@ -89,4 +89,11 @@ public class UserController {
             return ResponseEntity.badRequest().body("Error updating reserves: " + e.getMessage());
         }
     }
+
+    @GetMapping("/api/user/reserves/{MEMBERUID}")
+    public int getReserves(@PathVariable Long MEMBERUID){
+
+        return userService.findReserves(MEMBERUID);
+    }
+
 }

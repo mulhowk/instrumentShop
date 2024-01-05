@@ -8,7 +8,7 @@ function Footer(){
         <div className="footer">
             <div className="account-info">
             <div className="footer-logo">
-                <img src="/logo2.png" alt='logoImg' width="60" height="60"></img>
+                <img src="/violin.png" alt='logoImg' width="60" height="60"></img>
             </div>
             <div className="call-center">
                 <p className="color-red">CALL CENTER </p>

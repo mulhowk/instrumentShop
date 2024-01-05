@@ -17,8 +17,7 @@ function GoodsDetailsProduct(props) {
     const [wishList, setWishList] = useState([]);
     const [wishNo, setWishNo] = useState(0);
     const [wishCheck, setWishCheck] = useState(false);
-    {console.log(wishNo)}
-    {console.log(JSON.parse(localStorage.getItem('cart')) || [])}
+    {console.log(selectOptions)}
 
     useEffect(() => {
         if(MEMBERUID !== null){
@@ -82,7 +81,7 @@ function GoodsDetailsProduct(props) {
     const handlePayment = () =>{
 
         if(goodsOption.length !==0) {
-            if (selectOptions.length !==0) {
+            if (selectOptions.length ===0) {
                 alert("옵션을 선택해주세요.");
                 return;
             }

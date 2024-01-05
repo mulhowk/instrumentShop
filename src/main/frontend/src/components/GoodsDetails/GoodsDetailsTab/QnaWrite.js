@@ -6,6 +6,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
+import {getAuthToken, tokenUserInfo} from "../../../global/auth";
 
 function QnaWrite(){
 
@@ -13,13 +14,15 @@ function QnaWrite(){
 
     const params = useParams();
     const goodsId = params.goodsId;
+    const token =  getAuthToken();
+    const decodedToken = token? tokenUserInfo(token) : null;
 
     const [goods, setGoods] = useState([]);
 
     const [qnaTitle, setQnaTitle] = useState(null);
     const [qnaContent, setQnaContent] = useState(null);
     const [qnaFile, setQnaFile] = useState(null);
-    const [qnaWriter, setQnaWriter] = useState(null);
+    const [qnaWriter, setQnaWriter] = useState(decodedToken ? decodedToken.sub : null);
 
     const handleQnaCreate = () => {
 
@@ -27,11 +30,11 @@ function QnaWrite(){
 
         if(isConfirmed) {
             if(!qnaContent) {
-                alert('리뷰 내용을 작성해주세요.');
+                alert('문의 내용을 작성해주세요.');
                 return;
             }
             if(!qnaTitle) {
-                alert('리뷰 제목을 작성해주세요.');
+                alert('문의 제목을 작성해주세요.');
                 return;
             }
         } else return;

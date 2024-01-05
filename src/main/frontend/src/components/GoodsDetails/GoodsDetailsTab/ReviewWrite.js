@@ -6,10 +6,13 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
+import {getAuthToken, tokenUserInfo} from "../../../global/auth";
 
 function ReviewWrite(){
 
     const navigate = useNavigate();
+    const token =  getAuthToken();
+    const decodedToken = token? tokenUserInfo(token) : null;
 
     const params = useParams();
     const goodsId = params.goodsId;
@@ -19,7 +22,7 @@ function ReviewWrite(){
     const [reviewTitle, setReviewTitle] = useState(null);
     const [reviewContent, setReviewContent] = useState(null);
     const [reviewFile, setReviewFile] = useState(null);
-    const [reviewWriter, setReviewWriter] = useState(null);
+    const [reviewWriter, setReviewWriter] = useState(decodedToken ? decodedToken.sub : null);
 
     const handleCreateReview = () => {
 

@@ -114,4 +114,14 @@ public class GoodsController {
         }
     }
 
+    // 상품 구매시 구매량 + 재고 수정
+    @PostMapping("/goodsPayment/update")
+    public ResponseEntity<Goods> goodsSellCountUpdate(@ModelAttribute GoodsSellDTO goodsSellDTO){
+        Goods updateGoods = goodsService.updateGoodsSellCount(goodsSellDTO);
+
+        System.out.println(ResponseEntity.status(HttpStatus.OK).body(updateGoods));
+
+        return ResponseEntity.status(HttpStatus.OK).body(updateGoods);
+    }
+
 }

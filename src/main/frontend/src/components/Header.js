@@ -14,8 +14,8 @@ function Header(props){
 
     const token =  getAuthToken();
     const decodedToken = tokenUserInfo(token);
-
     const memberUid = decodedToken? decodedToken.UID : null;
+
     const [sumCart, setSumCart] = useState(0);
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -65,6 +65,10 @@ function Header(props){
         }
     };
 
+    const handelNoCart = () => {
+        alert("장바구니가 비어있습니다!");
+    }
+
     return(
             <div className="header">
                 <div className="header-search">
@@ -84,7 +88,7 @@ function Header(props){
                 </div>
                 <div className="header-logo">
                     <Link to="/">
-                        <img src="/logo0.png" alt='logoImg' width="70" height="70"/>
+                        <img src="/violin.png" alt='logoImg' width="70" height="70"/>
                     </Link>
                 </div>
                 <div className="header-menu">
@@ -154,12 +158,23 @@ function Header(props){
                 </div>
                 <div className="basket">
                     {decodedToken?
+                        (sumCart !== 0 ?
                     <a href={`/goodsList/cart/${memberUid}`}>
                         <img src="/basket.png" alt='basketImg' width="60" height="70"></img>
-                    </a> :
+                    </a>
+                            :
+                            <a onClick={handelNoCart}>
+                                <img src="/basket.png" alt='basketImg' width="60" height="70"></img>
+                            </a>)
+                        :
+                        (cart.length !==0?
                         <a href="/goodsList/cart/guest">
                             <img src="/basket.png" alt='basketImg' width="60" height="70"></img>
                         </a>
+                        :
+                                <a onClick={handelNoCart}>
+                                    <img src="/basket.png" alt='basketImg' width="60" height="70"></img>
+                                </a>)
                     }
                     <div className="basket-count">
                         {decodedToken?
