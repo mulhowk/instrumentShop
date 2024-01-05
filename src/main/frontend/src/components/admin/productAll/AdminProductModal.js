@@ -10,6 +10,11 @@ const AdminProductModal = ({ goods, onClose }) => {
                         <span className="close" onClick={onClose}>&times;</span>
                     </div>
                 </div>
+                <div className="modal-body">
+                    <div className="modal-goods-info">
+
+                    </div>
+                </div>
             </div>
         </>
     );
