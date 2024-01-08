@@ -1,5 +1,6 @@
 package com.example.instrumentshop.Users.Repositroy;
 
+import com.example.instrumentshop.Users.Entity.Role;
 import com.example.instrumentshop.Users.Entity.SocialType;
 import com.example.instrumentshop.Users.Entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -41,4 +42,7 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 
     @Query("select u.memberReserves from Users u where u.MEMBERUID = :MEMBERUID")
     int findMemberReserves(Long MEMBERUID);
+
+    @Query("SELECT u FROM Users u JOIN u.roles a WHERE a.name = :name")
+    List<Users> findByAuthorityName(@Param("name") String name);
 }

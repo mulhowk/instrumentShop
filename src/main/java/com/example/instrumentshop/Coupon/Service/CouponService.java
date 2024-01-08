@@ -39,7 +39,6 @@ public class CouponService {
     // 쿠폰 생성
     @Transactional
     public Coupon createCoupon(Coupon coupon) {
-        // 여기에 쿠폰 생성 전 유효성 검사나 비즈니스 로직을 추가할 수 있습니다.
         // 기본 상태를 '사용 가능'(1)으로 설정
         coupon.setCouponState("1");
         coupon.setCouponCreateAt(LocalDate.now());
