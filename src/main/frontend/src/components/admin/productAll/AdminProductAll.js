@@ -65,6 +65,7 @@ const AdminProductAll = () => {
                                 <th>최초등록일</th>
                                 <th>판매금액</th>
                                 <th>판매횟수</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,6 +78,7 @@ const AdminProductAll = () => {
                                 <td>{goodsTab.goodsDate}</td>
                                 <td>{goodsTab.goodsPrice}</td>
                                 <td>{goodsTab.goodsSellcount}</td>
+                                <td><button>미사용</button></td>
                             </tr>
                             ))}
                         </tbody>

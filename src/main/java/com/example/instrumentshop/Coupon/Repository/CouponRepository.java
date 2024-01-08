@@ -20,7 +20,7 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
     List<Coupon> findByCouponCreateAt(LocalDate date);
 
     // 쿠폰 상태별로 조회
-    List<Coupon> findByCouponState(String couponState);
+    List<Coupon> findByCouponState(boolean couponState);
 
     // 쿠폰 생성 및 수정은 JpaRepository에서 제공하는 save 메서드를 사용
     // 삭제는 JpaRepository에서 제공하는 delete 메서드를 사용

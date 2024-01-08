@@ -32,7 +32,7 @@ public class CouponService {
     }
 
     // 쿠폰 상태별로 조회
-    public List<Coupon> getCouponByCouponState(String couponState) {
+    public List<Coupon> getCouponByCouponState(boolean couponState) {
         return couponRepository.findByCouponState(couponState);
     }
 
@@ -40,7 +40,7 @@ public class CouponService {
     @Transactional
     public Coupon createCoupon(Coupon coupon) {
         // 기본 상태를 '사용 가능'(1)으로 설정
-        coupon.setCouponState("1");
+        coupon.setCouponState(true);
         coupon.setCouponCreateAt(LocalDate.now());
 
         return couponRepository.save(coupon);

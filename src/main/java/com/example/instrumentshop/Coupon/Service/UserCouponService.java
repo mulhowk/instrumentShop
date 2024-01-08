@@ -28,6 +28,8 @@ public class UserCouponService {
     @Transactional
     public void createAndDistributeCoupon(Coupon coupon) {
         // 쿠폰 생성
+        coupon.setCouponState(true);
+        coupon.setCouponCreateAt(LocalDate.now());
         Coupon savedCoupon = couponRepository.save(coupon);
 
         // USER 역할을 가진 모든 사용자 조회

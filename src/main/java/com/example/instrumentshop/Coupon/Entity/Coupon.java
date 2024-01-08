@@ -32,7 +32,7 @@ public class Coupon {
     private int couponLimit;
 
     @Column(nullable = false)
-    private String couponState;
+    private boolean couponState;
 
     @Column(nullable = false)
     private LocalDate couponStartAt;

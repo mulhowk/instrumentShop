@@ -55,7 +55,7 @@ const CouponAll = () => {
                             <th>이름</th>
                             <th>할인율</th>
                             <th>발급일</th>
-                            <th>사용기간종료일</th>
+                            <th>사용기간 종료일</th>
                         </tr>
                         </thead>
                         <tbody>

@@ -45,13 +45,18 @@ function AdminSide() {
                     </div>
                 </div>
                 <div className="a-s-c-tab-coupon">
-                    <a href="/admin/coupon"><span style={{backgroundImage: `url(${aMain})`, 
+                    <a href="/admin/couponAllList"><span style={{backgroundImage: `url(${aMain})`,
                                 backgroundRepeat: 'no-repeat',
                                 backgroundPosition: '0px',
                                 backgroundSize: '14px'}}>쿠폰</span></a>
                     <div className="a-s-c-tab-shopping-menu">
                         <ul>
-                            <a href="/admin/couponAllList"><li>쿠폰 목록</li></a>
+                            <Link to="/admin/couponAllList">
+                                <li>쿠폰 목록</li>
+                            </Link>
+                            <Link to="/admin/coupon">
+                                <li>쿠폰 등록</li>
+                            </Link>
                         </ul>
                     </div>
                 </div>

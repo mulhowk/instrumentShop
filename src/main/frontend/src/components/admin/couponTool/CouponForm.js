@@ -1,29 +1,45 @@
 import React, { useState } from 'react';
 import './couponForm.css';
 import axios from "axios";
+import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker, {registerLocale} from 'react-datepicker';
+import ko from 'date-fns/locale/ko'; // 한국어 로케일
+
+registerLocale('ko', ko); // 로케일 등록
 
 const CouponForm = () => {
 
 
     const [couponData, setCouponData] = useState({
-        couponName: '',
-        couponQuantity: '',
-        discountRate: '',
-        category: '',
-        startDate: '',
-        endDate: '',
-        useStartDate: '',
-        useEndDate: ''
+        couponName: '', // 이름
+        couponLimit: '', // 최대할인값
+        couponDiscount: '', // 할인율
+        couponStartAt: new Date(), // 사용 시작일을 오늘 날짜로 초기화
+        couponEndAt: new Date(), // 사용 종료일을 오늘 날짜로 초기화
     });
 
-    const handleInputChange = (e) => {
-        setCouponData({
-            ...couponData,
-            [e.target.name]: e.target.value
-        });
+    const handleInputChange = (eventOrDate, name) => {
+        if (eventOrDate instanceof Date) {
+            setCouponData({
+                ...couponData,
+                [name]: eventOrDate
+            });
+        } else {
+            const { name, value } = eventOrDate.target;
+            setCouponData({
+                ...couponData,
+                [name]: value
+            });
+        }
     };
     const handleSubmit = async () => {
-        // 서버에 데이터 전송하는 로직
+
+        const formattedCouponData = {
+            ...couponData,
+            couponStartAt: couponData.couponStartAt.toISOString().split('T')[0],
+            couponEndAt: couponData.couponEndAt.toISOString().split('T')[0],
+        };
+
         try {
             const response = await axios.post('/api/coupons/distribute', { coupon: couponData });
             console.log(response.data);
@@ -54,13 +70,13 @@ const CouponForm = () => {
             </div>
             <div className='coupon-table-frist'>
                 <div className='coupon-qty'>
-                    <span>쿠폰수량</span>
+                    <span>할인 최대가격</span>
                     <div className='coupon-qty-input custom-input-white'
-                         style={{width: '53px', height: '40px'}}>
+                         style={{width: '83px', height: '40px'}}>
                         <input
-                            style={{width: '48px'}}
-                            name="couponQuantity"
-                            value={couponData.couponQuantity}
+                            style={{width: '78px'}}
+                            name="couponLimit"
+                            value={couponData.couponLimit}
                             onChange={handleInputChange}
                         ></input>
                     </div>
@@ -71,35 +87,8 @@ const CouponForm = () => {
                          style={{width: '53px', height: '40px'}}>
                         <input placeholder='할인율을 입력하세요'
                                style={{width: '48px'}}
-                               name="discountRate"
-                               value={couponData.discountRate}
-                               onChange={handleInputChange}
-                        ></input>
-                    </div>
-                </div>
-                {/* 카테고리 필드 제거 */}
-            </div>
-            <div className='coupon-table-date'>
-                <div className='coupon-date-start'>
-                    <span>배포시작일</span>
-                    <div className='coupon-date-start-input custom-input-white'
-                         style={{width: '166px', height: '40px'}}>
-                        <input placeholder='시작일을 입력하세요'
-                               style={{width: '162px'}}
-                               name="startDate"
-                               value={couponData.startDate}
-                               onChange={handleInputChange}
-                        ></input>
-                    </div>
-                </div>
-                <div className='coupon-date-end'>
-                    <span>배포종료일</span>
-                    <div className='coupon-date-end-input custom-input-white'
-                         style={{width: '166px', height: '40px'}}>
-                        <input placeholder='종료일을 입력하세요'
-                               style={{width: '162px'}}
-                               name="endDate"
-                               value={couponData.endDate}
+                               name="couponDiscount"
+                               value={couponData.couponDiscount}
                                onChange={handleInputChange}
                         ></input>
                     </div>
@@ -110,24 +99,38 @@ const CouponForm = () => {
                     <span>사용시작일</span>
                     <div className='coupon-use-start-input custom-input-white'
                          style={{width: '166px', height: '40px'}}>
-                        <input placeholder='사용시작일을 입력하세요'
+{/*                        <input placeholder='사용시작일을 입력하세요'
                                style={{width: '162px'}}
-                               name="useStartDate"
-                               value={couponData.useStartDate}
+                               name="couponStartAt"
+                               value={couponData.couponStartAt}
                                onChange={handleInputChange}
-                        ></input>
+                        ></input>*/}
+                        <DatePicker
+                            style={{width: '162px'}}
+                            locale="ko" // 한국어 설정
+                            dateFormat="yyyy/MM/dd" // 날짜 포맷 설정
+                            selected={couponData.couponStartAt}
+                            onChange={(date) => handleInputChange(date, 'couponStartAt')}
+                        />
                     </div>
                 </div>
                 <div className='coupon-user-end'>
                     <span>사용종료일</span>
                     <div className='coupon-user-end-input custom-input-white'
                          style={{width:'166px', height:'40px'}}>
-                        <input placeholder='사용종료일을 입력하세요'
+{/*                        <input placeholder='사용종료일을 입력하세요'
                                style={{width: '162px'}}
-                               name="useEndDate"
-                               value={couponData.useEndDate}
+                               name="couponEndAt"
+                               value={couponData.couponEndAt}
                                onChange={handleInputChange}
-                        ></input>
+                        ></input>*/}
+                        <DatePicker
+                            style={{width: '162px'}}
+                            locale="ko" // 한국어 설정
+                            dateFormat="yyyy/MM/dd" // 날짜 포맷 설정
+                            selected={couponData.couponEndAt}
+                            onChange={(date) => handleInputChange(date, 'couponEndAt')}
+                        />
                     </div>
                 </div>
             </div>
