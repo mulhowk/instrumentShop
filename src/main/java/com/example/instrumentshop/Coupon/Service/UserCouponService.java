@@ -5,6 +5,7 @@ import com.example.instrumentshop.Coupon.Entity.Coupon;
 import com.example.instrumentshop.Coupon.Entity.UserCouponMap;
 import com.example.instrumentshop.Coupon.Repository.CouponRepository;
 import com.example.instrumentshop.Coupon.Repository.UserCouponRepository;
+import com.example.instrumentshop.Users.Entity.Role;
 import com.example.instrumentshop.Users.Entity.Users;
 import com.example.instrumentshop.Users.Repositroy.UsersRepository;
 import jakarta.transaction.Transactional;
@@ -30,7 +31,7 @@ public class UserCouponService {
         Coupon savedCoupon = couponRepository.save(coupon);
 
         // USER 역할을 가진 모든 사용자 조회
-        List<Users> usersWithRoleUser = usersRepository.findBySocialRole("USER");
+        List<Users> usersWithRoleUser = usersRepository.findByAuthorityName(Role.USER.getKey());
 
         // 모든 유저에게 쿠폰 할당
         for (Users user : usersWithRoleUser) {

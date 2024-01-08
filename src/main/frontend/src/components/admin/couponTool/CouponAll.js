@@ -1,25 +1,32 @@
 import './couponAll.css'
 import '../userTool/adminUserFilter.css';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
+import axios from "axios";
 
 const CouponAll = () => {
     // 데이터를 상태로 설정
-    const [users, setUsers] = useState([]);
+    const [coupons, setCoupons] = useState([]);
 
-    const couponAll = [
-        {
-            번호: "1",
-            이름: "전체 상품 할인",
-            할인율: "20%",
-            발급일: "2023-12-05",
-            사용기간종료일: "2023-10-30"
-        }
-    ]
+    useEffect(() => {
+        const fetchCoupons = async () => {
+            try {
+                const response = await axios.get('/api/coupons/all');
+                setCoupons(response.data);
+            } catch (error) {
+                console.error('Error fetching coupons:', error);
+            }
+        };
 
+        fetchCoupons();
+    }, []);
+
+    const formatDate = (dateArray) => {
+        return `${dateArray[0]}-${String(dateArray[1]).padStart(2, '0')}-${String(dateArray[2]).padStart(2, '0')}`;
+    };
 
     return (
         <>
-                    <div className="user-tool-component">
+            <div className="user-tool-component">
                 <div className="u-t-header">
                     <div className='u-t-h-font'>쿠폰목록</div>
                 </div>
@@ -43,28 +50,24 @@ const CouponAll = () => {
                 <div className="a-u-content">
                     <table className='a-u-table'>
                         <thead>
-                            <tr>
-                                <th>
-                                    <input type='checkbox'/>
-                                </th>
-                                <th>번호</th>
-                                <th>이름</th>
-                                <th>할인율</th>
-                                <th>발급일</th>
-                                <th>사용기간종료일</th>
-                            </tr>
+                        <tr>
+                            <th>번호</th>
+                            <th>이름</th>
+                            <th>할인율</th>
+                            <th>발급일</th>
+                            <th>사용기간종료일</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {couponAll.map((user, index) => (
+                        {coupons.map((coupon, index) => (
                             <tr key={index}>
-                                <td><input type='checkbox'/></td>
-                                <td>{user.번호}</td>
-                                <td>{user.이름}</td>
-                                <td>{user.할인율}</td>
-                                <td>{user.발급일}</td>
-                                <td>{user.사용기간종료일}</td>
+                                <td>{coupon.couponId}</td>
+                                <td>{coupon.couponName}</td>
+                                <td>{`${coupon.couponDiscount}%`}</td>
+                                <td>{formatDate(coupon.couponCreateAt)}</td>
+                                <td>{formatDate(coupon.couponEndAt)}</td>
                             </tr>
-                            ))}
+                        ))}
                         </tbody>
                     </table>
                 </div>
