@@ -153,7 +153,7 @@ public class GoodsService {
                         .goodsQuantity(goodsUpdateDTO.getGoodsQuantity())
                         .goodsCountry(goodsUpdateDTO.getGoodsCountry())
                         .goodsBrand(goodsUpdateDTO.getGoodsBrand())
-                        .goodsStatus(existingGoods.getGoodsStatus())
+                        .goodsStatus(existingGoods.isGoodsStatus())
                         .goodsOption(goodsUpdateDTO.getGoodsOption())
                         .goodsDetailImg(existingGoods.getGoodsDetailImg())
                         .build();
@@ -203,7 +203,7 @@ public class GoodsService {
                         .goodsQuantity(existingGoods.getGoodsQuantity() - goodsSellDTO.getGoodsSellcount())
                         .goodsCountry(existingGoods.getGoodsCountry())
                         .goodsBrand(existingGoods.getGoodsBrand())
-                        .goodsStatus(existingGoods.getGoodsStatus())
+                        .goodsStatus(existingGoods.isGoodsStatus())
                         .goodsOption(existingGoods.getGoodsOption())
                         .goodsDetailImg(existingGoods.getGoodsDetailImg())
                         .build();

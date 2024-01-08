@@ -41,7 +41,7 @@ function ReviewWrite(){
                 alert('리뷰 점수를 입력해주세요.');
                 return;
             }
-        }
+        } else return;
 
         // 각 상태값을 사용해 서버에 리뷰 생성 요청을 보냄
         const formReviewData = new FormData();

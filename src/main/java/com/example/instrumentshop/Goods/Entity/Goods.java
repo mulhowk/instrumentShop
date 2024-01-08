@@ -60,8 +60,8 @@ public class Goods {
     @Column(name = "goods_brand", length = 20)
     private String goodsBrand;
 
-    @Column(name = "goods_status", length = 5)
-    private String goodsStatus;
+    @Column(name = "goods_status")
+    private boolean goodsStatus;
 
     @Column(name = "goods_option", length = 20)
     private String goodsOption;
@@ -78,7 +78,7 @@ public class Goods {
         // Builder에 기본값 설정
         private boolean openGoods = true;
         private int goodsSellCount = 0;
-        private String goodsStatus = "판매";
+        private boolean goodsStatus = true;
         private String goodsDate;
 
         public GoodsBuilder goodsDate(String goodsDate) {
