@@ -56,6 +56,8 @@ public class UsersDTO {
 
         private int memberReserves;
 
+        private String loginDate;
+
         public SignResponse(Users users) {
             this.MEMBERUID = users.getMEMBERUID();
             this.member_name = users.getMemberName();
@@ -67,6 +69,7 @@ public class UsersDTO {
             this.socialRole = users.getSocialRole();
             this.refreshToken = users.getRefreshToken();
             this.memberReserves = users.getMemberReserves();
+            this.loginDate = users.getLoginDate();
         }
     }
 

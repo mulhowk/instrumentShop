@@ -3,6 +3,7 @@ package com.example.instrumentshop.Users.Controller;
 import com.example.instrumentshop.Global.Jwt.Controller.JwtController;
 import com.example.instrumentshop.Users.DTO.ReservesDTO;
 import com.example.instrumentshop.Users.DTO.UsersDTO;
+import com.example.instrumentshop.Users.Entity.Role;
 import com.example.instrumentshop.Users.Entity.Users;
 import com.example.instrumentshop.Users.Service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -94,6 +95,23 @@ public class UserController {
     public int getReserves(@PathVariable Long MEMBERUID){
 
         return userService.findReserves(MEMBERUID);
+    }
+
+    @PostMapping("/upsetRole")
+    public ResponseEntity<?> upsetRole(@RequestParam Long memberUid, @RequestParam String role) {
+        try {
+            Role newRole = Role.valueOf(role.toUpperCase());
+            boolean updateResult = userService.updateUserRole(memberUid, newRole);
+            if (updateResult) {
+                return ResponseEntity.ok("사용자 역할이 변경되었습니다.");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("사용자를 찾을 수 없습니다.");
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("올바르지 않은 역할입니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
+        }
     }
 
 }

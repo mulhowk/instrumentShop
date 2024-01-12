@@ -36,7 +36,7 @@ function RegisterForm() {
         member_email: email,
         member_pwd: password,
         member_name: name,
-        member_gender: name,
+        member_gender: gender,
         member_birth: birthDate,
         member_phone: phone,
         socialRole: "USER"
@@ -134,6 +134,7 @@ function RegisterForm() {
 
               if (response.ok) {
                   const message = await response.text();
+                  setIsValidationPassed(true);
                   console.log(message); // 또는 사용자에게 메시지 표시
               } else {
                   console.error('이메일 전송 실패');
@@ -330,9 +331,11 @@ function RegisterForm() {
                 </div>
             )}
 
-            <button className="c-r-f-button" onClick={handleRequestClick}>
-              인증요청
-            </button>
+              {!isValidationPassed && (
+                  <button className="c-r-f-button" onClick={handleRequestClick}>
+                      인증요청
+                  </button>
+              )}
             {isValidationPassed && (
                 <button className="c-r-f-button" onClick={authBtnClick}>
                   인증완료

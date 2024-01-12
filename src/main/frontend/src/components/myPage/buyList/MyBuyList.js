@@ -266,7 +266,7 @@ const MyBuyList = (props) => {
                     </div>
         ) :
                 <div className="box">
-                    <p style={{color : "white"}}>구매 내역이 없습니다.</p>
+                    <span style={{color : "black",display:"flex",height:"100%",justifyContent:"center",alignItems:"center"}}>구매 내역이 없습니다.</span>
                 </div>}
         </>
     );
