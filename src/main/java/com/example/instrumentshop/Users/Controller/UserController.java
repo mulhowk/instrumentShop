@@ -97,7 +97,7 @@ public class UserController {
         return userService.findReserves(MEMBERUID);
     }
 
-    @PostMapping("/upsetRole")
+    @PostMapping("/api/user/upsetRole")
     public ResponseEntity<?> upsetRole(@RequestParam Long memberUid, @RequestParam String role) {
         try {
             Role newRole = Role.valueOf(role.toUpperCase());

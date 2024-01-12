@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -132,14 +133,20 @@ public class UserService {
     }
 
     // 해당 하는 회원의 권한을 바꾸는 메소드
+
     @Transactional
     public boolean updateUserRole(Long memberUid, Role role) {
         try {
-            Optional<Users> userOptional = usersRepository.findById(memberUid);
+            Optional<Users> userOptional = Optional.ofNullable(usersRepository.findByMEMBERUID(memberUid));
             if (userOptional.isPresent()) {
                 Users user = userOptional.get();
                 user.setSocialRole(role); // 역할을 입력된 역할로 변경
-                user.setRoles(Collections.singletonList(Authority.builder().name("ROLE_" + role.name()).build()));
+
+                // 수정 가능한 리스트 사용
+                List<Authority> authorities = new ArrayList<>();;
+                authorities.add(Authority.builder().name("ROLE_" + role.name()).build());
+                user.setRoles(authorities);
+
                 usersRepository.save(user); // 변경된 사용자 정보 저장
                 return true;
             } else {

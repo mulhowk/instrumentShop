@@ -36,6 +36,20 @@ const AdminUserModal = ({ user, onClose }) => {
         }
     };
 
+    const updateUserRole = () => {
+        const roleSelect = document.getElementById("roleSelect");
+        const selectedRole = roleSelect.value;
+
+        axios.post(`/api/user/upsetRole?memberUid=${user.memberUid}&role=${selectedRole}`)
+            .then(response => {
+                alert('권한이 성공적으로 변경되었습니다.');
+                onClose(); // 여기서 상태를 업데이트하거나 모달을 닫을 수 있습니다.
+            })
+            .catch(error => {
+                alert('권한 변경 중 오류가 발생했습니다: ' + error.message);
+            });
+    };
+
     return (
         <>
             <div className="modal">
@@ -50,6 +64,14 @@ const AdminUserModal = ({ user, onClose }) => {
                             <p>이메일 : {user.memberEmail}</p>
                             <p>성별 : {user.memberGender}</p>
                             <p>권한 : {user.memberRole}</p>
+                            <div className="member-role-upset">
+                                <select className="member-role-select" id="roleSelect">
+                                    <option value="USER">일반회원</option>
+                                    <option value="ADMIN">관리자</option>
+                                    <option value="MAKETER">마케터</option>
+                                </select>
+                                <button className="edit-button" onClick={updateUserRole}>권한변경</button>
+                            </div>
                             <p>가입일 : {user.memberDate}</p>
                             <p>적립금 : {user.memberReserves}</p>
                             <p>최종로그인 : {user.loginDate}</p>

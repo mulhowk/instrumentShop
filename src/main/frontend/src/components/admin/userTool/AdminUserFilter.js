@@ -22,7 +22,7 @@ const AdminUserFilter = () => {
         };
 
         fetchAllUserInfo();
-    }, []);
+    }, [userinfo]);
 
     const handleRowClick = (user) => {
         setSelectedUser(user);
@@ -38,7 +38,7 @@ const AdminUserFilter = () => {
                 backgroundPosition: '15px',
                 backgroundSize: '25px'}}>
                     <input placeholder='검색'></input>
-                    <button className='edit-button'>검색</button>
+                    <button className='edit-button' name="searchBtn">검색</button>
                 </div>
                 <div className='header-title'>
                 </div>
