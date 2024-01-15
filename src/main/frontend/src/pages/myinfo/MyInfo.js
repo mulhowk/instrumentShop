@@ -10,19 +10,21 @@ import React, { useEffect , useState} from "react";
 import MyWishInfo from "../../components/myPage/wishList/MyWishInfo";
 import MyBuyInfo from "../../components/myPage/buyList/MyBuyInfo";
 import {getAuthToken, tokenUserInfo} from "../../global/auth";
+import {useLocation} from "react-router-dom";
 
 
 function MyInfo() {
 
+    const location = useLocation();
     const token =  getAuthToken();
 
     const decodedToken = tokenUserInfo(token);
 
     const memberUid = decodedToken.UID;
+    const states = location.state.buyList ? location.state.buyList : '';
 
-    const [selectedTab, setSelectedTab] = useState('profile'); // 기본값 설정
+    const [selectedTab, setSelectedTab] = useState(states ? states : 'profile' ); // 기본값 설정
     const [userData, setUserData] = useState();
-
     useEffect(() => {
         const fetchUserData = () => {
             const token = localStorage.getItem('token');
@@ -45,7 +47,7 @@ function MyInfo() {
     }, []);
 
     const ProfileSettings = () => <MyInfoContent userData = {userData} />;
-    const PurchaseHistory = () => <MyBuyInfo userData = {userData}/>;
+    const PurchaseHistory = () => userData && <MyBuyInfo userData = {userData}/>;
     const Wishlist = () => <MyWishInfo MEMBERUID = {memberUid}/>;
 
     return (

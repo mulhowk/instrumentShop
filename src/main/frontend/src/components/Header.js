@@ -15,10 +15,17 @@ function Header(props){
     const token =  getAuthToken();
     const decodedToken = tokenUserInfo(token);
     const memberUid = decodedToken? decodedToken.UID : null;
+    const navigate = useNavigate();
 
     const [sumCart, setSumCart] = useState(0);
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+    const handelClickOrder = () => {
+        const buyList = 'buyList';
+
+        navigate(`/myinfo`, {state : {buyList}});
+
+    }
 
 
     useEffect(() => {
@@ -149,11 +156,19 @@ function Header(props){
                             }} className="header-menu-text">MYPAGE</a>
                         </li>
                         }
-                        <li>
-                            <a href="/orderSearch">
+                        {!isLogin ?
+                            <li>
+                                <a href="/orderSearch">
                                 ORDER
-                            </a>
-                        </li>
+                                </a>
+                            </li>
+                            :
+                            <li>
+                                <a onClick={handelClickOrder}>
+                                    ORDER
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
                 <div className="basket">

@@ -3,10 +3,13 @@ import "../../styles/OpenMarket/GoodsControl.css"
 import ReactQuill from "react-quill";
 import {useNavigate, useParams} from 'react-router-dom';
 import axios from "axios";
+import {getAuthToken, tokenUserInfo} from "../../global/auth";
 
 
 function GoodsControl() {
 
+        const token =  getAuthToken();
+        const decodedToken = tokenUserInfo(token);
         const params = useParams();
         const goodsId = params.goodsId;
         const [goods, setGoods] = useState([]);
@@ -42,7 +45,7 @@ function GoodsControl() {
         const [childCategory, setChildCategory] = useState('');
         const [goodsDetail, setGoodsDetail] = useState('');
         const [goodsOption, setGoodsOption] = useState('');
-        const [goodsBrand, setGoodsBrand] = useState('');
+        const [goodsBrand, setGoodsBrand] = useState(decodedToken.brand);
         const [goodsQuantity, setGoodsQuantity] = useState(0);
         const [goodsCountry, setGoodsCountry] = useState('');
         const [options, setOptions] = useState(['','','','','']);
