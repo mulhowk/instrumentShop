@@ -1,6 +1,7 @@
 package com.example.instrumentshop.Global.Jwt.Util;
 
 import com.example.instrumentshop.Users.Entity.Authority;
+import com.example.instrumentshop.Users.Entity.Role;
 import com.example.instrumentshop.Users.Repositroy.UsersRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -61,10 +62,9 @@ public class JwtProvider {
     // eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVjcCIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sImlhdCI6MTYxNjQ0NjQyMCwiZXhwIjo
 
     // 토큰 생성
-    public String createToken(String account, List<Authority> roles, String name, Long UID
-            , String brand, String phoneNum) {
+    public String createToken(String account, Role socialRole, String name, Long UID, String brand, String phoneNum) {
         Claims claims = Jwts.claims().setSubject(account);
-        claims.put("roles", roles);
+        claims.put("roles", socialRole.name()); // social_role을 String으로 변환하여 추가
         claims.put("name", name);
         claims.put("UID", UID);
         claims.put("brand", brand);

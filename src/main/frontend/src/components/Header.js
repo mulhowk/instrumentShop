@@ -128,9 +128,14 @@ function Header(props){
                     <LoginContent/>
                 </Modal>
             </div>)}
-                        {isLogin && decodedToken.roles[0].name === 'ROLE_MARKETER' &&
+                        {isLogin && decodedToken.roles === 'MARKETER' &&
                             <li id="open-market">
-                                <a href={`/openMarket/${decodedToken.brand}`}>openMarket</a>
+                                <a href={`/openMarket/${decodedToken.brand}`}>OPEN-MARKET</a>
+                            </li>
+                        }
+                        {isLogin && decodedToken.roles === 'ADMIN' &&
+                            <li id="open-admin">
+                                <a href={`/admin`}>ADMIN</a>
                             </li>
                         }
                         {isLogin === false &&

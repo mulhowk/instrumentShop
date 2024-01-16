@@ -33,6 +33,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
 
+    // 로그인 메소드 수정
     public UsersDTO.SignResponse login(UsersDTO.SignRequest request) throws Exception {
         Users users = usersRepository.findByMemberEmail(request.getMember_email()).orElseThrow(() ->
                 new BadCredentialsException("잘못된 계정정보입니다."));
@@ -42,11 +43,8 @@ public class UserService {
         }
 
         String token = jwtProvider.createRefreshToken(); // 리프레시 토큰 생성
-
-
         users.updateRefreshToken(token); // 토큰 업데이트
 
-        // 현재 시간을 지정된 형식의 문자열로 변환
         String loginTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm"));
 
         return UsersDTO.SignResponse.builder()
@@ -55,11 +53,11 @@ public class UserService {
                 .member_name(users.getMemberName())
                 .socialRole(users.getSocialRole())
                 .roles(users.getRoles())
-                .token(jwtProvider.createToken(users.getMemberEmail(), users.getRoles()
+                .token(jwtProvider.createToken(users.getMemberEmail(), users.getSocialRole()
                         , users.getMemberName(), users.getMEMBERUID(), users.getOpenMarketBrand()
-                        , users.getMemberPhone())) //
-                .refreshToken(token) // 리프레시 토큰
-                .loginDate(loginTime) // 로그인 시간
+                        , users.getMemberPhone()))
+                .refreshToken(token)
+                .loginDate(loginTime)
                 .build();
     }
 
@@ -133,25 +131,20 @@ public class UserService {
     }
 
     // 해당 하는 회원의 권한을 바꾸는 메소드
-
     @Transactional
     public boolean updateUserRole(Long memberUid, Role role) {
         try {
-            Optional<Users> userOptional = Optional.ofNullable(usersRepository.findByMEMBERUID(memberUid));
-            if (userOptional.isPresent()) {
-                Users user = userOptional.get();
-                user.setSocialRole(role); // 역할을 입력된 역할로 변경
+            Users user = usersRepository.findByMEMBERUID(memberUid);
+            // 기존 역할을 모두 제거
+            user.getRoles().clear();
 
-                // 수정 가능한 리스트 사용
-                List<Authority> authorities = new ArrayList<>();;
-                authorities.add(Authority.builder().name("ROLE_" + role.name()).build());
-                user.setRoles(authorities);
+            // 새로운 역할 추가
+            Authority newRole = Authority.builder().name("ROLE_" + role.name()).build();
+            user.getRoles().add(newRole);
 
-                usersRepository.save(user); // 변경된 사용자 정보 저장
-                return true;
-            } else {
-                throw new Exception("해당하는 멤버를 찾을 수 없습니다."); // 사용자를 찾을 수 없는 경우 예외 처리
-            }
+            user.setSocialRole(role); // 역할을 입력된 역할로 변경
+            usersRepository.save(user); // 변경된 사용자 정보 저장
+            return true;
         } catch (Exception e) {
             return false; // 예외 발생 시 false 반환
         }

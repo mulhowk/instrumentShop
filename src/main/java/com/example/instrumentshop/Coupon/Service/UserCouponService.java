@@ -63,7 +63,8 @@ public class UserCouponService {
     }
 
     // 개별 유저에게 쿠폰 매핑
-    private void distributeCouponToUser(Coupon coupon, Users user) {
+    @Transactional
+    public void distributeCouponToUser(Coupon coupon, Users user) {
         UserCouponMap userCouponMap = new UserCouponMap();
         userCouponMap.setUsers(user);
         userCouponMap.setCoupon(coupon);
@@ -71,6 +72,17 @@ public class UserCouponService {
         userCouponMap.setAssignedDate(LocalDate.now());
 
         userCouponRepository.save(userCouponMap);
+    }
+
+    // 이미 생성된 쿠폰 받기
+    @Transactional
+    public void assignCouponToUser(Long couponId, Long userId) {
+        Coupon coupon = couponRepository.findById(couponId)
+                .orElseThrow(() -> new RuntimeException("쿠폰을 찾을 수 없습니다."));
+        Users user = usersRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+
+        distributeCouponToUser(coupon, user);
     }
 
     @Transactional

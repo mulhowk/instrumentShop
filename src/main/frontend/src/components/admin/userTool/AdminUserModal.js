@@ -68,7 +68,7 @@ const AdminUserModal = ({ user, onClose }) => {
                                 <select className="member-role-select" id="roleSelect">
                                     <option value="USER">일반회원</option>
                                     <option value="ADMIN">관리자</option>
-                                    <option value="MAKETER">마케터</option>
+                                    <option value="MARKETER">마케터</option>
                                 </select>
                                 <button className="edit-button" onClick={updateUserRole}>권한변경</button>
                             </div>
