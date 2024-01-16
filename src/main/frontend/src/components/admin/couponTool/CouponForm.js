@@ -58,6 +58,15 @@ const CouponForm = () => {
                     </div>
                 </div>  
         <div className='coupon-form'>
+            <div>
+                <span>쿠폰종류</span>
+                <div className='coupon-form-select custom-input-white'>
+                    <select>
+                        <option>자동배포</option>
+                        <option>지정배포</option>
+                    </select>
+                </div>
+            </div>
             <div className='coupon-title'>
                 <span>쿠폰이름</span>
                 <div className='coupon-title-input custom-input-white'>

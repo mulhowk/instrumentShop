@@ -2,6 +2,8 @@ package com.example.instrumentshop.Coupon.Service;
 
 import com.example.instrumentshop.Coupon.Entity.Coupon;
 import com.example.instrumentshop.Coupon.Repository.CouponRepository;
+import com.example.instrumentshop.Users.Entity.Role;
+import com.example.instrumentshop.Users.Entity.Users;
 import lombok.RequiredArgsConstructor;
 import net.bytebuddy.asm.Advice;
 import org.springframework.stereotype.Service;
@@ -45,7 +47,6 @@ public class CouponService {
 
         return couponRepository.save(coupon);
     }
-
 
     // 쿠폰 삭제
     @Transactional
