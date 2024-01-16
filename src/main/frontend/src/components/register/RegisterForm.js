@@ -122,27 +122,25 @@ function RegisterForm() {
       Object.keys(phoneInformationErrors).length === 0
     ) {
       setIsValidationPassed(true);  // 유효성 검사가 통과되었으므로 state를 true로 변경
+        try {
+            const response = await fetch(`/api/email/${email}/authcode`, {
+                method: 'GET',
+            });
+
+            if (response.ok) {
+                const message = await response.text();
+                setIsValidationPassed(true);
+                console.log(message); // 또는 사용자에게 메시지 표시
+            } else {
+                console.error('이메일 전송 실패');
+            }
+        } catch (error) {
+            console.error('이메일 전송 중 오류 발생:', error);
+        }
     } else {
       setIsValidationPassed(false); // 유효성 검사 실패 시 회원가입 버튼 숨김
     }
 
-      if (isValidationPassed) {
-          try {
-              const response = await fetch(`/api/email/${email}/authcode`, {
-                  method: 'GET',
-              });
-
-              if (response.ok) {
-                  const message = await response.text();
-                  setIsValidationPassed(true);
-                  console.log(message); // 또는 사용자에게 메시지 표시
-              } else {
-                  console.error('이메일 전송 실패');
-              }
-          } catch (error) {
-              console.error('이메일 전송 중 오류 발생:', error);
-          }
-      }
 
   };
 

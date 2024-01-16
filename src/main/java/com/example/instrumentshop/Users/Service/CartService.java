@@ -1,6 +1,7 @@
 package com.example.instrumentshop.Users.Service;
 
 import com.example.instrumentshop.Users.DTO.CartDTO;
+import com.example.instrumentshop.Users.DTO.CartUpdateDTO;
 import com.example.instrumentshop.Users.Entity.Cart;
 import com.example.instrumentshop.Users.Repositroy.CartRepository;
 import jakarta.transaction.Transactional;
@@ -45,9 +46,28 @@ public class CartService {
         return cartRepository.save(newCart);
     }
 
+    public Cart updatedCart(Cart cart){
+
+        Cart updateCart = Cart.builder()
+                .cartNo(cart.getCartNo())
+                .goods(cart.getGoods())
+                .goodsPrice(cart.getGoodsPrice())
+                .goodsQuantity(cart.getGoodsQuantity())
+                .goodsName(cart.getGoodsName())
+                .users(cart.getUsers())
+                .goodsImg(cart.getGoodsImg())
+                .goodsOption(cart.getGoodsOption())
+                .build();
+
+        cartRepository.save(updateCart);
+
+        return cartRepository.save(updateCart);
+
+    }
+
     public Integer getSumByMEMBERUID(Long MEMBERUID){
 
-        return cartRepository.sumByMEMBERUID(MEMBERUID);
+        return cartRepository.countByUsers_MEMBERUID(MEMBERUID);
     }
 
     public void deleteCartByCartNo(Long cartNo){

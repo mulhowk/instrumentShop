@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,10 +35,35 @@ public class CartController {
     @PostMapping("/cart/cartIn")
     public ResponseEntity<Cart> createCart(CartDTO cartDTO){
 
-        Cart newCart = cartService.createCart(cartDTO);
-        System.out.println(ResponseEntity.status(HttpStatus.CREATED).body(newCart));
+        List<Cart> cartList = cartService.findCartByMemberId(cartDTO.getUsers().getMEMBERUID());
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(newCart);
+        boolean eq = false;
+        Cart eqCart = null;
+
+        for(int i = 0; i < cartList.size(); i++){
+            eq = Objects.equals(cartList.get(i).getGoodsName(), cartDTO.getGoodsName())
+                    && Objects.equals(cartList.get(i).getGoodsOption(), cartDTO.getGoodsOption());
+            if(eq){
+                eqCart = cartList.get(i);
+                break;
+            }
+        }
+
+        if(eq){
+            eqCart.setGoodsQuantity(eqCart.getGoodsQuantity() + cartDTO.getGoodsQuantity());
+
+            Cart updateCart = cartService.updatedCart(eqCart);
+            System.out.println(ResponseEntity.status(HttpStatus.CREATED).body(updateCart));
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(updateCart);
+
+        } else {
+            Cart newCart = cartService.createCart(cartDTO);
+            System.out.println(ResponseEntity.status(HttpStatus.CREATED).body(newCart));
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(newCart);
+        }
+
     }
 
     @GetMapping("/cart/sum/{MEMBERUID}")

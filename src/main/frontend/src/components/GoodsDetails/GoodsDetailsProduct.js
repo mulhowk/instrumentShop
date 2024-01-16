@@ -13,6 +13,8 @@ function GoodsDetailsProduct(props) {
     const token =  getAuthToken();
     const decodedToken = tokenUserInfo(token);
     const MEMBERUID = decodedToken? decodedToken.UID : null;
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    {console.log(cart)}
 
     const [wishList, setWishList] = useState([]);
     const [wishNo, setWishNo] = useState(0);
@@ -123,6 +125,7 @@ function GoodsDetailsProduct(props) {
 
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+
         const newProduct = {
             cartNo : cart.length + 1,
             goods,
@@ -133,7 +136,15 @@ function GoodsDetailsProduct(props) {
             ...(goodsOption && { goodsOption })
         };
 
-        cart.push(newProduct);
+        const existingItem = cart.find(item => item.goodsName === newProduct.goodsName);
+
+        if (existingItem) {
+            // 이미 존재하는 상품인 경우
+            existingItem.goodsQuantity += newProduct.goodsQuantity;
+        } else {
+            // 존재하지 않는 상품인 경우
+            cart.push(newProduct);
+        }
 
         localStorage.setItem('cart', JSON.stringify(cart));
         alert("장바구니에 추가 되었습니다!");
