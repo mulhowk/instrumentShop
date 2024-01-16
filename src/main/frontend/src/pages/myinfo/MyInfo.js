@@ -21,7 +21,7 @@ function MyInfo() {
     const decodedToken = tokenUserInfo(token);
 
     const memberUid = decodedToken.UID;
-    const states = location.state.buyList ? location.state.buyList : '';
+    const states = location.state ? location.state.buyList : null;
 
     const [selectedTab, setSelectedTab] = useState(states ? states : 'profile' ); // 기본값 설정
     const [userData, setUserData] = useState();
