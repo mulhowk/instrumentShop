@@ -21,9 +21,14 @@ function MyInfo() {
     const decodedToken = tokenUserInfo(token);
 
     const memberUid = decodedToken.UID;
-    const states = location.state ? location.state.buyList : null;
+    const states = location.state.profile ? location.state.profile : location.state.buyList;
+    {console.log(states)}
 
-    const [selectedTab, setSelectedTab] = useState(states ? states : 'profile' ); // 기본값 설정
+    const [selectedTab, setSelectedTab] = useState('profile'); // 기본값 설정
+
+    useEffect(() => {
+        setSelectedTab(states)
+    }, [states]);
     const [userData, setUserData] = useState();
     useEffect(() => {
         const fetchUserData = () => {
@@ -46,7 +51,7 @@ function MyInfo() {
         fetchUserData();
     }, []);
 
-    const ProfileSettings = () => <MyInfoContent userData = {userData} />;
+    const ProfileSettings = () => userData && <MyInfoContent userData = {userData} />;
     const PurchaseHistory = () => userData && <MyBuyInfo userData = {userData}/>;
     const Wishlist = () => <MyWishInfo MEMBERUID = {memberUid}/>;
 
