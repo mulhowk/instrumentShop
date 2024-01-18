@@ -31,7 +31,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
             // TODO : createToken 매개인자값 추가
             if(oAuth2User.getSocialRole() == Role.GUEST) {
                 String accessToken = jwtProvider.createToken(oAuth2User.getMember_email()
-                        , null, null, null, null, null);
+                        , Role.GUEST, null, null, null, null);
 
                 // TODO : 토큰값 확인, accessToken, refreshToken 모두 생성해야함
                 response.addHeader("Authorization", "Bearer " + accessToken);

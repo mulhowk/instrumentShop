@@ -2,7 +2,7 @@ import '../styles/Header.css';
 import '../styles/MainCategory.css';
 import React, {useEffect, useState} from 'react';
 import '../styles/globalStyles.css'
-import { useNavigate } from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 import LoginContent from './login/LoginForm';
 import Modal from 'react-modal';
@@ -24,6 +24,13 @@ function Header(props){
         const buyList = 'buyList';
 
         navigate(`/myinfo`, {state : {buyList}});
+
+    }
+
+    const handelClickMyinfo = () => {
+        const profile = 'profile';
+
+        navigate(`/myinfo`, {state : {profile}});
 
     }
 
@@ -137,7 +144,7 @@ function Header(props){
             </div>)}
                         {isLogin && decodedToken.roles === 'MARKETER' &&
                             <li id="open-market">
-                                <a href={`/openMarket/${decodedToken.brand}`}>OPEN-MARKET</a>
+                                <a href={`/openMarket/${decodedToken.brand}`}>OPEN MARKET</a>
                             </li>
                         }
                         {isLogin && decodedToken.roles === 'ADMIN' &&
@@ -152,7 +159,9 @@ function Header(props){
                         }
                         {isLogin ?
                         <li>
-                            <a href="/myinfo">MYPAGE</a>
+                            <a onClick={handelClickMyinfo}>
+                                MYPAGE
+                            </a>
                         </li> :
                         <li>
                             <a onClick={(e) => {
