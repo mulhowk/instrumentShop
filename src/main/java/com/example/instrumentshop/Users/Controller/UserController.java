@@ -114,4 +114,15 @@ public class UserController {
         }
     }
 
+    @PutMapping("/api/user/updatePhone")
+    public ResponseEntity<?> updatePhone(@RequestParam String newPhone) {
+        boolean isUpdated = userService.updateMemberPhone(newPhone);
+
+        if (isUpdated) {
+            return ResponseEntity.ok("전화번호 업데이트 성공");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("전화번호 업데이트 실패");
+        }
+    }
+
 }

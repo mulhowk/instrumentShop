@@ -4,10 +4,14 @@ import cPhone from "../../img/register/c-phone.svg"
 import cEmail from "../../img/register/c-email.svg"
 import MyPageAddress from "./MyPageAddress";
 import { useOpenInWindow }  from 'use-open-window';
+import React, {useState} from "react";
+import AdminUserModal from "../admin/userTool/AdminUserModal";
+import MyInfoPhoneModal from "./MyInfoPhoneModal";
 
 
 function MyInfoContent(prop) {
     const userData = prop.userData;
+    const [showModalPhone, setShowModalPhone] = useState(false);
 
     console.log(userData);
     const url = '/myinfo/address';
@@ -20,7 +24,7 @@ function MyInfoContent(prop) {
     };
 
     const handleClick = () => {
-
+        setShowModalPhone(true);
     };
 
     const [handleWindowOpen, newWindowHandle] = useOpenInWindow(url, options);
@@ -45,31 +49,51 @@ function MyInfoContent(prop) {
                             </div>
                             <hr className="t-hr" />
                             <div className="m-c-g-t-c-tab"
-                                style={{backgroundImage: `url(${cPhone})`, 
-                                backgroundRepeat: 'no-repeat',
-                                backgroundPosition: '20px',
-                                backgroundSize: '20px'
-                            }}>
+                                 style={{
+                                     backgroundImage: `url(${cPhone})`,
+                                     backgroundRepeat: 'no-repeat',
+                                     backgroundPosition: '20px',
+                                     backgroundSize: '20px',
+                                     display: 'flex',
+                                     justifyContent: 'space-between'
+                                 }}>
                                 {userData && <span className="t-span">{userData.member_phone}</span>}
+                                <button className="delete-button"
+                                        style={{
+                                            marginLeft: '10px'
+                                        }}
+                                        onClick={handleClick}
+                                >수정
+                                </button>
                             </div>
-                            <hr className="t-hr" />
+                            <hr className="t-hr"/>
                             <div className="m-c-g-t-c-tab"
-                                style={{backgroundImage: `url(${cEmail})`, 
-                                backgroundRepeat: 'no-repeat',
-                                backgroundPosition: '20px',
-                                backgroundSize: '20px'
-                            }}>
+                                 style={{
+                                     backgroundImage: `url(${cEmail})`,
+                                     backgroundRepeat: 'no-repeat',
+                                     backgroundPosition: '20px',
+                                     backgroundSize: '20px',
+                                     display: 'flex',
+                                     justifyContent: 'space-between'
+                                 }}>
                                 {userData && <span className="t-span">{userData.member_email}</span>}
+                                <button className="delete-button"
+                                        style={{
+                                            marginLeft: '15px'
+                                        }}
+                                        onClick={handleClick}
+                                >수정
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <div className="null-space" />
+                    <div className="null-space"/>
                     <div className="m-c-g-tab">
                         <div className="m-c-g-t-header">
                             <p>주소지 관리</p>
                         </div>
                         <div className="m-c-g-t-content">
-                            <div className="m-c-g-t-c-tab"
+                        <div className="m-c-g-t-c-tab"
                                     style={{backgroundImage: `url(${cUser})`, 
                                     backgroundRepeat: 'no-repeat',
                                     backgroundPosition: '20px',
@@ -104,6 +128,13 @@ function MyInfoContent(prop) {
                     </div>
                 </div>
             </div>
+
+            {showModalPhone && (
+                <MyInfoPhoneModal
+                    onClose={() => setShowModalPhone(false)}
+                    userData={userData} // userData를 MyInfoPhoneModal 컴포넌트에 전달
+                />
+            )}
         </>
     );
 }
