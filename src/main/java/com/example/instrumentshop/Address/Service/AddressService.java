@@ -49,7 +49,7 @@ public class AddressService {
                         .addressId(address.getADDRESSID())
                         .addressReceiver(address.getAddressReceiver())
                         .addressNickname(address.getAddressNickname())
-                        .memberPhone(address.getUsers().getMemberPhone()) // 이 부분은 address 객체 구조에 따라 다를 수 있습니다.
+                        .memberPhone(address.getMemberPhone()) // 이 부분은 address 객체 구조에 따라 다를 수 있습니다.
                         .addressValue(address.getAddressValue())
                         .addressPostnumber(address.getAddressPostnumber())
                         .isUse(address.isUse())

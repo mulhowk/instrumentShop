@@ -10,10 +10,17 @@ import com.example.instrumentshop.Users.Repositroy.UsersRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -142,12 +149,32 @@ public class UserService {
             Authority newRole = Authority.builder().name("ROLE_" + role.name()).build();
             user.getRoles().add(newRole);
 
+            // 여기에서 새로운 토큰 생성
+            jwtProvider.createToken(user.getMemberEmail(), user.getSocialRole(),
+                    user.getMemberName(), user.getMEMBERUID(),
+                    user.getOpenMarketBrand(), user.getMemberPhone());
+
             user.setSocialRole(role); // 역할을 입력된 역할로 변경
             usersRepository.save(user); // 변경된 사용자 정보 저장
             return true;
         } catch (Exception e) {
             return false; // 예외 발생 시 false 반환
         }
+    }
+
+    @Transactional
+    public boolean updateMemberPhone(String newPhone) {
+        // 현재 로그인한 사용자의 이메일 가져오기
+        String email = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+
+        // 사용자 정보 조회
+        Users user = usersRepository.findByMemberEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
+
+        // 전화번호 업데이트
+        user.setMemberPhone(newPhone);
+        usersRepository.save(user);
+        return true;
     }
 
 }
