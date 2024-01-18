@@ -6,12 +6,15 @@ import CouponList from "./CouponList";
 import Modal from "react-modal";
 import axios from "axios";
 import MemberAddressList from "./MemberAddressList";
+import {useDispatch} from "react-redux";
+import {setMemberInfo} from "../../global/setMemberAction";
 
-function MemberInfo({ onMemberInfoChange }){
+function MemberInfo(){
 
     const token =  getAuthToken();
     const decodedToken = token? tokenUserInfo(token) : null;
     const memberUid = decodedToken ? decodedToken.UID : null;
+    const dispatch = useDispatch();
     const [userData, setUserData] = useState();
     const [defaultAddresses, setDefaultAddresses] = useState([]);
     {console.log(defaultAddresses)}
@@ -178,6 +181,21 @@ function MemberInfo({ onMemberInfoChange }){
         setPopupOpen(false);
     };
 
+    // useEffect(() => {
+    //     const memberInfo = {
+    //         orderName : orderName,
+    //         orderEmail : orderEmail,
+    //         orderPhone : orderPhone,
+    //         deliverName : deliverName,
+    //         deliverPhone : deliverPhone,
+    //         deliverAddress : deliverAddress,
+    //         orderMsg : orderMsg,
+    //         deliverMsg : deliverMsg
+    //     }
+    //     onMemberInfoChange(memberInfo);
+    //
+    // }, [orderName, orderEmail, orderPhone, deliverName, deliverPhone, deliverAddress, orderMsg, deliverMsg]);
+
     useEffect(() => {
         const memberInfo = {
             orderName : orderName,
@@ -189,7 +207,8 @@ function MemberInfo({ onMemberInfoChange }){
             orderMsg : orderMsg,
             deliverMsg : deliverMsg
         }
-        onMemberInfoChange(memberInfo);
+
+        dispatch(setMemberInfo(memberInfo));
 
     }, [orderName, orderEmail, orderPhone, deliverName, deliverPhone, deliverAddress, orderMsg, deliverMsg]);
 

@@ -29,7 +29,9 @@ function MyInfo() {
     useEffect(() => {
         setSelectedTab(states)
     }, [states]);
+
     const [userData, setUserData] = useState();
+
     useEffect(() => {
         const fetchUserData = () => {
             const token = localStorage.getItem('token');

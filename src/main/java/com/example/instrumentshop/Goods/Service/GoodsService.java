@@ -5,6 +5,7 @@ import com.example.instrumentshop.Goods.Entity.*;
 import com.example.instrumentshop.Goods.Repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -67,9 +68,8 @@ public class GoodsService {
     }
 
     // goodsDetails 서비스
-    @Transactional
+    @Cacheable(value = "goodsCache", key = "#goodsId")
     public Goods findGoodsByGoodsId(Long goodsId){
-
         return goodsRepository.findByGoodsId(goodsId);
     }
 

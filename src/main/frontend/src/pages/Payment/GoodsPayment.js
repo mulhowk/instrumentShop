@@ -23,8 +23,8 @@ function GoodsPayment(){
         <>
             <Header/>
             <MainCategory/>
-            <MemberInfo onMemberInfoChange = {handelMemberDataChange}/>
-            <OrderInfo goods = {goods} memberData = {memberData}/>
+            <MemberInfo/>
+            <OrderInfo goods = {goods}/>
             <Footer/>
         </>
     );

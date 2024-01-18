@@ -6,6 +6,7 @@ import {getAuthToken, tokenUserInfo} from "../../global/auth";
 import axios from "axios";
 import InMyCoupon from "../../pages/myinfo/InMyCoupon";
 import CouponList from "./CouponList";
+import {useSelector} from "react-redux";
 
 function OrderInfo(props) {
 
@@ -15,7 +16,8 @@ function OrderInfo(props) {
     const decodedToken = tokenUserInfo(token);
     const MEMBERUID = decodedToken? decodedToken.UID : null;
     const goods = props.goods;
-    const memberInfo = props.memberData;
+    // const memberInfo = props.memberData;
+    const memberInfo = useSelector((state) => state.memberInfo);
     const [memberCoupon, setMemberCoupon] = useState([]);
     const [productIndex, setProductIndex] = useState();
     const [selectedCoupon, setSelectedCoupon] = useState([]);
