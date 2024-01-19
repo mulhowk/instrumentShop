@@ -1,7 +1,8 @@
 .RollingBanner{
     display: block;
     border: 1px solid #AAAAAA;
-    width: 1500px;
+    width : 80vw;
+    min-width: 1500px;
     margin-left: 75px;
 }
 

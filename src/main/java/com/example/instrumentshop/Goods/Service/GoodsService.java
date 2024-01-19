@@ -68,7 +68,7 @@ public class GoodsService {
     }
 
     // goodsDetails 서비스
-    @Cacheable(value = "goodsCache", key = "#goodsId")
+    @Transactional
     public Goods findGoodsByGoodsId(Long goodsId){
         return goodsRepository.findByGoodsId(goodsId);
     }

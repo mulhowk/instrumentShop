@@ -18,6 +18,7 @@ function OrderInfo(props) {
     const goods = props.goods;
     // const memberInfo = props.memberData;
     const memberInfo = useSelector((state) => state.memberInfo);
+    {console.log(memberInfo)}
     const [memberCoupon, setMemberCoupon] = useState([]);
     const [productIndex, setProductIndex] = useState();
     const [selectedCoupon, setSelectedCoupon] = useState([]);
