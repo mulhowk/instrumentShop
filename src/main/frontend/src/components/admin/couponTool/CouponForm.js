@@ -11,13 +11,23 @@ const CouponForm = () => {
 
 
     const [couponData, setCouponData] = useState({
-        couponName: '', // 이름
-        couponLimit: '', // 최대할인값
-        couponDiscount: '', // 할인율
-        couponStartAt: new Date(), // 사용 시작일을 오늘 날짜로 초기화
-        couponEndAt: new Date(), // 사용 종료일을 오늘 날짜로 초기화
+        couponType: '자동배포', // 쿠폰 유형 필드 추가
+        couponName: '',
+        couponLimit: '',
+        couponDiscount: '',
+        couponStartAt: new Date(),
+        couponEndAt: new Date(),
+        couponQty: 0,
+        couponSpreadStartAt: new Date()
     });
 
+    const [showFields, setShowFields] = useState(false);
+
+    const handleTypeChange = (event) => {
+        const selectedType = event.target.value;
+        setCouponData({ ...couponData, couponType: selectedType });
+        setShowFields(selectedType === '지정배포');
+    };
     const handleInputChange = (eventOrDate, name) => {
         if (eventOrDate instanceof Date) {
             setCouponData({
@@ -33,6 +43,10 @@ const CouponForm = () => {
         }
     };
     const handleSubmit = async () => {
+
+        if (couponData.couponType !== '자동배포') { // 지정배포일 경우 실행할 로직
+
+        }
 
         const formattedCouponData = {
             ...couponData,
@@ -61,9 +75,9 @@ const CouponForm = () => {
             <div>
                 <span>쿠폰종류</span>
                 <div className='coupon-form-select custom-input-white'>
-                    <select>
-                        <option>자동배포</option>
-                        <option>지정배포</option>
+                    <select value={couponData.couponType} onChange={handleTypeChange}>
+                        <option value="자동배포">자동배포</option>
+                        <option value="지정배포">지정배포</option>
                     </select>
                 </div>
             </div>
@@ -143,6 +157,38 @@ const CouponForm = () => {
                     </div>
                 </div>
             </div>
+            {showFields && (
+                <div>
+                    <div className='coupon-qty'>
+                        {/* 수량 입력 필드 */}
+                        <span>
+                            배포될 쿠폰 수량
+                        </span>   
+                        <div className='coupon-qty-input custom-input-white'
+                             style={{width: '83px', height: '40px'}}>
+                            <input
+                                style={{width: '78px'}}
+                                name="couponQty"
+                                value={couponData.couponQty}
+                                onChange={handleInputChange}
+                            ></input>
+                        </div>
+                    </div>
+                    <div className='coupon-use-start'>
+                        {/* 시작 일자 입력 필드 */}
+                        <span>
+                            배포 활성화 시기
+                        </span>
+                        <DatePicker
+                            style={{width: '162px'}}
+                            locale="ko" // 한국어 설정
+                            dateFormat="yyyy/MM/dd" // 날짜 포맷 설정
+                            selected={couponData.couponSpreadStartAt}
+                            onChange={(date) => handleInputChange(date, 'couponSpreadStartAt')}
+                        />
+                    </div>
+                </div>
+            )}
             <div className='coupon-table-button'>
                 <div className='c-t-btn'>
                     <button className='c-t-btn-save' onClick={handleSubmit}>저장</button>
