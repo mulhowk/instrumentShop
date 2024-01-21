@@ -28,6 +28,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     private static final String NAVER = "naver";
     private static final String KAKAO = "kakao";
 
+
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         log.info("CustomOAuth2UserService loadUser 실행");

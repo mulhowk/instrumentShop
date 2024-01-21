@@ -248,11 +248,15 @@ function GoodsDetailsTab(props){
                         </button>
                     )}
                   </div>
+                    {decodedToken ?
                     <div className="review-write">
                       <Link to={`/goodsDetails/reviewWrite/${goods.goodsId}`}>
                         <button>WRITE</button>
                       </Link>
                     </div>
+                    : <div className="review-write">
+                        ""
+                      </div>}
                 </div>
 
             </div>
@@ -378,11 +382,17 @@ function GoodsDetailsTab(props){
                     )}
                     </div>
 
+                    {decodedToken ?
                     <div className="qna-write">
                         <Link to={`/goodsDetails/qnaWrite/${goods.goodsId}`}>
                         <button>WRITE</button>
                         </Link>
                     </div>
+                        :
+                    <div className="qna-write">
+                        ""
+                    </div>
+                    }
 
                 </div>
             </div>

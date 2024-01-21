@@ -9,6 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -30,6 +31,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -68,15 +70,6 @@ public class SecurityConfig {
                 .and()
                 // 조건별로 요청 허용/제한 설정
                 .authorizeRequests()
-                // 회원가입과 로그인은 모두 승인
-/*                .dispatcherTypeMatchers(HttpMethod.valueOf("/api/register")).permitAll()
-                .dispatcherTypeMatchers(HttpMethod.valueOf("/api/login")).permitAll()
-                .dispatcherTypeMatchers(HttpMethod.valueOf( "/oauth2/authorization/**")).permitAll()
-                // /admin으로 시작하는 요청은 ADMIN 권한이 있는 유저에게만 허용
-                    .dispatcherTypeMatchers(HttpMethod.valueOf("/api/admin/**")).hasRole("ADMIN")
-                // /user 로 시작하는 요청은 USER 권한이 있는 유저에게만 허용
-                .dispatcherTypeMatchers(HttpMethod.valueOf("/api/user/**")).hasRole("USER")
-                .anyRequest().denyAll()*/
                 .anyRequest().permitAll()
                 .and()
                 // JWT 인증 필터 적용
@@ -109,6 +102,7 @@ public class SecurityConfig {
                 .failureHandler(oAuth2LoginFailureHandler)
                 .userInfoEndpoint().userService(customOAuth2UserService)
         ;
+
 
         return http.build();
     }

@@ -4,6 +4,8 @@ import com.example.instrumentshop.Global.Jwt.Util.JwtProvider;
 import com.example.instrumentshop.Oauth2.Entity.CustomOAuth2User;
 import com.example.instrumentshop.Oauth2.Entity.OAuth2UserInfo;
 import com.example.instrumentshop.Users.Entity.Role;
+import com.example.instrumentshop.Users.Entity.Users;
+import com.example.instrumentshop.Users.Repositroy.UsersRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,11 +23,13 @@ import java.io.IOException;
 public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     private final JwtProvider jwtProvider;
+    private final UsersRepository usersRepository;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         log.info("OAuth2 Login 성공!");
         try {
+
             CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
 
             // User의 Role이 GUEST일 경우 처음 요청한 회원이므로 회원가입 페이지로 리다이렉트
@@ -36,9 +40,14 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
                 // TODO : 토큰값 확인, accessToken, refreshToken 모두 생성해야함
                 response.addHeader("Authorization", "Bearer " + accessToken);
-                response.sendRedirect("oauth2/sign-up"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
+                response.sendRedirect("http://localhost:3000/"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
 
                 jwtProvider.sendAccessAndRefreshToken(response, accessToken, null);
+                Users findUser = usersRepository.findByMemberEmail(oAuth2User.getMember_email())
+                        .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+
+                findUser.authorizeUser();
+                usersRepository.save(findUser);
 
             } else {
                 loginSuccess(response, oAuth2User); // 로그인에 성공한 경우 access, refresh 토큰 생성
@@ -51,11 +60,19 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     // TODO : 소셜 로그인 시에도 무조건 토큰 생성하지 말고 JWT 인증 필터처럼 RefreshToken 유/무에 따라 다르게 처리해보기
     private void loginSuccess(HttpServletResponse response, CustomOAuth2User oAuth2User) throws IOException {
-        String accessToken = jwtProvider.createToken(oAuth2User.getMember_email(), oAuth2User.getSocialRole(), null
-                , null, null, null);
+
+        Users findUser = usersRepository.findByMemberEmail(oAuth2User.getMember_email())
+                .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+
+        String accessToken = jwtProvider.createToken(oAuth2User.getMember_email(), oAuth2User.getSocialRole(),
+                findUser.getMemberName(), findUser.getMEMBERUID(), null, null);
         String refreshToken = jwtProvider.createRefreshToken();
+
+
         response.addHeader("Authorization", "Bearer " + accessToken);
         response.addHeader("Authorization-refresh", "Bearer " + refreshToken);
+        response.sendRedirect("http://localhost:3000/OAuth2/accessToken=" + accessToken
+                + "&refreshToken" + refreshToken);
 
         jwtProvider.sendAccessAndRefreshToken(response, accessToken, refreshToken);
         jwtProvider.updateRefreshToken(oAuth2User.getMember_email(), refreshToken);

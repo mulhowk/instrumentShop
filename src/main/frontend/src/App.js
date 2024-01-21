@@ -34,6 +34,7 @@ import InMyCoupon from './pages/myinfo/InMyCoupon.js';
 import AdminUserInfo from './pages/admin/AdminUserInfo.js';
 import OrderSearch from "./components/OrderList/OrderSearch";
 import OrderDetails from "./components/myPage/buyList/OrderDetails";
+import OAuth2Page from "./components/OAuth2Page";
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<MainPage/>}/>
+          <Route path="/OAuth2/:tokenInfo" element={<OAuth2Page/>}/>
           <Route path="/goodsList/query/:query" element={<GoodsList/>}/>
           <Route path="/goodsList/category/:categoryId" element={<GoodsList/>}/>
           <Route path="/goodsList/category/:categoryId/:subCategoryId" element={<GoodsList/>}/>

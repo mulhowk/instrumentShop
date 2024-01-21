@@ -126,7 +126,9 @@ function LoginForm() {
           </a>
         </div>
         <div>
-          <img alt="" src={Naver} />
+          <a href="http://localhost:8080/oauth2/authorization/naver">
+            <img alt="" src={Naver} />
+          </a>
         </div>
       </div>
     </div>

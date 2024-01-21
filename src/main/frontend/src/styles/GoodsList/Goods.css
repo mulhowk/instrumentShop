@@ -1,10 +1,11 @@
 .goods-list{
-    display: flex;
-    align-items: center;
+    display: grid;
     justify-content: center;
+    place-items: center;
     flex-wrap: wrap;
     margin-top: 50px;
-    width: 1660px;
+    width : 100vw;
+    min-width: 1680px;
 }
 
 .goods-list-header{
@@ -62,7 +63,7 @@
     white-space: nowrap;
     flex-wrap: wrap;
     margin-top: 20px;
-    width: 1200px;
+    width: 1260px;
 }
 
 .product{

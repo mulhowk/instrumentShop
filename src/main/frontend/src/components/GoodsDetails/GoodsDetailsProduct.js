@@ -3,6 +3,8 @@ import "../../styles/GoodsDetails/GoodsDetailsProduct.css";
 import {Link, useNavigate} from "react-router-dom";
 import {getAuthToken, tokenUserInfo} from "../../global/auth";
 import axios from "axios";
+import LoginContent from "../login/LoginForm";
+import Modal from "react-modal";
 
 function GoodsDetailsProduct(props) {
 
@@ -15,6 +17,8 @@ function GoodsDetailsProduct(props) {
     const MEMBERUID = decodedToken? decodedToken.UID : null;
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     {console.log(cart)}
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const [wishList, setWishList] = useState([]);
     const [wishNo, setWishNo] = useState(0);
@@ -355,6 +359,25 @@ function GoodsDetailsProduct(props) {
                     }}
                     onClick={handleCart}>장바구니
                     </button>
+                                <Modal
+                                    appElement={document.getElementById('root')}
+                                    isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}
+                                    style={{
+                                        overlay: {
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center'
+
+                                        },
+                                        content : {
+                                            width: '350px',
+                                            height: '460px',
+                                            position: 'absolute',
+                                            inset: ''
+                                        }
+                                    }}>
+                                    <LoginContent/>
+                                </Modal>
                     {MEMBERUID !== null ?
                         (
                     wishCheck ?(
@@ -382,6 +405,10 @@ function GoodsDetailsProduct(props) {
                         color: "black", width: "80px",
                         cursor : "pointer"
                     }}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setModalIsOpen(true);
+                            }}
                     >♡
                     </button> }
                 </div>) : ("")) : ("")}
